@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 from verideploy.evaluation.datasets import load_jsonl_dataset
-from verideploy.evaluation.quality import PHASE52_EXPECTED_COUNTS, PHASE52_TOTAL_CASES, validate_phase52_dataset
+from verideploy.evaluation.quality import PHASE52_EXPECTED_COUNTS, PHASE52_TOTAL_CASES, validate_dataset
 
 DATASET = Path("evals/datasets/verideploy-500/v1.jsonl")
 MANIFEST = Path("evals/datasets/verideploy-500/manifest.json")
@@ -12,7 +12,7 @@ MANIFEST = Path("evals/datasets/verideploy-500/manifest.json")
 
 def test_phase52_dataset_has_exact_required_shape() -> None:
     cases = load_jsonl_dataset(DATASET)
-    report = validate_phase52_dataset(DATASET)
+    report = validate_dataset(DATASET)
     assert len(cases) == PHASE52_TOTAL_CASES == 500
     assert report.category_counts == dict(sorted(PHASE52_EXPECTED_COUNTS.items()))
     assert report.unique_case_ids == 500
@@ -45,7 +45,7 @@ def test_quality_gate_detects_semantic_duplicates(tmp_path: Path) -> None:
     second["case_id"] = "retrieval-semantic-copy"
     candidate = tmp_path / "duplicate.jsonl"
     candidate.write_text("\n".join(rows + [json.dumps(second)]) + "\n", encoding="utf-8")
-    report = validate_phase52_dataset(candidate)
+    report = validate_dataset(candidate)
     assert report.passed is False
     assert any(issue.code == "semantic_duplicate" for issue in report.issues)
 
@@ -56,6 +56,6 @@ def test_quality_gate_detects_label_leakage(tmp_path: Path) -> None:
     first["input"]["answer_key"] = "do-not-expose"
     candidate = tmp_path / "leak.jsonl"
     candidate.write_text(json.dumps(first) + "\n", encoding="utf-8")
-    report = validate_phase52_dataset(candidate)
+    report = validate_dataset(candidate)
     assert report.passed is False
     assert any(issue.code == "label_leakage_field" for issue in report.issues)

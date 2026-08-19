@@ -16,7 +16,7 @@ Phase 61 introduces a single versioned guardrail policy and enforcement contract
 
 ## Red-team gate
 
-`evals/fixtures/guardrails/phase61-redteam.json` covers user prompts, WebSocket-style payloads, Kafka/event payloads, poisoned documents, cross-tenant retrieval, consequential MCP actions, unsupported output claims, operational retry abuse, and legitimate traffic. CI executes `scripts/benchmark_phase61_guardrails.py`; every fixture must match its expected allow/warn/deny/abstain result.
+`evals/fixtures/guardrails/phase61-redteam.json` covers user prompts, WebSocket-style payloads, Kafka/event payloads, poisoned documents, cross-tenant retrieval, consequential MCP actions, unsupported output claims, operational retry abuse, and legitimate traffic. CI executes `scripts/benchmark_guardrails.py`; every fixture must match its expected allow/warn/deny/abstain result.
 
 ## Safe error behavior
 

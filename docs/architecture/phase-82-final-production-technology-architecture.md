@@ -71,4 +71,4 @@ sequenceDiagram
 
 ## Validation
 
-`scripts/validate_phase82_architecture.py` compares this topology model with release metadata, Helm chart/workload/image versions, Compose services, required runtime paths, and security boundary invariants.
+`scripts/validate_production_topology.py` compares this topology model with release metadata, Helm chart/workload/image versions, Compose services, required runtime paths, and security boundary invariants.

@@ -26,13 +26,13 @@ Every case contains a stable `case_id`, category, model input, an explicit `grou
 Run locally:
 
 ```bash
-PYTHONPATH=src python scripts/validate_phase52_dataset.py
+PYTHONPATH=src python scripts/validate_dataset.py
 ```
 
 Regenerate deterministically:
 
 ```bash
-PYTHONPATH=src python scripts/generate_phase52_dataset.py
+PYTHONPATH=src python scripts/generate_dataset.py
 ```
 
 The manifest records the SHA-256 of the JSONL source. Dataset content, rather than generation timestamps, is the reproducibility anchor.

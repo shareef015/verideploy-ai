@@ -19,8 +19,8 @@ Breaking changes require a new schema major version and parallel contract family
 Run:
 
 ```bash
-PYTHONPATH=src python scripts/generate_phase71_contracts.py
-PYTHONPATH=src python scripts/validate_phase71_contracts.py
+PYTHONPATH=src python scripts/generate_contracts.py
+PYTHONPATH=src python scripts/validate_event_contracts.py
 ```
 
 Generated files are deterministic and covered by the monorepo integrity manifest.

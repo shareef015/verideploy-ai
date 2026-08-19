@@ -142,7 +142,7 @@ def architecture_scan(root: str | Path) -> list[SecurityFinding]:
     if "SecurityHeadersMiddleware" not in security_module or "AuthContextMiddleware" not in security_module or "SecurityModule" not in app_module:
         findings.append(SecurityFinding("SEC-API-001", "critical", "gateway security middleware is not enabled"))
     ci = (root / ".github/workflows/ci.yml").read_text(encoding="utf-8")
-    if "security_phase62_scan.py" not in ci:
+    if "security_scan.py" not in ci:
         findings.append(SecurityFinding("SEC-SUP-001", "high", "security scan is not enforced in CI"))
     package=json.loads((root / "package.json").read_text(encoding="utf-8"))
     for section in ("dependencies", "devDependencies"):

@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 
 def main()->int:
-    proc=subprocess.run([sys.executable,'scripts/generate_phase71_contracts.py'],cwd=ROOT,env={**__import__('os').environ,'PYTHONPATH':'src'},capture_output=True,text=True)
+    proc=subprocess.run([sys.executable,'scripts/generate_contracts.py'],cwd=ROOT,env={**__import__('os').environ,'PYTHONPATH':'src'},capture_output=True,text=True)
     errors=[] if proc.returncode==0 else [proc.stdout.strip() or proc.stderr.strip()]
     manifest=json.loads((ROOT/'contracts/final/manifest.json').read_text()) if (ROOT/'contracts/final/manifest.json').exists() else {'schemas':{}}
     required={'release-risk-response.v1','rca-response.v1','evidence-reference.v1','timeline-entry.v1','review-response.v1','api-error.v1','websocket-envelope.v1','kafka-envelope.v1'}

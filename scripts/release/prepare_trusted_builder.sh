@@ -8,4 +8,4 @@ command -v docker >/dev/null
 pnpm install --lockfile-only
 uv lock --python 3.12
 python scripts/release/resolve_base_image_digests.py
-PYTHONPATH=. python scripts/validate_phase68_supply_chain.py --release --report evals/reports/phase86-supply-chain-release.json
+PYTHONPATH=. python scripts/validate_supply_chain.py --release --report evals/reports/phase86-supply-chain-release.json

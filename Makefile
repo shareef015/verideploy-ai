@@ -41,13 +41,13 @@ test:
 	uv run pytest -q
 	pnpm test
 retrieval-benchmark:
-	PYTHONPATH=src:. python scripts/benchmark_phase13_retrieval.py
+	PYTHONPATH=src:. python scripts/benchmark_retrieval.py
 visual-retrieval-benchmark:
-	PYTHONPATH=src:. python scripts/benchmark_phase14_visual_retrieval.py
+	PYTHONPATH=src:. python scripts/benchmark_visual_retrieval.py
 fusion-benchmark:
-	PYTHONPATH=src:. python scripts/benchmark_phase15_multimodal_fusion.py
+	PYTHONPATH=src:. python scripts/benchmark_multimodal_fusion.py
 rca-benchmark:
-	PYTHONPATH=src:. python scripts/benchmark_phase23_rca.py
+	PYTHONPATH=src:. python scripts/benchmark_rca.py
 lint:
 	uv run ruff check .
 	pnpm lint
@@ -58,102 +58,102 @@ demo:
 	@echo "Cumulative Phase 4 demo: start stack with 'make up' and open http://localhost:3000/evidence"
 
 critic-benchmark:
-	PYTHONPATH=src python scripts/benchmark_phase24_critic.py
+	PYTHONPATH=src python scripts/benchmark_critic.py
 
 knowledge-corpus-validate:
-	PYTHONPATH=src:. python scripts/validate_phase27_knowledge_corpus.py
+	PYTHONPATH=src:. python scripts/validate_knowledge_corpus.py
 
 integration-contracts:
-	PYTHONPATH=src:. python scripts/verify_phase26_integration_contracts.py
+	PYTHONPATH=src:. python scripts/verify_integration_contracts.py
 
 
 topology-generate:
-	PYTHONPATH=src:. python scripts/generate_phase28_nexuspay_topology.py
+	PYTHONPATH=src:. python scripts/generate_nexuspay_topology.py
 
 topology-validate:
-	PYTHONPATH=src:. python scripts/validate_phase28_topology.py
+	PYTHONPATH=src:. python scripts/validate_topology.py
 
 topology-seed:
-	PYTHONPATH=src:. python scripts/seed_phase28_nexuspay_topology.py
+	PYTHONPATH=src:. python scripts/seed_nexuspay_topology.py
 
 incident-dataset-generate:
-	PYTHONPATH=src:. python scripts/generate_phase29_incident_dataset.py
+	PYTHONPATH=src:. python scripts/generate_incident_dataset.py
 
 incident-dataset-validate:
-	PYTHONPATH=src:. python scripts/validate_phase29_incident_dataset.py
+	PYTHONPATH=src:. python scripts/validate_incident_dataset.py
 
 incident-dataset-seed:
-	PYTHONPATH=src:. python scripts/seed_phase29_incident_dataset.py
+	PYTHONPATH=src:. python scripts/seed_incident_dataset.py
 
 
 evidence-graph-seed:
-	PYTHONPATH=src:. python scripts/seed_phase31_evidence_graph.py
+	PYTHONPATH=src:. python scripts/seed_evidence_graph.py
 
 schema-catalog-validate:
-	PYTHONPATH=src:. python scripts/validate_phase32_schema.py
+	PYTHONPATH=src:. python scripts/validate_schema.py
 
 postgres-performance-validate:
-	PYTHONPATH=src:. python scripts/validate_phase33_postgres_performance.py
+	PYTHONPATH=src:. python scripts/validate_postgres_performance.py
 
 metadata-filter-validate:
-	PYTHONPATH=src:. python scripts/validate_phase35_metadata_filters.py
+	PYTHONPATH=src:. python scripts/validate_metadata_filters.py
 
 self-corrective-rag-validate:
 	PYTHONPATH=src:. pytest -q tests/unit/test_phase36_self_corrective_rag.py
 
 hallucination-protection-validate:
-	PYTHONPATH=src:. python scripts/validate_phase37_hallucination_protection.py
+	PYTHONPATH=src:. python scripts/validate_hallucination_protection.py
 
 citation-architecture-validate:
 	PYTHONPATH=src:. pytest -q tests/unit/test_phase38_citation_architecture.py
 
 langgraph-state-validate:
-	PYTHONPATH=src:. python scripts/validate_phase39_langgraph_state.py
+	PYTHONPATH=src:. python scripts/validate_langgraph_state.py
 
 dynamic-parallel-validate:
-	PYTHONPATH=src:. python scripts/validate_phase40_dynamic_parallelism.py
+	PYTHONPATH=src:. python scripts/validate_dynamic_parallelism.py
 
 human-approval-validate:
-	PYTHONPATH=src:. python scripts/validate_phase41_human_approval.py
+	PYTHONPATH=src:. python scripts/validate_human_approval.py
 
 workflow-durability-validate:
-	PYTHONPATH=src:. python scripts/validate_phase42_workflow_durability.py
+	PYTHONPATH=src:. python scripts/validate_workflow_durability.py
 
 api-boundary-validate:
-	PYTHONPATH=src:. python scripts/validate_phase43_api_boundary.py
+	PYTHONPATH=src:. python scripts/validate_api_boundary.py
 
 frontend-foundation-validate:
-	PYTHONPATH=src:. python scripts/validate_phase44_frontend_foundation.py
+	PYTHONPATH=src:. python scripts/validate_frontend_foundation.py
 
 release-risk-screen-validate:
-	python scripts/validate_phase45_release_risk_screen.py
+	python scripts/validate_release_risk_screen.py
 
 incident-screen-validate:
-	PYTHONPATH=src:. python scripts/validate_phase46_incident_screen.py
+	PYTHONPATH=src:. python scripts/validate_incident_screen.py
 
 .PHONY: agent-execution-screen-validate
 agent-execution-screen-validate:
-	PYTHONPATH=src:. python scripts/validate_phase47_agent_execution_screen.py
+	PYTHONPATH=src:. python scripts/validate_agent_execution_screen.py
 
 .PHONY: llmops-data-validate
 llmops-data-validate:
-	PYTHONPATH=src:. python scripts/validate_phase48_llmops_data_platform.py
+	PYTHONPATH=src:. python scripts/validate_llmops_data_platform.py
 
 .PHONY: langsmith-integration-validate
 langsmith-integration-validate:
-	PYTHONPATH=src:. python scripts/validate_phase49_langsmith_integration.py
+	PYTHONPATH=src:. python scripts/validate_langsmith_integration.py
 
 .PHONY: release-validate release-plan release-deploy release-verify release-seed release-rollback
 release-validate:
-	PYTHONPATH=src:. python scripts/validate_phase86_release.py
+	PYTHONPATH=src:. python scripts/validate_release.py
 release-plan:
-	./scripts/release/phase86_plan.sh
+	./scripts/release/plan.sh
 release-deploy:
-	./scripts/release/phase86_deploy.sh
+	./scripts/release/deploy.sh
 release-verify:
-	./scripts/release/phase86_verify.sh
+	./scripts/release/verify.sh
 release-seed:
-	./scripts/release/phase86_seed_demo.sh
+	./scripts/release/seed_demo.sh
 release-rollback:
 	@test -n "$(REVISION)" || (echo "REVISION is required" && exit 2)
-	./scripts/release/phase86_rollback.sh "$(REVISION)"
+	./scripts/release/rollback.sh "$(REVISION)"

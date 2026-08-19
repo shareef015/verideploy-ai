@@ -12,7 +12,7 @@ The Helm chart runs `alembic upgrade head` as a pre-install/pre-upgrade hook. Be
 ```bash
 kubectl -n verideploy get deploy
 helm -n verideploy history verideploy
-VERIDEPLOY_ROLLBACK_APPROVED=yes scripts/release/phase86_rollback.sh <REVISION>
+VERIDEPLOY_ROLLBACK_APPROVED=yes scripts/release/rollback.sh <REVISION>
 ```
 The rollback script refuses to act without explicit approval and runs post-rollback readiness checks.
 

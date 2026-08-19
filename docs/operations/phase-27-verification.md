@@ -3,7 +3,7 @@
 Run the corpus gate:
 
 ```bash
-PYTHONPATH=src:. python scripts/validate_phase27_knowledge_corpus.py
+PYTHONPATH=src:. python scripts/validate_knowledge_corpus.py
 ```
 
 Expected required category counts are one each for architecture, database, deployment, Kubernetes, postmortem, runbook, security, and service. The command writes `artifacts/phase-27-corpus-validation.json` and exits non-zero on any manifest, hash, provenance, label, file-set, or retention error.

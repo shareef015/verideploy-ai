@@ -27,7 +27,7 @@ The deterministic benchmark reuses all 500 Phase 52 cases. Each of the seven cat
 Run locally:
 
 ```bash
-PYTHONPATH=src python scripts/benchmark_phase55_agent_metrics.py --report evals/reports/phase55-agent-metrics.json
+PYTHONPATH=src python scripts/benchmark_agent_metrics.py --report evals/reports/phase55-agent-metrics.json
 ```
 
 CI fails when any production threshold regresses. Model calls are not required for this gate.

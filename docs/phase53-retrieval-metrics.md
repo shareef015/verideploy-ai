@@ -14,7 +14,7 @@ Phase 53 turns the Phase 52 retrieval cases into an auditable retrieval benchmar
 
 ## Deterministic benchmark
 
-`PYTHONPATH=src python scripts/benchmark_phase53_retrieval_metrics.py --repeats 5`
+`PYTHONPATH=src python scripts/benchmark_retrieval_metrics.py --repeats 5`
 
 The repository benchmark is deliberately synthetic and paid-call-free. It validates metric implementation, reporting, regression gates, and statistical aggregation without depending on an external vector database. Production retrieval adapters can emit the same `RetrievalObservation` contract and reuse the exact metrics/reporting code.
 

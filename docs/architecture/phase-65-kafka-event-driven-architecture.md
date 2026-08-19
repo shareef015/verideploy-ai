@@ -35,7 +35,7 @@ Gateway replicas publish validated Kafka events to tenant-specific Redis channel
 Run:
 
 ```bash
-PYTHONPATH=src python scripts/benchmark_phase65_kafka_architecture.py
+PYTHONPATH=src python scripts/benchmark_kafka_architecture.py
 PYTHONPATH=src python -m pytest -q tests/events/test_phase65_kafka_event_driven_architecture.py
 ```
 

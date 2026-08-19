@@ -7,10 +7,10 @@ def load(name:str,path:Path):
     spec=importlib.util.spec_from_file_location(name,path); mod=importlib.util.module_from_spec(spec); assert spec and spec.loader; spec.loader.exec_module(mod); return mod
 
 def test_release_version_is_consistent():
-    m=load('p67',ROOT/'scripts/validate_phase67_monorepo.py'); assert m.validate()==[]
+    m=load('p67',ROOT/'scripts/validate_monorepo.py'); assert m.validate()==[]
 
 def test_generated_contract_manifest_is_current():
-    m=load('p67b',ROOT/'scripts/validate_phase67_monorepo.py'); assert json.loads((ROOT/'config/monorepo/integrity.json').read_text())==m.manifest()
+    m=load('p67b',ROOT/'scripts/validate_monorepo.py'); assert json.loads((ROOT/'config/monorepo/integrity.json').read_text())==m.manifest()
 
 def test_codeowners_cover_workspace_owners():
     policy=json.loads((ROOT/'config/monorepo/policy.json').read_text()); code=(ROOT/'.github/CODEOWNERS').read_text(); assert all(x['owner'] in code for x in policy['workspace_packages'].values())

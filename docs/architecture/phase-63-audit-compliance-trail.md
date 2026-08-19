@@ -18,4 +18,4 @@ Search is tenant-scoped and role-authorized. Export is limited to `auditor` and 
 `/audit` uses AG Grid and reads only through Next.js → NestJS → private FastAPI. Browser code never reaches the private AI service directly.
 
 ## Gate
-`PYTHONPATH=src python scripts/benchmark_phase63_audit_trail.py` must pass, and cumulative tests must prove tamper detection, signature verification, tenant isolation, export authorization, retention semantics, and viewer/API presence.
+`PYTHONPATH=src python scripts/benchmark_audit_trail.py` must pass, and cumulative tests must prove tamper detection, signature verification, tenant isolation, export authorization, retention semantics, and viewer/API presence.

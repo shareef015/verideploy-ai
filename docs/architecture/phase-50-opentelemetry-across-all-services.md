@@ -21,4 +21,4 @@ When `OTEL_ENABLED=true`, VeriDeploy has W3C Trace Context propagation across br
 - Collector: memory limiter + batching + resource normalization; trace export to Tempo.
 
 ## Validation gate
-A trace is valid when the same W3C trace ID is visible through the gateway, asynchronous Kafka hop, Python processing and final event path. Run `python scripts/validate_phase50_opentelemetry.py`.
+A trace is valid when the same W3C trace ID is visible through the gateway, asynchronous Kafka hop, Python processing and final event path. Run `python scripts/validate_opentelemetry.py`.

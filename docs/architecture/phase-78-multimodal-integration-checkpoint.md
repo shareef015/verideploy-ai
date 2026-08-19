@@ -14,6 +14,6 @@ This checkpoint hardens the existing image, document/PDF, audio, and video pipel
 
 ## Gate
 
-`PYTHONPATH=src python scripts/validate_phase78_multimodal.py`
+`PYTHONPATH=src python scripts/validate_multimodal.py`
 
 The gate requires all four modalities, clean-path fusion, bounded partial-failure fusion, 100% traceability, and 100% redaction correctness.

@@ -10,10 +10,10 @@
     "typecheck": "turbo typecheck",
     "test": "turbo test",
     "format:check": "prettier --check .",
-    "monorepo:validate": "python scripts/validate_phase67_monorepo.py",
+    "monorepo:validate": "python scripts/validate_monorepo.py",
     "ci:affected": "python scripts/ci/affected.py",
-    "supply-chain:validate": "python scripts/validate_phase68_supply_chain.py",
-    "supply-chain:release": "python scripts/validate_phase68_supply_chain.py --release"
+    "supply-chain:validate": "python scripts/validate_supply_chain.py",
+    "supply-chain:release": "python scripts/validate_supply_chain.py --release"
   },
   "devDependencies": {
     "prettier": "3.6.2",

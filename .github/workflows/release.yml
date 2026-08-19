@@ -29,9 +29,9 @@ jobs:
       - uses: azure/setup-helm@v4
         with: {version: v3.16.4}
       - name: Prepare trusted dependency and base-image material
-        run: ./scripts/release/phase86_prepare_trusted_builder.sh
+        run: ./scripts/release/prepare_trusted_builder.sh
       - name: Validate final release contract
-        run: PYTHONPATH=src python scripts/validate_phase86_release.py
+        run: PYTHONPATH=src python scripts/validate_release.py
       - name: Build and push versioned images with provenance and SBOM
         shell: bash
         run: |

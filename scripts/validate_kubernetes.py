@@ -84,7 +84,7 @@ def validate() -> dict[str, Any]:
     ):
         if token not in network_tpl: findings.append(f"network policy missing {token}")
 
-    drill = ROOT / "scripts/deploy/phase66_pod_failure_drill.sh"
+    drill = ROOT / "scripts/deploy/pod_failure_drill.sh"
     if not drill.exists() or "kubectl" not in drill.read_text(): findings.append("live pod-failure drill script missing")
 
     canary_tpl = _template("canary.yaml")

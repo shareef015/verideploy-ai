@@ -108,7 +108,7 @@ def test_phase28_frontend_renders_services_owners_slos_deployments_and_dependenc
 
 
 def test_phase28_seed_script_uses_postgres_repository_not_test_memory():
-    source = (ROOT / "scripts/seed_phase28_nexuspay_topology.py").read_text()
+    source = (ROOT / "scripts/seed_nexuspay_topology.py").read_text()
     assert "PostgresTopologyRepository" in source
     assert "TopologyService" in source
     assert "requires PostgreSQL" in source

@@ -8,4 +8,4 @@ The release gate protects keyword, dense and hybrid Recall@5, hybrid MRR, visual
 
 ## Production benchmark
 
-`scripts/validate_phase76_rag.py` writes `evals/reports/phase76-rag-performance.json`. The deterministic checkpoint is CI-safe. PostgreSQL/pgvector clean-index integration remains covered by the existing `TEST_POSTGRES_URL` integration suite and is intentionally not faked when no PostgreSQL service is present.
+`scripts/validate_rag.py` writes `evals/reports/phase76-rag-performance.json`. The deterministic checkpoint is CI-safe. PostgreSQL/pgvector clean-index integration remains covered by the existing `TEST_POSTGRES_URL` integration suite and is intentionally not faked when no PostgreSQL service is present.

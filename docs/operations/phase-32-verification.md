@@ -3,7 +3,7 @@
 Run:
 
 ```bash
-PYTHONPATH=src:. python scripts/validate_phase32_schema.py
+PYTHONPATH=src:. python scripts/validate_schema.py
 pytest -q tests/unit/test_phase32_operational_schema.py
 pytest -q
 DATABASE_URL=postgresql+psycopg://... alembic upgrade 0014_phase32_complete_operational_schema --sql

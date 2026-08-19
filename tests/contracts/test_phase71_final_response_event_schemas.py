@@ -34,9 +34,9 @@ def test_websocket_and_kafka_envelopes_share_event_payload_contract():
     assert ws.payload.model_dump()==kafka.payload.model_dump()
 
 def test_generator_is_deterministic_and_generated_clients_exist():
-    subprocess.run([sys.executable,"scripts/generate_phase71_contracts.py"],cwd=ROOT,check=True,env={**__import__('os').environ,"PYTHONPATH":"src"})
+    subprocess.run([sys.executable,"scripts/generate_contracts.py"],cwd=ROOT,check=True,env={**__import__('os').environ,"PYTHONPATH":"src"})
     first=(ROOT/'contracts/final/manifest.json').read_bytes()
-    subprocess.run([sys.executable,"scripts/generate_phase71_contracts.py"],cwd=ROOT,check=True,env={**__import__('os').environ,"PYTHONPATH":"src"})
+    subprocess.run([sys.executable,"scripts/generate_contracts.py"],cwd=ROOT,check=True,env={**__import__('os').environ,"PYTHONPATH":"src"})
     assert first==(ROOT/'contracts/final/manifest.json').read_bytes()
     assert (ROOT/'generated/clients/typescript/contracts.ts').exists()
     spec=importlib.util.spec_from_file_location('vd_generated',ROOT/'generated/clients/python/verideploy_contracts.py'); assert spec and spec.loader
@@ -44,7 +44,7 @@ def test_generator_is_deterministic_and_generated_clients_exist():
 
 def test_backward_compatibility_detects_removed_field_and_enum_narrowing():
     sys.path.insert(0,str(ROOT/'scripts'))
-    from generate_phase71_contracts import compare_signature, signature
+    from generate_contracts import compare_signature, signature
     old=signature(ReleaseRiskFinalResponse.model_json_schema())
     new=copy.deepcopy(old)
     new['root']['properties'].pop('summary')

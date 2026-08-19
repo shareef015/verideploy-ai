@@ -12,14 +12,14 @@ Phase 50 is complete and cumulative through Phases 1–50. OpenTelemetry is impl
 - `docs/architecture/phase-50-opentelemetry-across-all-services.md`
 - `docs/decisions/ADR-0032-opentelemetry-is-the-cross-service-trace-standard.md`
 - `tests/unit/test_phase50_opentelemetry.py`
-- `scripts/validate_phase50_opentelemetry.py`
+- `scripts/validate_opentelemetry.py`
 
 ## Trace architecture
 Browser client span -> NestJS inbound HTTP -> Kafka producer -> worker Kafka consumer -> AI/service operations -> LangGraph/RAG/MCP/data/outbound HTTP -> final event. `traceparent` and `tracestate` are the propagation standard; `x-correlation-id` remains the business/support correlation key.
 
 ## Commands
 ```bash
-python scripts/validate_phase50_opentelemetry.py
+python scripts/validate_opentelemetry.py
 pytest -q
 docker compose up -d tempo otel-collector
 ```

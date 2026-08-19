@@ -6,4 +6,4 @@ fi
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT/infrastructure/terraform"
 terraform apply verideploy-0.86.0.tfplan
-"$ROOT/scripts/release/phase86_verify.sh"
+"$ROOT/scripts/release/verify.sh"

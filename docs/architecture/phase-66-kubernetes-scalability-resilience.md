@@ -16,7 +16,7 @@ The Alembic migration Job runs before install/upgrade and has bounded retry plus
 
 ## Canary and rollback
 
-`canary.enabled` is false by default. Enabling it creates a separately selected gateway canary Deployment and Service, with a declared maximum traffic percentage annotation. The chart does not silently reroute stable traffic. `scripts/deploy/phase66_canary.sh` provides deploy, promote, rollback, and status operations and uses Helm `--atomic --wait` for deploy/promotion. External ingress/service-mesh weighting can target the canary service without changing the stable selector.
+`canary.enabled` is false by default. Enabling it creates a separately selected gateway canary Deployment and Service, with a declared maximum traffic percentage annotation. The chart does not silently reroute stable traffic. `scripts/deploy/canary.sh` provides deploy, promote, rollback, and status operations and uses Helm `--atomic --wait` for deploy/promotion. External ingress/service-mesh weighting can target the canary service without changing the stable selector.
 
 ## Multi-AZ assumptions
 
@@ -27,7 +27,7 @@ Production clusters are assumed to expose `topology.kubernetes.io/zone` and `kub
 Run:
 
 ```bash
-PYTHONPATH=src python scripts/validate_phase66_kubernetes.py
+PYTHONPATH=src python scripts/validate_kubernetes.py
 PYTHONPATH=src pytest -q tests/platform/test_phase66_kubernetes_scalability_resilience.py
 ```
 

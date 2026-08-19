@@ -4,7 +4,7 @@ from pathlib import Path
 
 import yaml
 
-from scripts.validate_phase66_kubernetes import CHART, validate
+from scripts.validate_kubernetes import CHART, validate
 from verideploy.platform.kubernetes import evaluate_workloads, simulate_single_pod_failure, simulate_single_zone_failure
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -37,7 +37,7 @@ def test_three_az_distribution_survives_one_zone_loss() -> None:
 def test_canary_and_migration_paths_are_explicit_and_safe() -> None:
     canary = (CHART / "templates/canary.yaml").read_text()
     migration = (CHART / "templates/migration-job.yaml").read_text()
-    deploy_script = (ROOT / "scripts/deploy/phase66_canary.sh").read_text()
+    deploy_script = (ROOT / "scripts/deploy/canary.sh").read_text()
     assert "verideploy-gateway-canary" in canary
     assert "max-traffic-percent" in canary
     assert "pre-install,pre-upgrade" in migration

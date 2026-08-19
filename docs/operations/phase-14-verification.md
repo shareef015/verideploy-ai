@@ -4,7 +4,7 @@ Run:
 
 ```bash
 PYTHONPATH=src:. pytest -q
-PYTHONPATH=src:. python scripts/benchmark_phase14_visual_retrieval.py
+PYTHONPATH=src:. python scripts/benchmark_visual_retrieval.py
 PYTHONPATH=src:. alembic upgrade head --sql
 ```
 

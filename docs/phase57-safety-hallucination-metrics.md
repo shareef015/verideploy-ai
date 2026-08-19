@@ -14,7 +14,7 @@ Phase 57 adds deterministic, CI-safe adversarial evaluation for hallucination an
 
 ## Adversarial gate
 
-`PYTHONPATH=src python scripts/benchmark_phase57_safety_metrics.py`
+`PYTHONPATH=src python scripts/benchmark_safety_metrics.py`
 
 The benchmark uses all 500 synthetic Phase 52 cases and injects deterministic adversarial conditions. The profile is explicitly synthetic and validates the metric/gating infrastructure rather than claiming real-world safety performance for a vendor model.
 

@@ -6,7 +6,7 @@ A clean operator environment needs Git, Docker/BuildKit, Terraform >=1.8, Helm 3
 ## 1. Verify source
 ```bash
 sha256sum -c VeriDeploy_AI_Phase_86.sha256
-PYTHONPATH=src python scripts/validate_phase86_release.py
+PYTHONPATH=src python scripts/validate_release.py
 ```
 
 ## 2. Build/sign release images
@@ -24,19 +24,19 @@ terraform plan -out=verideploy-0.86.0.tfplan
 
 ## 4. Apply only after release approval
 ```bash
-VERIDEPLOY_RELEASE_APPROVED=yes ../../scripts/release/phase86_deploy.sh
+VERIDEPLOY_RELEASE_APPROVED=yes ../../scripts/release/deploy.sh
 ```
 The script refuses to apply without the explicit approval variable.
 
 ## 5. Verify rollout and observability
 ```bash
-../../scripts/release/phase86_verify.sh
+../../scripts/release/verify.sh
 ```
 Verify deployments, services, readiness, ExternalSecret status, migration hook success, Kafka connectivity, and OTel/Prometheus visibility.
 
 ## 6. Seed and run the synthetic recruiter demo
 ```bash
-VERIDEPLOY_TENANT_ID=synthetic-demo VERIDEPLOY_USER_ID=recruiter-demo ../../scripts/release/phase86_seed_demo.sh
+VERIDEPLOY_TENANT_ID=synthetic-demo VERIDEPLOY_USER_ID=recruiter-demo ../../scripts/release/seed_demo.sh
 ```
 The seed script calls the public demo API; it does not edit the production database manually.
 

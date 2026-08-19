@@ -5,4 +5,4 @@
 4. Scan dependencies/images; HIGH/CRITICAL findings block unless a non-expired documented exception exists.
 5. Build artifacts; record SHA-256, commit SHA, repository, workflow and CI run ID.
 6. Sign images and provenance using keyless Sigstore/cosign in CI; verify before promotion.
-7. Run `python scripts/validate_phase68_supply_chain.py --release` before publishing.
+7. Run `python scripts/validate_supply_chain.py --release` before publishing.

@@ -25,4 +25,4 @@ Compose is a local parity environment, not a production security boundary. Phase
 
 ## Failure drills
 
-`python scripts/validate_phase75_platform.py` performs deterministic smoke, restart, critical-dependency failure, optional-observability degradation, and recovery checks. These tests do not require a privileged Docker daemon and therefore run safely in CI. A real deployment can additionally exercise the existing Kubernetes pod-failure drill from Phase 66.
+`python scripts/validate_platform.py` performs deterministic smoke, restart, critical-dependency failure, optional-observability degradation, and recovery checks. These tests do not require a privileged Docker daemon and therefore run safely in CI. A real deployment can additionally exercise the existing Kubernetes pod-failure drill from Phase 66.

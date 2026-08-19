@@ -4,7 +4,7 @@ Run:
 
 ```bash
 PYTHONPATH=.:src pytest -q tests/unit/test_phase15_multimodal_fusion.py
-PYTHONPATH=.:src python scripts/benchmark_phase15_multimodal_fusion.py
+PYTHONPATH=.:src python scripts/benchmark_multimodal_fusion.py
 PYTHONPATH=.:src pytest -q
 python -m compileall -q src services workers scripts
 ```

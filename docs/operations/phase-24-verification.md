@@ -4,7 +4,7 @@ Run:
 
 ```bash
 pytest -q tests/unit/test_phase24_critic_agent.py
-PYTHONPATH=src python scripts/benchmark_phase24_critic.py
+PYTHONPATH=src python scripts/benchmark_critic.py
 pytest -q
 python -m compileall -q src services workers scripts tests
 ```

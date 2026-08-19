@@ -172,7 +172,7 @@ if __name__ == "__main__":
 cd "C:\Users\ADMINI~1\AppData\Local\Temp\claude\c--Users-Administrator-Desktop-IT-OPS-verideploy-ai\f00c2c26-4ea6-46d5-a82a-5e1d279d078c\scratchpad"
 python dephase_tool.py rename "c:\Users\Administrator\Desktop\IT\OPS\verideploy-ai" "scripts/*phase*.py"
 ```
-Expected: prints ~78 `[dry] RENAME` lines (e.g. `scripts/benchmark_phase13_retrieval.py -> scripts/benchmark_retrieval.py`), no `COLLISION` error, no files actually touched (`git status` in repo stays clean). If a collision is reported, that pair needs a manual override in the task that covers it — note it and continue; don't loosen the tool's collision guard.
+Expected: prints ~78 `[dry] RENAME` lines (e.g. `scripts/benchmark_retrieval.py -> scripts/benchmark_retrieval.py`), no `COLLISION` error, no files actually touched (`git status` in repo stays clean). If a collision is reported, that pair needs a manual override in the task that covers it — note it and continue; don't loosen the tool's collision guard.
 
 - [ ] **Step 3: Commit the plan doc update (no repo code changes yet)**
 
@@ -323,10 +323,10 @@ git commit -m "refactor: strip phase-N branding from evals/reports and evals/fix
 **Files:**
 - Modify: 111 files under `tests/` (renamed)
 - Modify (explicit manual fix, in addition to the sweep): `tests/unit/test_phase25_mcp_api.py` → after rename, its `from tests.unit.test_phase25_mcp_gateway import build` must read `from tests.unit.test_mcp_gateway import build`
-- Modify (explicit manual fix): `tests/platform/test_phase66_kubernetes_scalability_resilience.py` and its target `scripts/validate_phase66_kubernetes.py` (already renamed in Task 3) — after rename, `from scripts.validate_phase66_kubernetes import CHART, validate` must read `from scripts.validate_kubernetes import CHART, validate`
+- Modify (explicit manual fix): `tests/platform/test_phase66_kubernetes_scalability_resilience.py` and its target `scripts/validate_kubernetes.py` (already renamed in Task 3) — after rename, `from scripts.validate_kubernetes import CHART, validate` must read `from scripts.validate_kubernetes import CHART, validate`
 
 **Interfaces:**
-- Consumes: `dephase_tool.py`. The tool's basename/stem substitution already rewrites `test_phase25_mcp_gateway` → `test_mcp_gateway` and `validate_phase66_kubernetes` → `validate_kubernetes` as plain string replacements, so the import lines should already be correct after the sweep — this step is to *verify* that, not to hand-edit blind.
+- Consumes: `dephase_tool.py`. The tool's basename/stem substitution already rewrites `test_phase25_mcp_gateway` → `test_mcp_gateway` and `validate_kubernetes` → `validate_kubernetes` as plain string replacements, so the import lines should already be correct after the sweep — this step is to *verify* that, not to hand-edit blind.
 
 - [ ] **Step 1: Rename and sweep**
 
@@ -364,7 +364,7 @@ git commit -m "refactor: strip phase-N branding from tests/, fix cross-module im
 ### Task 7: Scrub phase-numbered identifiers in `src/`, rename Alembic migration filenames (not revision IDs)
 
 **Files:**
-- Modify: `src/verideploy/evaluation/quality.py` (`PHASE52_EXPECTED_COUNTS`, `PHASE52_TOTAL_CASES`, `validate_phase52_dataset` → non-numbered names)
+- Modify: `src/verideploy/evaluation/quality.py` (`PHASE52_EXPECTED_COUNTS`, `PHASE52_TOTAL_CASES`, `validate_dataset` → non-numbered names)
 - Modify: `src/verideploy/rag/checkpoint/performance.py` (`run_phase76_checkpoint` → non-numbered name)
 - Modify: any caller of the above two (found via grep in Step 1)
 - Modify (filename only): 27 files under `src/verideploy/database/migrations/versions/` — e.g. `0010_phase28_nexuspay_topology.py` → `0010_nexuspay_topology.py`
@@ -378,14 +378,14 @@ git commit -m "refactor: strip phase-N branding from tests/, fix cross-module im
 cd "c:\Users\Administrator\Desktop\IT\OPS\verideploy-ai"
 grep -rn "PHASE[0-9]\+_\|_phase[0-9]\+\|phase[0-9]\+_" src/ services/ workers/ tests/ --include="*.py" | grep -v "database/migrations"
 ```
-Expected output becomes the exact rename list — expect at minimum `PHASE52_EXPECTED_COUNTS`, `PHASE52_TOTAL_CASES`, `validate_phase52_dataset`, `run_phase76_checkpoint`, and their call sites in tests (already renamed in Task 6, so this grep should mostly hit `src/`).
+Expected output becomes the exact rename list — expect at minimum `PHASE52_EXPECTED_COUNTS`, `PHASE52_TOTAL_CASES`, `validate_dataset`, `run_phase76_checkpoint`, and their call sites in tests (already renamed in Task 6, so this grep should mostly hit `src/`).
 
 - [ ] **Step 2: Rename each identifier with Edit (small, targeted — not scripted, since these are code identifiers not filenames)**
 
 For each `old_identifier -> new_identifier` pair found in Step 1, use the Edit tool with `replace_all: true` on every file that references it (both the definition site and call sites). Example for the two confirmed ones:
 - `PHASE52_EXPECTED_COUNTS` → `DATASET_EXPECTED_COUNTS`
 - `PHASE52_TOTAL_CASES` → `DATASET_TOTAL_CASES`
-- `validate_phase52_dataset` → `validate_dataset`
+- `validate_dataset` → `validate_dataset`
 - `run_phase76_checkpoint` → `run_rag_checkpoint`
 
 - [ ] **Step 3: Rename Alembic migration filenames only — leave revision/down_revision strings untouched**

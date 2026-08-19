@@ -101,6 +101,6 @@ def test_phase29_migration_has_rls_and_constraints():
 
 
 def test_phase29_seed_script_uses_validated_checked_in_dataset():
-    script = (ROOT / "scripts/seed_phase29_incident_dataset.py").read_text()
+    script = (ROOT / "scripts/seed_incident_dataset.py").read_text()
     assert "validate_incident_dataset" in script
     assert "nexuspay-incidents.json" in script

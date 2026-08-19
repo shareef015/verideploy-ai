@@ -6,7 +6,7 @@ Run:
 
 ```bash
 pytest -q
-python scripts/benchmark_phase13_retrieval.py
+python scripts/benchmark_retrieval.py
 alembic upgrade head --sql
 ```
 

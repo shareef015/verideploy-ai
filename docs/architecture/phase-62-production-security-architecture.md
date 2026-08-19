@@ -21,4 +21,4 @@ Kubernetes starts with default deny. Explicit policy permits web → gateway and
 CI runs the normal test/lint/build suite and the Phase 62 security architecture scan. Policy allows zero unresolved critical and zero unresolved high dependency vulnerabilities. Lockfiles and pinned container images remain part of the build contract. Production image/SBOM/CVE tooling can plug into this policy without changing application authorization semantics.
 
 ## Gate
-`PYTHONPATH=src python scripts/security_phase62_scan.py` fails when a critical architecture control is missing. Security tests exercise PKCE, RBAC/ABAC/tenant isolation, SSRF blocks, secret references, encryption posture and the repository architecture scan.
+`PYTHONPATH=src python scripts/security_scan.py` fails when a critical architecture control is missing. Security tests exercise PKCE, RBAC/ABAC/tenant isolation, SSRF blocks, secret references, encryption posture and the repository architecture scan.

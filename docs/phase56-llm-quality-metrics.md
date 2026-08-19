@@ -25,7 +25,7 @@ The production principle is: deterministic checks remain the CI source of truth;
 Run locally with:
 
 ```bash
-PYTHONPATH=src python scripts/benchmark_phase56_llm_quality_metrics.py
+PYTHONPATH=src python scripts/benchmark_llm_quality_metrics.py
 ```
 
 CI fails if the candidate profile falls below any quality threshold, if judge calibration fails, or if the candidate aggregate score regresses below the configured baseline profile.

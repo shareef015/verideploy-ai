@@ -24,6 +24,6 @@ def test_release_workflow_signs_and_fails_closed():
     assert '|| true' not in w
 
 def test_deploy_and_rollback_require_human_approval_and_seed_uses_public_api():
-    deploy=(ROOT/'scripts/release/phase86_deploy.sh').read_text(); rollback=(ROOT/'scripts/release/phase86_rollback.sh').read_text(); seed=(ROOT/'scripts/release/phase86_seed_demo.sh').read_text()
+    deploy=(ROOT/'scripts/release/deploy.sh').read_text(); rollback=(ROOT/'scripts/release/rollback.sh').read_text(); seed=(ROOT/'scripts/release/seed_demo.sh').read_text()
     assert 'VERIDEPLOY_RELEASE_APPROVED' in deploy and 'VERIDEPLOY_ROLLBACK_APPROVED' in rollback
     assert '/api/v1/demos/multimodal-killer/run' in seed and 'insert into' not in seed.lower()

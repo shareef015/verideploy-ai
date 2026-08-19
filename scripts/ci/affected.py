@@ -10,7 +10,7 @@ GROUPS={
  "contracts": ("contracts/","scripts/validate_contracts.py"),
  "kubernetes": ("infrastructure/helm/","infrastructure/kubernetes/","scripts/deploy/"),
 }
-GLOBAL=(".github/","config/monorepo/","config/release/","scripts/validate_phase67_monorepo.py")
+GLOBAL=(".github/","config/monorepo/","config/release/","scripts/validate_monorepo.py")
 
 def changes(base:str, head:str)->list[str]:
     out=subprocess.check_output(["git","diff","--name-only",f"{base}...{head}"],text=True)

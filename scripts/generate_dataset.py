@@ -88,7 +88,7 @@ def main() -> int:
     manifest = build_dataset_manifest(path=args.output, dataset_id="verideploy-500", version="1.0.0", description="Phase 52 deterministic 500-case production evaluation corpus")
     data = manifest.model_dump(mode="json")
     # created_at is informational; reproducibility is anchored to content_sha256 and deterministic source generation.
-    data["generated_by"] = "scripts/generate_phase52_dataset.py"
+    data["generated_by"] = "scripts/generate_dataset.py"
     data["quality_gate"] = report.as_dict()
     data["validated_at"] = datetime.now(UTC).isoformat()
     args.manifest.parent.mkdir(parents=True, exist_ok=True)

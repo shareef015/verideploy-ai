@@ -19,4 +19,4 @@ Overrides never make a blocked run baseline-promotable. Baseline promotion requi
 
 ## CI
 
-Use `scripts/evaluate_phase60_regression_gate.py` with the persistent evaluation SQLite store, baseline run ID, candidate run ID, and report output. A blocked gate exits `2`; `--non-blocking` can be used for informational branches.
+Use `scripts/evaluate_regression_gate.py` with the persistent evaluation SQLite store, baseline run ID, candidate run ID, and report output. A blocked gate exits `2`; `--non-blocking` can be used for informational branches.

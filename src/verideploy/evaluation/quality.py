@@ -126,7 +126,7 @@ def _validate_case(case: EvalCase) -> list[DatasetQualityIssue]:
     return issues
 
 
-def validate_phase52_dataset(path: Path) -> DatasetQualityReport:
+def validate_dataset(path: Path) -> DatasetQualityReport:
     cases = load_jsonl_dataset(path)
     category_counts = dict(sorted(Counter(case.category for case in cases).items()))
     issues: list[DatasetQualityIssue] = []
@@ -157,7 +157,7 @@ def validate_phase52_dataset(path: Path) -> DatasetQualityReport:
 
 
 def assert_phase52_dataset_quality(path: Path) -> DatasetQualityReport:
-    report = validate_phase52_dataset(path)
+    report = validate_dataset(path)
     if not report.passed:
         detail = "; ".join(f"{issue.code}:{issue.case_id or '-'}:{issue.message}" for issue in report.issues[:20])
         raise ValueError(f"Phase 52 dataset quality gate failed: {detail}")
