@@ -15,7 +15,7 @@ def test_canonical_architecture_diagrams_are_linked():
     t=(ROOT/'README.md').read_text(); assert 'docs/architecture/phase-82-topology.mmd' in t and 'docs/architecture/phase-82-data-flow.mmd' in t
 
 def test_screenshot_metadata_is_truthful_and_source_backed():
-    cfg=json.loads((ROOT/'config/recruiter/phase85-package.json').read_text())
+    cfg=json.loads((ROOT/'config/recruiter/package.json').read_text())
     for item in cfg['screenshots']:
         meta=json.loads((ROOT/item['metadata']).read_text()); assert meta['capture_kind']=='source_derived_static_capture'; assert meta['live_runtime_screenshot'] is False
         assert meta['derived_from'] and all((ROOT/p).exists() for p in meta['derived_from'])

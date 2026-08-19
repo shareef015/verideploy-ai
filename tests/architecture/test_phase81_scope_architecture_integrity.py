@@ -9,4 +9,4 @@ def test_approval_uses_authenticated_identity():
 def test_no_legacy_duplicate_services_namespace(): assert not (ROOT/"src/verideploy/services").exists()
 def test_every_registered_component_has_purpose_and_adr():
     import json
-    p=json.loads((ROOT/"config/architecture/phase81-scope-integrity.json").read_text()); assert all(x["purpose"] and x["adr"] for x in p["components"])
+    p=json.loads((ROOT/"config/architecture/scope-integrity.json").read_text()); assert all(x["purpose"] and x["adr"] for x in p["components"])

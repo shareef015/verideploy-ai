@@ -86,7 +86,7 @@ def _clean_index_fingerprint() -> str:
 
 def run_phase76_checkpoint(policy_path: Path | None = None) -> Phase76Checkpoint:
     root = Path(__file__).resolve().parents[4]
-    policy_path = policy_path or root / "config/rag/phase76-checkpoint.json"
+    policy_path = policy_path or root / "config/rag/checkpoint.json"
     policy = json.loads(policy_path.read_text())
     targets = policy["protected_targets"]
     latency_budget = policy["latency_budget_ms"]

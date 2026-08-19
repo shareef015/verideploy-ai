@@ -107,7 +107,7 @@
       "action":"Created one machine-readable topology model and generated/validated diagrams, workload versions, Compose services, security boundaries, and runtime paths from it.",
       "result_template":"The final topology validates {architecture_nodes} nodes and {architecture_flows} data-flow edges with no findings in the Phase 82 report.",
       "metrics":["architecture_nodes","architecture_flows"],
-      "evidence":["config/architecture/phase82-production-topology.json","evals/reports/phase82-final-production-architecture.json","docs/architecture/phase-82-final-production-technology-architecture.md"]
+      "evidence":["config/architecture/production-topology.json","evals/reports/phase82-final-production-architecture.json","docs/architecture/phase-82-final-production-technology-architecture.md"]
     }
   ],
   "tradeoffs": [

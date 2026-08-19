@@ -10,7 +10,7 @@ The finalized families are: release-risk response, RCA response, evidence refere
 
 ## Backward compatibility
 
-`contracts/compatibility/phase71-baseline.json` stores a compatibility signature. CI rejects removal of existing properties or schema definitions, addition of new required properties, incompatible type/format/reference/const changes, and enum narrowing. Additive optional fields and enum widening remain compatible with v1 consumers.
+`contracts/compatibility/final-response-event-schemas-baseline.json` stores a compatibility signature. CI rejects removal of existing properties or schema definitions, addition of new required properties, incompatible type/format/reference/const changes, and enum narrowing. Additive optional fields and enum widening remain compatible with v1 consumers.
 
 Breaking changes require a new schema major version and parallel contract family; the v1 snapshot is never rewritten merely to make CI green.
 

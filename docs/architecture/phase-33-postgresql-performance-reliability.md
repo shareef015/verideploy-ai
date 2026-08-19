@@ -19,7 +19,7 @@ Phase 33 adds partial indexes for active incidents, investigations, ready jobs, 
 Online Alembic execution is serialized with a PostgreSQL advisory lock acquired through `pg_try_advisory_lock`. Acquisition is bounded by `DB_MIGRATION_LOCK_TIMEOUT_SECONDS`; failure aborts the migration rather than running concurrently.
 
 ## Explain and concurrency policy
-`config/load/phase33-postgres-load.json` defines deterministic fixture volume, concurrency, and thresholds. Provisioned tests use `EXPLAIN (ANALYZE, FORMAT JSON)` and reject plans that exceed execution/cost limits or perform large sequential scans. The concurrency gate measures bounded multi-worker read latency and error rate.
+`config/load/postgres-load.json` defines deterministic fixture volume, concurrency, and thresholds. Provisioned tests use `EXPLAIN (ANALYZE, FORMAT JSON)` and reject plans that exceed execution/cost limits or perform large sequential scans. The concurrency gate measures bounded multi-worker read latency and error rate.
 
 ## HA assumptions
 Application correctness assumes one writable primary endpoint. Production HA is provided by the PostgreSQL platform (streaming/log-shipping standby, managed failover, or equivalent). The application uses `pool_pre_ping` so dead pooled connections are detected after failover. VeriDeploy does not claim synchronous multi-primary semantics.

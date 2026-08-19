@@ -11,4 +11,4 @@ make postgres-performance-validate
 PYTHONPATH=src:. pytest -q
 ```
 
-Provisioned acceptance uses EXPLAIN ANALYZE JSON and concurrent tenant-scoped reads against thresholds in `config/load/phase33-postgres-load.json`.
+Provisioned acceptance uses EXPLAIN ANALYZE JSON and concurrent tenant-scoped reads against thresholds in `config/load/postgres-load.json`.

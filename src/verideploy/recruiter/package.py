@@ -5,7 +5,7 @@ from typing import Any
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 def validate_recruiter_package(root: Path) -> dict[str, Any]:
-    cfg=json.loads((root/'config/recruiter/phase85-package.json').read_text())
+    cfg=json.loads((root/'config/recruiter/package.json').read_text())
     findings=[]
     readme=(root/'README.md').read_text(encoding='utf-8')
     if 'Phase 85' not in readme or '0.85.0' not in readme:

@@ -23,7 +23,7 @@ class ReadinessReport:
 
 
 def review_operational_readiness(root: Path) -> ReadinessReport:
-    policy = json.loads((root / "config/operations/phase79-readiness.json").read_text())
+    policy = json.loads((root / "config/operations/readiness.json").read_text())
     findings: list[ReadinessFinding] = []
     for domain, spec in policy["domains"].items():
         for evidence in spec["evidence"]:

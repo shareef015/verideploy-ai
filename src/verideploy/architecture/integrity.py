@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 def validate_architecture(root: Path) -> dict:
-    policy=json.loads((root/"config/architecture/phase81-scope-integrity.json").read_text())
+    policy=json.loads((root/"config/architecture/scope-integrity.json").read_text())
     errors=[]
     for item in policy["components"]:
         if not (root/item["path"]).exists(): errors.append(f"missing component: {item['path']}")

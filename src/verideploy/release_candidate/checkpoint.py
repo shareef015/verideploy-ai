@@ -51,7 +51,7 @@ def _report_passed(root: Path, path: str) -> bool:
 
 
 def evaluate_release_candidate(root: Path) -> ReleaseCandidateReport:
-    cfg=_json(root/'config/release-candidate/phase80.json')
+    cfg=_json(root/'config/release-candidate/checkpoint.json')
     gates=[]
     for name in cfg['required_gates']:
         evidence=cfg['sources'][name]

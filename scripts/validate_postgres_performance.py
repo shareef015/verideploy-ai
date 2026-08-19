@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from verideploy.database.performance import ExplainPlanPolicy
 
-CFG=Path('config/load/phase33-postgres-load.json')
+CFG=Path('config/load/postgres-load.json')
 
 def main() -> None:
     data=json.loads(CFG.read_text())

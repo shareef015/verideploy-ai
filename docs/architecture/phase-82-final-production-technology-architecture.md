@@ -2,7 +2,7 @@
 
 Release: **0.82.0**
 
-This document is generated from `config/architecture/phase82-production-topology.json`. It describes the deployed production boundary; it is not a conceptual alternate architecture.
+This document is generated from `config/architecture/production-topology.json`. It describes the deployed production boundary; it is not a conceptual alternate architecture.
 
 ## Production topology
 

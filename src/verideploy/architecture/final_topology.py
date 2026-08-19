@@ -12,7 +12,7 @@ class ArchitectureResult:
     flow_count: int
 
 def load_topology(root: Path) -> dict:
-    return json.loads((root / "config/architecture/phase82-production-topology.json").read_text())
+    return json.loads((root / "config/architecture/production-topology.json").read_text())
 
 def validate_topology(root: Path) -> ArchitectureResult:
     cfg = load_topology(root)

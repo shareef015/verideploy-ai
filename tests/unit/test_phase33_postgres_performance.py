@@ -12,7 +12,7 @@ from verideploy.database.session import DatabaseManager
 
 MIG=Path('src/verideploy/database/migrations/versions/0015_phase33_postgres_performance_reliability.py')
 ENV=Path('src/verideploy/database/migrations/env.py')
-LOAD=Path('config/load/phase33-postgres-load.json')
+LOAD=Path('config/load/postgres-load.json')
 
 
 def test_query_budget_validates_timeout_order_and_bounds():

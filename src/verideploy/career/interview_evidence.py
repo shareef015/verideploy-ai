@@ -43,7 +43,7 @@ def _format(value: Any, fmt: str) -> str:
 
 
 def load_config(root: Path) -> dict[str, Any]:
-    return _load_json(root / "config/career/phase84-resume-interview.json")
+    return _load_json(root / "config/career/resume-interview.json")
 
 
 def resolve_metrics(root: Path) -> dict[str, dict[str, Any]]:

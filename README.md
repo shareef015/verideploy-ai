@@ -43,7 +43,7 @@ flowchart LR
   T --> OBS[Prometheus / Grafana / Tempo / Loki]
 ```
 
-Canonical machine-readable topology: `config/architecture/phase82-production-topology.json`  
+Canonical machine-readable topology: `config/architecture/production-topology.json`  
 Generated topology: `docs/architecture/phase-82-topology.mmd`  
 Generated sequence/data flow: `docs/architecture/phase-82-data-flow.mmd`
 

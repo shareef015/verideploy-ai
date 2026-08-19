@@ -21,7 +21,7 @@ def test_phase76_visual_filters_citations_and_tenant_protection_are_closed():
         assert result.metrics[name] == 1.0
 
 def test_phase76_latency_and_cache_budgets_pass_after_clean_warmup():
-    policy=json.loads((ROOT/'config/rag/phase76-checkpoint.json').read_text())
+    policy=json.loads((ROOT/'config/rag/checkpoint.json').read_text())
     result=run_phase76_checkpoint()
     assert result.latency_ms['cold_p95'] <= policy['latency_budget_ms']['cold_p95']
     assert result.latency_ms['warm_p95'] <= policy['latency_budget_ms']['warm_p95']

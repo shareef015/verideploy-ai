@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
-def catalog(): return json.loads((ROOT/'config/demos/phase73.json').read_text())
+def catalog(): return json.loads((ROOT/'config/demos/production-demos.json').read_text())
 def test_exactly_five_synthetic_one_click_scenarios():
  c=catalog(); assert c['synthetic'] is True; assert [x['id'] for x in c['scenarios']]==['release-risk','incident-rca','screenshot','architecture','recording']
 def test_multimodal_demo_assets_exist_and_have_real_signatures():

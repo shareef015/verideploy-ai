@@ -9,7 +9,7 @@ def _json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 def validate_final_release(root: Path) -> dict[str, Any]:
-    cfg=_json(root/"config/release/phase86.json")
+    cfg=_json(root/"config/release/final-release.json")
     findings: list[str]=[]
     release_meta=_json(root/"config/release/version.json")
     if release_meta != {"version": RELEASE, "phase": 86}: findings.append("release metadata drift")
@@ -19,7 +19,7 @@ def validate_final_release(root: Path) -> dict[str, Any]:
     if f"version: {RELEASE}" not in chart or f"appVersion: {RELEASE}" not in chart: findings.append("Helm chart version drift")
     values=(root/"infrastructure/helm/verideploy/values-production.yaml").read_text()
     if values.count(f'tag: "{RELEASE}"') < 4 or f'imageTag: "{RELEASE}"' not in values: findings.append("production image tags are not aligned")
-    topology=_json(root/"config/architecture/phase82-production-topology.json")
+    topology=_json(root/"config/architecture/production-topology.json")
     if topology.get("release") != RELEASE: findings.append("production topology release drift")
     if len(cfg.get("images",[])) != 4: findings.append("four versioned release images are required")
     for image in cfg.get("images",[]):
@@ -49,7 +49,7 @@ def validate_final_release(root: Path) -> dict[str, Any]:
     readme=(root/"README.md").read_text()
     if "Phase 86 Final Production Release and Handoff" not in readme or RELEASE not in readme: findings.append("README missing final handoff section")
     # Secrets must be placeholders / references only in checked-in deployment assets.
-    sensitive_scan="\n".join((root/p).read_text(errors="ignore") for p in ["infrastructure/terraform/terraform.tfvars.example","config/release/phase86.json"])
+    sensitive_scan="\n".join((root/p).read_text(errors="ignore") for p in ["infrastructure/terraform/terraform.tfvars.example","config/release/final-release.json"])
     forbidden=[r"sk-[A-Za-z0-9_-]{20,}", r"AKIA[0-9A-Z]{16}", r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"]
     if any(re.search(pattern,sensitive_scan) for pattern in forbidden): findings.append("release assets contain credential-like material")
     local=cfg.get("execution_truth",{})

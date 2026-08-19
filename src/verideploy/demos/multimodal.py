@@ -60,7 +60,7 @@ class MultimodalDemoManifest(BaseModel):
 
     @classmethod
     def load(cls, root: Path) -> "MultimodalDemoManifest":
-        return cls.model_validate(json.loads((root / "config/demos/phase74.json").read_text()))
+        return cls.model_validate(json.loads((root / "config/demos/multimodal-killer-demo.json").read_text()))
 
 
 def validate_multimodal_demo(root: Path) -> dict[str, object]:

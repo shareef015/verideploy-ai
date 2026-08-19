@@ -38,7 +38,7 @@
     "scripts/generate_contracts.py",
     "scripts/validate_event_contracts.py",
     "contracts/final/manifest.json",
-    "contracts/compatibility/phase71-baseline.json",
+    "contracts/compatibility/final-response-event-schemas-baseline.json",
     "generated/clients/python/verideploy_contracts.py",
     "generated/clients/typescript/contracts.ts",
     "config/testing/strategy.json",

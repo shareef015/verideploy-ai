@@ -176,5 +176,5 @@ class Phase77Checkpoint:
 
 
 def run_phase77_checkpoint(root: Path) -> dict[str, Any]:
-    policy = root / "config/orchestration/phase77-checkpoint.json"
+    policy = root / "config/orchestration/checkpoint.json"
     return Phase77Checkpoint.from_file(policy).run()

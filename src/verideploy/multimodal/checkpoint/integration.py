@@ -32,7 +32,7 @@ class EvidenceResult:
 
 
 def load_policy(root: Path) -> dict:
-    return json.loads((root / "config/multimodal/phase78-checkpoint.json").read_text())
+    return json.loads((root / "config/multimodal/checkpoint.json").read_text())
 
 
 def redact(text: str) -> str:

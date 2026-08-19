@@ -23,7 +23,7 @@ OUT = ROOT / "contracts/final"
 PY_CLIENT = ROOT / "generated/clients/python/verideploy_contracts.py"
 TS_CLIENT = ROOT / "generated/clients/typescript/contracts.ts"
 MANIFEST = ROOT / "contracts/final/manifest.json"
-BASELINE = ROOT / "contracts/compatibility/phase71-baseline.json"
+BASELINE = ROOT / "contracts/compatibility/final-response-event-schemas-baseline.json"
 MODELS = {
     "release-risk-response.v1": ReleaseRiskFinalResponse,
     "rca-response.v1": RcaFinalResponse,

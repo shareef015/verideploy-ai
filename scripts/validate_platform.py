@@ -6,7 +6,7 @@ import yaml
 from verideploy.platform.reliability import DependencyState, PlatformReliabilityModel, PlatformState, required_compose_services
 
 ROOT=Path(__file__).resolve().parents[1]
-POLICY_PATH=ROOT/'config/platform/phase75-checkpoint.json'
+POLICY_PATH=ROOT/'config/platform/checkpoint.json'
 REPORT=ROOT/'evals/reports/phase75-platform-integration-reliability.json'
 
 

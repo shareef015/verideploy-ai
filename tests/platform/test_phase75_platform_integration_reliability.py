@@ -5,7 +5,7 @@ import yaml
 from verideploy.platform.reliability import DependencyState, PlatformReliabilityModel, PlatformState
 
 ROOT=Path(__file__).resolve().parents[2]
-POLICY=json.loads((ROOT/'config/platform/phase75-checkpoint.json').read_text())
+POLICY=json.loads((ROOT/'config/platform/checkpoint.json').read_text())
 
 
 def model():

@@ -4,7 +4,7 @@
   "synthetic_or_documentary": true,
   "derived_from": [
     "README.md",
-    "config/architecture/phase82-production-topology.json"
+    "config/architecture/production-topology.json"
   ],
   "note": "Rendered from repository source/report evidence for recruiter documentation; not a live application runtime screenshot."
 }

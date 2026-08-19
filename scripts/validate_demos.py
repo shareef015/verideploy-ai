@@ -1,7 +1,7 @@
 from __future__ import annotations
 import json,sys
 from pathlib import Path
-R=Path(__file__).resolve().parents[1]; c=json.loads((R/'config/demos/phase73.json').read_text()); issues=[]
+R=Path(__file__).resolve().parents[1]; c=json.loads((R/'config/demos/production-demos.json').read_text()); issues=[]
 if len(c.get('scenarios',[]))!=5: issues.append('exactly five demos required')
 for d in c.get('scenarios',[]):
  if not c.get('synthetic'): issues.append(f"{d.get('id')}: catalog not synthetic")

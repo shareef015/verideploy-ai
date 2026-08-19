@@ -8,7 +8,7 @@ from verideploy.architecture.final_topology import validate_topology
 
 def main():
     rel=json.loads((ROOT/'config/release/version.json').read_text())['version']
-    topo=json.loads((ROOT/'config/architecture/phase82-production-topology.json').read_text())
+    topo=json.loads((ROOT/'config/architecture/production-topology.json').read_text())
     findings=list(validate_topology(ROOT).findings)
     if topo['release'] != rel: findings.append('topology release mismatch')
     chart=yaml.safe_load((ROOT/'infrastructure/helm/verideploy/Chart.yaml').read_text())

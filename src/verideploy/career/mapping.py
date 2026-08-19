@@ -7,7 +7,7 @@ from typing import Any
 REQUIRED_SKILLS = {"python","typescript","openai","rag","agents","langgraph","mcp","multimodal","apis","realtime","evaluation","llmops","security","cloud_native"}
 
 def load_mapping(root: Path) -> dict[str, Any]:
-    return json.loads((root / "config/career/phase83-jd-mapping.json").read_text())
+    return json.loads((root / "config/career/jd-mapping.json").read_text())
 
 def validate_mapping(root: Path) -> list[str]:
     data = load_mapping(root)

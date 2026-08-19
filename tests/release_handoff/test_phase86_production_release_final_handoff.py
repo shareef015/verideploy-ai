@@ -7,7 +7,7 @@ def test_phase86_final_release_gate_passes():
     r=validate_final_release(ROOT); assert r['gate']=='pass', r['findings']; assert r['versioned_images']==4
 
 def test_versioned_images_and_helm_release_are_aligned():
-    cfg=json.loads((ROOT/'config/release/phase86.json').read_text())
+    cfg=json.loads((ROOT/'config/release/final-release.json').read_text())
     assert {i['component'] for i in cfg['images']}=={'web','gateway','ai','worker'}
     assert all(i['ref'].endswith(':0.86.0') for i in cfg['images'])
     values=(ROOT/'infrastructure/helm/verideploy/values-production.yaml').read_text(); assert values.count('0.86.0')>=5
