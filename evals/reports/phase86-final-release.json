@@ -1,0 +1,17 @@
+{
+  "phase": 86,
+  "release": "0.86.0",
+  "gate": "pass",
+  "versioned_images": 4,
+  "terraform_files": 4,
+  "required_artifacts": 20,
+  "trusted_external_steps": [
+    "registry push",
+    "keyless cosign signing",
+    "terraform apply",
+    "kubernetes rollout",
+    "live restore drill"
+  ],
+  "production_promotion_requires_external_evidence": true,
+  "findings": []
+}

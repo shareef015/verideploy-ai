@@ -1,0 +1,85 @@
+{
+  "phase": 80,
+  "release": "0.80.0",
+  "status": "RC_READY_FOR_CI",
+  "critical_failures": 0,
+  "ci_browser_required": true,
+  "gates": [
+    {
+      "name": "evaluation",
+      "status": "PASS",
+      "evidence": [
+        "evals/reports/phase53-retrieval-metrics.json",
+        "evals/reports/phase54-rag-metrics.json",
+        "evals/reports/phase55-agent-metrics.json",
+        "evals/reports/phase56-llm-quality-metrics.json",
+        "evals/reports/phase57-safety-hallucination-metrics.json",
+        "evals/reports/phase58-visual-multimodal-metrics.json",
+        "evals/reports/phase60-regression-gates.json"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "security",
+      "status": "PASS",
+      "evidence": [
+        "evals/reports/phase61-guardrails.json",
+        "evals/reports/phase62-security.json",
+        "evals/reports/phase79-production-operations.json"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "load",
+      "status": "PASS",
+      "evidence": [
+        "tests/load/test_phase72_load.py",
+        "evals/reports/phase78-multimodal-integration.json"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "chaos",
+      "status": "PASS",
+      "evidence": [
+        "tests/chaos/test_phase72_chaos.py",
+        "evals/reports/phase75-platform-integration-reliability.json"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "accessibility",
+      "status": "PASS",
+      "evidence": [
+        "apps/web/tests/e2e/shell.spec.ts"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "browser",
+      "status": "CI_ENFORCED",
+      "evidence": [
+        "apps/web/playwright.config.ts",
+        "apps/web/tests/e2e/shell.spec.ts"
+      ],
+      "detail": "Playwright Chromium install and browser suite are mandatory in CI"
+    },
+    {
+      "name": "contract",
+      "status": "PASS",
+      "evidence": [
+        "evals/reports/phase71-final-response-event-schemas.json",
+        "contracts/final/manifest.json"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "regression",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/release-candidate/pytest-summary.json"
+      ],
+      "detail": "required evidence present"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# Phase 76 — RAG Integration and Performance Checkpoint
+
+Phase 76 is a release checkpoint over the existing production RAG implementation. It does not introduce a parallel retriever. It validates the Phase 13 hybrid keyword/vector fusion, Phase 14 visual retrieval, Phase 34 orchestration, Phase 35 tenant/metadata authorization, Phase 38 citation closure, and Phase 64 retrieval cache against a deterministic clean-index corpus.
+
+## Protected targets
+
+The release gate protects keyword, dense and hybrid Recall@5, hybrid MRR, visual NDCG@4, metadata-filter correctness, tenant isolation and citation completeness. Clean-index chunking is deterministic, bounded and content-hashed. Cold and warm retrieval latency are measured independently and cache hit ratio is enforced after warm-up.
+
+## Production benchmark
+
+`scripts/validate_phase76_rag.py` writes `evals/reports/phase76-rag-performance.json`. The deterministic checkpoint is CI-safe. PostgreSQL/pgvector clean-index integration remains covered by the existing `TEST_POSTGRES_URL` integration suite and is intentionally not faked when no PostgreSQL service is present.

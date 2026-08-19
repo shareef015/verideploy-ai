@@ -1,0 +1,116 @@
+name: ci
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/validate_phase67_monorepo.py
+      - run: PYTHONPATH=. python scripts/validate_phase68_supply_chain.py --report evals/reports/phase68-supply-chain.json
+      - uses: astral-sh/setup-uv@v6
+        with: {python-version: '3.12'}
+      - run: uv sync --all-groups
+      - run: uv run ruff check .
+      - run: uv run mypy src services workers
+      - run: uv run pytest -q --cov=src/verideploy --cov-report=term-missing --cov-report=json:artifacts/coverage/python.json --cov-fail-under=85
+      - run: PYTHONPATH=src uv run python scripts/validate_phase72_testing.py --coverage-json artifacts/coverage/python.json --report evals/reports/phase72-testing-strategy.json
+      - run: PYTHONPATH=src uv run python -m verideploy.evaluation.cli smoke --environment ci --fail-on-regression --store artifacts/evaluation/ci-results.sqlite3 --report evals/reports/ci-smoke.json
+      - run: PYTHONPATH=src uv run python scripts/validate_phase52_dataset.py --report evals/reports/phase52-quality.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_phase53_retrieval_metrics.py --repeats 5 --report evals/reports/phase53-retrieval-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_phase54_rag_metrics.py --report evals/reports/phase54-rag-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_phase55_agent_metrics.py --report evals/reports/phase55-agent-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_phase56_llm_quality_metrics.py --report evals/reports/phase56-llm-quality-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_phase57_safety_metrics.py --report evals/reports/phase57-safety-hallucination-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_phase58_multimodal_metrics.py --report evals/reports/phase58-visual-multimodal-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_phase60_regression_gates.py --report evals/reports/phase60-regression-gates.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_phase61_guardrails.py --report evals/reports/phase61-guardrails.json
+      - run: PYTHONPATH=src uv run python scripts/security_phase62_scan.py --report evals/reports/phase62-security.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_phase63_audit_trail.py
+      - run: PYTHONPATH=src uv run python scripts/benchmark_phase64_multi_layer_cache.py --report evals/reports/phase64-multi-layer-cache.json
+      - run: PYTHONPATH=src python scripts/benchmark_phase65_kafka_architecture.py --report evals/reports/phase65-kafka-event-architecture.json
+      - run: PYTHONPATH=src python scripts/validate_phase66_kubernetes.py --report evals/reports/phase66-kubernetes-resilience.json
+      - run: PYTHONPATH=src uv run python scripts/validate_phase71_contracts.py
+      - run: PYTHONPATH=src uv run python scripts/validate_phase75_platform.py
+      - name: Phase 76 RAG integration and performance checkpoint
+        run: PYTHONPATH=src uv run python scripts/validate_phase76_rag.py --report evals/reports/phase76-rag-performance.json
+      - name: Phase 77 agentic orchestration checkpoint
+        run: PYTHONPATH=src uv run python scripts/validate_phase77_orchestration.py
+      - name: Phase 78 multimodal integration checkpoint
+        run: PYTHONPATH=src uv run python scripts/validate_phase78_multimodal.py
+      - name: Phase 79 production operations checkpoint
+        run: PYTHONPATH=src uv run python scripts/validate_phase79_operations.py
+      - name: Phase 80 evaluation and release-candidate checkpoint
+        run: PYTHONPATH=src uv run python scripts/validate_phase80_release_candidate.py
+      - name: Phase 81 scope and architecture integrity gate
+        run: PYTHONPATH=src uv run python scripts/validate_phase81_architecture.py
+      - name: Phase 82 final production architecture gate
+        run: PYTHONPATH=src uv run python scripts/validate_phase82_architecture.py
+      - name: Phase 83 AI-engineering JD evidence gate
+        run: PYTHONPATH=src uv run python scripts/validate_phase83_jd_mapping.py
+      - name: Phase 84 resume impact and interview evidence gate
+        run: PYTHONPATH=src uv run python scripts/validate_phase84_resume_interview.py
+      - name: Phase 85 recruiter README and explanation package gate
+        run: PYTHONPATH=src uv run python scripts/validate_phase85_recruiter_package.py
+      - name: Phase 86 production release and final handoff gate
+        run: PYTHONPATH=src uv run python scripts/validate_phase86_release.py
+      - run: docker compose -f docker-compose.yml config --quiet
+      - run: uv run python scripts/validate_contracts.py
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/validate_phase67_monorepo.py
+      - uses: pnpm/action-setup@v4
+        with: {version: 10.16.0}
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      # Phase 68 will add supply-chain lock material; until then resolution remains networked.
+      - run: pnpm install --no-frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      - run: pnpm --filter @verideploy/web exec playwright install --with-deps chromium
+      - run: pnpm --filter @verideploy/web test:e2e
+        env:
+          FRONTEND_SESSION_SECRET: phase44-ci-session-secret-at-least-32-bytes
+          FRONTEND_DEV_AUTH_BYPASS: "false"
+
+
+  python-shards:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with: {python-version: '3.12'}
+      - run: uv sync --all-groups
+      - name: Phase 73 production demo gate
+        run: PYTHONPATH=src uv run python scripts/validate_phase73_demos.py
+      - name: Phase 74 multimodal killer demo gate
+        run: PYTHONPATH=src uv run python scripts/validate_phase74_multimodal_demo.py
+      - name: Run deterministic pytest shard
+        run: |
+          PYTHONPATH=src uv run python scripts/run_phase72_pytest_shard.py --shard ${{ matrix.shard }} --shards 4
+
+
+  kubernetes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4
+        with: {version: v3.16.4}
+      - run: helm lint infrastructure/helm/verideploy -f infrastructure/helm/verideploy/values-production.yaml
+      - run: helm template verideploy infrastructure/helm/verideploy -f infrastructure/helm/verideploy/values-production.yaml > /tmp/verideploy-production.yaml
+      - run: test -s /tmp/verideploy-production.yaml
+
+      - name: Phase 69 configuration gate
+        run: uv run python scripts/validate_phase69_configuration.py
+

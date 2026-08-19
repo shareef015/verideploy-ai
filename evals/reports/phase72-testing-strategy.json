@@ -1,0 +1,34 @@
+{
+  "ci_shards": 4,
+  "coverage": {
+    "measured_percent": 87.32457834427707,
+    "passed": true,
+    "required_percent": 85.0
+  },
+  "errors": [],
+  "mutations": [
+    {
+      "killed": true,
+      "name": "reconciliation_gap_detection",
+      "reason": "gap must block convergence"
+    },
+    {
+      "killed": true,
+      "name": "ordered_inbox_deduplication",
+      "reason": "duplicate must not reapply"
+    },
+    {
+      "killed": true,
+      "name": "retry_to_dlq",
+      "reason": "terminal retry must route to DLQ"
+    },
+    {
+      "killed": true,
+      "name": "terminal_flow_citation_requirement",
+      "reason": "terminal result must require citations"
+    }
+  ],
+  "passed": true,
+  "phase": 72,
+  "suite_count": 11
+}

@@ -1,0 +1,86 @@
+{
+  "phase": 68,
+  "offline_validation": true,
+  "dependency_snapshot": {
+    "node": {
+      "prettier": "3.6.2",
+      "turbo": "2.5.6",
+      "typescript": "5.9.2"
+    },
+    "python_direct_requirements": [
+      "fastapi>=0.115,<1",
+      "pydantic>=2.10,<3",
+      "pydantic-settings>=2.7,<3",
+      "uvicorn[standard]>=0.34,<1",
+      "httpx>=0.28,<1",
+      "sqlalchemy>=2.0,<3",
+      "alembic>=1.18,<2",
+      "pgvector>=0.4,<1",
+      "psycopg[binary]>=3.2,<4",
+      "aiokafka>=0.12,<1",
+      "boto3>=1.35,<2",
+      "openai>=1.75,<3",
+      "redis>=5,<7",
+      "cryptography>=45,<47",
+      "pillow>=11,<13",
+      "pymupdf>=1.26,<2",
+      "numpy>=2,<3",
+      "langgraph>=0.6,<2",
+      "langgraph-checkpoint-postgres>=2,<4",
+      "mcp>=2,<3",
+      "langsmith>=0.3,<1",
+      "opentelemetry-api>=1.44,<2",
+      "opentelemetry-sdk>=1.44,<2",
+      "opentelemetry-exporter-otlp-proto-grpc>=1.44,<2",
+      "opentelemetry-instrumentation-fastapi>=0.65b0,<1",
+      "opentelemetry-instrumentation-httpx>=0.65b0,<1",
+      "opentelemetry-instrumentation-sqlalchemy>=0.65b0,<1",
+      "opentelemetry-instrumentation-redis>=0.65b0,<1",
+      "opentelemetry-instrumentation-system-metrics>=0.65b0,<1"
+    ],
+    "note": "Direct-dependency snapshot only; release still requires pnpm-lock.yaml and uv.lock."
+  },
+  "artifact_manifest": {
+    "schema_version": 1,
+    "release_version": "0.68.0",
+    "provenance": {
+      "git_commit": "UNAVAILABLE_OFFLINE_ARCHIVE",
+      "ci_provider": "offline-validation",
+      "ci_run_id": "offline",
+      "workflow": "phase68-offline-validation",
+      "source_repository": "verideploy-ai"
+    },
+    "artifacts": [
+      {
+        "path": "package.json",
+        "sha256": "484d30b785d27bff71663831282caffb560561dd8c618f5a6d3d578ac7ce760f",
+        "size_bytes": 703
+      },
+      {
+        "path": "pyproject.toml",
+        "sha256": "a8c2f7ed00d2a630322a46570ac34db506752aa3819e1d25b4015c47c78ad830",
+        "size_bytes": 1599
+      },
+      {
+        "path": "config/release/version.json",
+        "sha256": "823571ac008e6d77ea465db9224c2c38ab5f3c7d6ff0e9212f8d5865990f0fa4",
+        "size_bytes": 211
+      },
+      {
+        "path": "config/supply-chain/policy.json",
+        "sha256": "afa6d05ca37df618080f1db8bdc45477b39457ff0cb003bcd37527956641216b",
+        "size_bytes": 1022
+      }
+    ]
+  },
+  "gate": {
+    "passed": true,
+    "locks": {
+      "pnpm-lock.yaml": false,
+      "uv.lock": false
+    },
+    "base_images_digest_pinned": false,
+    "findings": [],
+    "policy_version": "0.68.0"
+  }
+}

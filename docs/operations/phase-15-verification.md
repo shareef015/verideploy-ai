@@ -1,0 +1,14 @@
+# Phase 15 Verification
+
+Run:
+
+```bash
+PYTHONPATH=.:src pytest -q tests/unit/test_phase15_multimodal_fusion.py
+PYTHONPATH=.:src python scripts/benchmark_phase15_multimodal_fusion.py
+PYTHONPATH=.:src pytest -q
+python -m compileall -q src services workers scripts
+```
+
+The benchmark gate requires all three seeded channels (`text`, `visual`, `runtime`) to contribute, 100% contributing-channel citation coverage, and zero duplicate selected evidence IDs.
+
+Phase 15 itself does not require a live OpenAI call or a live external runtime telemetry source. PostgreSQL-dependent integration tests inherited from Phases 12–14 remain conditional on `TEST_POSTGRES_URL`.
