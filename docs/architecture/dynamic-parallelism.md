@@ -30,7 +30,7 @@ A source timeout or exception is represented as a typed `ParallelTaskResult` wit
 
 ## Live node events
 
-Phase 40 reuses the durable Phase 18 `graph_runtime_events_phase18` stream rather than creating a second event store. `RuntimeParallelEventSink` emits:
+Phase 40 reuses the durable Phase 18 `graph_runtime_events` stream rather than creating a second event store. `RuntimeParallelEventSink` emits:
 
 - `graph.parallel.plan.created`
 - `graph.parallel.node.started`

@@ -44,7 +44,7 @@
     "config/testing/strategy.json",
     "scripts/validate_testing.py",
     "scripts/run_pytest_shard.py",
-    "docs/architecture/phase-72-complete-testing-strategy.md"
+    "docs/architecture/complete-testing-strategy.md"
   ],
   "schema_version": 1,
   "workspace_packages": {

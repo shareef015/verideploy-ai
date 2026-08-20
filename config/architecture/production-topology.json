@@ -267,8 +267,8 @@
     "OpenTelemetry"
   ],
   "diagram_sources": [
-    "docs/architecture/phase-82-final-production-technology-architecture.md",
-    "docs/architecture/phase-82-topology.mmd",
-    "docs/architecture/phase-82-data-flow.mmd"
+    "docs/architecture/final-production-technology-architecture.md",
+    "docs/architecture/topology.mmd",
+    "docs/architecture/data-flow.mmd"
   ]
 }

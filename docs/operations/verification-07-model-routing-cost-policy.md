@@ -12,7 +12,7 @@ Phase 7 acceptance criteria:
 8. staging/production validation for unresolved or unpriced models;
 9. no paid OpenAI call required by default tests.
 
-See `artifacts/phase-07-verification.txt` for the exact executable checks performed in the build environment.
+See `artifacts/verification-07-model-routing-cost-policy.txt` for the exact executable checks performed in the build environment.
 
 ## Build-environment result
 

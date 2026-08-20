@@ -75,7 +75,7 @@ def main() -> None:
         "state_sha256": state_sha256(migrated.state),
         "encryption_policy": "reference_only",
     }
-    target = Path("artifacts/phase-39-state-validation.json")
+    target = Path("artifacts/state-validation.json")
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
     print(json.dumps(report, indent=2, sort_keys=True))

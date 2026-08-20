@@ -20,4 +20,4 @@ checks={
 'no_private_contract':'/internal/v1/' not in C,
 }
 out={'valid':all(checks.values()),'checks':checks,'passed':sum(checks.values()),'total':len(checks)}
-path=ROOT/'artifacts/phase-45-release-risk-screen-validation.json'; path.write_text(json.dumps(out,indent=2)+'\n'); print(json.dumps(out,indent=2)); raise SystemExit(0 if out['valid'] else 1)
+path=ROOT/'artifacts/release-risk-screen-validation.json'; path.write_text(json.dumps(out,indent=2)+'\n'); print(json.dumps(out,indent=2)); raise SystemExit(0 if out['valid'] else 1)

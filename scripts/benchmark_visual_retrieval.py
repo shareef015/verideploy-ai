@@ -29,4 +29,4 @@ with TemporaryDirectory() as td:
  for c in cases:
   r=svc.search(VisualSearchQuery(tenant_id=t,text=c.query,top_k=4));rank=[h.page_number for h in r.hits];n=ndcg_at_k(rank,c.relevant_page,4);scores.append(n);rows.append({'query':c.query,'relevant_page':c.relevant_page,'ranking':rank,'ndcg@4':n})
  result={'backend':'cpu_fallback','cases':rows,'ndcg@4':sum(scores)/len(scores),'gate':sum(scores)/len(scores)>=0.95}
- Path('artifacts/phase-14-benchmark.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2));raise SystemExit(0 if result['gate'] else 1)
+ Path('artifacts/benchmark.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2));raise SystemExit(0 if result['gate'] else 1)

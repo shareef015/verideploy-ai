@@ -25,8 +25,8 @@
     "docs/recruiter/security-evaluation.md",
     "docs/recruiter/limitations.md",
     "docs/recruiter/setup-and-demo.md",
-    "docs/architecture/phase-82-topology.mmd",
-    "docs/architecture/phase-82-data-flow.mmd"
+    "docs/architecture/topology.mmd",
+    "docs/architecture/data-flow.mmd"
   ],
   "screenshots": [
     {

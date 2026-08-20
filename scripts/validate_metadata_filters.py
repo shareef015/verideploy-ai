@@ -20,7 +20,7 @@ def main():
             if requested and not (trusted & requested) and not scope.empty:
                 violations.append({'trusted':sorted(trusted),'requested':sorted(requested),'reason':'disjoint scope was not empty'})
     result={'valid':not violations,'cases_checked':checked,'violations':violations,'property':'effective scope never widens trusted service scope'}
-    out=Path('artifacts/phase-35-metadata-filter-validation.json'); out.parent.mkdir(exist_ok=True); out.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
+    out=Path('artifacts/metadata-filter-validation.json'); out.parent.mkdir(exist_ok=True); out.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
     print(json.dumps(result,sort_keys=True))
     if violations: raise SystemExit(1)
 if __name__=='__main__': main()

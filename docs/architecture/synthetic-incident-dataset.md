@@ -12,4 +12,4 @@ Machine-readable failure-mode strings are forbidden from observable feature text
 
 ## Persistence
 
-`synthetic_incidents_phase29` stores one tenant-scoped JSON payload per incident plus indexed label/split/service/time columns and an incident SHA-256. PostgreSQL RLS is enabled and forced. Seeding is idempotent by stable incident ID.
+`synthetic_incidents` stores one tenant-scoped JSON payload per incident plus indexed label/split/service/time columns and an incident SHA-256. PostgreSQL RLS is enabled and forced. Seeding is idempotent by stable incident ID.

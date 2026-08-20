@@ -21,4 +21,4 @@ The project targets the current official MCP Python SDK v2 (`mcp>=2,<3`) and exp
 
 ## Audit
 
-Every resolved invocation is recorded in `mcp_tool_audit_phase25`, including denied and failed calls. The journal stores tenant/user/service/tool, permission/risk/effect/decision, correlation ID, argument SHA-256, approval reference, sanitized error code, and duration. Raw tool arguments are not persisted by this audit table. Forced PostgreSQL RLS provides defense-in-depth tenant isolation.
+Every resolved invocation is recorded in `mcp_tool_audit`, including denied and failed calls. The journal stores tenant/user/service/tool, permission/risk/effect/decision, correlation ID, argument SHA-256, approval reference, sanitized error code, and duration. Raw tool arguments are not persisted by this audit table. Forced PostgreSQL RLS provides defense-in-depth tenant isolation.

@@ -34,7 +34,7 @@ async def main():
     record,result=await b.recover(tenant_id=TENANT,run_id=RUN,timeout_seconds=1)
     replay=b.operational_replay(tenant_id=TENANT,run_id=RUN)
     out={'valid':calls==1 and [x.run_id for x in stuck]==[RUN] and record.run_id==RUN and result.get('recovered') is True,'worker_a_lease_token':str(lease_a.lease_token),'worker_b_lease_token':str(lease_b.lease_token),'stuck_detected':len(stuck)==1,'side_effect_calls':calls,'idempotent_step_status':step.status.value,'recovered_run_id':str(record.run_id),'graph_invocations_after_recovery':graph.invocations,'durability_event_count':replay.event_count,'replay_sha256':replay.replay_sha256}
-    Path('artifacts').mkdir(exist_ok=True); Path('artifacts/phase-42-workflow-durability-validation.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n')
+    Path('artifacts').mkdir(exist_ok=True); Path('artifacts/workflow-durability-validation.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n')
     print(json.dumps(out,indent=2,sort_keys=True))
     if not out['valid']: raise SystemExit(1)
 asyncio.run(main())

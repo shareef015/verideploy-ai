@@ -44,8 +44,8 @@ flowchart LR
 ```
 
 Canonical machine-readable topology: `config/architecture/production-topology.json`  
-Generated topology: `docs/architecture/phase-82-topology.mmd`  
-Generated sequence/data flow: `docs/architecture/phase-82-data-flow.mmd`
+Generated topology: `docs/architecture/topology.mmd`  
+Generated sequence/data flow: `docs/architecture/data-flow.mmd`
 
 The browser never calls the private Python AI service directly.
 

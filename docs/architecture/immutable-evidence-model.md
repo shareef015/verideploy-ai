@@ -10,7 +10,7 @@ Version 1 may be a source record without parents. Any separately derived record 
 
 ## Immutability
 
-`evidence_versions_phase30` and `evidence_parent_links_phase30` reject SQL UPDATE and DELETE through database triggers. Corrections are represented by a new version rather than mutation. The in-memory deterministic repository deep-copies stored and returned records so test/demo callers cannot mutate persistence by changing a returned nested dictionary.
+`evidence_versions` and `evidence_parent_links` reject SQL UPDATE and DELETE through database triggers. Corrections are represented by a new version rather than mutation. The in-memory deterministic repository deep-copies stored and returned records so test/demo callers cannot mutate persistence by changing a returned nested dictionary.
 
 ## Tenant isolation
 

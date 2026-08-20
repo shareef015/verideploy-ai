@@ -14,7 +14,7 @@ Phase 41 adds a durable, concurrency-safe human approval boundary for high-risk 
 8. `ApprovalRuntimeBridge.resume_approved()` refuses resume unless the approval belongs to the run and is currently approved.
 
 ## Database authority
-`approval_requests_phase41` is the current approval state. `approval_events_phase41` is immutable audit history. Both are tenant-RLS protected. Approval events cannot be updated or deleted. Request lifecycle changes must increment version exactly once and follow allowed transitions.
+`approval_requests` is the current approval state. `approval_events` is immutable audit history. Both are tenant-RLS protected. Approval events cannot be updated or deleted. Request lifecycle changes must increment version exactly once and follow allowed transitions.
 
 ## Signed audit model
 The application signs canonical event data with HMAC-SHA256 using `APPROVAL_SIGNING_SECRET`, falling back to `APP_SECRET_KEY` when a dedicated key is not configured. Only the signature and payload digest are persisted; the signing key never enters the database.

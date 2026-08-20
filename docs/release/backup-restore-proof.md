@@ -3,7 +3,7 @@
 The repository includes both the production recovery policy and an executable restored-database verifier. A successful backup alone is not considered proof of recoverability.
 
 ## Existing controls
-- `docs/operations/phase-33-postgresql-ha-backup-pitr.md` defines HA, WAL archive, PITR, retention, and failure conditions.
+- `docs/operations/postgresql-ha-backup-pitr.md` defines HA, WAL archive, PITR, retention, and failure conditions.
 - `docs/operations/database-backup-restore.md` defines logical backup and isolated restore steps.
 - `scripts/verify_database_restore.py` verifies Alembic revision, pgvector, HNSW index, RLS, and forced RLS on a restored target.
 

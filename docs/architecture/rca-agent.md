@@ -30,7 +30,7 @@ A root cause is not marked determined unless it satisfies configured minimum sup
 
 ## Persistence
 
-Phase 23 reuses `agent_runs_phase19`. Prompt version/hash, input hash, terminal status, and strict output are persisted without adding a redundant RCA-specific table.
+Phase 23 reuses `agent_runs`. Prompt version/hash, input hash, terminal status, and strict output are persisted without adding a redundant RCA-specific table.
 
 ## API
 

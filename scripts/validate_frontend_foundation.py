@@ -28,4 +28,4 @@ checks={
  'mock_only_terms': not mock_terms,
 }
 result={'valid':all(checks.values()),'checks':checks,'legacy_routes':legacy,'page_fetch_offenders':page_fetch,'mock_terms':mock_terms,'web_version':package['version']}
-out=ROOT/'artifacts/phase-44-frontend-foundation-validation.json';out.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2));raise SystemExit(0 if result['valid'] else 1)
+out=ROOT/'artifacts/frontend-foundation-validation.json';out.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2));raise SystemExit(0 if result['valid'] else 1)

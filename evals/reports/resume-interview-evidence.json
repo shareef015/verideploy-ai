@@ -60,7 +60,7 @@
       "evidence": [
         "evals/reports/release-candidate.json",
         "evals/reports/release-candidate-benchmarks.json",
-        "docs/architecture/phase-80-evaluation-release-candidate-checkpoint.md"
+        "docs/architecture/evaluation-release-candidate-checkpoint.md"
       ]
     },
     {
@@ -71,7 +71,7 @@
       "action": "Removed demo reviewer fallbacks and required gateway user/role context, while retaining dry-run and human-approval safety controls.",
       "result": "The Phase 81 architecture-integrity report completed with no recorded findings after the production boundary was hardened.",
       "evidence": [
-        "docs/architecture/phase-81-scope-control-architecture-integrity.md",
+        "docs/architecture/scope-control-architecture-integrity.md",
         "evals/reports/scope-architecture-integrity.json",
         "apps/gateway/src/approvals/approvals.controller.ts"
       ]
@@ -85,7 +85,7 @@
       "result": "The clean checkpoint retained 100% traceability and the partial-failure fixture preserved degraded evidence lineage rather than hiding failed modalities.",
       "evidence": [
         "evals/reports/multimodal-integration.json",
-        "docs/architecture/phase-78-multimodal-integration-checkpoint.md"
+        "docs/architecture/multimodal-integration-checkpoint.md"
       ]
     },
     {
@@ -98,7 +98,7 @@
       "evidence": [
         "config/architecture/production-topology.json",
         "evals/reports/final-production-architecture.json",
-        "docs/architecture/phase-82-final-production-technology-architecture.md"
+        "docs/architecture/final-production-technology-architecture.md"
       ]
     }
   ],
@@ -108,7 +108,7 @@
       "decision": "Keep NestJS as the sole public application API while Python AI services remain private.",
       "tradeoff": "This adds an internal service boundary and contract maintenance cost, but isolates AI execution, centralizes authentication/tenant policy, and keeps browser clients away from private model/tool endpoints.",
       "evidence": [
-        "docs/architecture/phase-82-final-production-technology-architecture.md",
+        "docs/architecture/final-production-technology-architecture.md",
         "evals/reports/final-production-architecture.json"
       ]
     },
@@ -117,7 +117,7 @@
       "decision": "Require dry-run plus human approval for consequential remediation rather than autonomous writes.",
       "tradeoff": "This sacrifices maximum automation speed for auditability, blast-radius control, and safer production operation.",
       "evidence": [
-        "docs/architecture/phase-81-scope-control-architecture-integrity.md",
+        "docs/architecture/scope-control-architecture-integrity.md",
         "evals/reports/production-operations.json"
       ]
     },
@@ -150,19 +150,19 @@
     {
       "lesson": "Do not equate CI wiring with local execution. Record environment limitations explicitly and fail closed on missing evidence.",
       "evidence": [
-        "docs/architecture/phase-80-evaluation-release-candidate-checkpoint.md"
+        "docs/architecture/evaluation-release-candidate-checkpoint.md"
       ]
     },
     {
       "lesson": "Demo conveniences must not survive inside production authorization paths; periodic scope-control reviews should scan production entrypoints for mock identities and bypasses.",
       "evidence": [
-        "docs/architecture/phase-81-scope-control-architecture-integrity.md"
+        "docs/architecture/scope-control-architecture-integrity.md"
       ]
     },
     {
       "lesson": "Versioned deployment artifacts can drift independently; compare release metadata, Helm image tags, canary tags, diagrams, and runtime topology in one executable architecture gate.",
       "evidence": [
-        "docs/architecture/phase-82-final-production-technology-architecture.md"
+        "docs/architecture/final-production-technology-architecture.md"
       ]
     }
   ],

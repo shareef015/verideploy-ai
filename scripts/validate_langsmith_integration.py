@@ -37,7 +37,7 @@ async def main():
       'dataset_redacted': client.examples[-1]['inputs']['api_key']=='[REDACTED]',
     }
     payload={'valid':all(checks.values()),'checks':checks,'project':'verideploy-test','runs_created':len(client.created),'dataset_examples':len(client.examples)}
-    Path('artifacts/phase-49-langsmith-validation.json').write_text(json.dumps(payload,indent=2)+"\n")
+    Path('artifacts/langsmith-validation.json').write_text(json.dumps(payload,indent=2)+"\n")
     print(json.dumps(payload,indent=2))
     if not payload['valid']: raise SystemExit(1)
 asyncio.run(main())

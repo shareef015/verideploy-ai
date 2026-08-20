@@ -7,7 +7,7 @@ Target length: **8–10 minutes**. All demo data shown should be synthetic.
 - Explain the fragmented-evidence problem: code, deployments, dashboards, logs, documents, video, runbooks, and historical RCAs.
 
 ## 0:45–2:00 — Architecture
-- Show `docs/architecture/phase-82-topology.mmd`.
+- Show `docs/architecture/topology.mmd`.
 - Trace Browser → Next.js → NestJS → Kafka → Python/LangGraph/OpenAI/MCP → data stores → observability.
 - Call out the public/private API boundary and tenant/security controls.
 

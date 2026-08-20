@@ -16,9 +16,9 @@ def test_kafka_ops_preserves_idempotent_replay_contract():
     assert 'idempotent' in text and 'watermark' in text and 'dlq' in text
 
 def test_backup_restore_evidence_is_present():
-    for p in ['docs/operations/database-backup-restore.md','scripts/verify_database_restore.py','docs/operations/phase-33-postgresql-ha-backup-pitr.md']:
+    for p in ['docs/operations/database-backup-restore.md','scripts/verify_database_restore.py','docs/operations/postgresql-ha-backup-pitr.md']:
         assert (ROOT/p).exists()
 
 def test_incident_response_preserves_approval_audit_and_tenant_controls():
-    text=(ROOT/'docs/operations/phase79-incident-response.md').read_text().lower()
+    text=(ROOT/'docs/operations/incident-response.md').read_text().lower()
     assert 'human approval' in text and 'audit' in text and 'tenant' in text and 'restore' in text

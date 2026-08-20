@@ -42,6 +42,6 @@ with TemporaryDirectory() as td:
       'public_view_contract':'/investigations/{investigationId}/view:' in contract and '/internal/v1' not in contract,
     }
     result={'valid':all(bool(v) for v in checks.values()),'checks':checks,'base_sequence':base.last_sequence_number,'final_sequence':authoritative.last_sequence_number,'replay_count':len(replay),'journal_count':len(all_events),'convergence_sha256':authoritative.convergence_sha256}
-    out=ROOT/'artifacts/phase-46-incident-screen-validation.json';out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n")
+    out=ROOT/'artifacts/incident-screen-validation.json';out.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n")
     print(json.dumps(result,indent=2,sort_keys=True))
     raise SystemExit(0 if result['valid'] else 1)

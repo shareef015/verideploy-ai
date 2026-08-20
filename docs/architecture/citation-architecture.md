@@ -6,7 +6,7 @@ Make every released Phase 37 claim traceable to stable, tenant-scoped evidence t
 
 ## Data model
 
-`citations_phase38` is the immutable citation registry. `claim_citations_phase38` maps a Phase 37 `(verification_id, claim_id)` to one or more citations with the stored entailment score and whether the citation entails the released claim. Both tables are forced-RLS and append-only.
+`citations` is the immutable citation registry. `claim_citations` maps a Phase 37 `(verification_id, claim_id)` to one or more citations with the stored entailment score and whether the citation entails the released claim. Both tables are forced-RLS and append-only.
 
 Citation locator variants are `text`, `page`, `timecode`, and `code`. Page locators may carry a bounding box. Timecode locators carry millisecond start/end positions. Code locators require a repository-relative path and validated line range.
 

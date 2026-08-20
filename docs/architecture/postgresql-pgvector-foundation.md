@@ -10,7 +10,7 @@ Phase 12 establishes Alembic as the schema authority for the canonical PostgreSQ
 - `embedding_models`
 - `vector_embeddings`
 
-The earlier `embedding_cache_phase11` table remains a compatibility cache for the cumulative codebase. It is not the canonical pgvector store and will be retired through a later explicit data migration.
+The earlier `embedding_cache` table remains a compatibility cache for the cumulative codebase. It is not the canonical pgvector store and will be retired through a later explicit data migration.
 
 ## Vector migration decision
 

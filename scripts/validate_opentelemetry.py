@@ -14,6 +14,6 @@ checks={
 "phase49_isolation": (ROOT/"docs/decisions/ADR-0031-langsmith-is-observability-only.md").exists(),
 }
 result={"phase":50,"gate":"one distributed trace from browser request to final event","checks":checks,"passed":all(checks.values())}
-(ROOT/"artifacts/phase-50-opentelemetry-validation.json").write_text(json.dumps(result,indent=2)+"\n")
+(ROOT/"artifacts/opentelemetry-validation.json").write_text(json.dumps(result,indent=2)+"\n")
 print(json.dumps(result,indent=2))
 raise SystemExit(0 if result["passed"] else 1)

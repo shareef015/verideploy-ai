@@ -17,7 +17,7 @@ Phase 18 establishes the durable graph runtime only. It does not implement the S
 
 ## Persistence split
 
-LangGraph's `AsyncPostgresSaver` owns checkpoint internals. VeriDeploy stores `graph_runs_phase18` and `graph_runtime_events_phase18` for application status, tenant authorization, replay cursors, auditability, and operations. The two layers intentionally do not duplicate checkpoint payloads.
+LangGraph's `AsyncPostgresSaver` owns checkpoint internals. VeriDeploy stores `graph_runs` and `graph_runtime_events` for application status, tenant authorization, replay cursors, auditability, and operations. The two layers intentionally do not duplicate checkpoint payloads.
 
 ## Resume semantics
 

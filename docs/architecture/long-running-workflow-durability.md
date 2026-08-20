@@ -5,9 +5,9 @@ Phase 42 adds a lease-backed durability control plane around the existing Phase 
 ## Authorities
 
 - LangGraph PostgreSQL saver: graph execution checkpoint authority.
-- `graph_runs_phase18` and `graph_runtime_events_phase18`: runtime lifecycle/event authority.
-- `graph_state_snapshots_phase39`: versioned state/replay audit authority.
-- `approval_requests_phase41`: high-risk human approval authority.
+- `graph_runs` and `graph_runtime_events`: runtime lifecycle/event authority.
+- `graph_state_snapshots`: versioned state/replay audit authority.
+- `approval_requests`: high-risk human approval authority.
 - Phase 42 workflow tables: worker ownership, idempotent step state, recovery and durability event authority.
 
 ## Lease ownership

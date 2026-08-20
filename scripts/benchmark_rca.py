@@ -42,7 +42,7 @@ async def main():
         rows.append({'expected':cause,'top_k':ranked,'hit':hit,'determined':result.sufficiency.root_cause_determined})
     accuracy=correct/len(cases); unsupported_rate=unsupported/max(1,sum(len(r['top_k']) for r in rows))
     artifact={'cases':rows,'top_k':topk,'top_k_accuracy':accuracy,'unsupported_cause_rate':unsupported_rate,'threshold':0.8,'gate_passed':accuracy>=0.8 and unsupported_rate==0.0}
-    Path('artifacts/phase-23-rca-benchmark.json').write_text(json.dumps(artifact,indent=2)+'\n')
+    Path('artifacts/rca-benchmark.json').write_text(json.dumps(artifact,indent=2)+'\n')
     print(json.dumps(artifact,indent=2))
     if not artifact['gate_passed']: raise SystemExit(1)
 if __name__=='__main__': asyncio.run(main())

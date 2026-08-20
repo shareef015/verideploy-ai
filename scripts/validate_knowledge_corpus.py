@@ -7,7 +7,7 @@ from pathlib import Path
 from verideploy.knowledge.validation import validate_corpus
 
 ROOT = Path(__file__).resolve().parents[1]
-REPORT = ROOT / "artifacts" / "phase-27-corpus-validation.json"
+REPORT = ROOT / "artifacts" / "corpus-validation.json"
 
 
 def main() -> int:

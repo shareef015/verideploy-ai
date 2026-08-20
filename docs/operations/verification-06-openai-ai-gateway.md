@@ -13,7 +13,7 @@
 
 ## Executed in artifact environment
 
-The final artifact records the exact executable results in `artifacts/phase-06-verification.txt`.
+The final artifact records the exact executable results in `artifacts/verification-06-openai-ai-gateway.txt`.
 
 ## Environment limitations
 

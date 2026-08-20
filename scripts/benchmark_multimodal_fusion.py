@@ -78,7 +78,7 @@ def main() -> int:
         "images_used": result.trace.images_used,
         "gate": citation_coverage == 1.0 and duplication_rate == 0.0 and channels == expected,
     }
-    Path("artifacts/phase-15-benchmark.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    Path("artifacts/benchmark.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=2))
     return 0 if report["gate"] else 1
 

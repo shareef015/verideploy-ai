@@ -14,7 +14,7 @@ Verified on 2026-08-16 in the artifact build environment.
 - FastAPI `/health/ready`: HTTP 200, `ready` for dependencies implemented by the private service in the current phase.
 - Focused Phase 4 placeholder scan: clean.
 - Repository secret-pattern scan for common API-key/private-key signatures: clean.
-- Final ZIP integrity check: recorded in `artifacts/phase-04-verification.txt` after archive creation.
+- Final ZIP integrity check: recorded in `artifacts/verification-04-multimodal-sequence.txt` after archive creation.
 
 ## Phase 4 behaviors covered by executable tests
 

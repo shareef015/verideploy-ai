@@ -17,4 +17,4 @@ def test_local_parity_contains_critical_platform_dependencies():
     c=yaml.safe_load((ROOT/'docker-compose.yml').read_text())['services']; required={'web','gateway','ai-service','postgres','redis','kafka','minio','keycloak','otel-collector','prometheus','grafana','loki','tempo'}; assert required <= set(c)
 
 def test_diagrams_are_generated_from_canonical_topology_model():
-    t=load_topology(ROOT); assert len(t['diagram_sources'])==3; assert all((ROOT/p).exists() for p in t['diagram_sources']); doc=(ROOT/'docs/architecture/phase-82-final-production-technology-architecture.md').read_text(); assert 'Next.js' in doc and 'NestJS' in doc and 'LangGraph' in doc and 'OpenAI' in doc and 'PostgreSQL/pgvector' in doc
+    t=load_topology(ROOT); assert len(t['diagram_sources'])==3; assert all((ROOT/p).exists() for p in t['diagram_sources']); doc=(ROOT/'docs/architecture/final-production-technology-architecture.md').read_text(); assert 'Next.js' in doc and 'NestJS' in doc and 'LangGraph' in doc and 'OpenAI' in doc and 'PostgreSQL/pgvector' in doc

@@ -20,4 +20,4 @@ Every manifest entry includes `source_system`, `source_record_id`, generator nam
 
 ## Validation gate
 
-`make knowledge-corpus-validate` fails if any required category is missing, a file is missing/untracked, a content hash differs, provenance/lineage is invalid, category labels are absent, or retention coverage is incomplete. The validator writes `artifacts/phase-27-corpus-validation.json` for reproducibility.
+`make knowledge-corpus-validate` fails if any required category is missing, a file is missing/untracked, a content hash differs, provenance/lineage is invalid, category labels are absent, or retention coverage is incomplete. The validator writes `artifacts/corpus-validation.json` for reproducibility.

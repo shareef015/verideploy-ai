@@ -30,7 +30,7 @@
     "infrastructure/terraform/versions.tf",
     "infrastructure/terraform/outputs.tf",
     "infrastructure/terraform/terraform.tfvars.example",
-    "docs/release/phase86-release-notes.md",
+    "docs/release/release-notes.md",
     "docs/release/production-deployment.md",
     "docs/release/migration-and-rollback.md",
     "docs/release/backup-restore-proof.md",

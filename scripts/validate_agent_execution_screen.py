@@ -19,5 +19,5 @@ checks["navigation"]=has("apps/web/components/shell/app-shell.tsx","Agent Execut
 checks["no_phase47_table"]=not list((ROOT/"src/verideploy/database/migrations/versions").glob("*phase47*"))
 checks["version"]=(ROOT/"src/verideploy/__init__.py").read_text().strip()=='__version__ = "0.47.0"'
 result={"valid":all(checks.values()),"passed":sum(checks.values()),"total":len(checks),"checks":checks}
-print(json.dumps(result,indent=2));(ROOT/"artifacts/phase-47-agent-execution-validation.json").write_text(json.dumps(result,indent=2)+"\n")
+print(json.dumps(result,indent=2));(ROOT/"artifacts/agent-execution-validation.json").write_text(json.dumps(result,indent=2)+"\n")
 raise SystemExit(0 if result["valid"] else 1)

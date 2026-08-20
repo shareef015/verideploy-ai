@@ -72,7 +72,7 @@ async def main() -> int:
         "completed_count": parallel.completed_count,
         "partial_completion": parallel.partial_completion,
     }
-    path = Path("artifacts/phase-40-dynamic-parallel-validation.json")
+    path = Path("artifacts/dynamic-parallel-validation.json")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
     print(json.dumps(report, indent=2, sort_keys=True))

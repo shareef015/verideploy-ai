@@ -53,7 +53,7 @@ def main() -> int:
         "prompt_injection_evidence_count": result.prompt_injection_evidence_count,
         "claims": [{"claim_id":c.claim_id,"label":c.label.value,"action":c.action.value,"released":c.released_text is not None,"reasons":list(c.reasons)} for c in result.claims],
     }
-    out=Path("artifacts/phase-37-hallucination-evaluation.json"); out.parent.mkdir(parents=True,exist_ok=True); out.write_text(json.dumps(report,indent=2,sort_keys=True)+"\n")
+    out=Path("artifacts/hallucination-evaluation.json"); out.parent.mkdir(parents=True,exist_ok=True); out.write_text(json.dumps(report,indent=2,sort_keys=True)+"\n")
     print(json.dumps(report,sort_keys=True))
     return 0 if report["valid"] else 1
 

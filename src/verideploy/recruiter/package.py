@@ -27,7 +27,7 @@ def validate_recruiter_package(root: Path) -> dict[str, Any]:
         sources=meta.get('derived_from',[])
         if not sources or any(not (root/s).exists() for s in sources): findings.append(f'capture source evidence missing: {item["path"]}')
         captures.append(item['path'])
-    for rel in ('docs/architecture/phase-82-topology.mmd','docs/architecture/phase-82-data-flow.mmd'):
+    for rel in ('docs/architecture/topology.mmd','docs/architecture/data-flow.mmd'):
         if rel not in readme: findings.append(f'README does not link canonical diagram: {rel}')
     resume_evidence=root/'evals/reports/resume-interview-evidence.json'
     if not resume_evidence.exists() or json.loads(resume_evidence.read_text()).get('gate')!='pass': findings.append('measured-evidence gate not passing')
