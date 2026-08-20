@@ -1,4 +1,4 @@
-# Phase 49 verification
+# LangSmith Integration Verification
 
 ## Configuration
 
@@ -16,4 +16,4 @@ The status endpoint never returns the API key.
 
 ## Failure handling
 
-A LangSmith outage should update `last_error` on the observer status while business execution continues. Local Phase 48 LLMOps persistence is independent of external tracing.
+A LangSmith outage should update `last_error` on the observer status while business execution continues. Local LLMOps Data Platform LLMOps persistence is independent of external tracing.

@@ -1,6 +1,6 @@
-# Phase 65 — Kafka event-driven architecture
+# Kafka Event-Driven Architecture
 
-Phase 65 finalizes Kafka as the durable asynchronous backbone. Kafka remains authoritative for commands/events; Redis is used only for low-latency NestJS fan-out to connected browser sessions.
+Kafka Event Driven Architecture finalizes Kafka as the durable asynchronous backbone. Kafka remains authoritative for commands/events; Redis is used only for low-latency NestJS fan-out to connected browser sessions.
 
 ## Topic and ordering contract
 

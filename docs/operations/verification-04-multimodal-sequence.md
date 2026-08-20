@@ -1,22 +1,22 @@
-# Phase 4 Verification — Multimodal Evidence Workflow
+# Multimodal Evidence Workflow Verification
 
 Verified on 2026-08-16 in the artifact build environment.
 
 ## Passed checks
 
 - `pytest -q`: **28 passed** cumulative tests.
-- Focused Phase 4 tests: **8 passed**.
+- Focused Multimodal Sequence tests: **8 passed**.
 - `python -m compileall -q services src workers tests`: passed.
-- `python scripts/validate_contracts.py`: passed; Phase 4 REST and Kafka contracts present and parseable.
+- `python scripts/validate_contracts.py`: passed; Multimodal Sequence REST and Kafka contracts present and parseable.
 - Docker Compose YAML plus package JSON parse: passed.
 - TypeScript/TSX syntax transpilation with the installed TypeScript compiler: **29 source files passed** (declaration file excluded from transpilation).
 - FastAPI `/health/live`: HTTP 200, `ok`.
 - FastAPI `/health/ready`: HTTP 200, `ready` for dependencies implemented by the private service in the current phase.
-- Focused Phase 4 placeholder scan: clean.
+- Focused Multimodal Sequence placeholder scan: clean.
 - Repository secret-pattern scan for common API-key/private-key signatures: clean.
 - Final ZIP integrity check: recorded in `artifacts/verification-04-multimodal-sequence.txt` after archive creation.
 
-## Phase 4 behaviors covered by executable tests
+## Multimodal Sequence behaviors covered by executable tests
 
 - strict ingestion command schema validation;
 - unsafe/path-like original filename rejection;

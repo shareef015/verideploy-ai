@@ -1,8 +1,8 @@
-# Phase 16 — Audio Transcription Pipeline
+# Audio Transcription Pipeline
 
 ## Scope
 
-Phase 16 turns Phase 4 audio objects into timestamped, tenant-scoped transcript evidence. Kafka carries object references only; audio bytes stay in S3-compatible object storage. The multimodal worker retrieves the authorized object, validates its signature and size again, hashes the bytes, then invokes the configured transcription provider.
+Audio Transcription Pipeline turns Multimodal Sequence audio objects into timestamped, tenant-scoped transcript evidence. Kafka carries object references only; audio bytes stay in S3-compatible object storage. The multimodal worker retrieves the authorized object, validates its signature and size again, hashes the bytes, then invokes the configured transcription provider.
 
 ## Runtime path
 

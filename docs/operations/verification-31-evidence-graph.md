@@ -1,4 +1,4 @@
-# Phase 31 Verification
+# Evidence Graph Verification
 
 Run focused deterministic tests:
 

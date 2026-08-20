@@ -1,4 +1,4 @@
-# Phase 64 — Multi-Layer Caching
+# Multi-Layer Caching
 
 ## Goal
 

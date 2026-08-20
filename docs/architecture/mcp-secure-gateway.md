@@ -1,6 +1,6 @@
-# Phase 25 — MCP Servers and Secure Gateway
+# MCP Servers and Secure Gateway
 
-Phase 25 introduces the MCP security/control plane. Four logical MCP servers are exposed: GitHub, monitoring, knowledge, and incident. Every tool is registered in one deterministic `MCPToolRegistry` with a Pydantic input/output schema, permission, risk, read/write effect, timeout, and handler.
+MCP Secure Gateway introduces the MCP security/control plane. Four logical MCP servers are exposed: GitHub, monitoring, knowledge, and incident. Every tool is registered in one deterministic `MCPToolRegistry` with a Pydantic input/output schema, permission, risk, read/write effect, timeout, and handler.
 
 ## Security boundary
 
@@ -8,7 +8,7 @@ The language model never authorizes itself. A trusted `MCPCallerContext` supplie
 
 ## MCP SDK
 
-The project targets the current official MCP Python SDK v2 (`mcp>=2,<3`) and exposes server builders using `mcp.server.MCPServer`. SDK imports are lazy so tests can exercise the security gateway without requiring a transport runtime. Phase 26 owns production-grade integration hardening such as pagination, quotas, host allowlists, and external-system parity.
+The project targets the current official MCP Python SDK v2 (`mcp>=2,<3`) and exposes server builders using `mcp.server.MCPServer`. SDK imports are lazy so tests can exercise the security gateway without requiring a transport runtime. Real Engineering Data Integrations owns production-grade integration hardening such as pagination, quotas, host allowlists, and external-system parity.
 
 ## Registered tools
 

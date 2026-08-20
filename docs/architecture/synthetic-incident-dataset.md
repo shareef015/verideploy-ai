@@ -1,6 +1,6 @@
-# Phase 29 — Synthetic Incident Dataset
+# Synthetic Incident Dataset
 
-Phase 29 adds a deterministic NexusPay incident corpus for evaluation, demos, retrieval, and future model/agent testing. The corpus is derived from the Phase 28 topology and uses stable UUIDv5 identities and content hashes.
+Synthetic Incident Dataset adds a deterministic NexusPay incident corpus for evaluation, demos, retrieval, and future model/agent testing. The corpus is derived from the NexusPay Service Topology and uses stable UUIDv5 identities and content hashes.
 
 ## Dataset contract
 

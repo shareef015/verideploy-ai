@@ -1,12 +1,12 @@
-# Phase 24 — CriticAgent
+# CriticAgent
 
-Phase 24 adds the evidence-grounded critic boundary after Phase 23 RCA generation. The critic never creates a new RCA and never executes remediation. It deterministically extracts one claim per typed RCA hypothesis, checks cited evidence for lexical entailment, treats disconfirming evidence as contradiction input, recalibrates confidence, optionally performs bounded read-only Phase 13 hybrid retrieval, and requires human escalation when a root-cause claim remains unsupported, partial, contradicted, low-confidence, or unresolved.
+Critic Agent adds the evidence-grounded critic boundary after RCA Agent RCA generation. The critic never creates a new RCA and never executes remediation. It deterministically extracts one claim per typed RCA hypothesis, checks cited evidence for lexical entailment, treats disconfirming evidence as contradiction input, recalibrates confidence, optionally performs bounded read-only Hybrid Retrieval hybrid retrieval, and requires human escalation when a root-cause claim remains unsupported, partial, contradicted, low-confidence, or unresolved.
 
 ## Flow
 
 `RCAAgentResult -> deterministic claims -> evidence closure -> entailment/contradiction -> bounded follow-up retrieval -> confidence adjustment -> pass/escalate`
 
-The existing Phase 19 agent-run repository remains the audit store. No new database table is introduced.
+The existing Supervisor Planner Agent Contracts agent-run repository remains the audit store. No new database table is introduced.
 
 ## Safety properties
 

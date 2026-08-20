@@ -1,6 +1,6 @@
-# Phase 46 — Real-Time Incident Investigation Screen
+# Real-Time Incident Investigation Screen
 
-Phase 46 projects the durable investigation journal into a server-authoritative UI view. The browser never invents RCA state and never calls Python directly.
+Real Time Incident Investigation Screen projects the durable investigation journal into a server-authoritative UI view. The browser never invents RCA state and never calls Python directly.
 
 ## Convergence model
 

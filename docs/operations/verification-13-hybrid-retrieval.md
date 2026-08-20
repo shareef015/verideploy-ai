@@ -1,6 +1,6 @@
-# Phase 13 Verification
+# Hybrid Retrieval Verification
 
-Phase 13 verification includes deterministic unit tests, a labeled seed benchmark, offline Alembic migration inspection, and an optional real PostgreSQL/pgvector integration test.
+Hybrid Retrieval verification includes deterministic unit tests, a labeled seed benchmark, offline Alembic migration inspection, and an optional real PostgreSQL/pgvector integration test.
 
 Run:
 
@@ -16,4 +16,4 @@ For live PostgreSQL verification set `TEST_POSTGRES_URL` to an isolated PostgreS
 pytest -q tests/integration/test_postgres_hybrid_retrieval.py
 ```
 
-The benchmark gate fails if hybrid Recall@5 or MRR is lower than the better individual channel on the fixed Phase 13 seed corpus.
+The benchmark gate fails if hybrid Recall@5 or MRR is lower than the better individual channel on the fixed Hybrid Retrieval seed corpus.

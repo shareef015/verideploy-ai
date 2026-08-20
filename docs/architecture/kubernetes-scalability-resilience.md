@@ -1,6 +1,6 @@
-# Phase 66 — Kubernetes Scalability and Resilience
+# Kubernetes Scalability and Resilience
 
-Phase 66 turns the existing containerized VeriDeploy services into a production Kubernetes deployment contract. The Helm chart is deliberately conservative: stable workloads use native Deployments with zero-unavailable rolling updates, a canary is opt-in, schema migration runs as a pre-install/pre-upgrade hook, and rollback remains an explicit operator action.
+Kubernetes Scalability Resilience turns the existing containerized VeriDeploy services into a production Kubernetes deployment contract. The Helm chart is deliberately conservative: stable workloads use native Deployments with zero-unavailable rolling updates, a canary is opt-in, schema migration runs as a pre-install/pre-upgrade hook, and rollback remains an explicit operator action.
 
 ## Production workload contract
 
@@ -8,7 +8,7 @@ The chart deploys `web`, `gateway`, `ai-service`, and `worker`. Each stable work
 
 ## Dependencies and networking
 
-PostgreSQL, Redis, Kafka, and the object store remain externally configurable dependencies. Runtime credentials/endpoints enter through the existing Kubernetes Secret rather than chart literals. NetworkPolicy starts from default deny and opens only workload-local traffic, DNS, configured dependency ports, and HTTPS egress required for authorized external integrations. Phase 62 security assumptions remain authoritative.
+PostgreSQL, Redis, Kafka, and the object store remain externally configurable dependencies. Runtime credentials/endpoints enter through the existing Kubernetes Secret rather than chart literals. NetworkPolicy starts from default deny and opens only workload-local traffic, DNS, configured dependency ports, and HTTPS egress required for authorized external integrations. Production Security Architecture security assumptions remain authoritative.
 
 ## Migration safety
 

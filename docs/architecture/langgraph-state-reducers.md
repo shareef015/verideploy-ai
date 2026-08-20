@@ -1,6 +1,6 @@
-# Phase 39 — LangGraph State and Reducers
+# LangGraph State and Reducers
 
-Phase 39 finalizes the investigation state compatibility contract around the Phase 18 LangGraph runtime. LangGraph's official PostgreSQL checkpointer remains the execution checkpoint authority; VeriDeploy adds version-aware state preparation, deterministic reducer functions, state migration steps, canonical serialization/hashing, a reference-only secret policy, and append-only state snapshots for replay/audit.
+LangGraph State Reducers finalizes the investigation state compatibility contract around the LangGraph Production Runtime LangGraph runtime. LangGraph's official PostgreSQL checkpointer remains the execution checkpoint authority; VeriDeploy adds version-aware state preparation, deterministic reducer functions, state migration steps, canonical serialization/hashing, a reference-only secret policy, and append-only state snapshots for replay/audit.
 
 ## State schema
 
@@ -8,7 +8,7 @@ The current schema is `v3`. Identity fields (`tenant_id`, `investigation_id`, `r
 
 ## Saved-state migrations
 
-Historical Phase 18-style states are treated as schema v1 when no version is present.
+Historical LangGraph Production Runtime-style states are treated as schema v1 when no version is present.
 
 - `v1 → v2`: initializes parallel agent/evidence/approval/runtime-event fields.
 - `v2 → v3`: initializes citation state and final-output structure.
@@ -23,8 +23,8 @@ State is serialized as sorted compact UTF-8 JSON. Timezone-aware datetimes norma
 
 ## Encryption policy
 
-Checkpoint state must contain references, not credential material. Passwords, API keys, access/refresh/bearer tokens, authorization headers, private keys, and secret keys are rejected before checkpoint persistence. Secret-manager/object references are allowed. Production PostgreSQL storage/backups remain subject to the platform encryption-at-rest requirements from the database reliability runbooks; Phase 39 deliberately does not implement custom application cryptography.
+Checkpoint state must contain references, not credential material. Passwords, API keys, access/refresh/bearer tokens, authorization headers, private keys, and secret keys are rejected before checkpoint persistence. Secret-manager/object references are allowed. Production PostgreSQL storage/backups remain subject to the platform encryption-at-rest requirements from the database reliability runbooks; LangGraph State Reducers deliberately does not implement custom application cryptography.
 
 ## Persistence
 
-Migration `0021_phase39_langgraph_state_reducers` creates `graph_state_snapshots_phase39`. Snapshots are append-only, tenant-RLS protected, run/tenant validated, sequence numbered, schema-versioned, canonical-hashed, and include migration history. The table complements rather than replaces LangGraph's checkpointer tables.
+Migration `0021_phase39_langgraph_state_reducers` creates `graph_state_snapshots`. Snapshots are append-only, tenant-RLS protected, run/tenant validated, sequence numbered, schema-versioned, canonical-hashed, and include migration history. The table complements rather than replaces LangGraph's checkpointer tables.

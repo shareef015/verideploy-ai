@@ -1,4 +1,4 @@
-# Phase 78 — Multimodal Integration Checkpoint
+# Multimodal Integration Checkpoint
 
 This checkpoint hardens the existing image, document/PDF, audio, and video pipelines without introducing a second multimodal stack.
 

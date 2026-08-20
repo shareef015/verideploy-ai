@@ -1,4 +1,4 @@
-# Phase 39 verification
+# LangGraph State Reducers Verification
 
 Run:
 
@@ -12,4 +12,4 @@ With a provisioned PostgreSQL database, set `TEST_POSTGRES_URL` and run `tests/i
 
 Offline Alembic verification must include upgrade through `0021_phase39_langgraph_state_reducers` and downgrade `0021 → 0020`.
 
-The Phase 39 acceptance gate is satisfied only when a legacy active investigation upgrades to the current schema while retaining investigation/run/correlation identity, saved node output, approval references, and replay continuity. Unit/replay tests are authoritative for this environment; live PostgreSQL trigger execution must not be reported as passed unless `TEST_POSTGRES_URL` is configured.
+The LangGraph State Reducers acceptance gate is satisfied only when a legacy active investigation upgrades to the current schema while retaining investigation/run/correlation identity, saved node output, approval references, and replay continuity. Unit/replay tests are authoritative for this environment; live PostgreSQL trigger execution must not be reported as passed unless `TEST_POSTGRES_URL` is configured.

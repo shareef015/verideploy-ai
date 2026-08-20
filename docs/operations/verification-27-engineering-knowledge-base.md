@@ -1,4 +1,4 @@
-# Phase 27 verification
+# Engineering Knowledge Base Verification
 
 Run the corpus gate:
 

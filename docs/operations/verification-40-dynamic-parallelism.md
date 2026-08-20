@@ -1,13 +1,13 @@
-# Phase 40 Verification — Dynamic Parallelism
+# Dynamic Parallelism Verification
 
 ## Required checks
 
 1. `PYTHONPATH=src:. pytest -q tests/unit/test_dynamic_parallelism.py`
 2. `make dynamic-parallel-validate`
-3. Run Phase 18/19/39 regression tests.
+3. Run LangGraph Production Runtime/19/39 regression tests.
 4. Run cumulative Python tests.
 5. Verify configuration limits are present in `Settings` and `.env.example`.
-6. Verify runtime events use the existing Phase 18 event repository.
+6. Verify runtime events use the existing LangGraph Production Runtime event repository.
 7. Verify source/credential hygiene and package integrity.
 
 ## Acceptance criteria
@@ -26,4 +26,4 @@
 
 ## Environment limitations
 
-The repository declares `langgraph>=0.6,<2`, but the current execution container does not have the LangGraph package installed. The direct `Send` adapter test therefore skips. Core executor/reducer/event/latency behavior is executable without that package. Docker and provisioned PostgreSQL are not required for this phase because Phase 40 reuses the existing Phase 18 event store and Phase 39 checkpoint/state persistence contracts.
+The repository declares `langgraph>=0.6,<2`, but the current execution container does not have the LangGraph package installed. The direct `Send` adapter test therefore skips. Core executor/reducer/event/latency behavior is executable without that package. Docker and provisioned PostgreSQL are not required for this phase because Dynamic Parallelism reuses the existing LangGraph Production Runtime event store and LangGraph State Reducers checkpoint/state persistence contracts.

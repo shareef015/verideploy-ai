@@ -1,6 +1,6 @@
-# Phase 28 — NexusPay Service Topology
+# NexusPay Service Topology
 
-Phase 28 introduces a deterministic synthetic company topology used by later incident, release, and dataset phases. The topology is a normalized operational graph rather than frontend-only fixture data.
+NexusPay Service Topology introduces a deterministic synthetic company topology used by later incident, release, and dataset phases. The topology is a normalized operational graph rather than frontend-only fixture data.
 
 ## Model
 

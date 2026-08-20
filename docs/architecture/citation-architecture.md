@@ -1,18 +1,18 @@
-# Phase 38 — Citation Architecture
+# Citation Architecture
 
 ## Objective
 
-Make every released Phase 37 claim traceable to stable, tenant-scoped evidence that a currently authorized user can preview. Citation identity is independent from presentation and is derived from tenant ID, document ID, chunk ID, source version, evidence SHA-256, and canonical locator JSON.
+Make every released Hallucination Protection claim traceable to stable, tenant-scoped evidence that a currently authorized user can preview. Citation identity is independent from presentation and is derived from tenant ID, document ID, chunk ID, source version, evidence SHA-256, and canonical locator JSON.
 
 ## Data model
 
-`citations` is the immutable citation registry. `claim_citations` maps a Phase 37 `(verification_id, claim_id)` to one or more citations with the stored entailment score and whether the citation entails the released claim. Both tables are forced-RLS and append-only.
+`citations` is the immutable citation registry. `claim_citations` maps a Hallucination Protection `(verification_id, claim_id)` to one or more citations with the stored entailment score and whether the citation entails the released claim. Both tables are forced-RLS and append-only.
 
 Citation locator variants are `text`, `page`, `timecode`, and `code`. Page locators may carry a bounding box. Timecode locators carry millisecond start/end positions. Code locators require a repository-relative path and validated line range.
 
 ## Claim closure
 
-Citation creation starts from a tenant-scoped Phase 37 verification and its Phase 36 source run. Only released claims are considered. Each mapped evidence chunk must exist in the source run, resolve to the same retrieval document, preserve the evidence SHA-256 used by Phase 37, and meet the Phase 37 support threshold for that claim label. Bundle creation fails closed if any released claim lacks an entailing citation.
+Citation creation starts from a tenant-scoped Hallucination Protection verification and its Self Corrective RAG source run. Only released claims are considered. Each mapped evidence chunk must exist in the source run, resolve to the same retrieval document, preserve the evidence SHA-256 used by Hallucination Protection, and meet the Hallucination Protection support threshold for that claim label. Bundle creation fails closed if any released claim lacks an entailing citation.
 
 ## Permission-safe preview
 

@@ -1,31 +1,31 @@
-# Phase 5 postmortem sequence
+# Postmortem Sequence
 
 ```text
 Reviewed completed investigation
-        |
-        v
+ |
+ v
 Next.js postmortem shell
-        |
-        v
+ |
+ v
 NestJS POST /api/v1/postmortems
-        |
-        +-- deterministic postmortem id + idempotency key
-        v
+ |
+ +-- deterministic postmortem id + idempotency key
+ v
 Kafka verideploy.commands.postmortem.v1
-        |
-        v
+ |
+ v
 Python postmortem worker
-        |
-        +-- verify tenant + COMPLETED source investigation
-        +-- validate reviewed evidence closure
-        +-- persist source investigation version
-        v
+ |
+ +-- verify tenant + COMPLETED source investigation
+ +-- validate reviewed evidence closure
+ +-- persist source investigation version
+ v
 Postmortem PENDING_APPROVAL
-        |
-        v
+ |
+ v
 NestJS review endpoint -> private FastAPI -> optimistic version check
-        |
-        +--> APPROVED -> final Markdown/JSON export enabled
-        +--> CHANGES_REQUESTED
-        +--> REJECTED
+ |
+ +--> APPROVED -> final Markdown/JSON export enabled
+ +--> CHANGES_REQUESTED
+ +--> REJECTED
 ```

@@ -1,4 +1,4 @@
-# Phase 36 verification
+# Self Corrective RAG Verification
 
 Run:
 

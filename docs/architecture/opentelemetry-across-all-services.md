@@ -1,4 +1,4 @@
-# Phase 50 — OpenTelemetry Across All Services
+# OpenTelemetry Across All Services
 
 ## Outcome
 When `OTEL_ENABLED=true`, VeriDeploy has W3C Trace Context propagation across browser requests, the NestJS public API, Kafka messages, Python AI/worker processes, HTTP clients, Redis, SQLAlchemy hooks, and explicit workflow spans. OTLP traces flow through the collector into Tempo.
@@ -10,7 +10,7 @@ When `OTEL_ENABLED=true`, VeriDeploy has W3C Trace Context propagation across br
 - `traceparent`/`tracestate` are propagated; correlation IDs remain a separate support/debug key.
 - Secrets, prompt bodies, document bodies, auth headers, cookies and API keys are never span attributes.
 - Health endpoints are excluded from request tracing to control noise.
-- Phase 49 LangSmith remains optional AI-run observability and cannot affect routing, retrieval, approvals, or decisions.
+- LangSmith Integration LangSmith remains optional AI-run observability and cannot affect routing, retrieval, approvals, or decisions.
 - OTLP exporter failure is non-fatal in development/test and fail-fast in staging/production Python startup.
 
 ## Services

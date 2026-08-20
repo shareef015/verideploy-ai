@@ -1,22 +1,22 @@
-# Phase 10 — Structured-Output Platform
+# Structured-Output Platform
 
 ## Purpose
 
-Phase 10 establishes one authoritative boundary between model-generated text and typed VeriDeploy business data. Provider-side Structured Outputs reduce malformed responses, but Pydantic validation remains mandatory before a result is returned to business logic or persisted as a successful structured result.
+Structured Output Platform establishes one authoritative boundary between model-generated text and typed VeriDeploy business data. Provider-side Structured Outputs reduce malformed responses, but Pydantic validation remains mandatory before a result is returned to business logic or persisted as a successful structured result.
 
 ## Flow
 
 ```text
 AIRequest
-  -> StructuredSchemaRegistry(name@version)
-  -> Pydantic JSON Schema export
-  -> OpenAI Responses text.format json_schema / strict=true
-  -> AIResult.output_text
-  -> syntax-only JSON unwrap (optional)
-  -> Pydantic strict validation
-      -> accepted: persist validated response + typed model
-      -> rejected: telemetry + bounded fresh provider retry
-      -> exhausted: StructuredOutputValidationError
+ -> StructuredSchemaRegistry(name@version)
+ -> Pydantic JSON Schema export
+ -> OpenAI Responses text.format json_schema / strict=true
+ -> AIResult.output_text
+ -> syntax-only JSON unwrap (optional)
+ -> Pydantic strict validation
+ -> accepted: persist validated response + typed model
+ -> rejected: telemetry + bounded fresh provider retry
+ -> exhausted: StructuredOutputValidationError
 ```
 
 ## Registry
@@ -37,7 +37,7 @@ Validation errors are sanitized before telemetry: field locations, error types, 
 
 ## Persistence ordering
 
-Phase 8 response persistence is deferred when `structured_output` is set by the Phase 10 engine. The gateway exposes `persist_validated_response`, and the engine invokes it only after strict Pydantic validation succeeds. Invalid structured outputs therefore cannot be stored as accepted structured results.
+Responses API Adapter response persistence is deferred when `structured_output` is set by the Structured Output Platform engine. The gateway exposes `persist_validated_response`, and the engine invokes it only after strict Pydantic validation succeeds. Invalid structured outputs therefore cannot be stored as accepted structured results.
 
 ## Discriminated unions
 

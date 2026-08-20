@@ -1,3 +1,3 @@
-# Phase 48 verification
+# LLMOps Data Platform Verification
 
-Run `make llmops-data-validate` and the Phase 48 unit suite. Live PostgreSQL RLS/trigger execution requires `TEST_POSTGRES_URL`.
+Run `make llmops-data-validate` and the LLMOps Data Platform unit suite. Live PostgreSQL RLS/trigger execution requires `TEST_POSTGRES_URL`.

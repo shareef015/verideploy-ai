@@ -1,4 +1,4 @@
-# Phase 6 verification
+# OpenAI AI Gateway Verification
 
 ## Acceptance criteria
 

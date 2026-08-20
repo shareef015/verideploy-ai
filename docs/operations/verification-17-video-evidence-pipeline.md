@@ -1,6 +1,6 @@
-# Phase 17 Verification
+# Video Evidence Pipeline Verification
 
-Phase 17 verification must cover real FFmpeg behavior, deterministic replay, degradation, persistence contracts, and the cumulative suite.
+Video Evidence Pipeline verification must cover real FFmpeg behavior, deterministic replay, degradation, persistence contracts, and the cumulative suite.
 
 Required checks:
 
@@ -15,7 +15,7 @@ Required checks:
 - missing transcription configuration degrades without losing frame evidence;
 - duration policy rejection;
 - Kafka command contains object reference, not video bytes;
-- migration upgrade/downgrade DDL contains all Phase 17 tables and forced RLS;
+- migration upgrade/downgrade DDL contains all Video Evidence Pipeline tables and forced RLS;
 - private read endpoint enforces service identity and tenant scope;
 - full cumulative test suite.
 

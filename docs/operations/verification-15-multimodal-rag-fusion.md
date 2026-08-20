@@ -1,4 +1,4 @@
-# Phase 15 Verification
+# Multimodal RAG Fusion Verification
 
 Run:
 
@@ -11,4 +11,4 @@ python -m compileall -q src services workers scripts
 
 The benchmark gate requires all three seeded channels (`text`, `visual`, `runtime`) to contribute, 100% contributing-channel citation coverage, and zero duplicate selected evidence IDs.
 
-Phase 15 itself does not require a live OpenAI call or a live external runtime telemetry source. PostgreSQL-dependent integration tests inherited from Phases 12–14 remain conditional on `TEST_POSTGRES_URL`.
+Multimodal RAG Fusion itself does not require a live OpenAI call or a live external runtime telemetry source. PostgreSQL-dependent integration tests inherited from Phases 12–14 remain conditional on `TEST_POSTGRES_URL`.

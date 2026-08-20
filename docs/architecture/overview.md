@@ -3,7 +3,7 @@
 ## Product boundary
 VeriDeploy AI is an evidence-driven engineering investigation platform. The browser never calls Python directly. Next.js owns the user experience, NestJS owns the public API/security/realtime contract, and Python owns AI/RAG/workflow execution. Kafka is the durable command/event boundary.
 
-## Phase 1 components
+## Initial Setup components
 - **Next.js web**: authenticated-app foundation and system entry UI; no future workflow is simulated.
 - **NestJS gateway**: versioned public boundary with health and correlation semantics.
 - **FastAPI AI service**: private control-plane service, not browser-facing.

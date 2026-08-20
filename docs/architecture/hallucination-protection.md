@@ -1,10 +1,10 @@
-# Phase 37 — Hallucination Protection
+# Hallucination Protection
 
-Phase 37 is a claim-release boundary after the Phase 36 self-corrective RAG controller. It verifies proposed claims only against the exact tenant-scoped Phase 36 retrieval context. It does not perform hidden retrieval and does not treat evidence text as executable instructions.
+Hallucination Protection is a claim-release boundary after the Self Corrective RAG self-corrective RAG controller. It verifies proposed claims only against the exact tenant-scoped Self Corrective RAG retrieval context. It does not perform hidden retrieval and does not treat evidence text as executable instructions.
 
 ## Flow
 
-1. Load the Phase 36 run under tenant scope.
+1. Load the Self Corrective RAG run under tenant scope.
 2. Resolve every proposed evidence `chunk_id` against that stored run.
 3. Separate prompt-injection-shaped lines from evidence content.
 4. Compute deterministic lexical entailment and contradiction signals.
@@ -17,4 +17,4 @@ Phase 37 is a claim-release boundary after the Phase 36 self-corrective RAG cont
 
 Unsupported material claims are not released. The evaluation metric is the unsupported-material rate in the protected output, while the proposed unsupported rate is retained as adversarial input metadata.
 
-Phase 38 will add stable citation architecture and deep-linkable locators; Phase 37 intentionally uses the already-stored retrieval `chunk_id` references rather than inventing a parallel citation system.
+Citation Architecture will add stable citation architecture and deep-linkable locators; Hallucination Protection intentionally uses the already-stored retrieval `chunk_id` references rather than inventing a parallel citation system.

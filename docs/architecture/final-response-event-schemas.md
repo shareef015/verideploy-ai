@@ -1,6 +1,6 @@
-# Phase 71 — Final Response and Event Schemas
+# Final Response and Event Schemas
 
-Phase 71 establishes one versioned contract surface for the terminal release-risk and incident-RCA responses and for the real-time envelopes that transport those results.
+Final Response Event Schemas establishes one versioned contract surface for the terminal release-risk and incident-RCA responses and for the real-time envelopes that transport those results.
 
 ## Canonical contracts
 

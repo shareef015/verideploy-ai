@@ -1,6 +1,6 @@
-# Phase 23 verification
+# RCA Agent Verification
 
-Phase 23 verification covers strict RCA schema validation, evidence-reference closure, tenant/scope controls, trigger-versus-root-cause separation, temporal/causal scoring, contradiction penalties, required-channel sufficiency, prompt/routing integration, private API authorization, and the fixed synthetic top-k RCA benchmark.
+RCA Agent verification covers strict RCA schema validation, evidence-reference closure, tenant/scope controls, trigger-versus-root-cause separation, temporal/causal scoring, contradiction penalties, required-channel sufficiency, prompt/routing integration, private API authorization, and the fixed synthetic top-k RCA benchmark.
 
 Run:
 

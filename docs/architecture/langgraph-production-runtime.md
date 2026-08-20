@@ -1,8 +1,8 @@
-# Phase 18 — LangGraph Production Runtime
+# LangGraph Production Runtime
 
 ## Scope
 
-Phase 18 establishes the durable graph runtime only. It does not implement the Supervisor, Planner, RAG, RCA, or Critic agents assigned to later phases.
+LangGraph Production Runtime establishes the durable graph runtime only. It does not implement the Supervisor, Planner, RAG, RCA, or Critic agents assigned to later phases.
 
 ## Runtime contract
 
@@ -29,4 +29,4 @@ A restarted worker resolves the same graph version and invokes with the existing
 
 ## Non-goals
 
-Human interrupt/resume policy is implemented in Phase 41. Agent contracts begin in Phase 19. Final state reducers/migrations are expanded in Phase 39.
+Human interrupt/resume policy is implemented in Human in the Loop Approval. Agent contracts begin in Supervisor Planner Agent Contracts. Final state reducers/migrations are expanded in LangGraph State Reducers.

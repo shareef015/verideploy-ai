@@ -1,6 +1,6 @@
-# Phase 76 — RAG Integration and Performance Checkpoint
+# RAG Integration and Performance Checkpoint
 
-Phase 76 is a release checkpoint over the existing production RAG implementation. It does not introduce a parallel retriever. It validates the Phase 13 hybrid keyword/vector fusion, Phase 14 visual retrieval, Phase 34 orchestration, Phase 35 tenant/metadata authorization, Phase 38 citation closure, and Phase 64 retrieval cache against a deterministic clean-index corpus.
+RAG Integration Performance Checkpoint is a release checkpoint over the existing production RAG implementation. It does not introduce a parallel retriever. It validates the Hybrid Retrieval hybrid keyword/vector fusion, Visual Document Retrieval visual retrieval, Retrieval Pipeline Orchestration, Metadata Filtering Authorization tenant/metadata authorization, Citation Architecture citation closure, and Multi Layer Caching retrieval cache against a deterministic clean-index corpus.
 
 ## Protected targets
 

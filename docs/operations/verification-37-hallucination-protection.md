@@ -1,4 +1,4 @@
-# Phase 37 verification
+# Hallucination Protection Verification
 
 Run:
 

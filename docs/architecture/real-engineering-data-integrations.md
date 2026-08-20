@@ -1,10 +1,10 @@
-# Phase 26 — Real Engineering Data Integrations
+# Real Engineering Data Integrations
 
-Phase 26 adds production read adapters for GitHub, Jira Cloud, Prometheus, Grafana annotations, distributed traces (Tempo/OpenTelemetry data), and Loki logs. The adapters sit below Phase 25's MCP gateway and Phase 22's runtime-evidence contracts; they do not authorize users or decide workflow truth.
+Real Engineering Data Integrations adds production read adapters for GitHub, Jira Cloud, Prometheus, Grafana annotations, distributed traces (Tempo/OpenTelemetry data), and Loki logs. The adapters sit below MCP Secure Gateway's MCP gateway and Runtime Evidence Agent's runtime-evidence contracts; they do not authorize users or decide workflow truth.
 
 ## Security boundary
 
-All outbound HTTP reads use `ResilientReadClient`. A configured endpoint must use HTTP(S), must not contain userinfo credentials, and its hostname must appear in `INTEGRATION_ALLOWED_HOSTS`. Redirect targets are revalidated before following. The client is GET-only for Phase 26.
+All outbound HTTP reads use `ResilientReadClient`. A configured endpoint must use HTTP(S), must not contain userinfo credentials, and its hostname must appear in `INTEGRATION_ALLOWED_HOSTS`. Redirect targets are revalidated before following. The client is GET-only for Real Engineering Data Integrations.
 
 Credentials are supplied only as server-side adapter headers and are never accepted in tool/model arguments or copied into `IntegrationResult` records. GitHub uses Bearer token headers. Jira supports `basic` (Atlassian email + API token) and `bearer` (OAuth access token) modes.
 

@@ -1,4 +1,4 @@
-# Phase 46 verification
+# Real Time Incident Investigation Screen Verification
 
 Run `python scripts/validate_incident_screen.py` and `pytest -q tests/unit/test_incident_investigation_screen.py`.
 

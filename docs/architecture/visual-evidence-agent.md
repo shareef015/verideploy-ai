@@ -1,6 +1,6 @@
-# Phase 21 — VisualEvidenceAgent
+# VisualEvidenceAgent
 
-Phase 21 composes existing visual capabilities instead of creating a parallel vision stack. The agent performs bounded query planning, Phase 14 page-level visual search, and Phase 9 secure image intelligence. Candidate pages are identified by retrieval score, but search score is never treated as visual proof. Each selected page is re-read from the indexed local artifact, SHA-256 verified against the Phase 14 record, passed through Phase 9 secure image preparation/provenance, and analyzed with the strict dashboard, architecture, or error-screen schema.
+Visual Evidence Agent composes existing visual capabilities instead of creating a parallel vision stack. The agent performs bounded query planning, Visual Document Retrieval page-level visual search, and Image Intelligence Layer secure image intelligence. Candidate pages are identified by retrieval score, but search score is never treated as visual proof. Each selected page is re-read from the indexed local artifact, SHA-256 verified against the Visual Document Retrieval record, passed through Image Intelligence Layer secure image preparation/provenance, and analyzed with the strict dashboard, architecture, or error-screen schema.
 
 ## Runtime flow
 
@@ -10,7 +10,7 @@ The agent is read-only and requires `visual.evidence.read`. Trusted `document_id
 
 ## Evidence model
 
-Direct observations preserve normalized evidence locators and confidence. Derived findings are explicitly typed as model inference, dashboard anomaly, architecture component, architecture relationship, or error signal, and each retains the supporting observation IDs. This preserves the Phase 9 distinction between observation and inference.
+Direct observations preserve normalized evidence locators and confidence. Derived findings are explicitly typed as model inference, dashboard anomaly, architecture component, architecture relationship, or error signal, and each retains the supporting observation IDs. This preserves the Image Intelligence Layer distinction between observation and inference.
 
 ## Confidence qualification
 

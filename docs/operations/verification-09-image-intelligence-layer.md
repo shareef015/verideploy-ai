@@ -1,6 +1,6 @@
-# Phase 9 Verification
+# Image Intelligence Layer Verification
 
-Phase 9 acceptance criteria:
+Image Intelligence Layer acceptance criteria:
 
 1. secure image preparation and content validation;
 2. configurable `low`/`high`/`original`/`auto` detail policy;
@@ -15,7 +15,7 @@ Phase 9 acceptance criteria:
 
 ## Executed checks
 
-The cumulative Python suite passed **86 tests**, including **13 Phase 9-focused tests**. The focused tests cover decode/re-encode metadata sanitization, detail selection, original-detail policy, malformed image rejection, locator validation, numeric uncertainty, inference evidence closure, prompt-injection instruction separation, image-ID forgery rejection, Responses API image mapping, private-service authentication, tenant mismatch rejection, and a successful private endpoint response.
+The cumulative Python suite passed **86 tests**, including **13 Image Intelligence Layer-focused tests**. The focused tests cover decode/re-encode metadata sanitization, detail selection, original-detail policy, malformed image rejection, locator validation, numeric uncertainty, inference evidence closure, prompt-injection instruction separation, image-ID forgery rejection, Responses API image mapping, private-service authentication, tenant mismatch rejection, and a successful private endpoint response.
 
 Python byte compilation passed after the changes. No live OpenAI request was made; OpenAI transport is exercised with an injected SDK-compatible fake client.
 

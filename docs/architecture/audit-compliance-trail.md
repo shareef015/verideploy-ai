@@ -1,6 +1,6 @@
-# Phase 63 — Audit and Compliance Trail
+# Audit and Compliance Trail
 
-Phase 63 centralizes consequential-action reconstruction around an append-only, tenant-scoped audit envelope. The production PostgreSQL table is immutable except for retention-authorized deletion after `retain_until` and only when no legal hold is active.
+Audit Compliance Trail centralizes consequential-action reconstruction around an append-only, tenant-scoped audit envelope. The production PostgreSQL table is immutable except for retention-authorized deletion after `retain_until` and only when no legal hold is active.
 
 ## Audit envelope
 Every event records actor type/id/roles, resource type/id/tenant, action, result, correlation ID, optional trace/span IDs, source, reason code, redacted payload, retention class, legal hold, previous hash, event hash, and optional review signature.

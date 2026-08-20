@@ -1,8 +1,8 @@
-# Phase 13 — Hybrid Retrieval
+# Hybrid Retrieval
 
 ## Scope
 
-Phase 13 implements a production retrieval layer that combines PostgreSQL full-text search and pgvector cosine retrieval. It intentionally does not implement visual retrieval, query expansion, reranking, self-corrective retrieval, or parent-child resolution; those belong to later phases.
+Hybrid Retrieval implements a production retrieval layer that combines PostgreSQL full-text search and pgvector cosine retrieval. It intentionally does not implement visual retrieval, query expansion, reranking, self-corrective retrieval, or parent-child resolution; those belong to later phases.
 
 ## Retrieval channels
 
@@ -12,7 +12,7 @@ Phase 13 implements a production retrieval layer that combines PostgreSQL full-t
 
 ### Dense channel
 
-The query is embedded through the Phase 11 `EmbeddingPipeline`. Dense candidates are retrieved from the Phase 12 `vector_embeddings` table using cosine distance (`<=>`) and the HNSW cosine index. The query is constrained by tenant, active embedding model, dimensions, and `CURRENT` state.
+The query is embedded through the Embedding Pipeline `EmbeddingPipeline`. Dense candidates are retrieved from the PostgreSQL pgvector Foundation `vector_embeddings` table using cosine distance (`<=>`) and the HNSW cosine index. The query is constrained by tenant, active embedding model, dimensions, and `CURRENT` state.
 
 ## Fusion
 
@@ -20,7 +20,7 @@ Raw lexical scores and vector distances are not directly averaged because they h
 
 `rrf_score(d) = Σ 1 / (k + rank_channel(d))`
 
-Phase 13 uses `k=60` by default. A source-diversity cap prevents one source from occupying the entire result window.
+Hybrid Retrieval uses `k=60` by default. A source-diversity cap prevents one source from occupying the entire result window.
 
 ## Traceability
 
@@ -28,4 +28,4 @@ Every hybrid hit contains its channel rank, raw score, normalized score, and RRF
 
 ## Migration boundary
 
-Migration `0002_phase13_hybrid_retrieval` adds the minimal retrieval corpus tables and GIN index required by this phase. It deliberately avoids the complete document/RAG schema that is scheduled for Phase 32.
+Migration `0002_phase13_hybrid_retrieval` adds the minimal retrieval corpus tables and GIN index required by this phase. It deliberately avoids the complete document/RAG schema that is scheduled for Complete RAG Operational Schema.

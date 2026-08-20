@@ -1,19 +1,19 @@
-# Phase 14 — Visual Document Retrieval
+# Visual Document Retrieval
 
 ## Boundary
-Phase 14 retrieves visually relevant PDF pages. It does not perform Phase 15 multimodal evidence fusion or Phase 9 image interpretation on every page.
+Visual Document Retrieval retrieves visually relevant PDF pages. It does not perform Multimodal RAG Fusion multimodal evidence fusion or Image Intelligence Layer image interpretation on every page.
 
 ## Production path
-1. Authorized PDF bytes reach `VisualIndexWorker` from the Phase 4 object-storage/ingestion transport.
+1. Authorized PDF bytes reach `VisualIndexWorker` from the Multimodal Sequence object-storage/ingestion transport.
 2. `PdfPageRenderer` renders every page to a deterministic PNG, extracts the PDF native text layer (no OCR), and records SHA-256, dimensions, document/page identity, and tenant.
 3. `VisualRetrieverAdapter` indexes each rendered page.
-   - Primary optional backend: Hugging Face native ColPali late-interaction retrieval.
-   - CPU fallback: native-text token hashing plus rendered-page visual statistics. It is explicitly identified as a fallback and never claims VLM equivalence.
+ - Primary optional backend: Hugging Face native ColPali late-interaction retrieval.
+ - CPU fallback: native-text token hashing plus rendered-page visual statistics. It is explicitly identified as a fallback and never claims VLM equivalence.
 4. `visual_page_indexes` stores backend/model/index version and either fallback features or a reference to the multi-vector embedding artifact.
 5. `POST /internal/v1/retrieval/visual` searches only the caller tenant and returns ranked page IDs, hashes, and internal image references.
 
 ## Why multi-vector embeddings are referenced, not forced into pgvector
-ColPali produces page-level multi-vector representations and scores them through late interaction. Phase 14 therefore stores an embedding artifact reference instead of flattening a page into the Phase 12 single-vector schema. A later scaling phase may adopt a specialized multi-vector index without changing this contract.
+ColPali produces page-level multi-vector representations and scores them through late interaction. Visual Document Retrieval therefore stores an embedding artifact reference instead of flattening a page into the PostgreSQL pgvector Foundation single-vector schema. A later scaling phase may adopt a specialized multi-vector index without changing this contract.
 
 ## Safety and tenancy
 - PDF signature is validated before rendering.

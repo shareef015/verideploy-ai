@@ -1,16 +1,16 @@
-# Phase 5 verification
+# Postmortem Sequence Verification
 
 ## Executed successfully
 - Cumulative Python test suite: 35 passed.
-- Focused Phase 5 tests: 7 passed.
+- Focused Postmortem Sequence tests: 7 passed.
 - Python byte-compilation: passed.
-- OpenAPI, AsyncAPI, Phase 5 JSON schemas, and Docker Compose YAML parsing: passed.
+- OpenAPI, AsyncAPI, Postmortem Sequence JSON schemas, and Docker Compose YAML parsing: passed.
 - TypeScript/TSX syntax transpilation using the installed TypeScript compiler: 33 source files passed.
 - FastAPI `/health/live` and `/health/ready` runtime smoke: HTTP 200.
-- Focused Phase 5 TODO/FIXME/fake-success/pass scan: passed.
+- Focused Postmortem Sequence TODO/FIXME/fake-success/pass scan: passed.
 - Repository secret-pattern scan: passed.
 
-## Phase 5 behavioral gates proven by tests
+## Postmortem Sequence behavioral gates proven by tests
 - incomplete investigations cannot generate a postmortem;
 - reviewed evidence references cannot escape the reviewed evidence set;
 - generation is tenant-scoped and idempotent;

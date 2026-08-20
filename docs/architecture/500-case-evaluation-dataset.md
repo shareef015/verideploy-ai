@@ -1,6 +1,6 @@
-# Phase 52 — 500-Case Evaluation Dataset
+# 500-Case Evaluation Dataset
 
-Phase 52 turns the Phase 51 evaluation control plane into a substantial, deterministic benchmark corpus for VeriDeploy AI. All cases are synthetic and are safe for local, CI, and portfolio demonstrations.
+500 Case Evaluation Dataset turns the Evaluation Framework evaluation control plane into a substantial, deterministic benchmark corpus for VeriDeploy AI. All cases are synthetic and are safe for local, CI, and portfolio demonstrations.
 
 ## Dataset contract
 

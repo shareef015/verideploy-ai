@@ -1,6 +1,6 @@
-# Phase 74 — Multimodal Killer Demo
+# Multimodal Killer Demo
 
-Phase 74 composes the production ingestion, investigation, evidence, citation, critic, audit, approval, Kafka and live-UI boundaries into a single recruiter-ready synthetic scenario.
+Multimodal Killer Demo composes the production ingestion, investigation, evidence, citation, critic, audit, approval, Kafka and live-UI boundaries into a single recruiter-ready synthetic scenario.
 
 ## Evidence
 

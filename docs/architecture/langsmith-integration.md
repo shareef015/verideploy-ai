@@ -1,12 +1,12 @@
-# Phase 49 — LangSmith Integration
+# LangSmith Integration
 
 ## Goal
 
-LangSmith is an opt-in external observability plane. It must never become an execution dependency or replace the authoritative Phase 48 LLMOps ledger.
+LangSmith is an opt-in external observability plane. It must never become an execution dependency or replace the authoritative LLMOps Data Platform LLMOps ledger.
 
 ## Data flow
 
-`business execution -> local Phase 48 LLMOps persistence -> best-effort LangSmith export`
+`business execution -> local LLMOps persistence -> best-effort LangSmith export`
 
 The model gateway creates a deterministic correlation root and child LLM run. Orchestrated retrieval can create a retriever child under the same root. Correlation IDs and prompt-version metadata are preserved; raw model inputs/outputs are represented by hashes in the default model tracing path.
 
@@ -16,9 +16,9 @@ The model gateway creates a deterministic correlation root and child LLM run. Or
 - Staging/production require an API key when enabled.
 - Project names are environment-qualified: `<prefix>-<environment>`.
 - LangSmith client/transport failures are captured as observer diagnostics and are never raised into business logic.
-- Metadata/payloads pass through the Phase 48 recursive redactor before generic export.
+- Metadata/payloads pass through the LLMOps Data Platform recursive redactor before generic export.
 - Dataset export is a separate explicit opt-in capability and is never called automatically by production execution.
-- Phase 48 PostgreSQL LLMOps data remains authoritative for audit, retention, cost, and investigation traceability.
+- LLMOps Data Platform PostgreSQL LLMOps data remains authoritative for audit, retention, cost, and investigation traceability.
 
 ## Run hierarchy
 

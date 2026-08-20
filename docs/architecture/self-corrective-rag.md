@@ -1,10 +1,10 @@
-# Phase 36 — Self-Corrective RAG
+# Self-Corrective RAG
 
-Phase 36 wraps the Phase 34 retrieval pipeline with a bounded corrective controller. It grades retrieved evidence, rewrites queries deterministically, may relax only caller-requested metadata constraints, and stops with an explicit reason. Trusted Phase 35 tenant/permission/service/environment/team/document-kind authorization is immutable throughout retries.
+Self Corrective RAG wraps the Retrieval Pipeline Orchestration retrieval pipeline with a bounded corrective controller. It grades retrieved evidence, rewrites queries deterministically, may relax only caller-requested metadata constraints, and stops with an explicit reason. Trusted Metadata Filtering Authorization tenant/permission/service/environment/team/document-kind authorization is immutable throughout retries.
 
 ## Controller flow
 
-1. Run authorized Phase 34 retrieval.
+1. Run authorized Retrieval Pipeline Orchestration retrieval.
 2. Grade relevance, source corroboration, and usable context.
 3. Stop immediately when evidence is sufficient.
 4. Otherwise rewrite the query up to the configured rewrite budget.

@@ -1,8 +1,8 @@
-# Phase 7 — Model Routing and Cost Policy
+# Model Routing and Cost Policy
 
 ## Purpose
 
-Phase 7 makes model selection a deterministic platform policy rather than a caller decision. Application code asks for a workload; the model router selects a logical role (`fast`, `standard`, or `reasoning`), resolves the configured model, records why it selected that route, and applies bounded retry/fallback, concurrency, budget, and cost policy.
+Model Routing Cost Policy makes model selection a deterministic platform policy rather than a caller decision. Application code asks for a workload; the model router selects a logical role (`fast`, `standard`, or `reasoning`), resolves the configured model, records why it selected that route, and applies bounded retry/fallback, concurrency, budget, and cost policy.
 
 ## Default workload routing
 
@@ -52,7 +52,7 @@ Per-role semaphores prevent expensive reasoning traffic from consuming all local
 - `AI_STANDARD_CONCURRENCY`
 - `AI_REASONING_CONCURRENCY`
 
-Distributed per-tenant request and monthly budget admission remains owned by the Phase 6 `RequestController` (Redis in production).
+Distributed per-tenant request and monthly budget admission remains owned by the OpenAI AI Gateway `RequestController` (Redis in production).
 
 ## Audit
 
@@ -70,4 +70,4 @@ Each attempted routed model produces a `ModelRoutingAuditRecord` with:
 - latency
 - outcome
 
-Phase 48 will persist this contract into the LLMOps data platform. Phase 7 uses a deterministic sink abstraction so the routing core is already production-boundary compatible.
+LLMOps Data Platform will persist this contract into the LLMOps data platform. Model Routing Cost Policy uses a deterministic sink abstraction so the routing core is already production-boundary compatible.

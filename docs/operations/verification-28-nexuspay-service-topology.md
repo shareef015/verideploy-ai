@@ -1,4 +1,4 @@
-# Phase 28 Verification
+# NexusPay Service Topology Verification
 
 Generate and validate the stable seed:
 

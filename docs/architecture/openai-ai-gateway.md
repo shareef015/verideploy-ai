@@ -1,29 +1,29 @@
-# Phase 6 — OpenAI-first production AI architecture
+# OpenAI-first production AI architecture
 
 ## Purpose
 
-Phase 6 introduces the AI control boundary without implementing Phase 7 model routing or Phase 8's full Responses API feature surface. All future model use must pass through this gateway rather than instantiating provider SDK clients inside agents, routes, retrievers, or workers.
+OpenAI AI Gateway introduces the AI control boundary without implementing Model Routing Cost Policy model routing or Responses API Adapter's full Responses API feature surface. All future model use must pass through this gateway rather than instantiating provider SDK clients inside agents, routes, retrievers, or workers.
 
 ## Runtime boundary
 
 ```text
 Domain service / future LangGraph node
-        |
-        v
+ |
+ v
 AIRequest (tenant, correlation, request ID, operation, configured model)
-        |
-        v
+ |
+ v
 AIGateway
-  |-- distributed rate/budget reservation
-  |-- bounded retry ownership + jitter
-  |-- per-attempt telemetry
-  |-- cancellation settlement
-  v
+ |-- distributed rate/budget reservation
+ |-- bounded retry ownership + jitter
+ |-- per-attempt telemetry
+ |-- cancellation settlement
+ v
 AIProvider protocol
-        |
-        +--> OpenAIProvider (official async OpenAI SDK, SDK retries disabled)
-        |
-        +--> DeterministicTestProvider (default unit/contract tests)
+ |
+ +--> OpenAIProvider (official async OpenAI SDK, SDK retries disabled)
+ |
+ +--> DeterministicTestProvider (default unit/contract tests)
 ```
 
 The OpenAI adapter sets `max_retries=0`. VeriDeploy deliberately owns retry decisions so every attempt is observable and so non-retryable authentication, permission and validation errors cannot be retried accidentally.
@@ -50,7 +50,7 @@ Only failures explicitly marked retryable enter the bounded retry path.
 
 Development/test may use `InMemoryRequestController`. Production configuration rejects that backend and requires Redis. The Redis controller atomically reserves the estimated request cost at admission time so concurrent requests cannot all pass a stale budget check. Completion settles the reservation; terminal failure or cancellation releases it.
 
-Phase 7 will add model-specific pricing and replace the default estimated request cost with calculated estimates/actuals.
+Model Routing Cost Policy will add model-specific pricing and replace the default estimated request cost with calculated estimates/actuals.
 
 ## Secret handling
 
@@ -58,8 +58,8 @@ The AI status endpoint exposes booleans such as `openai_key_configured`; it neve
 
 ## Scope intentionally deferred
 
-- model-role routing and cost tables: Phase 7
-- complete Responses API streaming/tool/cancellation contract: Phase 8
-- image intelligence: Phase 9
-- structured output platform: Phase 10
+- model-role routing and cost tables: Model Routing Cost Policy
+- complete Responses API streaming/tool/cancellation contract: Responses API Adapter
+- image intelligence: Image Intelligence Layer
+- structured output platform: Structured Output Platform
 - agent prompts and orchestration: later LangGraph phases

@@ -1,4 +1,4 @@
-# Phase 29 verification
+# Synthetic Incident Dataset Verification
 
 Run:
 
@@ -8,4 +8,4 @@ make incident-dataset-validate
 PYTHONPATH=src:. pytest -q tests/unit/test_synthetic_incident_dataset.py
 ```
 
-`make incident-dataset-seed` requires a migrated PostgreSQL database and validates the checked-in dataset before writing. The Phase 29 acceptance gate passes only when there are at least 200 incidents and the validator reports no causality, ordering, balance, leakage, hashing, topology-reference, or determinism errors.
+`make incident-dataset-seed` requires a migrated PostgreSQL database and validates the checked-in dataset before writing. The Synthetic Incident Dataset acceptance gate passes only when there are at least 200 incidents and the validator reports no causality, ordering, balance, leakage, hashing, topology-reference, or determinism errors.

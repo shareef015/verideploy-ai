@@ -1,6 +1,6 @@
-# Phase 30 — Immutable Evidence Model
+# Immutable Evidence Model
 
-Phase 30 introduces the append-only evidence authority used by later evidence-graph, RCA, critic, postmortem, and audit workflows.
+Immutable Evidence Model introduces the append-only evidence authority used by later evidence-graph, RCA, critic, postmortem, and audit workflows.
 
 ## Design
 

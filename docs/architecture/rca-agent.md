@@ -1,6 +1,6 @@
-# Phase 23 — RCAAgent
+# RCAAgent
 
-Phase 23 adds an evidence-grounded root-cause-analysis agent on top of the durable Phase 18 runtime and the Phase 19 agent governance layer. It consumes already-authorized `NormalizedEvidence` produced by the Phase 15 fusion contract and does not perform retrieval itself.
+RCA Agent adds an evidence-grounded root-cause-analysis agent on top of the durable LangGraph Production Runtime and the Supervisor Planner Agent Contracts agent governance layer. It consumes already-authorized `NormalizedEvidence` produced by the Multimodal RAG Fusion contract and does not perform retrieval itself.
 
 ## Boundaries
 
@@ -11,7 +11,7 @@ Phase 23 adds an evidence-grounded root-cause-analysis agent on top of the durab
 - Trigger, root cause, and alternative are distinct hypothesis kinds.
 - Unknown evidence IDs fail the run.
 - Cross-tenant evidence and trusted service/environment scope mismatches fail before model execution or acceptance.
-- Recommended tests are proposals only. Potentially mutating tests must be marked `requires_approval`; Phase 23 executes no remediation/action.
+- Recommended tests are proposals only. Potentially mutating tests must be marked `requires_approval`; RCA Agent executes no remediation/action.
 
 ## Deterministic assessment
 
@@ -30,7 +30,7 @@ A root cause is not marked determined unless it satisfies configured minimum sup
 
 ## Persistence
 
-Phase 23 reuses `agent_runs`. Prompt version/hash, input hash, terminal status, and strict output are persisted without adding a redundant RCA-specific table.
+RCA Agent reuses `agent_runs`. Prompt version/hash, input hash, terminal status, and strict output are persisted without adding a redundant RCA-specific table.
 
 ## API
 

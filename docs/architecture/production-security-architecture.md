@@ -1,4 +1,4 @@
-# Phase 62 — Production Security Architecture
+# Production Security Architecture
 
 VeriDeploy uses two separate identity planes. Browser/API traffic authenticates with OIDC Authorization Code + PKCE and derives user, tenant and role context from verified token claims. Private service traffic never accepts browser identity as service identity; NestJS and trusted workers sign private FastAPI requests with service identity and bounded clock skew.
 
@@ -18,7 +18,7 @@ Production configuration must reference an external secret manager (`aws-sm://`,
 Kubernetes starts with default deny. Explicit policy permits web → gateway and gateway → private AI service; production manifests must add only the minimum egress required for databases, brokers, telemetry and approved external APIs.
 
 ## Supply chain
-CI runs the normal test/lint/build suite and the Phase 62 security architecture scan. Policy allows zero unresolved critical and zero unresolved high dependency vulnerabilities. Lockfiles and pinned container images remain part of the build contract. Production image/SBOM/CVE tooling can plug into this policy without changing application authorization semantics.
+CI runs the normal test/lint/build suite and the Production Security Architecture security architecture scan. Policy allows zero unresolved critical and zero unresolved high dependency vulnerabilities. Lockfiles and pinned container images remain part of the build contract. Production image/SBOM/CVE tooling can plug into this policy without changing application authorization semantics.
 
 ## Gate
 `PYTHONPATH=src python scripts/security_scan.py` fails when a critical architecture control is missing. Security tests exercise PKCE, RBAC/ABAC/tenant isolation, SSRF blocks, secret references, encryption posture and the repository architecture scan.

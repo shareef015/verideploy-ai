@@ -1,8 +1,8 @@
-# Phase 11 — Embedding Pipeline
+# Embedding Pipeline
 
 ## Purpose
 
-Phase 11 creates the production embedding boundary used by later pgvector and hybrid-retrieval phases. It intentionally does not create a vector index yet; Phase 12 owns PostgreSQL/pgvector foundations.
+Embedding Pipeline creates the production embedding boundary used by later pgvector and hybrid-retrieval phases. It intentionally does not create a vector index yet; PostgreSQL pgvector Foundation owns PostgreSQL/pgvector foundations.
 
 ## Runtime path
 

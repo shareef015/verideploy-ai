@@ -1,6 +1,6 @@
-# Phase 19 — Supervisor, Planner, and Agent Contracts
+# Supervisor, Planner, and Agent Contracts
 
-Phase 19 adds typed, versioned agent contracts on top of the Phase 18 LangGraph runtime. It does not create a second orchestration loop. Supervisor, planner, and GitHub agents are designed to become deterministic graph nodes/subgraphs while Phase 18 continues to own checkpoints, resume, cancellation, and streaming.
+Supervisor Planner Agent Contracts adds typed, versioned agent contracts on top of the LangGraph Production Runtime LangGraph runtime. It does not create a second orchestration loop. Supervisor, planner, and GitHub agents are designed to become deterministic graph nodes/subgraphs while LangGraph Production Runtime continues to own checkpoints, resume, cancellation, and streaming.
 
 ## Boundaries
 

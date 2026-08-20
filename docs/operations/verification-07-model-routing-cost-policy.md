@@ -1,6 +1,6 @@
-# Phase 7 Verification
+# Model Routing Cost Policy Verification
 
-Phase 7 acceptance criteria:
+Model Routing Cost Policy acceptance criteria:
 
 1. deterministic fast/standard/reasoning routing;
 2. configuration-driven bindings and fallbacks;
@@ -16,4 +16,4 @@ See `artifacts/verification-07-model-routing-cost-policy.txt` for the exact exec
 
 ## Build-environment result
 
-The cumulative Python suite passed 61 tests, including 10 focused Phase 7 routing/configuration tests. Python compilation, contract/config parsing, FastAPI live/ready/AI-status smoke, 35-file TypeScript/TSX syntax transpilation, placeholder scanning, and secret-pattern scanning passed. No live OpenAI request was made. Docker, pnpm, Ruff, and MyPy were unavailable and are therefore not reported as passed.
+The cumulative Python suite passed 61 tests, including 10 focused Model Routing Cost Policy routing/configuration tests. Python compilation, contract/config parsing, FastAPI live/ready/AI-status smoke, 35-file TypeScript/TSX syntax transpilation, placeholder scanning, and secret-pattern scanning passed. No live OpenAI request was made. Docker, pnpm, Ruff, and MyPy were unavailable and are therefore not reported as passed.

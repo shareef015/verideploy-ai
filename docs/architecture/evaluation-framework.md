@@ -1,6 +1,6 @@
-# Phase 51 — Evaluation Framework Foundation
+# Evaluation Framework Foundation
 
-Phase 51 establishes the production evaluation control plane used by later VeriDeploy quality phases.
+Evaluation Framework establishes the production evaluation control plane used by later VeriDeploy quality phases.
 
 ## Architecture
 

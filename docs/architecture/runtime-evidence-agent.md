@@ -1,7 +1,7 @@
-# Phase 22 — RuntimeEvidenceAgent
+# RuntimeEvidenceAgent
 
 ## Boundary
-Phase 22 queries authorized runtime telemetry and normalizes it into the Phase 15 `RuntimeEvidenceInput` contract. It does not perform RCA or make remediation decisions.
+Runtime Evidence Agent queries authorized runtime telemetry and normalizes it into the Multimodal RAG Fusion `RuntimeEvidenceInput` contract. It does not perform RCA or make remediation decisions.
 
 ## Sources
 - Prometheus: read-only `/api/v1/query_range` for active and baseline windows.
@@ -18,4 +18,4 @@ The active window is immutable once authorized. The baseline is the immediately 
 Each source has an independent execution record. One failed source produces a `runtime_source_failure` limitation while successful sources remain usable. All-source failure is explicitly insufficient.
 
 ## Evidence
-Metric, log, trace, and Grafana annotation results are normalized to Phase 15 runtime evidence with stable evidence IDs, source system/ID, observed timestamp, service/environment, and confidence.
+Metric, log, trace, and Grafana annotation results are normalized to Multimodal RAG Fusion runtime evidence with stable evidence IDs, source system/ID, observed timestamp, service/environment, and confidence.

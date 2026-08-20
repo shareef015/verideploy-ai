@@ -1,6 +1,6 @@
-# Phase 75 — Platform integration and reliability checkpoint
+# Platform Integration and Reliability Checkpoint
 
-Phase 75 verifies the foundational runtime as one system: browser, NestJS gateway, private Python AI service, workers, PostgreSQL/pgvector, Redis, Kafka, S3-compatible object storage, OIDC identity, and the OpenTelemetry/Prometheus/Grafana/Loki/Tempo observability path.
+Platform Integration Reliability Checkpoint verifies the foundational runtime as one system: browser, NestJS gateway, private Python AI service, workers, PostgreSQL/pgvector, Redis, Kafka, S3-compatible object storage, OIDC identity, and the OpenTelemetry/Prometheus/Grafana/Loki/Tempo observability path.
 
 ## Readiness policy
 
@@ -21,8 +21,8 @@ Liveness answers only whether the process is alive. Readiness is the deployment/
 - Keycloak dev realm → external OIDC provider
 - OTel Collector + Prometheus/Grafana/Loki/Tempo → production observability pipeline
 
-Compose is a local parity environment, not a production security boundary. Phase 62/66 production controls remain authoritative.
+Compose is a local parity environment, not a production security boundary. Production Security Architecture/66 production controls remain authoritative.
 
 ## Failure drills
 
-`python scripts/validate_platform.py` performs deterministic smoke, restart, critical-dependency failure, optional-observability degradation, and recovery checks. These tests do not require a privileged Docker daemon and therefore run safely in CI. A real deployment can additionally exercise the existing Kubernetes pod-failure drill from Phase 66.
+`python scripts/validate_platform.py` performs deterministic smoke, restart, critical-dependency failure, optional-observability degradation, and recovery checks. These tests do not require a privileged Docker daemon and therefore run safely in CI. A real deployment can additionally exercise the existing Kubernetes pod-failure drill from Kubernetes Scalability Resilience.

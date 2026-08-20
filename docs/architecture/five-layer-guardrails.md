@@ -1,6 +1,6 @@
-# Phase 61 — Five-Layer Guardrails
+# Five-Layer Guardrails
 
-Phase 61 introduces a single versioned guardrail policy and enforcement contract across input, retrieval, tool/MCP, output, and operational boundaries. The policy is hashed for reproducibility and every violation carries a control ID, policy version, correlation ID, trace ID, span ID, action, and safe metadata.
+Five Layer Guardrails introduces a single versioned guardrail policy and enforcement contract across input, retrieval, tool/MCP, output, and operational boundaries. The policy is hashed for reproducibility and every violation carries a control ID, policy version, correlation ID, trace ID, span ID, action, and safe metadata.
 
 ## Enforcement layers
 

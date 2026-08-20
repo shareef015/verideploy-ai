@@ -1,4 +1,4 @@
-# Phase 12 Verification — PostgreSQL and pgvector Foundation
+# PostgreSQL and pgvector Foundation Verification
 
 Date: 2026-08-17
 Repository version: 0.12.0
@@ -7,7 +7,7 @@ Repository version: 0.12.0
 
 - Cumulative pytest: 117 passed, 2 skipped.
 - The 2 skipped tests are real PostgreSQL/pgvector integration tests guarded by TEST_POSTGRES_URL.
-- Phase 12 focused unit/config/Compose checks passed.
+- PostgreSQL pgvector Foundation focused unit/config/Compose checks passed.
 - Python compileall passed for src, services, workers, scripts, and tests.
 - Alembic offline upgrade SQL generation passed.
 - Alembic offline downgrade SQL generation passed.
@@ -17,7 +17,7 @@ Repository version: 0.12.0
 - Cumulative contract validation passed.
 - config/vector-index.json and docker-compose.yml parsed successfully.
 - 36 TypeScript/TSX source files syntax-transpiled successfully.
-- Phase 12 production-path TODO/FIXME/fake-success/placeholder scan passed.
+- PostgreSQL pgvector Foundation production-path TODO/FIXME/fake-success/placeholder scan passed.
 - Static key/private-key pattern scan passed.
 
 ## Not executed / not claimed as passed

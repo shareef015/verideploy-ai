@@ -1,6 +1,6 @@
-# Phase 77 — Agentic orchestration checkpoint
+# Agentic Orchestration Checkpoint
 
-Phase 77 hardens the existing VeriDeploy supervisor/planner/specialist-agent architecture rather than introducing a second graph runtime.
+Agentic Orchestration Checkpoint hardens the existing VeriDeploy supervisor/planner/specialist-agent architecture rather than introducing a second graph runtime.
 
 ## Protected orchestration paths
 

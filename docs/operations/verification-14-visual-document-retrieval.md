@@ -1,4 +1,4 @@
-# Phase 14 verification
+# Visual Document Retrieval Verification
 
 Run:
 
@@ -8,4 +8,4 @@ PYTHONPATH=src:. python scripts/benchmark_visual_retrieval.py
 PYTHONPATH=src:. alembic upgrade head --sql
 ```
 
-Live PostgreSQL verification additionally requires `TEST_POSTGRES_URL` and runs the Phase 12–14 integration suites. A ColPali runtime additionally requires compatible `transformers`, `torch`, model weights, and sufficient hardware; the default test suite never downloads model weights.
+Live PostgreSQL verification additionally requires `TEST_POSTGRES_URL` and runs the PostgreSQL pgvector Foundation–14 integration suites. A ColPali runtime additionally requires compatible `transformers`, `torch`, model weights, and sufficient hardware; the default test suite never downloads model weights.

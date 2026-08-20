@@ -1,10 +1,10 @@
-# Phase 12 — PostgreSQL and pgvector Foundation
+# PostgreSQL and pgvector Foundation
 
 ## Purpose
 
-Phase 12 establishes Alembic as the schema authority for the canonical PostgreSQL vector foundation. Application startup must not create these canonical tables. The browser and AI layers continue to depend on repositories; repositories depend on the shared `DatabaseManager`.
+PostgreSQL pgvector Foundation establishes Alembic as the schema authority for the canonical PostgreSQL vector foundation. Application startup must not create these canonical tables. The browser and AI layers continue to depend on repositories; repositories depend on the shared `DatabaseManager`.
 
-## Canonical Phase 12 tables
+## Canonical PostgreSQL pgvector Foundation tables
 
 - `tenants`
 - `embedding_models`
@@ -14,7 +14,7 @@ The earlier `embedding_cache` table remains a compatibility cache for the cumula
 
 ## Vector migration decision
 
-Revision `0001_phase12_pgvector` fixes the Phase 12 index at 3072 dimensions for the configured `text-embedding-3-large` binding. Runtime configuration is validated against `config/vector-index.json`. Changing model or dimensions requires a new migration, a new index version, and re-embedding; the existing HNSW index is never reused with incompatible dimensions.
+Revision `0001_phase12_pgvector` fixes the PostgreSQL pgvector Foundation index at 3072 dimensions for the configured `text-embedding-3-large` binding. Runtime configuration is validated against `config/vector-index.json`. Changing model or dimensions requires a new migration, a new index version, and re-embedding; the existing HNSW index is never reused with incompatible dimensions.
 
 ## Indexing
 

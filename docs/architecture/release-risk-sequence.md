@@ -1,4 +1,4 @@
-# Phase 2 Release-Risk Sequence
+# Release-Risk Sequence
 
 1. The authenticated browser submits release metadata and policy signals to `POST /api/v1/releases/risk-assessments`.
 2. NestJS validates the request and required identity/idempotency headers.
@@ -10,4 +10,4 @@
 8. The UI requests the authoritative status through NestJS; NestJS reads through the private Python service with tenant scope.
 9. The UI stops polling on `COMPLETED`, `FAILED`, or `CANCELLED`.
 
-The LLM does not author the numeric release score in Phase 2. This keeps the decision auditable and follows the master architecture requirement that model-derived reasoning must not secretly become the authoritative score.
+The LLM does not author the numeric release score in Release Risk Sequence. This keeps the decision auditable and follows the master architecture requirement that model-derived reasoning must not secretly become the authoritative score.

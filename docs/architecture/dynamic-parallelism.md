@@ -1,8 +1,8 @@
-# Phase 40 — Dynamic Parallelism
+# Dynamic Parallelism
 
 ## Goal
 
-Phase 40 adds planner-driven dynamic fan-out/fan-in to the durable LangGraph runtime while preserving the Phase 39 state/reducer guarantees. The acceptance requirement is that parallel execution lowers latency for independent work without allowing branch completion order to change final investigation state.
+Dynamic Parallelism adds planner-driven dynamic fan-out/fan-in to the durable LangGraph runtime while preserving the LangGraph State Reducers state/reducer guarantees. The acceptance requirement is that parallel execution lowers latency for independent work without allowing branch completion order to change final investigation state.
 
 ## Execution contract
 
@@ -16,7 +16,7 @@ Planner output is the authoritative set of branch tasks. `plan_to_langgraph_send
 
 ## Deterministic fan-in
 
-Wall-clock completion order is never used as reducer order. Results are sorted by `(source, task_id)` and only then reduced with the Phase 39 reducers:
+Wall-clock completion order is never used as reducer order. Results are sorted by `(source, task_id)` and only then reduced with the LangGraph State Reducers:
 
 - ordered unique append: completed nodes, evidence IDs, citation IDs, approval IDs, errors, runtime events;
 - deterministic deep map merge: node outputs and agent outputs;
@@ -30,7 +30,7 @@ A source timeout or exception is represented as a typed `ParallelTaskResult` wit
 
 ## Live node events
 
-Phase 40 reuses the durable Phase 18 `graph_runtime_events` stream rather than creating a second event store. `RuntimeParallelEventSink` emits:
+Dynamic Parallelism reuses the durable LangGraph Production Runtime `graph_runtime_events` stream rather than creating a second event store. `RuntimeParallelEventSink` emits:
 
 - `graph.parallel.plan.created`
 - `graph.parallel.node.started`
@@ -52,7 +52,7 @@ The final fan-in event includes the deterministic state-update SHA-256. Per-bran
 
 ## Persistence decision
 
-No new PostgreSQL table is required in Phase 40. Live branch events already persist in the Phase 18 runtime event table; canonical state/checkpoint history already persists through the official LangGraph checkpointer plus Phase 39 state snapshots. Adding another persistence authority would create duplicate workflow truth.
+No new PostgreSQL table is required in Dynamic Parallelism. Live branch events already persist in the LangGraph Production Runtime event table; canonical state/checkpoint history already persists through the official LangGraph checkpointer plus LangGraph State Reducers state snapshots. Adding another persistence authority would create duplicate workflow truth.
 
 ## Acceptance benchmark
 

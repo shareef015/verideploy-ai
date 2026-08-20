@@ -1,11 +1,11 @@
-# Phase 41 — Human-in-the-Loop Approval
+# Human-in-the-Loop Approval
 
 ## Purpose
-Phase 41 adds a durable, concurrency-safe human approval boundary for high-risk VeriDeploy actions. A high-risk production decision cannot become executable merely because an agent proposes it. The workflow must create a durable approval request, expose it to an eligible reviewer queue, record a signed decision event, and authorize graph resume only after the approval is terminal `approved`.
+Human in the Loop Approval adds a durable, concurrency-safe human approval boundary for high-risk VeriDeploy actions. A high-risk production decision cannot become executable merely because an agent proposes it. The workflow must create a durable approval request, expose it to an eligible reviewer queue, record a signed decision event, and authorize graph resume only after the approval is terminal `approved`.
 
 ## Flow
 1. Review policy evaluates risk score and risk class.
-2. `ApprovalRuntimeBridge.interrupt_for_review()` persists the approval request, changes the Phase 18 graph run to `WAITING_FOR_APPROVAL`, and appends `graph.approval.interrupted`.
+2. `ApprovalRuntimeBridge.interrupt_for_review()` persists the approval request, changes the LangGraph Production Runtime graph run to `WAITING_FOR_APPROVAL`, and appends `graph.approval.interrupted`.
 3. Reviewers consume the queue through Next.js → NestJS → private FastAPI.
 4. Approve, reject, request-change, delegation, and expiry transitions are versioned.
 5. Every transition produces an HMAC-SHA256 signed append-only audit event.

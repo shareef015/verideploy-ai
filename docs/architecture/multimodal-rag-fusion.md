@@ -1,8 +1,8 @@
-# Phase 15 — Multimodal RAG Fusion
+# Multimodal RAG Fusion
 
 ## Purpose
 
-Phase 15 introduces the deterministic evidence-fusion boundary between retrieval and later reasoning/agent phases. It does not query external runtime systems and it does not ask an LLM to invent evidence. Phase 13 supplies text/hybrid retrieval results, Phase 14 supplies visual page results, and authorized runtime evidence can be supplied through the same strict request contract until the dedicated runtime retrieval layer is implemented in Phase 22.
+Multimodal RAG Fusion introduces the deterministic evidence-fusion boundary between retrieval and later reasoning/agent phases. It does not query external runtime systems and it does not ask an LLM to invent evidence. Hybrid Retrieval supplies text/hybrid retrieval results, Visual Document Retrieval supplies visual page results, and authorized runtime evidence can be supplied through the same strict request contract until the dedicated runtime retrieval layer is implemented in Runtime Evidence Agent.
 
 ## Common evidence contract
 
@@ -12,7 +12,7 @@ Channels are `text`, `visual`, and `runtime`. Visual batches must carry an expli
 
 ## Fusion score
 
-The Phase 15 score is deterministic and inspectable:
+The Multimodal RAG Fusion score is deterministic and inspectable:
 
 `fusion_score = 0.75 * relevance_score + 0.25 * source_confidence`
 
@@ -39,4 +39,4 @@ Images are represented by safe internal image references; image bytes/Base64 are
 
 ## Scope boundary
 
-Phase 15 does not implement Prometheus/log/trace querying, reranking, self-corrective RAG, or final answer generation. Those remain in their dedicated later phases.
+Multimodal RAG Fusion does not implement Prometheus/log/trace querying, reranking, self-corrective RAG, or final answer generation. Those remain in their dedicated later phases.

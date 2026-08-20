@@ -1,4 +1,4 @@
-# Phase 43 Verification
+# NestJS Python Boundary Verification
 
 Run `make api-boundary-validate` and `pytest -q tests/unit/test_api_boundary.py`.
 

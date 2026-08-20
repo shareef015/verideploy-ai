@@ -1,4 +1,4 @@
-# Phase 43 — NestJS Public API and Python AI-Service Boundary
+# NestJS Public API and Python AI-Service Boundary
 
 ## Boundary
 Browser traffic terminates at Next.js/NestJS. The Python AI service is private network-only and exposes `/internal/v1/*` to trusted services. NestJS centralizes those calls in `PrivateAiClient`; direct module-level `fetch()` calls to Python are prohibited.

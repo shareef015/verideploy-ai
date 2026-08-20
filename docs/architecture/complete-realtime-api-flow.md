@@ -1,6 +1,6 @@
-# Phase 70 — Complete Real-Time API Flow
+# Complete Real-Time API Flow
 
-Phase 70 closes the production path for release-risk and incident-RCA workflows.
+Complete Realtime API Flow closes the production path for release-risk and incident-RCA workflows.
 
 `Browser -> NestJS -> Kafka command -> Python worker -> LangGraph workflow boundary -> persistence -> Kafka event -> Redis fan-out -> NestJS WebSocket/SSE -> browser reconciliation`
 

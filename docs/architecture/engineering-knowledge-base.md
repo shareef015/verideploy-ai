@@ -1,6 +1,6 @@
-# Phase 27 — Engineering Knowledge Base
+# Engineering Knowledge Base
 
-Phase 27 provides a deterministic, synthetic engineering knowledge corpus that feeds the existing VeriDeploy retrieval and embedding stack. The corpus is not an ad-hoc fixture directory: `data/knowledge/manifest.json` is the authority for document identity, category, labels, retrieval kind, tenant, service/environment scope, content hash, provenance URI, retention class, and synthetic lineage.
+Engineering Knowledge Base provides a deterministic, synthetic engineering knowledge corpus that feeds the existing VeriDeploy retrieval and embedding stack. The corpus is not an ad-hoc fixture directory: `data/knowledge/manifest.json` is the authority for document identity, category, labels, retrieval kind, tenant, service/environment scope, content hash, provenance URI, retention class, and synthetic lineage.
 
 ## Required coverage
 
@@ -8,7 +8,7 @@ The corpus contains one curated document for each required category: architectur
 
 ## Ingestion path
 
-`EngineeringKnowledgeCorpus` validates and loads the file-backed manifest. Deterministic chunk IDs are UUIDv5 values over document ID, ordinal, and chunk content SHA-256. `KnowledgeCorpusIngestor` then reuses `PostgresRetrievalCorpusWriter` for document/chunk upserts and can pass the same chunks to the Phase 11 `EmbeddingPipeline`. No Phase-27-only vector store or retrieval path exists.
+`EngineeringKnowledgeCorpus` validates and loads the file-backed manifest. Deterministic chunk IDs are UUIDv5 values over document ID, ordinal, and chunk content SHA-256. `KnowledgeCorpusIngestor` then reuses `PostgresRetrievalCorpusWriter` for document/chunk upserts and can pass the same chunks to the Embedding Pipeline `EmbeddingPipeline`. No dedicated vector store or retrieval path exists for this corpus alone.
 
 ## Lineage and provenance
 

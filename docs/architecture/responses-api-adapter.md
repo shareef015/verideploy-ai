@@ -1,22 +1,22 @@
-# Phase 8 — OpenAI Responses API Adapter
+# OpenAI Responses API Adapter
 
 ## Purpose
 
-Phase 8 turns the Phase 6/7 provider boundary into a complete OpenAI Responses API transport while keeping OpenAI-specific event types out of VeriDeploy business code.
+Responses API Adapter turns the OpenAI AI Gateway/7 provider boundary into a complete OpenAI Responses API transport while keeping OpenAI-specific event types out of VeriDeploy business code.
 
 ## Production boundary
 
 ```text
 agent / graph / domain service
-        -> AIRequest
-        -> AIGateway
-             -> routing + concurrency + budget
-             -> OpenAIProvider
-                  -> POST /v1/responses
-                  -> Responses stream events
-                  -> cancel response
-        -> normalized AIResult / AIStreamEvent
-        -> tenant-scoped response snapshot
+ -> AIRequest
+ -> AIGateway
+ -> routing + concurrency + budget
+ -> OpenAIProvider
+ -> POST /v1/responses
+ -> Responses stream events
+ -> cancel response
+ -> normalized AIResult / AIStreamEvent
+ -> tenant-scoped response snapshot
 ```
 
 The browser still never calls this private Python service directly.
@@ -34,7 +34,7 @@ The browser still never calls this private Python service directly.
 - background flag;
 - maximum output tokens and metadata.
 
-Phase 10 owns structured-output schemas and repair policy; Phase 8 does not implement that future scope.
+Structured Output Platform owns structured-output schemas and repair policy; Responses API Adapter does not implement that future scope.
 
 ## Unified output contract
 
@@ -62,7 +62,7 @@ The provider exposes the Responses cancel operation. Cancellation of an in-fligh
 
 ## Persistence
 
-The gateway can persist normalized response snapshots through `ResponsePersistence`. Phase 8 includes:
+The gateway can persist normalized response snapshots through `ResponsePersistence`. Responses API Adapter includes:
 
 - tenant-scoped in-memory persistence for deterministic tests;
 - SQLAlchemy-backed durable persistence for runtime use;
@@ -72,7 +72,7 @@ Later database phases consolidate this table into the canonical production schem
 
 ## Error mapping
 
-The Phase 6 taxonomy remains authoritative. OpenAI HTTP/SDK errors are normalized to authentication, permission, invalid request, rate limit, timeout, connection, provider unavailable, or unknown categories. Retry-After is captured when available.
+The OpenAI AI Gateway taxonomy remains authoritative. OpenAI HTTP/SDK errors are normalized to authentication, permission, invalid request, rate limit, timeout, connection, provider unavailable, or unknown categories. Retry-After is captured when available.
 
 ## Official implementation references
 

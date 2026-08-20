@@ -1,7 +1,7 @@
-# Phase 33 — PostgreSQL Performance and Reliability
+# PostgreSQL Performance and Reliability
 
 ## Scope
-Phase 33 preserves the Phase 32 schema semantics while adding bounded database resource use, targeted indexes, query telemetry, migration serialization, load gates, and recovery/HA operating assumptions.
+PostgreSQL Performance Reliability preserves the Complete RAG Operational Schema semantics while adding bounded database resource use, targeted indexes, query telemetry, migration serialization, load gates, and recovery/HA operating assumptions.
 
 ## Connection pooling and query budgets
 `DatabaseManager` uses SQLAlchemy pooling with `pool_pre_ping`, bounded pool size/overflow/wait, connection recycle, and LIFO reuse for PostgreSQL. Every tenant session applies transaction-local `statement_timeout`, `lock_timeout`, and `idle_in_transaction_session_timeout` plus `app.tenant_id`. Callers can provide a validated `QueryBudget` for a narrower operation-specific budget.
@@ -10,10 +10,10 @@ Phase 33 preserves the Phase 32 schema semantics while adding bounded database r
 SQLAlchemy cursor events measure execution duration. Queries crossing `DB_SLOW_QUERY_THRESHOLD_MS` are represented by a normalized SHA-256 SQL fingerprint, operation, duration, row count, and timestamp. Bind parameter values are not recorded. `database_query_telemetry` is append-oriented and RANGE partitioned by `observed_at`; its default partition exists to prevent rejected writes between managed monthly partitions.
 
 ## Partitioning decision
-Partitioning is justified only for the high-volume time-series query-telemetry stream. Existing releases, incidents, evidence, graph, and RAG tables retain their canonical identities because repartitioning them in Phase 33 would add foreign-key/RLS migration risk without measured evidence that they need partitioning. Operators can later add monthly telemetry partitions without changing application contracts.
+Partitioning is justified only for the high-volume time-series query-telemetry stream. Existing releases, incidents, evidence, graph, and RAG tables retain their canonical identities because repartitioning them in PostgreSQL Performance Reliability would add foreign-key/RLS migration risk without measured evidence that they need partitioning. Operators can later add monthly telemetry partitions without changing application contracts.
 
 ## Index strategy
-Phase 33 adds partial indexes for active incidents, investigations, ready jobs, unpublished outbox records, and pending reviews; composite indexes cover retrieval source/chunk order, graph relation/time queries, and evidence kind/time queries. These are workload-oriented rather than duplicating all existing indexes.
+PostgreSQL Performance Reliability adds partial indexes for active incidents, investigations, ready jobs, unpublished outbox records, and pending reviews; composite indexes cover retrieval source/chunk order, graph relation/time queries, and evidence kind/time queries. These are workload-oriented rather than duplicating all existing indexes.
 
 ## Migration reliability
 Online Alembic execution is serialized with a PostgreSQL advisory lock acquired through `pg_try_advisory_lock`. Acquisition is bounded by `DB_MIGRATION_LOCK_TIMEOUT_SECONDS`; failure aborts the migration rather than running concurrently.

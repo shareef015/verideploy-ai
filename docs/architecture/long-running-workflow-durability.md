@@ -1,6 +1,6 @@
-# Phase 42 — Long-Running Workflow Durability
+# Long-Running Workflow Durability
 
-Phase 42 adds a lease-backed durability control plane around the existing Phase 18 LangGraph runtime. It does not replace LangGraph checkpoints, Phase 39 state snapshots, or Phase 41 approval interrupts.
+Long Running Workflow Durability adds a lease-backed durability control plane around the existing LangGraph Production Runtime LangGraph runtime. It does not replace LangGraph checkpoints, LangGraph State Reducers state snapshots, or Human in the Loop Approval interrupts.
 
 ## Authorities
 
@@ -8,7 +8,7 @@ Phase 42 adds a lease-backed durability control plane around the existing Phase 
 - `graph_runs` and `graph_runtime_events`: runtime lifecycle/event authority.
 - `graph_state_snapshots`: versioned state/replay audit authority.
 - `approval_requests`: high-risk human approval authority.
-- Phase 42 workflow tables: worker ownership, idempotent step state, recovery and durability event authority.
+- Long Running Workflow Durability workflow tables: worker ownership, idempotent step state, recovery and durability event authority.
 
 ## Lease ownership
 
