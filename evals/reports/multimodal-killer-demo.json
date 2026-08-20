@@ -1,9 +1,9 @@
 {
-  "phase": 74,
-  "gate": "pass",
-  "synthetic": true,
-  "evidence_count": 7,
   "citation_count": 7,
+  "critic_status": "SUPPORTED_WITH_ALTERNATIVE_CHECK",
+  "estimated_cost_usd": 0.084,
+  "evidence_count": 7,
+  "gate": "pass",
   "graph_nodes": [
     "evidence_ingestion",
     "multimodal_extraction",
@@ -13,9 +13,8 @@
     "decision_policy",
     "human_review_gate"
   ],
-  "critic_status": "SUPPORTED_WITH_ALTERNATIVE_CHECK",
-  "review_status": "pending",
+  "issues": [],
   "latency_budget_ms": 2500,
-  "estimated_cost_usd": 0.084,
-  "issues": []
+  "review_status": "pending",
+  "synthetic": true
 }

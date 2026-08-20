@@ -24,7 +24,7 @@ class KnowledgeIngestionResult:
 
 
 class KnowledgeCorpusIngestor:
-    """Idempotently materialize a validated Phase 27 corpus into the existing retrieval stack."""
+    """Idempotently materialize a validated Engineering Knowledge Base corpus into the existing retrieval stack."""
 
     def __init__(
         self,

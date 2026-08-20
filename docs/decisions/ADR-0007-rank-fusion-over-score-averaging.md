@@ -1,7 +1,7 @@
 # ADR-0007 — Use Reciprocal Rank Fusion for lexical + dense retrieval
 
 ## Status
-Accepted in Phase 13.
+Accepted
 
 ## Decision
 Use Reciprocal Rank Fusion (RRF) as the authoritative hybrid ranking mechanism. Keep per-channel normalized scores only for diagnostics and explainability.
@@ -12,4 +12,4 @@ PostgreSQL text-search relevance and pgvector cosine distance are not calibrated
 ## Consequences
 - Fusion is insensitive to arbitrary raw-score scale differences.
 - Ranking decisions remain auditable.
-- Later rerankers can operate on the fused candidate set without changing the Phase 13 channel contracts.
+- Later rerankers can operate on the fused candidate set without changing the Hybrid Retrieval channel contracts.

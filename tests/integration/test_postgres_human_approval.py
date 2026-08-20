@@ -17,7 +17,7 @@ from verideploy.approvals.signing import ApprovalAuditSigner
 from verideploy.database.session import DatabaseManager
 
 URL=os.getenv("TEST_POSTGRES_URL")
-pytestmark=pytest.mark.skipif(not URL, reason="TEST_POSTGRES_URL is required for Phase 41 PostgreSQL approval tests")
+pytestmark=pytest.mark.skipif(not URL, reason="TEST_POSTGRES_URL is required for PostgreSQL approval tests")
 
 
 def _sync(url:str)->str:

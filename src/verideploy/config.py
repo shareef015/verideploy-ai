@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     internal_service_auth_max_skew_seconds: int = Field(default=60, ge=5, le=600)
     database_url: str = "postgresql+psycopg://verideploy:verideploy@postgres:5432/verideploy"
     redis_url: str = "redis://redis:6379/0"
-    # Phase 64 — multi-layer caching. Production must use Redis and encrypted sensitive layers.
+    # Multi Layer Caching — multi-layer caching. Production must use Redis and encrypted sensitive layers.
     cache_backend: Literal["memory", "redis"] = "redis"
     cache_policy_path: str = "config/cache/policy.json"
     cache_encryption_secret: SecretStr | None = None
@@ -103,7 +103,7 @@ class Settings(BaseSettings):
     integration_backoff_base_seconds: float = Field(default=0.25, ge=0, le=10)
     integration_max_retry_delay_seconds: float = Field(default=60.0, ge=0, le=600)
 
-    # Phase 50 — OpenTelemetry across all services.
+    # OpenTelemetry Across All Services — OpenTelemetry across all services.
     otel_enabled: bool = False
     otel_exporter_otlp_endpoint: str = "http://otel-collector:4317"
     otel_exporter_otlp_insecure: bool = True
@@ -112,7 +112,7 @@ class Settings(BaseSettings):
     otel_traces_sampler_arg: float = Field(default=1.0, ge=0, le=1)
     otel_browser_exporter_url: str = "http://localhost:4318/v1/traces"
 
-    # Phase 49 — LangSmith integration (observability only).
+    # LangSmith Integration — LangSmith integration (observability only).
     langsmith_enabled: bool = False
     langsmith_api_key: SecretStr | None = None
     langsmith_endpoint: str = "https://api.smith.langchain.com"
@@ -196,7 +196,7 @@ class Settings(BaseSettings):
     approval_default_expiry_seconds: int = Field(default=3600, ge=60, le=604800)
     approval_signing_secret: SecretStr | None = None
 
-    # Phase 69 — environment, secrets, and configuration management.
+    # Environment Secrets Configuration Management — environment, secrets, and configuration management.
     environment_manifest_path: str = "config/environments/manifest.json"
     external_secret_provider: Literal["aws-sm", "azure-kv", "gcp-sm", "vault", "k8s-secret", "none"] = "none"
     config_kms_key_ref: str | None = None

@@ -2,7 +2,7 @@
 
 ## Decision
 
-`VisualEvidenceAgent` composes Phase 14 visual retrieval with Phase 9 secure image intelligence. It does not directly call remote image URLs, create a second visual index, or treat retrieval score as observed evidence.
+`VisualEvidenceAgent` composes Visual Document Retrieval visual retrieval with Image Intelligence Layer secure image intelligence. It does not directly call remote image URLs, create a second visual index, or treat retrieval score as observed evidence.
 
 ## Rationale
 
@@ -10,4 +10,4 @@ Retrieval and visual interpretation answer different questions. Retrieval identi
 
 ## Security
 
-Only indexed image paths are accepted by the production adapter. The exact indexed SHA-256 must match before analysis. Trusted document scope cannot be broadened by model output. Embedded text remains untrusted evidence under the Phase 9 prompt-injection boundary.
+Only indexed image paths are accepted by the production adapter. The exact indexed SHA-256 must match before analysis. Trusted document scope cannot be broadened by model output. Embedded text remains untrusted evidence under the Image Intelligence Layer prompt-injection boundary.

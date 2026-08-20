@@ -48,23 +48,23 @@ def build_prompt_registry(root: str | Path = ".") -> PromptRegistry:
     registry = PromptRegistry()
     for name in ("supervisor", "planner", "github"):
         registry.register_file(name=name, version="1.0.0", path=root / "prompts" / name / "v1.0.0.txt")
-    # Phase 20 extends routing/planning without mutating historical prompt versions.
+    # RAG Agent extends routing/planning without mutating historical prompt versions.
     registry.register_file(name="supervisor", version="1.1.0", path=root / "prompts" / "supervisor" / "v1.1.0.txt")
     registry.register_file(name="planner", version="1.1.0", path=root / "prompts" / "planner" / "v1.1.0.txt")
     registry.register_file(name="rag", version="1.0.0", path=root / "prompts" / "rag" / "v1.0.0.txt")
-    # Phase 21 extends routing/planning without mutating earlier prompt versions.
+    # Visual Evidence Agent extends routing/planning without mutating earlier prompt versions.
     registry.register_file(name="supervisor", version="1.2.0", path=root / "prompts" / "supervisor" / "v1.2.0.txt")
     registry.register_file(name="planner", version="1.2.0", path=root / "prompts" / "planner" / "v1.2.0.txt")
     registry.register_file(name="visual_evidence", version="1.0.0", path=root / "prompts" / "visual_evidence" / "v1.0.0.txt")
-    # Phase 22 adds runtime evidence without mutating earlier prompt versions.
+    # Runtime Evidence Agent adds runtime evidence without mutating earlier prompt versions.
     registry.register_file(name="supervisor", version="1.3.0", path=root / "prompts" / "supervisor" / "v1.3.0.txt")
     registry.register_file(name="planner", version="1.3.0", path=root / "prompts" / "planner" / "v1.3.0.txt")
     registry.register_file(name="runtime_evidence", version="1.0.0", path=root / "prompts" / "runtime_evidence" / "v1.0.0.txt")
-    # Phase 23 adds RCA without mutating earlier prompt versions.
+    # RCA Agent adds RCA without mutating earlier prompt versions.
     registry.register_file(name="supervisor", version="1.4.0", path=root / "prompts" / "supervisor" / "v1.4.0.txt")
     registry.register_file(name="planner", version="1.4.0", path=root / "prompts" / "planner" / "v1.4.0.txt")
     registry.register_file(name="rca", version="1.0.0", path=root / "prompts" / "rca" / "v1.0.0.txt")
-    # Phase 24 adds critic validation without mutating earlier prompt versions.
+    # Critic Agent adds critic validation without mutating earlier prompt versions.
     registry.register_file(name="supervisor", version="1.5.0", path=root / "prompts" / "supervisor" / "v1.5.0.txt")
     registry.register_file(name="planner", version="1.5.0", path=root / "prompts" / "planner" / "v1.5.0.txt")
     registry.register_file(name="critic", version="1.0.0", path=root / "prompts" / "critic" / "v1.0.0.txt")

@@ -2,11 +2,11 @@
 
 ## Decision
 
-Phase 24 extracts claims deterministically from the typed Phase 23 RCA result instead of asking another LLM to paraphrase the RCA. Citation entailment and contradiction checks are deterministic and evidence-bound. A bounded read-only retrieval path may add supporting evidence when a claim is weak, but it may not broaden trusted tenant/service/environment scope.
+Critic Agent extracts claims deterministically from the typed RCA Agent RCA result instead of asking another LLM to paraphrase the RCA. Citation entailment and contradiction checks are deterministic and evidence-bound. A bounded read-only retrieval path may add supporting evidence when a claim is weak, but it may not broaden trusted tenant/service/environment scope.
 
 ## Rationale
 
-A model-based critic that first rewrites the RCA can introduce a second hallucination surface. Deterministic claim extraction ensures the critic evaluates exactly what Phase 23 asserted. The lexical entailment gate is intentionally conservative and auditable; later evaluation phases can calibrate or replace it without changing the agent contract.
+A model-based critic that first rewrites the RCA can introduce a second hallucination surface. Deterministic claim extraction ensures the critic evaluates exactly what RCA Agent asserted. The lexical entailment gate is intentionally conservative and auditable; later evaluation phases can calibrate or replace it without changing the agent contract.
 
 ## Consequences
 

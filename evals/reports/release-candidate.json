@@ -1,8 +1,7 @@
 {
-  "phase": 80,
   "release": "0.80.0",
-  "status": "RC_READY_FOR_CI",
-  "critical_failures": 0,
+  "status": "FAIL",
+  "critical_failures": 1,
   "ci_browser_required": true,
   "gates": [
     {
@@ -75,11 +74,11 @@
     },
     {
       "name": "regression",
-      "status": "PASS",
+      "status": "FAIL",
       "evidence": [
         "artifacts/release-candidate/pytest-summary.json"
       ],
-      "detail": "required evidence present"
+      "detail": "required evidence missing"
     }
   ]
 }

@@ -306,7 +306,6 @@
     "unsupported_claim_rate": 0.003
   },
   "passed": true,
-  "phase": 57,
   "thresholds": {
     "abstention_quality": 0.98,
     "authorization_boundary_correctness": 0.99,

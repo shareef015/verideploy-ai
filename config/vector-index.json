@@ -1,5 +1,5 @@
 {
-  "index_version": "phase12-v1",
+  "index_version": "v1",
   "embedding_model": "text-embedding-3-large",
   "dimensions": 3072,
   "distance": "cosine",

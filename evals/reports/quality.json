@@ -9,7 +9,7 @@
     "retrieval": 100,
     "visual": 60
   },
-  "dataset_path": "evals/datasets/verideploy-500/v1.jsonl",
+  "dataset_path": "evals\\datasets\\verideploy-500\\v1.jsonl",
   "issues": [],
   "passed": true,
   "unique_case_ids": 500,

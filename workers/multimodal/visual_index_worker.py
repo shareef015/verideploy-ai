@@ -12,7 +12,7 @@ class VisualIndexCommand:
     pdf_bytes: bytes
 
 class VisualIndexWorker:
-    """Transport-independent Phase 14 worker. Object-store transport supplies authorized PDF bytes."""
+    """Transport-independent Visual Document Retrieval worker. Object-store transport supplies authorized PDF bytes."""
     def __init__(self, service: VisualDocumentService) -> None: self.service=service
     def handle(self, command: VisualIndexCommand) -> dict[str, object]:
         pages,indexes=self.service.index_pdf(tenant_id=command.tenant_id,document_id=command.document_id,source_key=command.source_key,title=command.title,pdf_bytes=command.pdf_bytes)

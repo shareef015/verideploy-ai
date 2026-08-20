@@ -72,7 +72,6 @@
   },
   "ocr_free_reasoning": true,
   "passed": true,
-  "phase": 58,
   "synthetic_multimodal_profile": true,
   "thresholds": {
     "aggregate_score": 0.97,

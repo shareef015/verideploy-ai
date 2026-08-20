@@ -10,7 +10,7 @@ from verideploy.graphs.parallel import DynamicParallelExecutor, ParallelPlan, Pa
 class Planner:
     def __init__(self, tasks, concurrency):
         self.value = ParallelPlan.deterministic(
-            planner_version="phase40-validation-planner-v1",
+            planner_version="validation-planner-v1",
             tasks=tasks,
             requested_concurrency=concurrency,
             minimum_successes=len(tasks),
@@ -44,7 +44,7 @@ async def run_with(delays: dict[str, float], concurrency: int):
         max_tasks=8,
         default_deadline_seconds=1.0,
         max_deadline_seconds=1.0,
-    ).execute({"investigation_id": "phase40-validation"})
+    ).execute({"investigation_id": "validation"})
 
 
 async def main() -> int:

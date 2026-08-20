@@ -6,7 +6,7 @@ from verideploy.topology.service import TopologyService
 
 settings=get_settings()
 if not settings.database_url.startswith("postgresql"):
-    raise SystemExit("Phase 28 topology persistence requires PostgreSQL")
+    raise SystemExit("topology persistence requires PostgreSQL")
 db=DatabaseManager(settings.database_url,pool_size=settings.db_pool_size,max_overflow=settings.db_max_overflow,pool_timeout_seconds=settings.db_pool_timeout_seconds)
 try:
     snapshot=TopologyService(PostgresTopologyRepository(db)).seed(build_nexuspay_topology())

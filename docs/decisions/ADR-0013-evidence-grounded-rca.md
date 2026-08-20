@@ -1,7 +1,7 @@
 # ADR-0013 — Evidence-grounded RCA over free-form causal prose
 
 ## Status
-Accepted — Phase 23.
+Accepted
 
 ## Decision
 RCA generation is split into two layers: the model proposes a strict ranked hypothesis structure, and deterministic application code validates references and computes support, contradiction, temporal, causal, and adjusted-confidence measures.
@@ -13,4 +13,4 @@ A language model can be useful for proposing causal explanations but must not be
 - RCA cannot cite evidence outside the supplied tenant-scoped evidence set.
 - Root-cause determination is conservative and may return `false` even when the model proposed a root cause.
 - Recommended tests are not executed in this phase.
-- Phase 24 can critique a typed, evidence-linked RCA rather than parsing prose.
+- Critic Agent can critique a typed, evidence-linked RCA rather than parsing prose.

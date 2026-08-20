@@ -28,7 +28,7 @@ worker:
 ingestion-worker:
 	PYTHONPATH=src:. uv run python -m workers.ingestion.ingestion_main
 embedding-worker:
-	@echo "Phase 11 embedding worker is transport-ready; invoke workers.embedding.embedding_worker.EmbeddingWorker from the Kafka runtime adapter."
+	@echo "Embedding worker is transport-ready; invoke workers.embedding.embedding_worker.EmbeddingWorker from the Kafka runtime adapter."
 video-worker:
 	PYTHONPATH=src:. python -m workers.multimodal.video_evidence_main
 
@@ -55,7 +55,7 @@ typecheck:
 	uv run mypy src services workers
 	pnpm typecheck
 demo:
-	@echo "Cumulative Phase 4 demo: start stack with 'make up' and open http://localhost:3000/evidence"
+	@echo "Demo: start stack with 'make up' and open http://localhost:3000/evidence"
 
 critic-benchmark:
 	PYTHONPATH=src python scripts/benchmark_critic.py

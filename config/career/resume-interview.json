@@ -1,5 +1,4 @@
 {
-  "phase": 84,
   "release": "0.84.0",
   "policy": {
     "forbid_unmeasured_numeric_facts": true,
@@ -8,7 +7,7 @@
     "require_qualifiers_for_nonproduction_measurements": true
   },
   "metrics": [
-    {"id":"rc_regression_passed","source":"evals/reports/release-candidate-benchmarks.json","path":"regression.passed","format":"integer","qualifier":"measured in Phase 80 local release-candidate run"},
+    {"id":"rc_regression_passed","source":"evals/reports/release-candidate-benchmarks.json","path":"regression.passed","format":"integer","qualifier":"measured in a local release-candidate run"},
     {"id":"coverage_percent","source":"evals/reports/release-candidate-benchmarks.json","path":"coverage.measured_percent","format":"percent_2","qualifier":"Python statement coverage measured by the release-candidate gate"},
     {"id":"mutation_killed","source":"evals/reports/release-candidate-benchmarks.json","path":"mutation_tests.killed","format":"integer","qualifier":"critical mutation probes killed"},
     {"id":"mutation_total","source":"evals/reports/release-candidate-benchmarks.json","path":"mutation_tests.total","format":"integer","qualifier":"critical mutation probes executed"},
@@ -18,7 +17,7 @@
     {"id":"agent_score","source":"evals/reports/release-candidate-benchmarks.json","path":"agent_checkpoint.aggregate_score","format":"decimal_2","qualifier":"three deterministic orchestration scenarios"},
     {"id":"agent_scenarios","source":"evals/reports/release-candidate-benchmarks.json","path":"agent_checkpoint.scenario_count","format":"integer","qualifier":"deterministic orchestration checkpoint scenarios"},
     {"id":"multimodal_traceability","source":"evals/reports/release-candidate-benchmarks.json","path":"multimodal_checkpoint.clean_traceability","format":"percent_0","qualifier":"deterministic multimodal checkpoint"},
-    {"id":"security_critical_findings","source":"evals/reports/release-candidate-benchmarks.json","path":"security.critical_findings","format":"integer","qualifier":"Phase 80 aggregated security evidence"},
+    {"id":"security_critical_findings","source":"evals/reports/release-candidate-benchmarks.json","path":"security.critical_findings","format":"integer","qualifier":"aggregated security evidence"},
     {"id":"operations_domains","source":"evals/reports/production-operations.json","path":"domains_checked","format":"integer","qualifier":"operational readiness domains"},
     {"id":"operations_critical_gaps","source":"evals/reports/production-operations.json","path":"critical_gaps","format":"integer","qualifier":"operational readiness review"},
     {"id":"architecture_nodes","source":"evals/reports/final-production-architecture.json","path":"node_count","format":"integer","qualifier":"validated production topology model"},
@@ -51,13 +50,13 @@
     },
     {
       "id":"quality_security",
-      "template":"Established release-candidate quality gates with {rc_regression_passed} passing regression tests, {coverage_percent} Python coverage, {mutation_killed}/{mutation_total} critical mutation probes killed, and {security_critical_findings} critical security findings in the aggregated Phase 80 evidence.",
+      "template":"Established release-candidate quality gates with {rc_regression_passed} passing regression tests, {coverage_percent} Python coverage, {mutation_killed}/{mutation_total} critical mutation probes killed, and {security_critical_findings} critical security findings in the aggregated release-candidate evidence.",
       "metrics":["rc_regression_passed","coverage_percent","mutation_killed","mutation_total","security_critical_findings"],
       "evidence":["evals/reports/release-candidate-benchmarks.json"]
     },
     {
       "id":"multimodal_operations",
-      "template":"Hardened multimodal evidence processing and production operations with {multimodal_traceability} clean-path traceability, {operations_domains} readiness domains reviewed, and {operations_critical_gaps} critical operational gaps in the Phase 79 review.",
+      "template":"Hardened multimodal evidence processing and production operations with {multimodal_traceability} clean-path traceability, {operations_domains} readiness domains reviewed, and {operations_critical_gaps} critical operational gaps in the production-operations review.",
       "metrics":["multimodal_traceability","operations_domains","operations_critical_gaps"],
       "evidence":["evals/reports/multimodal-integration.json","evals/reports/production-operations.json"]
     },
@@ -85,7 +84,7 @@
       "situation":"Architecture-integrity review found an earlier demo-era reviewer fallback inside the production approval boundary.",
       "task":"Ensure consequential approval reads and decisions use authenticated production identity and role context.",
       "action":"Removed demo reviewer fallbacks and required gateway user/role context, while retaining dry-run and human-approval safety controls.",
-      "result_template":"The Phase 81 architecture-integrity report completed with no recorded findings after the production boundary was hardened.",
+      "result_template":"The architecture-integrity report completed with no recorded findings after the production boundary was hardened.",
       "metrics":[],
       "evidence":["docs/architecture/scope-control-architecture-integrity.md","evals/reports/scope-architecture-integrity.json","apps/gateway/src/approvals/approvals.controller.ts"]
     },
@@ -105,7 +104,7 @@
       "situation":"A large multi-service portfolio can drift when diagrams, release metadata, Helm images, and actual service boundaries are maintained independently.",
       "task":"Make the documented architecture verifiably match deployed topology and data flows.",
       "action":"Created one machine-readable topology model and generated/validated diagrams, workload versions, Compose services, security boundaries, and runtime paths from it.",
-      "result_template":"The final topology validates {architecture_nodes} nodes and {architecture_flows} data-flow edges with no findings in the Phase 82 report.",
+      "result_template":"The final topology validates {architecture_nodes} nodes and {architecture_flows} data-flow edges with no findings in the production architecture report.",
       "metrics":["architecture_nodes","architecture_flows"],
       "evidence":["config/architecture/production-topology.json","evals/reports/final-production-architecture.json","docs/architecture/final-production-technology-architecture.md"]
     }

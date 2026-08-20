@@ -17,4 +17,4 @@ VeriDeploy routes workloads to stable logical roles (`fast`, `standard`, `reason
 - policy and cost changes are reviewable configuration changes;
 - production cannot start with unresolved roles;
 - production rejects unpriced configured models by default;
-- callers may still use the Phase 6 explicit-model compatibility path only when no router is installed; normal production execution uses the router.
+- callers may still use the OpenAI AI Gateway explicit-model compatibility path only when no router is installed; normal production execution uses the router.

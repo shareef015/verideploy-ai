@@ -2,7 +2,7 @@
 
 ## Decision
 
-Use a checked-in, versioned manifest as the authority for the Phase 27 synthetic engineering corpus. Keep source Markdown human-readable, but require cryptographic hashes, deterministic IDs, explicit provenance, labels, retention classes, and synthetic lineage before ingestion.
+Use a checked-in, versioned manifest as the authority for the Engineering Knowledge Base synthetic engineering corpus. Keep source Markdown human-readable, but require cryptographic hashes, deterministic IDs, explicit provenance, labels, retention classes, and synthetic lineage before ingestion.
 
 ## Rationale
 
@@ -10,4 +10,4 @@ A loose fixture folder cannot prove which documents were indexed, whether conten
 
 ## Consequences
 
-Content changes require a manifest hash update and corpus-version review. Corpus ingestion reuses the existing retrieval/embedding contracts. Real customer or production documents are outside Phase 27 and must enter through authorized ingestion paths with appropriate governance.
+Content changes require a manifest hash update and corpus-version review. Corpus ingestion reuses the existing retrieval/embedding contracts. Real customer or production documents are outside Engineering Knowledge Base and must enter through authorized ingestion paths with appropriate governance.

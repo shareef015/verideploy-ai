@@ -97,7 +97,6 @@ def validate() -> dict[str, Any]:
     if not zone.passed: findings.append("single zone failure drill failed")
 
     result = {
-        "phase": 66,
         "chart_version": chart.get("version"),
         "workloads": sorted(workloads),
         "single_pod_failure": {"passed": pod.passed, "workloads": dict(pod.workload_results)},

@@ -16,7 +16,7 @@ checks["no_frontend_simulation"]=has("apps/web/app/(platform)/agent-execution/pa
 checks["browser_boundary"]="/internal/v1" not in (ROOT/"apps/web/app/(platform)/agent-execution/page.tsx").read_text()
 checks["public_contract"]=has("contracts/openapi/gateway.yaml","version: 0.47.0","/agent-execution/{runId}:","streamAgentExecutionEvents") and "/internal/v1" not in (ROOT/"contracts/openapi/gateway.yaml").read_text()
 checks["navigation"]=has("apps/web/components/shell/app-shell.tsx","Agent Execution","/agent-execution")
-checks["no_phase47_table"]=not list((ROOT/"src/verideploy/database/migrations/versions").glob("*phase47*"))
+checks["no_dedicated_migration_table"]=not list((ROOT/"src/verideploy/database/migrations/versions").glob("*phase47*"))
 checks["version"]=(ROOT/"src/verideploy/__init__.py").read_text().strip()=='__version__ = "0.47.0"'
 result={"valid":all(checks.values()),"passed":sum(checks.values()),"total":len(checks),"checks":checks}
 print(json.dumps(result,indent=2));(ROOT/"artifacts/agent-execution-validation.json").write_text(json.dumps(result,indent=2)+"\n")

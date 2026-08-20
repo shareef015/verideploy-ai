@@ -17,4 +17,4 @@ Vector stores require fixed dimensionality. Silent drift can make indexes unusab
 - Every returned vector is dimension-checked before persistence.
 - Existing cached vectors remain addressable by model/dimension/version.
 - Re-embedding is explicit and auditable.
-- Phase 12 may bind this contract to pgvector schema/index migrations without changing Phase 11 callers.
+- PostgreSQL pgvector Foundation may bind this contract to pgvector schema/index migrations without changing Embedding Pipeline callers.

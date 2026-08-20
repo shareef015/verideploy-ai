@@ -7,7 +7,7 @@ def test_gate_passes():
     r=validate_recruiter_package(ROOT); assert r['gate']=='pass', r['findings']; assert r['screenshots']==3
 
 def test_root_readme_is_current_and_dual_audience():
-    t=(ROOT/'README.md').read_text(); assert 'Phase 85' in t and '0.85.0' in t
+    t=(ROOT/'README.md').read_text(); assert '0.86.0' in t
     for s in ['What VeriDeploy AI Does','Measured Engineering Evidence','Known Limitations','Interview Walkthrough','Repository Guide']: assert f'## {s}' in t
     assert 'more than an llm wrapper' in t.lower()
 

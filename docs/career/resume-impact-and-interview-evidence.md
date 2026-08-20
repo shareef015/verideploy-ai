@@ -1,4 +1,4 @@
-# VeriDeploy AI â€” Resume Impact and Interview Evidence
+# VeriDeploy AI — Resume Impact and Interview Evidence
 
 All numeric claims below are rendered from measured repository evidence. Qualifiers are preserved for synthetic, estimated, CI-only, or in-process measurements.
 
@@ -7,8 +7,8 @@ All numeric claims below are rendered from measured repository evidence. Qualifi
 - Built VeriDeploy AI as an evidence-driven release assurance and incident intelligence platform with 15 validated production architecture nodes and 19 validated data-flow edges across Next.js, NestJS, Kafka, Python AI services, persistence, security, and observability.
 - Engineered hybrid RAG with keyword, dense, visual, reranking, metadata filters, citations, and caching; the deterministic clean-index checkpoint achieved 100% Hybrid Recall@5, 1.00 Hybrid MRR, and an 87.5% warmed-cache hit ratio.
 - Implemented supervisor/planner/specialist-agent orchestration with fan-out/fan-in, retries, critic correction, durable recovery, and human approval; 3 deterministic scenarios achieved an aggregate path score of 1.00.
-- Established release-candidate quality gates with 700 passing regression tests, 87.32% Python coverage, 4/4 critical mutation probes killed, and 0 critical security findings in the aggregated Evaluation Release Candidate Checkpoint evidence.
-- Hardened multimodal evidence processing and production operations with 100% clean-path traceability, 10 readiness domains reviewed, and 0 critical operational gaps in the Production Operations Checkpoint review.
+- Established release-candidate quality gates with 700 passing regression tests, 87.32% Python coverage, 4/4 critical mutation probes killed, and 0 critical security findings in the aggregated release-candidate evidence.
+- Hardened multimodal evidence processing and production operations with 100% clean-path traceability, 10 readiness domains reviewed, and 0 critical operational gaps in the production-operations review.
 - Mapped 14 AI-engineering skill claims to code plus verification evidence, including Python, TypeScript, OpenAI, RAG, LangGraph, MCP, multimodal AI, real-time systems, evaluation, LLMOps, security, and cloud-native engineering.
 
 ## STAR stories
@@ -23,7 +23,7 @@ All numeric claims below are rendered from measured repository evidence. Qualifi
 - **Situation:** Architecture-integrity review found an earlier demo-era reviewer fallback inside the production approval boundary.
 - **Task:** Ensure consequential approval reads and decisions use authenticated production identity and role context.
 - **Action:** Removed demo reviewer fallbacks and required gateway user/role context, while retaining dry-run and human-approval safety controls.
-- **Result:** The Scope Control Architecture Integrity architecture-integrity report completed with no recorded findings after the production boundary was hardened.
+- **Result:** The architecture-integrity report completed with no recorded findings after the production boundary was hardened.
 
 ### Designed bounded multimodal degradation
 - **Situation:** Large multimodal investigations must remain traceable when an extractor fails instead of silently dropping evidence or exhausting resources.
@@ -35,7 +35,7 @@ All numeric claims below are rendered from measured repository evidence. Qualifi
 - **Situation:** A large multi-service portfolio can drift when diagrams, release metadata, Helm images, and actual service boundaries are maintained independently.
 - **Task:** Make the documented architecture verifiably match deployed topology and data flows.
 - **Action:** Created one machine-readable topology model and generated/validated diagrams, workload versions, Compose services, security boundaries, and runtime paths from it.
-- **Result:** The final topology validates 15 nodes and 19 data-flow edges with no findings in the Final Production Technology Architecture report.
+- **Result:** The final topology validates 15 nodes and 19 data-flow edges with no findings in the production architecture report.
 
 ## Trade-offs
 

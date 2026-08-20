@@ -9,7 +9,7 @@ The investigation planner needs to fan out to independent evidence sources to re
 ## Decision
 Use one typed `ParallelPlan` as the fan-out contract and execute it under centrally configured task-count, concurrency, and deadline ceilings. Translate the same plan to LangGraph `Send` objects when native dynamic routing is used. Represent every branch completion, timeout, and failure explicitly.
 
-Fan-in must ignore completion order. Completed results are sorted by `(source, task_id)` and reduced only through the Phase 39 deterministic reducers. Branches may update only reducer-safe fields. Incompatible writes fail closed.
+Fan-in must ignore completion order. Completed results are sorted by `(source, task_id)` and reduced only through the LangGraph State Reducers deterministic reducers. Branches may update only reducer-safe fields. Incompatible writes fail closed.
 
 Partial completion is valid when successful branch results remain useful. It is represented explicitly through result counts, `partial_completion`, and `minimum_successes_met`; no failed branch may inject partial state.
 

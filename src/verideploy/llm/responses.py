@@ -22,7 +22,7 @@ class AIInputImage(BaseModel):
         if (self.image_url is None) == (self.file_id is None):
             raise ValueError("input_image requires exactly one of image_url or file_id")
         if self.image_url is not None and not self.image_url.startswith("data:image/"):
-            raise ValueError("VeriDeploy image inputs accept only sanitized data URLs in Phase 9")
+            raise ValueError("VeriDeploy image inputs accept only sanitized data URLs")
         return self
 
 

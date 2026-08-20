@@ -2,7 +2,7 @@
 
 ## Decision
 
-Represent the Phase 28 synthetic company topology as a deterministic, normalized, tenant-scoped graph with stable UUIDv5 identities and a canonical seed SHA-256. Persist the exact validated snapshot to PostgreSQL and expose it through the existing Next.js → NestJS → private FastAPI boundary.
+Represent the NexusPay Service Topology synthetic company topology as a deterministic, normalized, tenant-scoped graph with stable UUIDv5 identities and a canonical seed SHA-256. Persist the exact validated snapshot to PostgreSQL and expose it through the existing Next.js → NestJS → private FastAPI boundary.
 
 ## Why
 

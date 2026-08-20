@@ -1,5 +1,4 @@
 {
-  "phase": 68,
   "offline_validation": true,
   "dependency_snapshot": {
     "node": {
@@ -42,29 +41,29 @@
   },
   "artifact_manifest": {
     "schema_version": 1,
-    "release_version": "0.68.0",
+    "release_version": "0.86.0",
     "provenance": {
-      "git_commit": "UNAVAILABLE_OFFLINE_ARCHIVE",
+      "git_commit": "d37f9f74c908391e417d6c05af24d8a0c2ba216d",
       "ci_provider": "offline-validation",
       "ci_run_id": "offline",
-      "workflow": "phase68-offline-validation",
+      "workflow": "offline-validation",
       "source_repository": "verideploy-ai"
     },
     "artifacts": [
       {
         "path": "package.json",
-        "sha256": "484d30b785d27bff71663831282caffb560561dd8c618f5a6d3d578ac7ce760f",
-        "size_bytes": 703
+        "sha256": "a09b5d070484feeb3a526c9a3fb31e7129c89e0168b55bd7d5d70d07e2a8c9a9",
+        "size_bytes": 702
       },
       {
         "path": "pyproject.toml",
-        "sha256": "a8c2f7ed00d2a630322a46570ac34db506752aa3819e1d25b4015c47c78ad830",
-        "size_bytes": 1599
+        "sha256": "4e6aa2a9643f47e3769a17a5d71e783072e6e609e378a82ee7e87206935fabc3",
+        "size_bytes": 1619
       },
       {
         "path": "config/release/version.json",
-        "sha256": "823571ac008e6d77ea465db9224c2c38ab5f3c7d6ff0e9212f8d5865990f0fa4",
-        "size_bytes": 211
+        "sha256": "f6d80483c718fb759e3c04c88922d04595dae174cc99cf34b492a852d2ddc93d",
+        "size_bytes": 26
       },
       {
         "path": "config/supply-chain/policy.json",
@@ -77,7 +76,7 @@
     "passed": true,
     "locks": {
       "pnpm-lock.yaml": false,
-      "uv.lock": false
+      "uv.lock": true
     },
     "base_images_digest_pinned": false,
     "findings": [],

@@ -15,7 +15,7 @@ def main() -> None:
     engine = create_engine(settings.database_url, future=True)
     with engine.connect() as connection:
         if connection.dialect.name != "postgresql":
-            raise SystemExit("Phase 12 database check requires PostgreSQL")
+            raise SystemExit("database check requires PostgreSQL")
         extension = connection.scalar(text("SELECT extversion FROM pg_extension WHERE extname='vector'"))
         if not extension:
             raise SystemExit("pgvector extension is not installed")

@@ -1,7 +1,7 @@
 # VeriDeploy AI
 
 **Production-Grade Agentic Release Assurance and Incident Intelligence**  
-Cumulative implementation: **Phase 85** · Release **0.85.0** · Recruiter demos use **synthetic data only**.
+**Release 0.86.0** · Recruiter demos use **synthetic data only**.
 
 ![VeriDeploy AI recruiter overview](docs/recruiter/captures/01-product-overview.png)
 
@@ -80,12 +80,12 @@ Video script: `docs/recruiter/demo-video-script.md`
 
 | Evidence | Measured result | Evidence file |
 |---|---:|---|
-| Phase 80 regression | 700 passing tests | `evals/reports/release-candidate-benchmarks.json` |
+| Cumulative regression | 700 passing tests | `evals/reports/release-candidate-benchmarks.json` |
 | Python coverage | 87.32% | same report |
 | Critical mutation probes | 4/4 killed | same report |
 | Security critical findings | 0 | same report |
 | Hybrid RAG Recall@5 | 1.00 | `evals/reports/rag-performance.json` |
-| Hybrid RAG MRR | 1.00 | Phase 76 report |
+| Hybrid RAG MRR | 1.00 | same report |
 | Agent path score | 1.00 | `evals/reports/agentic-orchestration.json` |
 | Multimodal clean traceability | 100% | `evals/reports/multimodal-integration.json` |
 | Critical operational gaps | 0 | `evals/reports/production-operations.json` |
@@ -171,14 +171,10 @@ Use `docs/recruiter/interview-walkthrough.md` for a 15-minute senior-engineer ex
 - AI JD mapping — `docs/career/ai-engineering-jd-mapping.md`
 - Resume/STAR evidence — `docs/career/resume-impact-and-interview-evidence.md`
 
-## Status
+## Production Release and Handoff
 
-Cumulative through **Phase 85**. Phase 86 is the final production release, deployment, and handoff phase.
+**Current release: `0.86.0`.** The recruiter README/explanation package remains the presentation layer; production handoff assets sit alongside it.
 
-## Phase 86 Final Production Release and Handoff
-
-**Current cumulative release: `0.86.0` (Phase 86 of 86).** The recruiter README/explanation package established in **Phase 85 / 0.85.0** remains the presentation layer; Phase 86 adds the production handoff boundary.
-
-Production release assets now include four versioned image definitions, Helm `0.86.0`, a Terraform plan/apply baseline, explicit migration and safe rollback procedures, backup/restore verification requirements, a keyless cosign release workflow, demo deployment/seeding scripts, final release notes, and a complete technical handoff.
+Production release assets include four versioned image definitions, Helm `0.86.0`, a Terraform plan/apply baseline, explicit migration and safe rollback procedures, backup/restore verification requirements, a keyless cosign release workflow, demo deployment/seeding scripts, final release notes, and a complete technical handoff.
 
 Start with [`docs/release/production-deployment.md`](docs/release/production-deployment.md) for deployment and [`docs/release/final-technical-handoff.md`](docs/release/final-technical-handoff.md) for the operating/explanation package. Registry push, keyless signing, live Terraform apply, Kubernetes rollout, and live restore evidence must be produced in the trusted target environment; this repository does not represent those external operations as having run locally when they have not.

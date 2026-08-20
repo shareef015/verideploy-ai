@@ -12,7 +12,7 @@ from verideploy.evaluation.storage import EvaluationStore
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="verideploy-eval", description="VeriDeploy evaluation runner")
     sub = parser.add_subparsers(dest="command", required=True)
-    smoke = sub.add_parser("smoke", help="run the deterministic Phase 51 smoke dataset")
+    smoke = sub.add_parser("smoke", help="run the deterministic smoke dataset")
     smoke.add_argument("--dataset", type=Path, default=Path("evals/datasets/smoke/v1.jsonl"))
     smoke.add_argument("--store", type=Path, default=Path("artifacts/evaluation/results.sqlite3"))
     smoke.add_argument("--report", type=Path, default=Path("evals/reports/smoke-latest.json"))

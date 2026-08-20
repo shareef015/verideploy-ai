@@ -15,7 +15,7 @@ def main() -> int:
     args = parser.parse_args()
     run, _ = run_evaluation(
         dataset_path=args.dataset,
-        dataset_id="phase51-smoke",
+        dataset_id="smoke",
         dataset_version="1.0.0",
         description="Worker-executed smoke evaluation",
         evaluator_names=["exact_fields", "required_fields"],

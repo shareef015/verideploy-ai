@@ -118,7 +118,7 @@ class StateMigrationResult:
 
 def _v1_to_v2(state: dict[str, Any]) -> dict[str, Any]:
     upgraded = deepcopy(state)
-    # Phase 18 states had no explicit schema version and only node_outputs/errors.
+    # LangGraph Production Runtime states had no explicit schema version and only node_outputs/errors.
     upgraded.setdefault("agent_outputs", {})
     upgraded.setdefault("evidence_ids", [])
     upgraded.setdefault("approval_ids", [])

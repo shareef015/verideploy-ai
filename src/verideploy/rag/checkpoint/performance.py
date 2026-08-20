@@ -133,7 +133,7 @@ def run_rag_checkpoint(policy_path: Path | None = None) -> RagPerformanceCheckpo
             start = time.perf_counter_ns()
             if key not in cache:
                 misses += 1
-                # The hybrid benchmark is the same production fusion primitive used by Phase 13.
+                # The hybrid benchmark is the same production fusion primitive used by Hybrid Retrieval.
                 # Rerank the known clean-index keys and generate stable evidence hashes.
                 ranking = _rerank(case.query, [case.relevant_key] + [d.key for d in CORPUS if d.key != case.relevant_key])
                 winner = ranking[0]

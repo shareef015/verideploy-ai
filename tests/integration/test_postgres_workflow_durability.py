@@ -12,7 +12,7 @@ from verideploy.graphs.durability import LeaseConflictError, LeaseLostError, Ste
 from verideploy.graphs.durability_repository import PostgresDurabilityRepository
 
 URL=os.getenv('TEST_POSTGRES_URL')
-pytestmark=pytest.mark.skipif(not URL,reason='TEST_POSTGRES_URL is required for Phase 42 PostgreSQL durability tests')
+pytestmark=pytest.mark.skipif(not URL,reason='TEST_POSTGRES_URL is required for PostgreSQL durability tests')
 def _sync(url:str)->str: return url.replace('postgresql+asyncpg://','postgresql+psycopg://').replace('postgresql://','postgresql+psycopg://',1)
 
 def test_postgres_lease_idempotency_rls_and_append_only_recovery():

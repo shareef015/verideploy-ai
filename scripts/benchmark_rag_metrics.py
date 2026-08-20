@@ -131,7 +131,6 @@ def main() -> int:
     passed = all(checks.values())
 
     report = {
-        "phase": 54,
         "dataset": args.dataset,
         "case_count": len(cases),
         "deterministic_rule_based": True,

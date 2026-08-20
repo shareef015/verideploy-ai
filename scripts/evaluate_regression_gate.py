@@ -9,7 +9,7 @@ from verideploy.evaluation.storage import EvaluationStore
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Evaluate VeriDeploy Phase 60 PR/CI quality gate")
+    parser = argparse.ArgumentParser(description="Evaluate VeriDeploy PR/CI quality gate")
     parser.add_argument("--store", type=Path, required=True)
     parser.add_argument("--baseline-run-id", required=True)
     parser.add_argument("--candidate-run-id", required=True)

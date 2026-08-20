@@ -9,7 +9,7 @@ def main():
  proc=subprocess.run([sys.executable,"-m","pytest","--collect-only","-q"],cwd=ROOT,text=True,capture_output=True)
  if proc.returncode: print(proc.stdout); print(proc.stderr,file=sys.stderr); return proc.returncode
  nodes=[x.strip() for x in proc.stdout.splitlines() if "::" in x and not x.startswith("<")]; selected=[n for n in nodes if shard_for(n,a.shards)==a.shard]
- print(f"phase72 shard {a.shard}/{a.shards}: {len(selected)} tests")
+ print(f" shard {a.shard}/{a.shards}: {len(selected)} tests")
  if not selected: return 0
  return subprocess.call([sys.executable,"-m","pytest","-q",*selected],cwd=ROOT)
 if __name__=="__main__": raise SystemExit(main())

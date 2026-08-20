@@ -181,7 +181,7 @@ def _validate_parallel_state_update(update: Mapping[str, Any]) -> None:
 def deterministic_fan_in(results: Sequence[ParallelTaskResult]) -> dict[str, Any]:
     """Reduce completed branch updates in canonical order.
 
-    Runtime completion order is intentionally ignored. Phase 39 reducers provide
+    Runtime completion order is intentionally ignored. The state reducers provide
     deterministic de-duplication/deep merge and reject incompatible parallel writes.
     Failed/timed-out branches contribute explicit error records but never partial state.
     """

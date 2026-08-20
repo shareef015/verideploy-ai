@@ -12,7 +12,7 @@ def validate_final_release(root: Path) -> dict[str, Any]:
     cfg=_json(root/"config/release/final-release.json")
     findings: list[str]=[]
     release_meta=_json(root/"config/release/version.json")
-    if release_meta != {"version": RELEASE, "phase": 86}: findings.append("release metadata drift")
+    if release_meta != {"version": RELEASE}: findings.append("release metadata drift")
     pkg=_json(root/"package.json")
     if pkg.get("version") != RELEASE: findings.append("root package version drift")
     chart=(root/"infrastructure/helm/verideploy/Chart.yaml").read_text()
@@ -47,7 +47,7 @@ def validate_final_release(root: Path) -> dict[str, Any]:
     seed=(root/"scripts/release/seed_demo.sh").read_text()
     if "/api/v1/demos/multimodal-killer/run" not in seed or "INSERT INTO" in seed.upper(): findings.append("demo seed path must use public API")
     readme=(root/"README.md").read_text()
-    if "Phase 86 Final Production Release and Handoff" not in readme or RELEASE not in readme: findings.append("README missing final handoff section")
+    if "Production Release and Handoff" not in readme or RELEASE not in readme: findings.append("README missing final handoff section")
     # Secrets must be placeholders / references only in checked-in deployment assets.
     sensitive_scan="\n".join((root/p).read_text(errors="ignore") for p in ["infrastructure/terraform/terraform.tfvars.example","config/release/final-release.json"])
     forbidden=[r"sk-[A-Za-z0-9_-]{20,}", r"AKIA[0-9A-Z]{16}", r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"]
@@ -56,7 +56,6 @@ def validate_final_release(root: Path) -> dict[str, Any]:
     if any(local.get(k) is True for k in ("local_registry_push","local_cosign_signature","live_terraform_apply","live_restore_drill")):
         findings.append("local execution truth overclaims external release operations")
     return {
-        "phase":86,
         "release":RELEASE,
         "gate":"pass" if not findings else "fail",
         "versioned_images":len(cfg.get("images",[])),

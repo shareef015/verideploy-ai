@@ -17,9 +17,9 @@ from verideploy.graphs.state import (
 def main() -> None:
     legacy = {
         "tenant_id": "11111111-1111-4111-8111-111111111111",
-        "investigation_id": "phase39-active-investigation",
+        "investigation_id": "active-investigation",
         "run_id": "22222222-2222-4222-8222-222222222222",
-        "correlation_id": "phase39-correlation",
+        "correlation_id": "correlation",
         "completed_nodes": ["intake"],
         "node_outputs": {"intake": {"incident_id": "INC-P39"}},
         "approval_ids": ["approval-1"],

@@ -1,6 +1,5 @@
 {
   "schema_version": 1,
-  "phase": 86,
   "release": "0.86.0",
   "images": [
     {
@@ -44,7 +43,7 @@
     "scripts/release/prepare_trusted_builder.sh",
     "scripts/release/resolve_base_image_digests.py",
     "artifacts/release/source-manifest.json",
-    "artifacts/release/phase86-local-validation.json"
+    "artifacts/release/local-validation.json"
   ],
   "safety": {
     "external_writes_default": false,

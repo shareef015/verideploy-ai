@@ -1,11 +1,13 @@
 {
   "ci_shards": 4,
   "coverage": {
-    "measured_percent": 87.32457834427707,
-    "passed": true,
+    "measured_percent": 0.0,
+    "passed": false,
     "required_percent": 85.0
   },
-  "errors": [],
+  "errors": [
+    "coverage 0.0% below required 85.0%"
+  ],
   "mutations": [
     {
       "killed": true,
@@ -28,7 +30,6 @@
       "reason": "terminal result must require citations"
     }
   ],
-  "passed": true,
-  "phase": 72,
+  "passed": false,
   "suite_count": 11
 }

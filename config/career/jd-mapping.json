@@ -1,5 +1,4 @@
 {
-  "phase": 83,
   "release": "0.83.0",
   "policy": {
     "require_code_evidence": true,

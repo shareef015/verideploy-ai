@@ -70,7 +70,6 @@ def main() -> int:
     citation_coverage = len({c.channel for c in result.citations} & expected) / len(expected)
     duplication_rate = 1.0 - (len({e.evidence_id for e in result.evidence}) / max(1, len(result.evidence)))
     report = {
-        "phase": 15,
         "citation_channel_coverage": citation_coverage,
         "duplicate_evidence_rate": duplication_rate,
         "contributing_channels": [c.value for c in result.contributing_channels],

@@ -13,7 +13,7 @@ from verideploy.database.factory import create_database_manager
 def get_approval_service() -> HumanApprovalService:
     settings = get_settings()
     if not settings.database_url.startswith("postgresql"):
-        raise RuntimeError("Phase 41 approval runtime requires PostgreSQL")
+        raise RuntimeError("approval runtime requires PostgreSQL")
     db = create_database_manager(settings)
     secret = settings.approval_signing_secret or settings.app_secret_key
     return HumanApprovalService(

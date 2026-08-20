@@ -10,7 +10,7 @@ TanStack Query is the standard server-state cache, Zod is the runtime response-v
 
 ## Why
 
-Earlier cumulative phases correctly preserved the network boundary but duplicated tenant IDs, users, gateway URLs, error handling and `fetch()` behavior in individual pages. That was acceptable for proving backend workflows but not for a production frontend. Centralizing these concerns removes identity drift, prevents accidental Python-service exposure, and creates a predictable base for Phase 45+ real-time product screens.
+Earlier cumulative phases correctly preserved the network boundary but duplicated tenant IDs, users, gateway URLs, error handling and `fetch()` behavior in individual pages. That was acceptable for proving backend workflows but not for a production frontend. Centralizing these concerns removes identity drift, prevents accidental Python-service exposure, and creates a predictable base for Real Time Release Risk Screen+ real-time product screens.
 
 ## Consequences
 

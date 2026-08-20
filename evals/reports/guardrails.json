@@ -3,7 +3,6 @@
   "failed": 0,
   "gate_passed": true,
   "passed": 9,
-  "phase": 61,
   "policy_sha256": "ed09edb0ed46bb39e63255f8829212c7a888cbe20121d9f8ffe79698a2449a0a",
   "policy_version": "1.0.0",
   "results": [

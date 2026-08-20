@@ -87,7 +87,6 @@
   },
   "model_judge_default_enabled": false,
   "passed": true,
-  "phase": 56,
   "thresholds": {
     "aggregate_score": 0.97,
     "answer_quality": 0.95,

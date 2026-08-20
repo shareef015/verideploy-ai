@@ -14,7 +14,7 @@ from .servers.tools import register_tools
 def create_mcp_gateway(*, retriever, runtime_prometheus) -> SecureMCPGateway:
     settings = get_settings()
     registry = MCPToolRegistry()
-    # Phase 26 production GitHub adapter owns host allowlisting, bounded retries, quotas, and secret isolation.
+    # Real Engineering Data Integrations production GitHub adapter owns host allowlisting, bounded retries, quotas, and secret isolation.
     github = create_engineering_integrations(settings).github
     knowledge = HybridKnowledgeBackend(retriever, model_name=settings.openai_embedding_model,
                                        dimensions=settings.openai_embedding_dimensions,

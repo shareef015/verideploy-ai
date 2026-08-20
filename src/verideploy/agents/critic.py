@@ -81,7 +81,7 @@ class CriticFollowupRetrievalPort(Protocol):
 
 
 class HybridCriticFollowupRetrieval:
-    """Read-only Phase 13 hybrid retrieval adapter for bounded critic follow-up."""
+    """Read-only Hybrid Retrieval hybrid retrieval adapter for bounded critic follow-up."""
 
     def __init__(self, retrieval) -> None:
         self.retrieval = retrieval
@@ -152,10 +152,10 @@ class HybridCriticFollowupRetrieval:
 class CriticAgent(BaseAgent[BaseModel]):
     """Deterministic RCA critic.
 
-    Claim extraction is derived from the typed Phase 23 RCA result. The critic does not
+    Claim extraction is derived from the typed RCA result. The critic does not
     ask a second model to paraphrase claims, which prevents criticism itself from adding
     unsupported assertions. The BaseAgent inheritance keeps the common agent shape, but
-    Phase 24 intentionally performs no LLM generation.
+    The critic intentionally performs no LLM generation.
     """
 
     agent_name = AgentName.CRITIC

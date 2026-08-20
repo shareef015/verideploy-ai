@@ -56,7 +56,7 @@ class AIResponseRow(Base):
 
 
 class SqlAlchemyResponsePersistence(ResponsePersistence):
-    """Phase 8 durable response snapshots; later database phases migrate this table centrally."""
+    """Responses API Adapter durable response snapshots; later database phases migrate this table centrally."""
 
     def __init__(self, database_url: str, *, create_schema: bool = False) -> None:
         self._engine = create_engine(database_url, future=True)

@@ -12,7 +12,7 @@ ROOT=Path(__file__).resolve().parents[1]
 with TemporaryDirectory() as td:
     service=InvestigationService(SqlAlchemyInvestigationRepository(f"sqlite:///{td}/validation.db",create_schema=True))
     tenant,user,investigation=uuid4(),uuid4(),uuid4()
-    cmd=CreateInvestigationCommand(investigation_id=investigation,tenant_id=tenant,requested_by=user,idempotency_key='phase46-validation',query='Why did checkout latency increase after the release?')
+    cmd=CreateInvestigationCommand(investigation_id=investigation,tenant_id=tenant,requested_by=user,idempotency_key='validation',query='Why did checkout latency increase after the release?')
     record,_=service.accept(cmd);record,_=service.initialize(tenant,investigation)
     base=service.projection(tenant,investigation)
     service.append(record=record,event_type='investigation.hypothesis.updated',payload={'hypothesis_id':'h-db','title':'Database pool exhaustion','confidence':.84,'supporting_evidence_ids':['ev-db']})

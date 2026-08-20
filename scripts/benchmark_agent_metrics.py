@@ -53,7 +53,7 @@ def _hex(case_id: str, salt: str, length: int) -> str:
 def _category(row: dict[str, Any]) -> str:
     category = str(row.get("category", ""))
     if category not in ROUTES:
-        raise ValueError(f"unsupported phase52 category: {category}")
+        raise ValueError(f"unsupported dataset category: {category}")
     return category
 
 
@@ -144,7 +144,7 @@ def _observation(row: dict[str, Any]) -> AgentObservation:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Phase 55 deterministic agent metrics benchmark")
+    parser = argparse.ArgumentParser(description="Deterministic agent metrics benchmark")
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()
 
@@ -154,7 +154,6 @@ def main() -> int:
     gate_failures = [f"{name}={float(summary[name]):.6f} < {minimum:.6f}" for name, minimum in THRESHOLDS.items() if float(summary[name]) < minimum]
     report.update(
         {
-            "phase": 55,
             "dataset": "verideploy-500",
             "dataset_version": "1",
             "dataset_case_count": len(observations),

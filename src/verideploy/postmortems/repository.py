@@ -26,7 +26,7 @@ class PostmortemRepository(ABC):
 
 
 class Base(DeclarativeBase):
-    """Declarative base for Phase 5 postmortem persistence."""
+    """Declarative base for Postmortem Sequence postmortem persistence."""
 
 
 class PostmortemRow(Base):

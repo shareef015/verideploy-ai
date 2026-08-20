@@ -7838,7 +7838,6 @@
   ],
   "gate_failures": [],
   "gate_passed": true,
-  "phase": 55,
   "summary": {
     "aggregate_score": 0.9889166586499919,
     "case_observations": 500,

@@ -51,8 +51,8 @@ def validate()->list[str]:
 def main()->int:
     if '--write' in sys.argv:
         out=manifest(); (ROOT/'config/monorepo/integrity.json').write_text(json.dumps(out,indent=2,sort_keys=True)+'\n')
-    errors=validate(); report={"phase":67,"version":VERSION,"passed":not errors,"errors":errors,"integrity":manifest()}
+    errors=validate(); report={"version":VERSION,"passed":not errors,"errors":errors,"integrity":manifest()}
     rp=ROOT/'evals/reports/monorepo-hardening.json'; rp.parent.mkdir(parents=True,exist_ok=True); rp.write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
-    print(json.dumps({"phase":67,"passed":not errors,"errors":errors}))
+    print(json.dumps({"passed":not errors,"errors":errors}))
     return 0 if not errors else 1
 if __name__=='__main__': raise SystemExit(main())

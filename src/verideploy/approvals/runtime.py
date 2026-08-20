@@ -8,7 +8,7 @@ from verideploy.graphs.runtime import GraphRunStatus, LangGraphRuntime
 
 
 class ApprovalRuntimeBridge:
-    """Durable Phase 41 interrupt/resume boundary around LangGraphRuntime."""
+    """Durable Human in the Loop Approval interrupt/resume boundary around LangGraphRuntime."""
 
     def __init__(self, *, runtime: LangGraphRuntime, approvals: HumanApprovalService) -> None:
         self.runtime = runtime

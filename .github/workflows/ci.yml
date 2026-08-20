@@ -35,27 +35,27 @@ jobs:
       - run: PYTHONPATH=src python scripts/validate_kubernetes.py --report evals/reports/kubernetes-resilience.json
       - run: PYTHONPATH=src uv run python scripts/validate_event_contracts.py
       - run: PYTHONPATH=src uv run python scripts/validate_platform.py
-      - name: Phase 76 RAG integration and performance checkpoint
+      - name: RAG integration and performance checkpoint
         run: PYTHONPATH=src uv run python scripts/validate_rag.py --report evals/reports/rag-performance.json
-      - name: Phase 77 agentic orchestration checkpoint
+      - name: agentic orchestration checkpoint
         run: PYTHONPATH=src uv run python scripts/validate_orchestration.py
-      - name: Phase 78 multimodal integration checkpoint
+      - name: multimodal integration checkpoint
         run: PYTHONPATH=src uv run python scripts/validate_multimodal.py
-      - name: Phase 79 production operations checkpoint
+      - name: production operations checkpoint
         run: PYTHONPATH=src uv run python scripts/validate_operations.py
-      - name: Phase 80 evaluation and release-candidate checkpoint
+      - name: evaluation and release-candidate checkpoint
         run: PYTHONPATH=src uv run python scripts/validate_release_candidate.py
-      - name: Phase 81 scope and architecture integrity gate
+      - name: scope and architecture integrity gate
         run: PYTHONPATH=src uv run python scripts/validate_scope_integrity.py
-      - name: Phase 82 final production architecture gate
+      - name: final production architecture gate
         run: PYTHONPATH=src uv run python scripts/validate_production_topology.py
-      - name: Phase 83 AI-engineering JD evidence gate
+      - name: AI-engineering JD evidence gate
         run: PYTHONPATH=src uv run python scripts/validate_jd_mapping.py
-      - name: Phase 84 resume impact and interview evidence gate
+      - name: resume impact and interview evidence gate
         run: PYTHONPATH=src uv run python scripts/validate_resume_interview.py
-      - name: Phase 85 recruiter README and explanation package gate
+      - name: recruiter README and explanation package gate
         run: PYTHONPATH=src uv run python scripts/validate_recruiter_package.py
-      - name: Phase 86 production release and final handoff gate
+      - name: production release and final handoff gate
         run: PYTHONPATH=src uv run python scripts/validate_release.py
       - run: docker compose -f docker-compose.yml config --quiet
       - run: uv run python scripts/validate_contracts.py
@@ -68,7 +68,7 @@ jobs:
         with: {version: 10.16.0}
       - uses: actions/setup-node@v4
         with: {node-version: 22}
-      # Phase 68 will add supply-chain lock material; until then resolution remains networked.
+      # Dependency Artifact Supply Chain Management will add supply-chain lock material; until then resolution remains networked.
       - run: pnpm install --no-frozen-lockfile
       - run: pnpm lint
       - run: pnpm typecheck
@@ -77,7 +77,7 @@ jobs:
       - run: pnpm --filter @verideploy/web exec playwright install --with-deps chromium
       - run: pnpm --filter @verideploy/web test:e2e
         env:
-          FRONTEND_SESSION_SECRET: phase44-ci-session-secret-at-least-32-bytes
+          FRONTEND_SESSION_SECRET: ci-session-secret-at-least-32-bytes
           FRONTEND_DEV_AUTH_BYPASS: "false"
 
 
@@ -92,9 +92,9 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with: {python-version: '3.12'}
       - run: uv sync --all-groups
-      - name: Phase 73 production demo gate
+      - name: production demo gate
         run: PYTHONPATH=src uv run python scripts/validate_demos.py
-      - name: Phase 74 multimodal killer demo gate
+      - name: multimodal killer demo gate
         run: PYTHONPATH=src uv run python scripts/validate_multimodal_demo.py
       - name: Run deterministic pytest shard
         run: |
@@ -111,6 +111,6 @@ jobs:
       - run: helm template verideploy infrastructure/helm/verideploy -f infrastructure/helm/verideploy/values-production.yaml > /tmp/verideploy-production.yaml
       - run: test -s /tmp/verideploy-production.yaml
 
-      - name: Phase 69 configuration gate
+      - name: configuration gate
         run: uv run python scripts/validate_configuration.py
 

@@ -5,6 +5,6 @@ from verideploy.evaluation.storage import EvaluationStore
 
 __all__ = ["assert_dataset_quality", "validate_dataset", "EvaluationStore", "compare_runs", "deterministic_smoke_runner", "run_evaluation"]
 
-# Phase 53 retrieval metrics are exposed from verideploy.evaluation.retrieval_metrics.
+# Retrieval Metrics retrieval metrics are exposed from verideploy.evaluation.retrieval_metrics.
 
 from .safety_metrics import SafetyObservation, SafetyCaseMetrics

@@ -13,7 +13,7 @@ async def run() -> dict[str, object]:
     cache = MultiLayerCache(
         backend,
         load_cache_policy(),
-        encryption_secret="phase64-ci-cache-encryption-secret-32-bytes-minimum",
+        encryption_secret="ci-cache-encryption-secret-32-bytes-minimum",
     )
     a = CacheContext("tenant-a", "ci", "retrieval", "viewer")
     b = CacheContext("tenant-b", "ci", "retrieval", "viewer")
@@ -31,14 +31,13 @@ async def run() -> dict[str, object]:
     isolated = (await cache.get(CacheLayer.RETRIEVAL, b, "incident-query")).status == "miss"
     invalidated = await cache.invalidate(CacheLayer.RETRIEVAL, a, tag="incident:64")
 
-    session = CacheContext("tenant-a", "ci", "session", "user:phase64")
+    session = CacheContext("tenant-a", "ci", "session", "user:")
     await cache.set(CacheLayer.SESSION, session, "session", {"access": "sensitive-marker"})
     raw = await backend.get(cache.cache_key(CacheLayer.SESSION, session, "session"))
     encrypted = bool(raw and raw.startswith(b"gcm1:") and b"sensitive-marker" not in raw)
 
     gate = calls == 1 and isolated and invalidated == 1 and encrypted and len(results) == 40
     return {
-        "phase": 64,
         "gate": "PASS" if gate else "FAIL",
         "concurrent_callers": len(results),
         "origin_loader_calls": calls,

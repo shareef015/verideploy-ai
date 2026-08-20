@@ -27,7 +27,7 @@ class HybridKnowledgeBackend:
 
 
 class RuntimeMonitoringBackend:
-    """MCP monitoring adapter backed by Phase 22's authorized runtime source port."""
+    """MCP monitoring adapter backed by Runtime Evidence Agent's authorized runtime source port."""
 
     def __init__(self, prometheus: RuntimeToolPort) -> None:
         self.prometheus = prometheus
@@ -68,7 +68,7 @@ class InvestigationIncidentBackend:
             payload={"note": note},
         )) if hasattr(record, "event") else None
         if event is None:
-            # Existing Phase 3 record has no event factory; write through repository event contract explicitly.
+            # Existing Incident Realtime Sequence record has no event factory; write through repository event contract explicitly.
             from datetime import UTC, datetime
             from uuid import uuid4
             from verideploy.investigations.schemas import InvestigationEvent

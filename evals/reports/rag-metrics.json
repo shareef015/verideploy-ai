@@ -32,7 +32,6 @@
   },
   "model_judge_default_enabled": false,
   "passed": true,
-  "phase": 54,
   "summary": {
     "aggregate_score": 0.9802918192918192,
     "case_observations": 500,

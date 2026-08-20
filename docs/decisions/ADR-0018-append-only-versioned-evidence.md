@@ -10,4 +10,4 @@ Silent mutation breaks auditability, reproducibility, citation validity, and der
 
 ## Consequences
 
-Storage grows with revisions, but provenance remains reproducible. Retention metadata is recorded per version; lifecycle deletion is intentionally not implemented in Phase 30 because it would conflict with the current immutability gate and requires a later policy-controlled archive/tombstone design.
+Storage grows with revisions, but provenance remains reproducible. Retention metadata is recorded per version; lifecycle deletion is intentionally not implemented in Immutable Evidence Model because it would conflict with the current immutability gate and requires a later policy-controlled archive/tombstone design.

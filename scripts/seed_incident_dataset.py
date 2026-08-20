@@ -14,7 +14,7 @@ async def main() -> None:
     dataset = IncidentDataset.model_validate(json.loads((ROOT / "data/incidents/nexuspay-incidents.json").read_text()))
     report = validate_incident_dataset(dataset)
     if not report.valid:
-        raise RuntimeError(f"Phase 29 dataset validation failed: {report.errors}")
+        raise RuntimeError(f"dataset validation failed: {report.errors}")
     manager = DatabaseManager(get_settings().database_url)
     try:
         repo = SqlAlchemyIncidentDatasetRepository(async_sessionmaker(manager.engine, expire_on_commit=False))

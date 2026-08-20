@@ -5,10 +5,10 @@ from verideploy.rag.retrieval.service import HybridRetriever
 
 
 class HybridRetrieverRAGTool:
-    """Agent-facing adapter over the Phase 13 retriever.
+    """Agent-facing adapter over the hybrid retriever.
 
     The RAGAgent may select one of the already-authorized retrieval modes, but cannot
-    bypass the Phase 13 repository/embedding/tenant controls.
+    bypass the repository/embedding/tenant controls.
     """
 
     def __init__(self, retriever: HybridRetriever) -> None:

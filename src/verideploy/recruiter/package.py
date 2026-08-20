@@ -8,8 +8,8 @@ def validate_recruiter_package(root: Path) -> dict[str, Any]:
     cfg=json.loads((root/'config/recruiter/package.json').read_text())
     findings=[]
     readme=(root/'README.md').read_text(encoding='utf-8')
-    if 'Phase 85' not in readme or '0.85.0' not in readme:
-        findings.append('root README is not current for Phase 85 / release 0.85.0')
+    if '0.86.0' not in readme:
+        findings.append('root README is not current for release 0.86.0')
     for section in cfg['required_readme_sections']:
         if f'## {section}' not in readme: findings.append(f'README missing section: {section}')
     for rel in cfg['required_documents']:
@@ -31,4 +31,4 @@ def validate_recruiter_package(root: Path) -> dict[str, Any]:
         if rel not in readme: findings.append(f'README does not link canonical diagram: {rel}')
     resume_evidence=root/'evals/reports/resume-interview-evidence.json'
     if not resume_evidence.exists() or json.loads(resume_evidence.read_text()).get('gate')!='pass': findings.append('measured-evidence gate not passing')
-    return {'phase':85,'release':'0.85.0','gate':'pass' if not findings else 'fail','readme_sections':len(cfg['required_readme_sections']),'documents':len(cfg['required_documents']),'screenshots':len(captures),'findings':findings}
+    return {'release':'0.86.0','gate':'pass' if not findings else 'fail','readme_sections':len(cfg['required_readme_sections']),'documents':len(cfg['required_documents']),'screenshots':len(captures),'findings':findings}

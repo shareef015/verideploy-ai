@@ -5,7 +5,6 @@
   "deliveries": 200,
   "high_watermark": 100,
   "passed": true,
-  "phase": 65,
   "stable_partition": 6,
   "statuses": {
     "applied": 50,

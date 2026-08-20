@@ -1,26 +1,12 @@
 {
-  "phase": 70,
-  "passed": true,
-  "reconciliation": {
-    "high_watermark": 5,
-    "duplicates": [
-      2
-    ],
-    "missing": [],
-    "converged": true
-  },
+  "assertions": [
+    "state",
+    "event_order",
+    "citations",
+    "audit",
+    "final_ui"
+  ],
   "flows": {
-    "release_risk": [
-      "browser.command",
-      "nestjs.validation",
-      "kafka.command",
-      "worker.consume",
-      "langgraph.release_risk",
-      "persistence",
-      "kafka.event",
-      "redis.websocket",
-      "browser.reconcile"
-    ],
     "incident_rca": [
       "browser.command",
       "nestjs.validation",
@@ -33,13 +19,26 @@
       "kafka.event",
       "redis.websocket",
       "browser.reconcile"
+    ],
+    "release_risk": [
+      "browser.command",
+      "nestjs.validation",
+      "kafka.command",
+      "worker.consume",
+      "langgraph.release_risk",
+      "persistence",
+      "kafka.event",
+      "redis.websocket",
+      "browser.reconcile"
     ]
   },
-  "assertions": [
-    "state",
-    "event_order",
-    "citations",
-    "audit",
-    "final_ui"
-  ]
+  "passed": true,
+  "reconciliation": {
+    "converged": true,
+    "duplicates": [
+      2
+    ],
+    "high_watermark": 5,
+    "missing": []
+  }
 }

@@ -1,9 +1,8 @@
 {
-  "phase": 60,
   "gate": {
     "policy_id": "default-pr-quality-v1",
-    "baseline_run_id": "phase60-baseline",
-    "candidate_run_id": "phase60-candidate",
+    "baseline_run_id": "baseline",
+    "candidate_run_id": "candidate",
     "status": "pass",
     "releasable": true,
     "baseline_promotable": true,
@@ -55,7 +54,7 @@
     },
     "override": null
   },
-  "baseline_promoted": "phase60-candidate",
+  "baseline_promoted": "candidate",
   "quality_budgets": "blocking_and_warning",
   "statistical_detection": "paired_95pct_ci",
   "flaky_handling": "variance_quarantine",

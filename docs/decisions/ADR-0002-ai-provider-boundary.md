@@ -18,5 +18,5 @@ The application, not the SDK, owns bounded retry decisions. Provider-specific ex
 - future LangGraph nodes and agents receive one stable AI contract;
 - provider request IDs and VeriDeploy request/correlation IDs remain traceable;
 - retry behavior is testable and observable;
-- model selection remains a separate Phase 7 concern;
+- model selection remains a separate Model Routing Cost Policy concern;
 - Responses API mechanics can evolve inside the adapter without leaking into business logic.

@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from verideploy.evaluation.datasets import build_dataset_manifest
-from verideploy.evaluation.quality import PHASE52_EXPECTED_COUNTS, assert_phase52_dataset_quality
+from verideploy.evaluation.quality import EXPECTED_COUNTS, assert_dataset_quality
 
 SERVICES = ("checkout-api", "payment-worker", "order-service", "catalog-api", "identity-api", "notification-worker", "inventory-api", "gateway")
 CAUSES = ("db_pool_exhaustion", "retry_storm", "cache_stampede", "bad_index_plan", "downstream_timeout", "memory_pressure", "queue_backlog", "dns_resolution")
@@ -21,7 +21,7 @@ def base(case_id: str, category: str, user_input: dict[str, Any], ground_truth: 
         "case_id": case_id,
         "category": category,
         "input": user_input,
-        "expected": {"quality_contract": "phase52-v1", "must_use_ground_truth": True, "must_cite_required_sources": True},
+        "expected": {"quality_contract": "v1", "must_use_ground_truth": True, "must_cite_required_sources": True},
         "ground_truth": ground_truth,
         "source_requirements": sources,
         "metadata": {"split": "evaluation", "synthetic": True, "difficulty": difficulty, "dataset_family": "verideploy-500", "schema_version": "1.0"},
@@ -72,20 +72,20 @@ BUILDERS = {"retrieval": retrieval, "rca": rca, "release_risk": release_risk, "v
 
 def generate(path: Path) -> None:
     cases: list[dict[str, Any]] = []
-    for category, count in PHASE52_EXPECTED_COUNTS.items():
+    for category, count in EXPECTED_COUNTS.items():
         builder = BUILDERS[category]
         cases.extend(builder(i) for i in range(1, count + 1))
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("".join(json.dumps(case, sort_keys=True, separators=(",", ":")) + "\n" for case in cases), encoding="utf-8")
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate and validate the deterministic VeriDeploy Phase 52 500-case evaluation dataset")
+    parser = argparse.ArgumentParser(description="Generate and validate the deterministic VeriDeploy 500-case evaluation dataset")
     parser.add_argument("--output", type=Path, default=Path("evals/datasets/verideploy-500/v1.jsonl"))
     parser.add_argument("--manifest", type=Path, default=Path("evals/datasets/verideploy-500/manifest.json"))
     args = parser.parse_args()
     generate(args.output)
-    report = assert_phase52_dataset_quality(args.output)
-    manifest = build_dataset_manifest(path=args.output, dataset_id="verideploy-500", version="1.0.0", description="Phase 52 deterministic 500-case production evaluation corpus")
+    report = assert_dataset_quality(args.output)
+    manifest = build_dataset_manifest(path=args.output, dataset_id="verideploy-500", version="1.0.0", description="Deterministic 500-case production evaluation corpus")
     data = manifest.model_dump(mode="json")
     # created_at is informational; reproducibility is anchored to content_sha256 and deterministic source generation.
     data["generated_by"] = "scripts/generate_dataset.py"

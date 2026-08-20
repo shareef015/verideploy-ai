@@ -152,7 +152,6 @@ class OrchestrationPerformanceCheckpoint:
         retry_pass = all(r.retry_count <= self.retry_budget for r in results)
         gate = threshold_pass and scenario_pass and retry_pass and metrics["unlinked_failure_count"] == 0
         return {
-            "phase": 77,
             "gate": "pass" if gate else "fail",
             "release_version": self.policy["release_version"],
             "scenario_count": len(results),

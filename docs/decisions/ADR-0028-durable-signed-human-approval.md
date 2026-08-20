@@ -3,10 +3,10 @@
 **Status:** Accepted
 
 ## Decision
-Use a dedicated Phase 41 approval request plus immutable signed event history, linked to Phase 18 graph runs, for high-risk workflow authorization.
+Use a dedicated Human in the Loop Approval request plus immutable signed event history, linked to LangGraph Production Runtime graph runs, for high-risk workflow authorization.
 
-## Why not reuse `human_reviews_phase32` alone?
-Phase 32 provides the broad operational review schema but does not encode the concurrency, signed-event, delegation, expiry, graph interrupt/resume, and fail-closed authorization semantics required by Phase 41.
+## Why not reuse `human_reviews` alone?
+Complete RAG Operational Schema provides the broad operational review schema but does not encode the concurrency, signed-event, delegation, expiry, graph interrupt/resume, and fail-closed authorization semantics required by Human in the Loop Approval.
 
 ## Concurrency
 PostgreSQL `SELECT ... FOR UPDATE`, optimistic `version`, idempotency uniqueness, lifecycle triggers, and a deferred matching-event constraint form the database authority. The in-memory repository mirrors the same single-winner semantics with a lock for deterministic tests.

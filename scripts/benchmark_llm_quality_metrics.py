@@ -131,7 +131,7 @@ def _observation(case: dict[str, Any], variant: tuple[str, str, str, int]) -> LL
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Phase 56 deterministic LLM quality benchmark")
+    parser = argparse.ArgumentParser(description="Deterministic LLM quality benchmark")
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()
 
@@ -169,7 +169,6 @@ def main() -> int:
     passed = all(checks.values())
 
     report = {
-        "phase": 56,
         "dataset": "evals/datasets/verideploy-500/v1.jsonl",
         "dataset_case_count": len(cases),
         "case_observations": len(observations),

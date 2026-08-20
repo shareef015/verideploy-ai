@@ -23,9 +23,9 @@ class VectorIndexConfig(BaseModel):
     @model_validator(mode="after")
     def validate(self) -> "VectorIndexConfig":
         if self.distance != "cosine":
-            raise ValueError("Phase 12 supports cosine distance only")
+            raise ValueError("configuration supports cosine distance only")
         if self.index_type != "hnsw":
-            raise ValueError("Phase 12 requires an HNSW index")
+            raise ValueError("configuration requires an HNSW index")
         return self
 
 

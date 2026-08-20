@@ -94,7 +94,7 @@ class SelfCorrectiveRAG:
                 stop_reason = StopReason.EXTERNAL_SEARCH_UNAVAILABLE
             else:
                 external_evidence = await self.external_search.search(query=current.query, max_results=3)
-                # External evidence is supplemental only in Phase 36; it never upgrades internal evidence to sufficient automatically.
+                # External evidence is supplemental only in Self Corrective RAG; it never upgrades internal evidence to sufficient automatically.
 
         answerable = best_grade.grade is EvidenceGrade.SUFFICIENT
         qualification = None if answerable else (

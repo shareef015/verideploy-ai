@@ -11,7 +11,7 @@ from verideploy.graphs.saved_state import PostgresSavedStateRepository
 
 
 TEST_POSTGRES_URL = os.getenv("TEST_POSTGRES_URL")
-pytestmark = pytest.mark.skipif(not TEST_POSTGRES_URL, reason="TEST_POSTGRES_URL is required for Phase 39 PostgreSQL state tests")
+pytestmark = pytest.mark.skipif(not TEST_POSTGRES_URL, reason="TEST_POSTGRES_URL is required for PostgreSQL state tests")
 
 
 def _sync_url(url: str) -> str:

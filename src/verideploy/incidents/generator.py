@@ -59,7 +59,7 @@ def _incident_digest(incident: SyntheticIncident) -> str:
 
 def build_incident_dataset(count_per_label: int = 30) -> IncidentDataset:
     if count_per_label < 25:
-        raise ValueError("Phase 29 requires at least 200 incidents; use >=25 per eight labels")
+        raise ValueError("dataset requires at least 200 incidents; use >=25 per eight labels")
     rng = random.Random(SEED)
     topology = build_nexuspay_topology()
     services = {s.slug: s for s in topology.services}

@@ -29,7 +29,7 @@ class ProductionGraphRuntime:
 
 async def create_production_graph_runtime(settings: Settings) -> ProductionGraphRuntime:
     if not settings.database_url.startswith("postgresql"):
-        raise RuntimeError("Phase 18 production LangGraph runtime requires PostgreSQL")
+        raise RuntimeError("production LangGraph runtime requires PostgreSQL")
     checkpointer = await create_postgres_checkpointer(settings.database_url)
     database = create_database_manager(settings)
     repository = SqlAlchemyGraphRuntimeRepository(
@@ -56,7 +56,7 @@ def create_dynamic_parallel_executor(
     workers: dict[str, object],
     event_sink: object | None = None,
 ):
-    """Build the Phase 40 executor from production configuration.
+    """Build the dynamic-parallel executor from production configuration.
 
     The caller supplies the planner and source workers because those are investigation-
     specific capabilities; concurrency/deadline safety policy remains centralized in

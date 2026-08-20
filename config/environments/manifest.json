@@ -1,6 +1,5 @@
 {
   "version": "1.0.0",
-  "phase": 69,
   "environments": [
     "development",
     "test",

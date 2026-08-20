@@ -24,7 +24,7 @@
       "lineage": {
         "source_system": "verideploy-synthetic-corpus",
         "source_record_id": "KB-SYN-001",
-        "generator": "phase27-curated-corpus",
+        "generator": "curated-corpus",
         "generator_version": "1.0.0",
         "synthetic": true,
         "parent_document_id": null
@@ -49,7 +49,7 @@
       "lineage": {
         "source_system": "verideploy-synthetic-corpus",
         "source_record_id": "KB-SYN-002",
-        "generator": "phase27-curated-corpus",
+        "generator": "curated-corpus",
         "generator_version": "1.0.0",
         "synthetic": true,
         "parent_document_id": null
@@ -75,7 +75,7 @@
       "lineage": {
         "source_system": "verideploy-synthetic-corpus",
         "source_record_id": "KB-SYN-003",
-        "generator": "phase27-curated-corpus",
+        "generator": "curated-corpus",
         "generator_version": "1.0.0",
         "synthetic": true,
         "parent_document_id": null
@@ -100,7 +100,7 @@
       "lineage": {
         "source_system": "verideploy-synthetic-corpus",
         "source_record_id": "KB-SYN-004",
-        "generator": "phase27-curated-corpus",
+        "generator": "curated-corpus",
         "generator_version": "1.0.0",
         "synthetic": true,
         "parent_document_id": null
@@ -125,7 +125,7 @@
       "lineage": {
         "source_system": "verideploy-synthetic-corpus",
         "source_record_id": "KB-SYN-005",
-        "generator": "phase27-curated-corpus",
+        "generator": "curated-corpus",
         "generator_version": "1.0.0",
         "synthetic": true,
         "parent_document_id": null
@@ -150,7 +150,7 @@
       "lineage": {
         "source_system": "verideploy-synthetic-corpus",
         "source_record_id": "KB-SYN-006",
-        "generator": "phase27-curated-corpus",
+        "generator": "curated-corpus",
         "generator_version": "1.0.0",
         "synthetic": true,
         "parent_document_id": null
@@ -175,7 +175,7 @@
       "lineage": {
         "source_system": "verideploy-synthetic-corpus",
         "source_record_id": "KB-SYN-007",
-        "generator": "phase27-curated-corpus",
+        "generator": "curated-corpus",
         "generator_version": "1.0.0",
         "synthetic": true,
         "parent_document_id": null
@@ -200,7 +200,7 @@
       "lineage": {
         "source_system": "verideploy-synthetic-corpus",
         "source_record_id": "KB-SYN-008",
-        "generator": "phase27-curated-corpus",
+        "generator": "curated-corpus",
         "generator_version": "1.0.0",
         "synthetic": true,
         "parent_document_id": null

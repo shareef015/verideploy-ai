@@ -120,9 +120,9 @@ def _validate_case(case: EvalCase) -> list[DatasetQualityIssue]:
 
     split = case.metadata.get("split")
     if split != "evaluation":
-        issues.append(DatasetQualityIssue("split_invalid", "Phase 52 cases must use split=evaluation", case.case_id))
+        issues.append(DatasetQualityIssue("split_invalid", "dataset cases must use split=evaluation", case.case_id))
     if case.metadata.get("synthetic") is not True:
-        issues.append(DatasetQualityIssue("provenance_invalid", "Phase 52 cases must be marked synthetic", case.case_id))
+        issues.append(DatasetQualityIssue("provenance_invalid", "dataset cases must be marked synthetic", case.case_id))
     return issues
 
 
@@ -160,5 +160,5 @@ def assert_dataset_quality(path: Path) -> DatasetQualityReport:
     report = validate_dataset(path)
     if not report.passed:
         detail = "; ".join(f"{issue.code}:{issue.case_id or '-'}:{issue.message}" for issue in report.issues[:20])
-        raise ValueError(f"Phase 52 dataset quality gate failed: {detail}")
+        raise ValueError(f"dataset quality gate failed: {detail}")
     return report

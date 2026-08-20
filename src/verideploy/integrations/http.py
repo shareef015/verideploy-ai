@@ -88,7 +88,7 @@ class ResilientReadClient:
         **kwargs,
     ) -> httpx.Response:
         if method.upper() != "GET":
-            raise IntegrationRequestFailed("Phase 26 integration client is read-only")
+            raise IntegrationRequestFailed("integration client is read-only")
         if not self.configured:
             raise IntegrationUnconfigured("integration endpoint is not configured")
         url = self._url(path_or_url)

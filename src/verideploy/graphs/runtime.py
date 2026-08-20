@@ -161,7 +161,7 @@ class LangGraphRuntime:
         saved_state_repository: SavedStateRepository | None = None,
     ) -> None:
         if durability != "sync":
-            raise ValueError("Phase 18 production runtime requires sync checkpoint durability")
+            raise ValueError("production runtime requires sync checkpoint durability")
         self.registry = registry
         self.repository = repository
         self.checkpointer = checkpointer
@@ -363,7 +363,7 @@ async def create_postgres_checkpointer(database_url: str) -> Any:
         from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
     except ImportError as exc:  # pragma: no cover - depends on provisioned runtime
         raise RuntimeError(
-            "Phase 18 requires langgraph-checkpoint-postgres in the production environment"
+            "production runtime requires langgraph-checkpoint-postgres in the production environment"
         ) from exc
 
     dsn = database_url.replace("postgresql+psycopg://", "postgresql://", 1)

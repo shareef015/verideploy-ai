@@ -10,11 +10,11 @@ from verideploy.approvals.service import HumanApprovalService
 from verideploy.approvals.signing import ApprovalAuditSigner
 
 TENANT=UUID("11111111-1111-4111-8111-111111111111")
-svc=HumanApprovalService(repository=InMemoryApprovalRepository(),signer=ApprovalAuditSigner("phase41-validator-signing-secret"))
+svc=HumanApprovalService(repository=InMemoryApprovalRepository(),signer=ApprovalAuditSigner("validator-signing-secret"))
 request=svc.request_review(ApprovalRequestCreate(
  tenant_id=TENANT,run_id=uuid4(),investigation_id="INV-41-GATE",action_type="production.release.promote",action_payload={"release":"REL-41"},
  risk=ApprovalRisk.CRITICAL,risk_score=99,requested_by="planner",evidence_summary=EvidenceSummary(title="Critical production promotion",summary="Concurrent approval gate fixture",evidence_ids=("ev-41",),risk_factors=("production write",)),
- policy=ReviewPolicy(policy_id="critical-production",required_roles=("release_reviewer",),expiry_seconds=3600),idempotency_key="phase41-concurrency-gate",
+ policy=ReviewPolicy(policy_id="critical-production",required_roles=("release_reviewer",),expiry_seconds=3600),idempotency_key="concurrency-gate",
 ))
 before=svc.authorize_action(tenant_id=TENANT,approval_id=request.approval_id)
 barrier=threading.Barrier(17); results=[]; lock=threading.Lock()

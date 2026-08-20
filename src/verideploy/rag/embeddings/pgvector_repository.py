@@ -35,7 +35,7 @@ def _record(row: dict[str, object]) -> EmbeddingRecord:
 
 
 class PgVectorEmbeddingCacheRepository(EmbeddingRepository):
-    """Phase 11 cache contract implemented on the canonical Phase 12 pgvector table."""
+    """Embedding Pipeline cache contract implemented on the canonical PostgreSQL pgvector table."""
 
     def __init__(self, db: DatabaseManager, *, model_name: str, dimensions: int) -> None:
         if db.engine.dialect.name != "postgresql":
@@ -68,7 +68,7 @@ class PgVectorEmbeddingCacheRepository(EmbeddingRepository):
 
     def save(self, record: EmbeddingRecord) -> EmbeddingRecord:
         if record.model != self.model_name or record.dimensions != self.dimensions:
-            raise ValueError("embedding record does not match active Phase 12 vector index")
+            raise ValueError("embedding record does not match active vector index")
         insert = text(f"""
             INSERT INTO vector_embeddings (
                 embedding_id, tenant_id, embedding_model_id, document_id, chunk_id, content_hash,

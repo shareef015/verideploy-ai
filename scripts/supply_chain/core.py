@@ -25,7 +25,7 @@ def provenance()->dict[str,str]:
     return {
       'git_commit':git_commit(), 'ci_provider':os.getenv('CI_PROVIDER','github-actions' if os.getenv('GITHUB_ACTIONS') else 'offline-validation'),
       'ci_run_id':os.getenv('GITHUB_RUN_ID') or os.getenv('CI_RUN_ID','offline'),
-      'workflow':os.getenv('GITHUB_WORKFLOW') or os.getenv('CI_WORKFLOW','phase68-offline-validation'),
+      'workflow':os.getenv('GITHUB_WORKFLOW') or os.getenv('CI_WORKFLOW','offline-validation'),
       'source_repository':os.getenv('GITHUB_REPOSITORY') or os.getenv('CI_REPOSITORY','verideploy-ai')}
 
 def dependency_snapshot()->dict[str,Any]:

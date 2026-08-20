@@ -8,8 +8,8 @@
   "failures": [],
   "gate": "pass",
   "latency_ms": {
-    "cold_p95": 0.02019,
-    "warm_p95": 0.00023
+    "cold_p95": 0.0924,
+    "warm_p95": 0.001
   },
   "metrics": {
     "citation_completeness": 1.0,
@@ -21,6 +21,5 @@
     "metadata_filter_correctness": 1.0,
     "tenant_isolation": 1.0,
     "visual_ndcg_at_4": 1.0
-  },
-  "phase": 76
+  }
 }

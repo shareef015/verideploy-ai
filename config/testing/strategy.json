@@ -1,6 +1,5 @@
 {
   "schema_version": 1,
-  "phase": 72,
   "release_version": "0.72.0",
   "coverage": {
     "global_min_percent": 85,
@@ -22,7 +21,7 @@
       "tests/configuration"
     ],
     "graph": [
-      "tests/unit/test_phase39_langgraph_state.py",
+      "tests/unit/test_langgraph_state_reducers.py",
       "tests/unit/test_dynamic_parallelism.py"
     ],
     "agent": [

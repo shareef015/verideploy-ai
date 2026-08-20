@@ -44,7 +44,6 @@ def build_report(root: Path) -> dict[str, Any]:
     findings = validate_mapping(root)
     claims = data["claims"]
     return {
-        "phase": 83,
         "release": data["release"],
         "gate": "pass" if not findings else "fail",
         "skill_claims": len(claims),

@@ -41,8 +41,8 @@ class EvidenceLocator(BaseModel):
 class RuntimeEvidenceInput(BaseModel):
     """Normalized runtime signal input for fusion.
 
-    Phase 15 accepts runtime evidence produced by authorized upstream adapters. It does
-    not query Prometheus/log/trace systems itself; that belongs to Phase 22.
+    This model accepts runtime evidence produced by authorized upstream adapters. It does
+    not query Prometheus/log/trace systems itself; that belongs to the runtime evidence agent.
     """
 
     model_config = ConfigDict(extra="forbid")

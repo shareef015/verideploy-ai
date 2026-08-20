@@ -10,4 +10,4 @@ A claim citation must remain stable across repeated references to the same sourc
 
 ## Consequences
 
-Citation lookup and citation preview are distinct operations. A valid citation may exist while preview is unavailable to the current caller. This is intentional and fail-closed. Phase 38 does not bypass Phase 35 metadata filters or Phase 37 entailment decisions.
+Citation lookup and citation preview are distinct operations. A valid citation may exist while preview is unavailable to the current caller. This is intentional and fail-closed. Citation Architecture does not bypass Metadata Filtering Authorization metadata filters or Hallucination Protection entailment decisions.

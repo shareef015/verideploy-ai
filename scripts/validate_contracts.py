@@ -56,4 +56,4 @@ for item in manifest["schemas"]:
     parsed = json.loads(path.read_text(encoding="utf-8"))
     if parsed.get("type") != "object" or parsed.get("additionalProperties") is not False:
         raise SystemExit(f"structured schema is not a closed object: {path}")
-print("contract files parsed; cumulative Phase 10 REST/event/structured contracts present")
+print("contract files parsed; REST/event/structured contracts present")

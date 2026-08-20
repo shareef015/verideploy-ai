@@ -15,7 +15,7 @@ def main():
  cov=coverage_gate(measured,float(s["coverage"]["global_min_percent"]))
  if not cov.passed: errors.append(f"coverage {cov.measured_percent:.1f}% below required {cov.required_percent:.1f}%")
  errors += [f"mutation survived: {m.name}" for m in muts if not m.killed]
- report={"phase":72,"passed":not errors,"coverage":{"measured_percent":cov.measured_percent,"required_percent":cov.required_percent,"passed":cov.passed},"mutations":[m.__dict__ for m in muts],"suite_count":len(s["suites"]),"ci_shards":s["ci_shards"],"errors":errors}
+ report={"passed":not errors,"coverage":{"measured_percent":cov.measured_percent,"required_percent":cov.required_percent,"passed":cov.passed},"mutations":[m.__dict__ for m in muts],"suite_count":len(s["suites"]),"ci_shards":s["ci_shards"],"errors":errors}
  rp=ROOT/a.report; rp.parent.mkdir(parents=True,exist_ok=True); rp.write_text(json.dumps(report,indent=2,sort_keys=True)+"\n")
  print(json.dumps(report,sort_keys=True)); return 0 if not errors else 1
 if __name__=="__main__": raise SystemExit(main())

@@ -72,8 +72,8 @@ def main()->int:
     policy,compose=load(); errors=validate_static(policy,compose); sim=simulate(policy)
     sim_pass=sim['baseline_ready'] and all(all(v.values()) for v in sim['critical'].values()) and all(all(v.values()) for v in sim['optional'].values())
     gate=not errors and sim_pass
-    report={'phase':75,'gate':'pass' if gate else 'fail','errors':errors,'simulation':sim,'compose_services':sorted(compose.get('services',{}))}
+    report={'gate':'pass' if gate else 'fail','errors':errors,'simulation':sim,'compose_services':sorted(compose.get('services',{}))}
     out=Path(args.report); out.parent.mkdir(parents=True,exist_ok=True); out.write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
-    print(json.dumps({'phase':75,'gate':report['gate'],'errors':errors,'critical_failures_tested':len(sim['critical']),'optional_failures_tested':len(sim['optional'])}))
+    print(json.dumps({'gate':report['gate'],'errors':errors,'critical_failures_tested':len(sim['critical']),'optional_failures_tested':len(sim['optional'])}))
     return 0 if gate else 1
 if __name__=='__main__': raise SystemExit(main())

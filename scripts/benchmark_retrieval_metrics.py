@@ -88,7 +88,6 @@ def build_report(repeats: int = 5) -> dict[str, Any]:
                 rows.append(score_observation(obs))
     comparison = compare_retrievers(rows, baseline="dense")
     return {
-        "phase": 53,
         "dataset": "verideploy-500/v1",
         "retrieval_case_count": len(cases),
         "repeats": repeats,
@@ -120,7 +119,7 @@ def validate_report(report: dict[str, Any]) -> list[str]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run Phase 53 deterministic retrieval metric benchmark")
+    parser = argparse.ArgumentParser(description="Run deterministic retrieval metric benchmark")
     parser.add_argument("--repeats", type=int, default=5)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()

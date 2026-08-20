@@ -31,7 +31,6 @@ class DemoExpected(BaseModel):
 class MultimodalDemoManifest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     version: str
-    phase: Literal[74]
     id: Literal["multimodal-killer"]
     title: str
     synthetic: Literal[True]
@@ -79,7 +78,6 @@ def validate_multimodal_demo(root: Path) -> dict[str, object]:
         if item.modality == "document" and path.suffix.lower() == ".pdf" and not data.startswith(b"%PDF-"):
             issues.append(f"invalid pdf signature: {item.asset}")
     return {
-        "phase": 74,
         "gate": "pass" if not issues else "fail",
         "synthetic": manifest.synthetic,
         "evidence_count": len(manifest.evidence),

@@ -1,4 +1,4 @@
-# Phase 67 ownership boundaries. Replace aliases with real GitHub teams in deployed organizations.
+# Production Monorepo Hardening ownership boundaries. Replace aliases with real GitHub teams in deployed organizations.
 * @verideploy/platform
 /apps/web/ @verideploy/frontend
 /apps/gateway/ @verideploy/platform

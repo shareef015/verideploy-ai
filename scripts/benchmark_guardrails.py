@@ -18,7 +18,7 @@ def main() -> int:
         else: d=engine.check_operational(c["operation"],ctx,retries=c.get("retries",0))
         ok=d.action.value==c["expect"]; passed+=int(ok)
         rows.append({"id":c["id"],"expected":c["expect"],"actual":d.action.value,"passed":ok,"controls":[v.control_id for v in d.violations]})
-    report={"phase":61,"policy_version":engine.policy.version,"policy_sha256":engine.policy.sha256,"cases":len(cases),"passed":passed,"failed":len(cases)-passed,"gate_passed":passed==len(cases),"results":rows,"telemetry":engine.telemetry.snapshot()}
+    report={"policy_version":engine.policy.version,"policy_sha256":engine.policy.sha256,"cases":len(cases),"passed":passed,"failed":len(cases)-passed,"gate_passed":passed==len(cases),"results":rows,"telemetry":engine.telemetry.snapshot()}
     out=root/args.report; out.parent.mkdir(parents=True,exist_ok=True); out.write_text(json.dumps(report,indent=2,sort_keys=True)+"\n")
     print(json.dumps({k:report[k] for k in ("cases","passed","failed","gate_passed")},indent=2))
     return 0 if report["gate_passed"] else 1

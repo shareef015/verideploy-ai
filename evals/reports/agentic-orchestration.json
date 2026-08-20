@@ -120,7 +120,6 @@
     },
     "unlinked_failure_count": 0
   },
-  "phase": 77,
   "release_version": "0.77.0",
   "retry_budget": 2,
   "scenario_count": 3,

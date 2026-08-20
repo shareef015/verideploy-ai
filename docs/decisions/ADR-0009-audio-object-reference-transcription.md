@@ -6,7 +6,7 @@ Kafka transcription commands contain S3-compatible object references, not audio 
 
 ## Rationale
 
-Audio uploads can be large. Putting binary audio on Kafka would create broker/message-size coupling, duplicate storage, and operational failure modes. Object references preserve the durable Phase 4 ingestion boundary while keeping Kafka messages small and replayable.
+Audio uploads can be large. Putting binary audio on Kafka would create broker/message-size coupling, duplicate storage, and operational failure modes. Object references preserve the durable Multimodal Sequence ingestion boundary while keeping Kafka messages small and replayable.
 
 ## Consequences
 

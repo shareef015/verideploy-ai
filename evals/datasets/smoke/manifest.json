@@ -1,5 +1,5 @@
 {
-  "dataset_id": "phase51-smoke",
+  "dataset_id": "smoke",
   "version": "1.0.0",
   "schema_version": "1.0",
   "description": "Deterministic, synthetic, paid-call-free smoke dataset for evaluation plumbing.",

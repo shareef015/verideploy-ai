@@ -4,7 +4,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from uuid import uuid4
 from verideploy.agents.contracts import AgentAuthorization, AgentRequest, ToolPermission
-from verideploy.agents.prompts import build_phase19_prompt_registry
+from verideploy.agents.prompts import build_prompt_registry
 from verideploy.agents.repository import InMemoryAgentRunRepository
 from verideploy.agents.rca import RCAAgent
 from verideploy.rag.fusion.schemas import EvidenceChannel, EvidenceLocator, NormalizedEvidence
@@ -33,9 +33,9 @@ async def main():
     topk=3; correct=0; unsupported=0; rows=[]
     for cause,t1,t2,alt in cases:
         tenant=uuid4(); a=evidence(tenant,EvidenceChannel.RUNTIME,t1,t1,0); b=evidence(tenant,EvidenceChannel.TEXT,t2,t2,3)
-        r=AgentRequest(tenant_id=tenant,user_id='benchmark',correlation_id='phase23-benchmark',objective='Determine root cause',context={'service':'checkout','environment':'production'})
+        r=AgentRequest(tenant_id=tenant,user_id='benchmark',correlation_id='rca-benchmark',objective='Determine root cause',context={'service':'checkout','environment':'production'})
         auth=AgentAuthorization(tenant_id=tenant,user_id='benchmark',allowed_permissions=frozenset({ToolPermission.RCA_ANALYSIS_READ}))
-        result=await RCAAgent(model=Model(proposal(cause,a,b,alt)),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository()).run(r,authorization=auth,evidence=[a,b])
+        result=await RCAAgent(model=Model(proposal(cause,a,b,alt)),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository()).run(r,authorization=auth,evidence=[a,b])
         ranked=[x.statement for x in result.hypotheses[:topk]]
         hit=cause in ranked; correct += int(hit)
         unsupported += sum(1 for h in result.hypotheses if not h.supporting_evidence_ids)

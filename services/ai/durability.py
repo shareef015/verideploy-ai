@@ -26,11 +26,11 @@ class WorkflowDurabilityOperations:
         self.durability.cancel_run(tenant_id=tenant_id,run_id=run_id,actor_id=actor_id,reason=reason)
         if run.status not in {GraphRunStatus.COMPLETED,GraphRunStatus.CANCELLED}:
             self.graph_repo.set_status(tenant_id=tenant_id,run_id=run_id,status=GraphRunStatus.CANCELLED,error_code='operator_cancelled')
-            self.graph_repo.append_event(tenant_id=tenant_id,run_id=run_id,thread_id=run.thread_id,graph_name=run.graph_name,graph_version=run.graph_version,event_type='graph.run.cancelled',payload={'actor_id':actor_id,'reason':reason,'source':'phase42'})
+            self.graph_repo.append_event(tenant_id=tenant_id,run_id=run_id,thread_id=run.thread_id,graph_name=run.graph_name,graph_version=run.graph_version,event_type='graph.run.cancelled',payload={'actor_id':actor_id,'reason':reason,'source':'durability'})
 
 @lru_cache
 def get_workflow_durability_operations()->WorkflowDurabilityOperations:
     settings=get_settings()
-    if not settings.database_url.startswith('postgresql'): raise RuntimeError('Phase 42 workflow durability requires PostgreSQL')
+    if not settings.database_url.startswith('postgresql'): raise RuntimeError('workflow durability requires PostgreSQL')
     db=create_database_manager(settings)
     return WorkflowDurabilityOperations(PostgresDurabilityRepository(db,statement_timeout_ms=settings.db_statement_timeout_ms),SqlAlchemyGraphRuntimeRepository(db,statement_timeout_ms=settings.db_statement_timeout_ms))

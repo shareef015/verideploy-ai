@@ -36,7 +36,7 @@ class RetrievalChunkInput:
 
 
 class PostgresRetrievalCorpusWriter:
-    """Minimal Phase 13 corpus writer; later ingestion phases can call this without bypassing tenant scope."""
+    """Minimal Hybrid Retrieval corpus writer; later ingestion phases can call this without bypassing tenant scope."""
 
     def __init__(self, db: DatabaseManager) -> None:
         if db.engine.dialect.name != "postgresql":

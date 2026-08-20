@@ -293,5 +293,5 @@ if __name__ == "__main__":
     write = "--write-baseline" in sys.argv
     generate(write_baseline=write)
     problems = validate_compatibility()
-    print(json.dumps({"phase": 71, "passed": not problems, "errors": problems}, sort_keys=True))
+    print(json.dumps({"passed": not problems, "errors": problems}, sort_keys=True))
     raise SystemExit(0 if not problems else 1)

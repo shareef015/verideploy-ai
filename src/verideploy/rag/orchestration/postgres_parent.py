@@ -9,7 +9,7 @@ from verideploy.rag.orchestration.schemas import ParentResolvedContext
 
 
 class PostgresParentResolver:
-    """Resolve stable parent context from the canonical Phase 13 corpus."""
+    """Resolve stable parent context from the canonical Hybrid Retrieval corpus."""
     def __init__(self, db: DatabaseManager, *, neighbor_radius: int = 1) -> None:
         self.db = db
         self.neighbor_radius = max(0, min(3, neighbor_radius))

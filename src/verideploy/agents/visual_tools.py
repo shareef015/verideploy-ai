@@ -38,10 +38,10 @@ class VisualDocumentSearchTool:
 
 
 class StoredVisualAnalysisTool:
-    """Analyze only images already admitted/indexed by Phase 14.
+    """Analyze only images already admitted/indexed by visual document retrieval.
 
-    The current Phase 14 index stores a filesystem image reference. This adapter verifies
-    the exact indexed SHA-256 before passing bytes through the Phase 9 secure image
+    The current visual index stores a filesystem image reference. This adapter verifies
+    the exact indexed SHA-256 before passing bytes through the secure image
     preparation and provenance boundary. It never accepts an arbitrary remote URL.
     """
 

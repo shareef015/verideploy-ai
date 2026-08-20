@@ -166,7 +166,7 @@ class AuditTrail:
     """Append-only, tenant-isolated audit trail with hash-chain tamper evidence.
 
     This implementation is deterministic and storage-neutral; production persistence is
-    provided by the Phase 63 PostgreSQL migration. It is also used by CI/red-team tests.
+    provided by the audit-compliance PostgreSQL migration. It is also used by CI/red-team tests.
     """
 
     def __init__(self, policy: AuditPolicy | None = None):

@@ -34,7 +34,7 @@ class RoutingAuditSink(Protocol):
 
 
 class InMemoryRoutingAuditSink:
-    """Thread-safe deterministic sink for tests/demo. Phase 48 moves this to the LLMOps database."""
+    """Thread-safe deterministic sink for tests/demo. LLMOps Data Platform moves this to the LLMOps database."""
 
     def __init__(self) -> None:
         self._records: list[ModelRoutingAuditRecord] = []

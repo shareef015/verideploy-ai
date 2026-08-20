@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def build(seq: int) -> EventEnvelope:
-    return EventEnvelope(event_type="investigation.progressed", tenant_id="synthetic-nexuspay", aggregate_id="inv-500", ordering_key="synthetic-nexuspay:inv-500", sequence_number=seq, payload={"step":seq}, correlation_id="phase65-correlation", producer="phase65-benchmark", schema_family="investigation-event")
+    return EventEnvelope(event_type="investigation.progressed", tenant_id="synthetic-nexuspay", aggregate_id="inv-500", ordering_key="synthetic-nexuspay:inv-500", sequence_number=seq, payload={"step":seq}, correlation_id="kafka-correlation", producer="kafka-benchmark", schema_family="investigation-event")
 
 
 def main() -> int:
@@ -25,8 +25,7 @@ def main() -> int:
     for i in order:
         result=inbox.accept(events[i],lambda item: applied.append(item.sequence_number)); statuses[result.status]=statuses.get(result.status,0)+1
     retry=RetryPolicy(max_attempts=5).decide('base',5,'verideploy.retry.platform.v1','verideploy.dlq.platform.v1')
-    report={
-      'phase':65,'case':'duplicate-and-out-of-order-convergence','deliveries':len(order),'unique_events':100,
+    report={'case':'duplicate-and-out-of-order-convergence','deliveries':len(order),'unique_events':100,
       'applied_count':len(applied),'high_watermark':inbox.high_watermark('synthetic-nexuspay','inv-500'),
       'applied_in_order':applied==list(range(1,101)),'statuses':statuses,
       'stable_partition':registry.partition(topic,'synthetic-nexuspay:inv-500'),

@@ -157,7 +157,6 @@ def build_report(root: Path) -> dict[str, Any]:
         for c in cfg["cost_latency_decisions"]
     ]
     return {
-        "phase": 84,
         "release": cfg["release"],
         "gate": "pass" if not findings else "fail",
         "measured_metrics": len(metrics),

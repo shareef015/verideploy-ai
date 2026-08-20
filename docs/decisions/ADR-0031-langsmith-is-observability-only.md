@@ -2,7 +2,7 @@
 
 ## Decision
 
-VeriDeploy integrates LangSmith as an optional external trace/evaluation sink. Phase 48's tenant-scoped LLMOps ledger remains the durable operational source of truth.
+VeriDeploy integrates LangSmith as an optional external trace/evaluation sink. LLMOps Data Platform's tenant-scoped LLMOps ledger remains the durable operational source of truth.
 
 ## Consequences
 

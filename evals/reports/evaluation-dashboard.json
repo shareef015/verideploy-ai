@@ -1,17 +1,4 @@
 {
-  "phase": 59,
-  "passed": true,
-  "dashboard_route": "/evaluations",
-  "public_api_prefix": "/api/v1/evaluations",
-  "private_api_prefix": "/internal/v1/evaluations",
-  "unified_metric_snapshot": {
-    "retrieval_ndcg_at_10": 0.9889493783804245,
-    "rag_aggregate": 0.9802918192918192,
-    "agent_aggregate": 0.9889166586499919,
-    "llm_quality_aggregate": 0.9956523809523811,
-    "safety_aggregate": 0.997847619047619,
-    "multimodal_aggregate": 0.9717184444444444
-  },
   "capabilities": [
     "unified evaluation runs",
     "model/prompt/retriever comparison",
@@ -21,11 +8,23 @@
     "release gates",
     "historical quality trends"
   ],
+  "dashboard_route": "/evaluations",
+  "data_note": "Dashboard demo fixtures are synthetic; persisted run APIs read the EvaluationStore SQLite database.",
+  "passed": true,
+  "private_api_prefix": "/internal/v1/evaluations",
+  "public_api_prefix": "/api/v1/evaluations",
   "release_gate_defaults": {
     "max_aggregate_drop": 0.01,
+    "max_failed_case_rate": 0.05,
     "max_metric_drop": 0.02,
-    "min_candidate_score": 0.9,
-    "max_failed_case_rate": 0.05
+    "min_candidate_score": 0.9
   },
-  "data_note": "Dashboard demo fixtures are synthetic; persisted run APIs read the EvaluationStore SQLite database."
+  "unified_metric_snapshot": {
+    "agent_aggregate": 0.9889166586499919,
+    "llm_quality_aggregate": 0.9956523809523811,
+    "multimodal_aggregate": 0.9717184444444444,
+    "rag_aggregate": 0.9802918192918192,
+    "retrieval_ndcg_at_10": 0.9889493783804245,
+    "safety_aggregate": 0.997847619047619
+  }
 }

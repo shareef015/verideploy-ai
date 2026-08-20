@@ -19,7 +19,7 @@ class Client:
 
 async def main():
     client=Client(); obs=LangSmithObserver(client=client,environment='test',project_name='verideploy-test',dataset_export_enabled=True)
-    req=AIRequest(tenant_id=uuid4(),correlation_id='phase49-validator',operation='validate.langsmith',model='test-model',input='synthetic input',metadata={'prompt_name':'validator','prompt_version':'1','prompt_sha256':'a'*64})
+    req=AIRequest(tenant_id=uuid4(),correlation_id='validator',operation='validate.langsmith',model='test-model',input='synthetic input',metadata={'prompt_name':'validator','prompt_version':'1','prompt_sha256':'a'*64})
     ctrl=InMemoryRequestController(LocalControlPolicy(requests_per_minute=10,monthly_budget_usd=Decimal('10')))
     result=await AIGateway(provider=DeterministicTestProvider(output_text='business-result'),controller=ctrl,langsmith_observer=obs).execute(req)
     ds=LangSmithDatasetHook(client=client,enabled=True,environment='test',dataset_prefix='verideploy-evals')
@@ -30,7 +30,7 @@ async def main():
       'root_and_child_created': len(client.created)==2,
       'hierarchy_parented': child.get('parent_run_id')==client.created[0].get('id'),
       'environment_project': child.get('project_name')=='verideploy-test',
-      'correlation_metadata': child.get('extra',{}).get('metadata',{}).get('correlation_id')=='phase49-validator',
+      'correlation_metadata': child.get('extra',{}).get('metadata',{}).get('correlation_id')=='validator',
       'prompt_version_metadata': child.get('extra',{}).get('metadata',{}).get('prompt_version')=='1',
       'dataset_export_opt_in': dataset_ok,
       'dataset_environment_separated': 'verideploy-evals-test-validator' in client.datasets,

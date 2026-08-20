@@ -22,9 +22,9 @@
       "redacted_text": "Grafana screenshot owner [REDACTED_EMAIL] token [REDACTED_SECRET]",
       "sha256": "e533086dfa7841b89c316dd58c2f5578a6c3f2d5bb43d6a578cacf8504e8f668",
       "status": "READY",
-      "storage_key": "tenant/tenant-phase78/multimodal/image/ev-image-large/e533086dfa7841b8",
+      "storage_key": "tenant/tenant/multimodal/image/ev-image-large/e533086dfa7841b8",
       "timeline_events": 40,
-      "trace_id": "e4fdde4d5686f9fd7d5afc82f9c03cbe"
+      "trace_id": "7e79a4ea7931dc6b2b4ad5d338792bf3"
     },
     {
       "degradation_reason": null,
@@ -33,9 +33,9 @@
       "redacted_text": "Architecture PDF references checkout and postgres",
       "sha256": "f7bdcec92f67ed6537db5830ee7ca270b6179061dc688ee18db1d14581629e6e",
       "status": "READY",
-      "storage_key": "tenant/tenant-phase78/multimodal/pdf/ev-pdf-large/f7bdcec92f67ed65",
+      "storage_key": "tenant/tenant/multimodal/pdf/ev-pdf-large/f7bdcec92f67ed65",
       "timeline_events": 400,
-      "trace_id": "9134a3d5b270e0ab4e20c4dcf701cb92"
+      "trace_id": "d64ab6665912d6dc359b7b2a0f2e012b"
     },
     {
       "degradation_reason": null,
@@ -44,9 +44,9 @@
       "redacted_text": "Incident bridge audio transcript",
       "sha256": "77b382818ded83e3599d9af0e995afc8ce93f511b64ce9634beb6408a39510ca",
       "status": "READY",
-      "storage_key": "tenant/tenant-phase78/multimodal/audio/ev-audio-large/77b382818ded83e3",
+      "storage_key": "tenant/tenant/multimodal/audio/ev-audio-large/77b382818ded83e3",
       "timeline_events": 180,
-      "trace_id": "e5b2530e02dccfd9b2ee8b3776ad0bbc"
+      "trace_id": "0b3aed088f86d3f166a0bec6fd1a242c"
     },
     {
       "degradation_reason": null,
@@ -55,9 +55,9 @@
       "redacted_text": "Incident recording aligned with runtime spike",
       "sha256": "eb3e7ca963b7fdd2519e3d6236a62de3bd7e472e518a1456c1591ff899835bae",
       "status": "READY",
-      "storage_key": "tenant/tenant-phase78/multimodal/video/ev-video-large/eb3e7ca963b7fdd2",
+      "storage_key": "tenant/tenant/multimodal/video/ev-video-large/eb3e7ca963b7fdd2",
       "timeline_events": 120,
-      "trace_id": "bc3d74acc5bf59f18878a9ab81d17c5c"
+      "trace_id": "b8758bc5dce374400646d51d3ab27acf"
     }
   ],
   "partial": {
@@ -84,9 +84,9 @@
       "redacted_text": "Grafana screenshot owner [REDACTED_EMAIL] token [REDACTED_SECRET]",
       "sha256": "e533086dfa7841b89c316dd58c2f5578a6c3f2d5bb43d6a578cacf8504e8f668",
       "status": "READY",
-      "storage_key": "tenant/tenant-phase78/multimodal/image/ev-image-large/e533086dfa7841b8",
+      "storage_key": "tenant/tenant/multimodal/image/ev-image-large/e533086dfa7841b8",
       "timeline_events": 40,
-      "trace_id": "e4fdde4d5686f9fd7d5afc82f9c03cbe"
+      "trace_id": "7e79a4ea7931dc6b2b4ad5d338792bf3"
     },
     {
       "degradation_reason": "partial_failure:page_render",
@@ -97,7 +97,7 @@
       "status": "DEGRADED",
       "storage_key": null,
       "timeline_events": 0,
-      "trace_id": "9134a3d5b270e0ab4e20c4dcf701cb92"
+      "trace_id": "d64ab6665912d6dc359b7b2a0f2e012b"
     },
     {
       "degradation_reason": null,
@@ -106,9 +106,9 @@
       "redacted_text": "Incident bridge audio transcript",
       "sha256": "77b382818ded83e3599d9af0e995afc8ce93f511b64ce9634beb6408a39510ca",
       "status": "READY",
-      "storage_key": "tenant/tenant-phase78/multimodal/audio/ev-audio-large/77b382818ded83e3",
+      "storage_key": "tenant/tenant/multimodal/audio/ev-audio-large/77b382818ded83e3",
       "timeline_events": 180,
-      "trace_id": "e5b2530e02dccfd9b2ee8b3776ad0bbc"
+      "trace_id": "0b3aed088f86d3f166a0bec6fd1a242c"
     },
     {
       "degradation_reason": "partial_failure:frame_extract",
@@ -119,10 +119,9 @@
       "status": "DEGRADED",
       "storage_key": null,
       "timeline_events": 0,
-      "trace_id": "bc3d74acc5bf59f18878a9ab81d17c5c"
+      "trace_id": "b8758bc5dce374400646d51d3ab27acf"
     }
   ],
   "passed": true,
-  "phase": 78,
   "redaction_correctness": 1.0
 }

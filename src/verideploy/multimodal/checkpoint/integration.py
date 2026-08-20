@@ -113,7 +113,6 @@ def run_checkpoint(root: Path) -> dict:
         and partial_fusion["surviving_ratio"] >= policy["minimum_surviving_evidence_ratio"]
     )
     return {
-        "phase": 78,
         "passed": passed,
         "clean": clean_fusion,
         "partial": partial_fusion,

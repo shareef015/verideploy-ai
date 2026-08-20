@@ -112,7 +112,7 @@ def _observation(case: dict[str, Any]) -> SafetyObservation:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Phase 57 deterministic safety/hallucination adversarial benchmark")
+    parser = argparse.ArgumentParser(description="Deterministic safety/hallucination adversarial benchmark")
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()
 
@@ -139,7 +139,6 @@ def main() -> int:
             )
 
     report = {
-        "phase": 57,
         "dataset": "evals/datasets/verideploy-500/v1.jsonl",
         "dataset_case_count": len(cases),
         "deterministic_rule_based": True,

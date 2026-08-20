@@ -5,7 +5,7 @@ from uuid import uuid4
 
 from verideploy.agents.contracts import AgentAuthorization, AgentRequest, ToolBudget, ToolPermission
 from verideploy.agents.critic import CriticAgent
-from verideploy.agents.prompts import build_phase19_prompt_registry
+from verideploy.agents.prompts import build_prompt_registry
 from verideploy.agents.rca import RCAAgentResult, RCAHypothesisAssessment, RCAHypothesisKind, RCASufficiency
 from verideploy.agents.repository import InMemoryAgentRunRepository
 from verideploy.rag.fusion.schemas import EvidenceChannel, EvidenceLocator, NormalizedEvidence
@@ -21,9 +21,9 @@ def rca(a,b,statement,disconfirm=None):
     return RCAAgentResult(incident_summary='benchmark incident',hypotheses=[h],root_causes=[h],triggers=[],alternatives=[],limitations=[],sufficiency=RCASufficiency(root_cause_determined=True,top_hypothesis_id='hyp-01',evidence_count=2+(1 if disconfirm else 0),evidence_channels=h.supporting_channels,reason_codes=['sufficient']),tool_calls_used=0)
 
 async def main():
-    tenant=uuid4(); request=AgentRequest(tenant_id=tenant,user_id='benchmark',correlation_id='phase24-benchmark',objective='Critique RCA',context={'service':'checkout','environment':'production'})
+    tenant=uuid4(); request=AgentRequest(tenant_id=tenant,user_id='benchmark',correlation_id='critic-benchmark',objective='Critique RCA',context={'service':'checkout','environment':'production'})
     auth=AgentAuthorization(tenant_id=tenant,user_id='benchmark',allowed_permissions=frozenset({ToolPermission.CRITIC_ANALYSIS_READ}))
-    agent=CriticAgent(model=Dummy(),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository())
+    agent=CriticAgent(model=Dummy(),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository())
     a=evidence(tenant,'database connection pool reached maximum and exhausted available connections')
     b=evidence(tenant,'connection pool exhaustion causes checkout latency and queueing',EvidenceChannel.TEXT)
     d=evidence(tenant,'database connection pool remained healthy and below 40 percent')

@@ -41,7 +41,7 @@ def _modality(case: dict[str, Any]) -> str:
     case_id = str(case["case_id"])
     if category == "visual":
         return ("image", "screenshot", "diagram")[_bucket(case_id, "visual-modality", 3)]
-    # Ensure temporal media are represented without changing the Phase 52 category labels.
+    # Ensure temporal media are represented without changing the 500 Case Evaluation Dataset category labels.
     return "audio" if _bucket(case_id, "temporal-modality", 2) == 0 else "video"
 
 
@@ -98,7 +98,7 @@ def _observation(case: dict[str, Any]) -> MultimodalObservation:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Phase 58 deterministic visual/multimodal benchmark")
+    parser = argparse.ArgumentParser(description="Deterministic visual/multimodal benchmark")
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     args = parser.parse_args()
 
@@ -109,7 +109,6 @@ def main() -> int:
     gate = modality_gate(summary, THRESHOLDS)
 
     report = {
-        "phase": 58,
         "dataset": "evals/datasets/verideploy-500/v1.jsonl",
         "dataset_case_count": len(cases),
         "deterministic_rule_based": True,
