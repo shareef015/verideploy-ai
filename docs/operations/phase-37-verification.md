@@ -4,7 +4,7 @@ Run:
 
 ```bash
 make hallucination-protection-validate
-PYTHONPATH=src:. pytest -q tests/unit/test_phase37_hallucination_protection.py
+PYTHONPATH=src:. pytest -q tests/unit/test_hallucination_protection.py
 PYTHONPATH=src:. pytest -q
 ```
 

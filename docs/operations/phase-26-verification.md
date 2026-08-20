@@ -3,7 +3,7 @@
 Run the focused suite:
 
 ```bash
-PYTHONPATH=src:. pytest -q tests/unit/test_phase26_engineering_integrations.py tests/unit/test_phase26_integration_api.py
+PYTHONPATH=src:. pytest -q tests/unit/test_engineering_integrations.py tests/unit/test_integration_api.py
 ```
 
 Run the cumulative Python suite:

@@ -11,7 +11,7 @@ Expected required category counts are one each for architecture, database, deplo
 Focused tests:
 
 ```bash
-PYTHONPATH=src:. pytest -q tests/unit/test_phase27_engineering_knowledge_base.py
+PYTHONPATH=src:. pytest -q tests/unit/test_engineering_knowledge_base.py
 ```
 
 The checked-in corpus is synthetic. Do not replace it with confidential engineering documents, credentials, customer data, or private production exports.

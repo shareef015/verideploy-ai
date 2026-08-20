@@ -33,7 +33,7 @@
       "name": "load",
       "status": "PASS",
       "evidence": [
-        "tests/load/test_phase72_load.py",
+        "tests/load/test_load.py",
         "evals/reports/multimodal-integration.json"
       ],
       "detail": "required evidence present"
@@ -42,7 +42,7 @@
       "name": "chaos",
       "status": "PASS",
       "evidence": [
-        "tests/chaos/test_phase72_chaos.py",
+        "tests/chaos/test_chaos.py",
         "evals/reports/platform-integration-reliability.json"
       ],
       "detail": "required evidence present"

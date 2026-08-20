@@ -1,7 +1,7 @@
 from pathlib import Path
 
 
-def test_phase18_migration_has_run_event_tables_and_forced_rls():
+def test_langgraph_runtime_migration_has_run_event_tables_and_forced_rls():
     text = Path("src/verideploy/database/migrations/versions/0006_phase18_langgraph_runtime.py").read_text()
     assert 'revision = "0006_phase18_langgraph_runtime"' in text
     assert 'down_revision = "0005_phase17_video_evidence"' in text

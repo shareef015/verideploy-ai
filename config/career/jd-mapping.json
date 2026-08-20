@@ -22,7 +22,7 @@
           "src/verideploy/graphs/runtime.py"
         ],
         "tests": [
-          "tests/orchestration/test_phase77_agentic_orchestration_checkpoint.py"
+          "tests/orchestration/test_agentic_orchestration_checkpoint.py"
         ],
         "reports": [
           "evals/reports/agentic-orchestration.json"
@@ -39,7 +39,7 @@
           "apps/gateway/src/main.ts"
         ],
         "tests": [
-          "tests/architecture/test_phase82_final_production_technology_architecture.py"
+          "tests/architecture/test_final_production_technology_architecture.py"
         ],
         "reports": [
           "evals/reports/final-production-architecture.json"
@@ -56,7 +56,7 @@
           "src/verideploy/rag/embeddings/openai_provider.py"
         ],
         "tests": [
-          "tests/unit/test_phase20_rag_retrieval_modes.py"
+          "tests/unit/test_rag_retrieval_modes.py"
         ],
         "reports": [
           "evals/reports/llm-quality-metrics.json"
@@ -73,7 +73,7 @@
           "src/verideploy/rag/orchestration/service.py"
         ],
         "tests": [
-          "tests/rag/test_phase76_rag_integration_performance.py"
+          "tests/rag/test_rag_integration_performance.py"
         ],
         "reports": [
           "evals/reports/rag-performance.json"
@@ -90,7 +90,7 @@
           "src/verideploy/agents/supervisor.py"
         ],
         "tests": [
-          "tests/orchestration/test_phase77_agentic_orchestration_checkpoint.py"
+          "tests/orchestration/test_agentic_orchestration_checkpoint.py"
         ],
         "reports": [
           "evals/reports/agentic-orchestration.json"
@@ -107,7 +107,7 @@
           "src/verideploy/graphs/runtime.py"
         ],
         "tests": [
-          "tests/unit/test_phase39_langgraph_state_reducers.py"
+          "tests/unit/test_langgraph_state_reducers.py"
         ],
         "reports": [
           "evals/reports/agentic-orchestration.json"
@@ -124,7 +124,7 @@
           "src/verideploy/mcp/security.py"
         ],
         "tests": [
-          "tests/unit/test_phase25_mcp_gateway.py"
+          "tests/unit/test_mcp_gateway.py"
         ],
         "reports": [
           "evals/reports/production-operations.json"
@@ -141,7 +141,7 @@
           "src/verideploy/multimodal/checkpoint/integration.py"
         ],
         "tests": [
-          "tests/multimodal/test_phase78_multimodal_integration_checkpoint.py"
+          "tests/multimodal/test_multimodal_integration_checkpoint.py"
         ],
         "reports": [
           "evals/reports/multimodal-integration.json"
@@ -158,7 +158,7 @@
           "apps/gateway/src/main.ts"
         ],
         "tests": [
-          "tests/contracts/test_phase71_final_response_event_schemas.py"
+          "tests/contracts/test_final_response_event_schemas.py"
         ],
         "reports": [
           "evals/reports/final-response-event-schemas.json"
@@ -175,7 +175,7 @@
           "src/verideploy/realtime/flow.py"
         ],
         "tests": [
-          "tests/realtime/test_phase70_complete_realtime_api_flow.py"
+          "tests/realtime/test_complete_realtime_api_flow.py"
         ],
         "reports": [
           "evals/reports/complete-realtime-api-flow.json"
@@ -192,7 +192,7 @@
           "src/verideploy/evaluation/runner.py"
         ],
         "tests": [
-          "tests/release_candidate/test_phase80_release_candidate_checkpoint.py"
+          "tests/release_candidate/test_release_candidate_checkpoint.py"
         ],
         "reports": [
           "evals/reports/release-candidate-benchmarks.json"
@@ -209,7 +209,7 @@
           "src/verideploy/llmops/service.py"
         ],
         "tests": [
-          "tests/unit/test_phase48_llmops_data_platform.py"
+          "tests/unit/test_llmops_data_platform.py"
         ],
         "reports": [
           "evals/reports/release-candidate-benchmarks.json"
@@ -226,7 +226,7 @@
           "src/verideploy/security/architecture.py"
         ],
         "tests": [
-          "tests/security/test_phase62_production_security_architecture.py"
+          "tests/security/test_production_security_architecture.py"
         ],
         "reports": [
           "evals/reports/security.json"
@@ -243,7 +243,7 @@
           "infrastructure/helm/verideploy/templates/workloads.yaml"
         ],
         "tests": [
-          "tests/platform/test_phase66_kubernetes_scalability_resilience.py"
+          "tests/platform/test_kubernetes_scalability_resilience.py"
         ],
         "reports": [
           "evals/reports/production-operations.json"

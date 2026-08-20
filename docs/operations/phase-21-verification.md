@@ -3,7 +3,7 @@
 Run the focused suite with:
 
 ```bash
-pytest -q tests/unit/test_phase21_visual_evidence_agent.py
+pytest -q tests/unit/test_visual_evidence_agent.py
 ```
 
 Run cumulative verification with:

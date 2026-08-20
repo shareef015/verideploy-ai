@@ -5,7 +5,7 @@ Phase 23 verification covers strict RCA schema validation, evidence-reference cl
 Run:
 
 ```bash
-PYTHONPATH=src:. pytest -q tests/unit/test_phase23_rca_agent.py
+PYTHONPATH=src:. pytest -q tests/unit/test_rca_agent.py
 PYTHONPATH=src:. python scripts/benchmark_rca.py
 PYTHONPATH=src:. pytest -q
 ```

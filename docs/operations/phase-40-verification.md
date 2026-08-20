@@ -2,7 +2,7 @@
 
 ## Required checks
 
-1. `PYTHONPATH=src:. pytest -q tests/unit/test_phase40_dynamic_parallelism.py`
+1. `PYTHONPATH=src:. pytest -q tests/unit/test_dynamic_parallelism.py`
 2. `make dynamic-parallel-validate`
 3. Run Phase 18/19/39 regression tests.
 4. Run cumulative Python tests.

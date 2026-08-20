@@ -3,7 +3,7 @@
 Run:
 
 ```bash
-PYTHONPATH=src:. pytest -q tests/unit/test_phase30_immutable_evidence.py
+PYTHONPATH=src:. pytest -q tests/unit/test_immutable_evidence.py
 PYTHONPATH=src:. pytest -q
 python -m compileall -q src services
 ```

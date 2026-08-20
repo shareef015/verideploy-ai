@@ -23,7 +23,7 @@
     ],
     "graph": [
       "tests/unit/test_phase39_langgraph_state.py",
-      "tests/unit/test_phase40_dynamic_parallelism.py"
+      "tests/unit/test_dynamic_parallelism.py"
     ],
     "agent": [
       "tests/agent"

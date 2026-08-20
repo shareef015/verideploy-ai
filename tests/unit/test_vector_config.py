@@ -6,7 +6,7 @@ from verideploy.database.models.embedding import PHASE12_VECTOR_DIMENSIONS
 from verideploy.database.vector_config import load_vector_index_config, validate_embedding_settings
 
 
-def test_phase12_vector_config_matches_migration_decision() -> None:
+def test_vector_config_matches_migration_decision() -> None:
     config = load_vector_index_config("config/vector-index.json")
     assert config.dimensions == PHASE12_VECTOR_DIMENSIONS == 3072
     assert config.distance == "cosine"

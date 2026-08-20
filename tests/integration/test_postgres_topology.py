@@ -14,7 +14,7 @@ POSTGRES_URL = os.getenv("TEST_POSTGRES_URL")
 pytestmark = pytest.mark.skipif(not POSTGRES_URL, reason="TEST_POSTGRES_URL is not configured")
 
 
-def test_phase28_postgres_topology_persists_idempotently_and_is_tenant_scoped() -> None:
+def test_postgres_topology_persists_idempotently_and_is_tenant_scoped() -> None:
     assert POSTGRES_URL is not None
     cfg = Config("alembic.ini"); cfg.set_main_option("sqlalchemy.url", POSTGRES_URL); command.upgrade(cfg, "head")
     db = DatabaseManager(POSTGRES_URL)

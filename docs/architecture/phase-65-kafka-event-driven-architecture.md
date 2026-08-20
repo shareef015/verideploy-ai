@@ -36,7 +36,7 @@ Run:
 
 ```bash
 PYTHONPATH=src python scripts/benchmark_kafka_architecture.py
-PYTHONPATH=src python -m pytest -q tests/events/test_phase65_kafka_event_driven_architecture.py
+PYTHONPATH=src python -m pytest -q tests/events/test_kafka_event_driven_architecture.py
 ```
 
 The benchmark deliberately sends 100 unique state transitions out of order and then redelivers all 100. Exactly 100 transitions must apply, in sequence, and terminal retry exhaustion must route to the DLQ.

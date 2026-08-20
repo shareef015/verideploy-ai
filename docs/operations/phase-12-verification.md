@@ -35,7 +35,7 @@ Run:
 
 1. make migrate
 2. make db-check
-3. TEST_POSTGRES_URL=<dedicated-postgres-url> pytest -q tests/integration/test_phase12_postgres_pgvector.py
+3. TEST_POSTGRES_URL=<dedicated-postgres-url> pytest -q tests/integration/test_postgres_pgvector.py
 4. make db-backup
 5. Restore the dump into a clean database.
 6. Point DATABASE_URL at the restored database and run make db-restore-verify.

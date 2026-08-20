@@ -99,13 +99,13 @@ metadata-filter-validate:
 	PYTHONPATH=src:. python scripts/validate_metadata_filters.py
 
 self-corrective-rag-validate:
-	PYTHONPATH=src:. pytest -q tests/unit/test_phase36_self_corrective_rag.py
+	PYTHONPATH=src:. pytest -q tests/unit/test_self_corrective_rag.py
 
 hallucination-protection-validate:
 	PYTHONPATH=src:. python scripts/validate_hallucination_protection.py
 
 citation-architecture-validate:
-	PYTHONPATH=src:. pytest -q tests/unit/test_phase38_citation_architecture.py
+	PYTHONPATH=src:. pytest -q tests/unit/test_citation_architecture.py
 
 langgraph-state-validate:
 	PYTHONPATH=src:. python scripts/validate_langgraph_state.py

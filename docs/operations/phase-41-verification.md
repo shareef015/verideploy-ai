@@ -4,14 +4,14 @@ Run:
 
 ```bash
 make human-approval-validate
-pytest -q tests/unit/test_phase41_human_approval.py
+pytest -q tests/unit/test_human_approval.py
 pytest -q
 ```
 
 When a PostgreSQL test database is available:
 
 ```bash
-TEST_POSTGRES_URL=postgresql+psycopg://... pytest -q tests/integration/test_phase41_postgres_human_approval.py
+TEST_POSTGRES_URL=postgresql+psycopg://... pytest -q tests/integration/test_postgres_human_approval.py
 ```
 
 The live PostgreSQL test verifies migration-to-head, RLS isolation, row-lock/version concurrency, a single terminal audit event, append-only audit history, and rejection of a naked `approved` SQL update without a matching signed event.

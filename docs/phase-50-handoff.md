@@ -11,7 +11,7 @@ Phase 50 is complete and cumulative through Phases 1–50. OpenTelemetry is impl
 - `infrastructure/observability/tempo.yaml`
 - `docs/architecture/phase-50-opentelemetry-across-all-services.md`
 - `docs/decisions/ADR-0032-opentelemetry-is-the-cross-service-trace-standard.md`
-- `tests/unit/test_phase50_opentelemetry.py`
+- `tests/unit/test_opentelemetry.py`
 - `scripts/validate_opentelemetry.py`
 
 ## Trace architecture

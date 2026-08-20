@@ -1,6 +1,6 @@
 # Phase 43 Verification
 
-Run `make api-boundary-validate` and `pytest -q tests/unit/test_phase43_api_boundary.py`.
+Run `make api-boundary-validate` and `pytest -q tests/unit/test_api_boundary.py`.
 
 Production/staging must use a strong `APP_SECRET_KEY` and should set a distinct `INTERNAL_SERVICE_AUTH_SECRET`. The AI service must not publish port 8000 externally. Gateway retries are bounded and mutation calls that are not intrinsically idempotent must set `retry:false`.
 

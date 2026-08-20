@@ -1,6 +1,6 @@
 # Phase 38 verification
 
-Run `make citation-architecture-validate` for deterministic unit coverage. With `TEST_POSTGRES_URL` set, run `pytest -q tests/integration/test_phase38_postgres_citation_architecture.py` to verify real migration/RLS/append-only behavior.
+Run `make citation-architecture-validate` for deterministic unit coverage. With `TEST_POSTGRES_URL` set, run `pytest -q tests/integration/test_postgres_citation_architecture.py` to verify real migration/RLS/append-only behavior.
 
 Operational checks:
 

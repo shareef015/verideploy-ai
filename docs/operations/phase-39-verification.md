@@ -3,12 +3,12 @@
 Run:
 
 ```bash
-PYTHONPATH=src:. pytest -q tests/unit/test_phase39_langgraph_state_reducers.py
+PYTHONPATH=src:. pytest -q tests/unit/test_langgraph_state_reducers.py
 make langgraph-state-validate
 PYTHONPATH=src:. pytest -q
 ```
 
-With a provisioned PostgreSQL database, set `TEST_POSTGRES_URL` and run `tests/integration/test_phase39_postgres_saved_state.py`. That integration test migrates to head, persists a state snapshot, verifies cross-tenant invisibility, and checks that direct SQL mutation is rejected.
+With a provisioned PostgreSQL database, set `TEST_POSTGRES_URL` and run `tests/integration/test_postgres_saved_state.py`. That integration test migrates to head, persists a state snapshot, verifies cross-tenant invisibility, and checks that direct SQL mutation is rejected.
 
 Offline Alembic verification must include upgrade through `0021_phase39_langgraph_state_reducers` and downgrade `0021 → 0020`.
 

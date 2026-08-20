@@ -5,7 +5,7 @@ from fastapi.testclient import TestClient
 from services.ai.main import app
 from services.ai.mcp_gateway import get_mcp_gateway
 from verideploy.mcp.contracts import MCPPermission
-from tests.unit.test_phase25_mcp_gateway import build
+from tests.unit.test_mcp_gateway import build
 
 
 def test_mcp_private_api_auth_and_invoke():

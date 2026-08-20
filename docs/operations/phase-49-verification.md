@@ -9,7 +9,7 @@ Dataset export additionally requires `LANGSMITH_DATASET_EXPORT_ENABLED=true` and
 ## Operational checks
 
 - `make langsmith-integration-validate`
-- `pytest -q tests/unit/test_phase49_langsmith_integration.py`
+- `pytest -q tests/unit/test_langsmith_integration.py`
 - `GET /internal/v1/langsmith/status` from a trusted service identity
 
 The status endpoint never returns the API key.

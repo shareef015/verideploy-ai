@@ -1,7 +1,7 @@
 from pathlib import Path
 
 
-def test_phase13_migration_has_fts_gin_rls_and_is_reversible():
+def test_hybrid_retrieval_migration_has_fts_gin_rls_and_is_reversible():
     source = Path("src/verideploy/database/migrations/versions/0002_phase13_hybrid_retrieval.py").read_text()
     assert 'down_revision = "0001_phase12_pgvector"' in source
     assert "search_vector tsvector GENERATED ALWAYS" in source

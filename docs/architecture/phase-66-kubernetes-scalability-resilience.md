@@ -28,7 +28,7 @@ Run:
 
 ```bash
 PYTHONPATH=src python scripts/validate_kubernetes.py
-PYTHONPATH=src pytest -q tests/platform/test_phase66_kubernetes_scalability_resilience.py
+PYTHONPATH=src pytest -q tests/platform/test_kubernetes_scalability_resilience.py
 ```
 
 When Helm and a target cluster are available, operators should additionally run `helm lint`, `helm template`, server-side dry-run, and a real controlled pod-eviction drill before production promotion. The repository CI gate remains paid-service-free and cluster-independent.

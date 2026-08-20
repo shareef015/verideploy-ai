@@ -322,11 +322,11 @@ git commit -m "refactor: strip phase-N branding from evals/reports and evals/fix
 
 **Files:**
 - Modify: 111 files under `tests/` (renamed)
-- Modify (explicit manual fix, in addition to the sweep): `tests/unit/test_phase25_mcp_api.py` → after rename, its `from tests.unit.test_phase25_mcp_gateway import build` must read `from tests.unit.test_mcp_gateway import build`
-- Modify (explicit manual fix): `tests/platform/test_phase66_kubernetes_scalability_resilience.py` and its target `scripts/validate_kubernetes.py` (already renamed in Task 3) — after rename, `from scripts.validate_kubernetes import CHART, validate` must read `from scripts.validate_kubernetes import CHART, validate`
+- Modify (explicit manual fix, in addition to the sweep): `tests/unit/test_mcp_api.py` → after rename, its `from tests.unit.test_mcp_gateway import build` must read `from tests.unit.test_mcp_gateway import build`
+- Modify (explicit manual fix): `tests/platform/test_kubernetes_scalability_resilience.py` and its target `scripts/validate_kubernetes.py` (already renamed in Task 3) — after rename, `from scripts.validate_kubernetes import CHART, validate` must read `from scripts.validate_kubernetes import CHART, validate`
 
 **Interfaces:**
-- Consumes: `dephase_tool.py`. The tool's basename/stem substitution already rewrites `test_phase25_mcp_gateway` → `test_mcp_gateway` and `validate_kubernetes` → `validate_kubernetes` as plain string replacements, so the import lines should already be correct after the sweep — this step is to *verify* that, not to hand-edit blind.
+- Consumes: `dephase_tool.py`. The tool's basename/stem substitution already rewrites `test_mcp_gateway` → `test_mcp_gateway` and `validate_kubernetes` → `validate_kubernetes` as plain string replacements, so the import lines should already be correct after the sweep — this step is to *verify* that, not to hand-edit blind.
 
 - [ ] **Step 1: Rename and sweep**
 

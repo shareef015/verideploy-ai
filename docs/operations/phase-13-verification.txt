@@ -32,6 +32,6 @@ Skipped / not claimed as passed
 Provisioned-environment gate
 
 1. make migrate
-2. TEST_POSTGRES_URL=<isolated-postgres-url> pytest -q tests/integration/test_phase12_postgres_pgvector.py tests/integration/test_phase13_postgres_hybrid_retrieval.py
+2. TEST_POSTGRES_URL=<isolated-postgres-url> pytest -q tests/integration/test_postgres_pgvector.py tests/integration/test_postgres_hybrid_retrieval.py
 3. make retrieval-benchmark
 4. make lint && make typecheck && make test
