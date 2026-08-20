@@ -39,14 +39,14 @@ class PostgresRetrievalPipelineTraceRepository(RetrievalPipelineTraceRepository)
     def save(self, trace: RetrievalPipelineTrace) -> None:
         payload = trace.model_dump(mode="json")
         sql = text("""
-            INSERT INTO retrieval_pipeline_runs_phase34
+            INSERT INTO retrieval_pipeline_runs
                 (run_id, tenant_id, pipeline_version, input_sha256, query_text, trace_json, context_sha256)
             VALUES
                 (:run_id, :tenant_id, :pipeline_version, :input_sha256, :query_text, CAST(:trace_json AS jsonb), :context_sha256)
             ON CONFLICT (run_id) DO NOTHING
         """)
         decision_sql = text("""
-            INSERT INTO retrieval_ranking_decisions_phase34
+            INSERT INTO retrieval_ranking_decisions
                 (decision_id, run_id, tenant_id, stage, ordinal, chunk_id, document_id, source_key,
                  input_score, output_score, action, reason_code, components, source_version)
             VALUES
@@ -65,7 +65,7 @@ class PostgresRetrievalPipelineTraceRepository(RetrievalPipelineTraceRepository)
                 "context_sha256": trace.context_sha256,
             })
             for item in trace.decisions:
-                decision_id = uuid5(NAMESPACE_URL, f"phase34:{trace.run_id}:{item.stage.value}:{item.ordinal}")
+                decision_id = uuid5(NAMESPACE_URL, f":{trace.run_id}:{item.stage.value}:{item.ordinal}")
                 session.execute(decision_sql, {
                     "decision_id": str(decision_id), "run_id": str(trace.run_id), "tenant_id": str(trace.tenant_id),
                     "stage": item.stage.value, "ordinal": item.ordinal,
@@ -79,7 +79,7 @@ class PostgresRetrievalPipelineTraceRepository(RetrievalPipelineTraceRepository)
             session.commit()
 
     def get(self, *, tenant_id: UUID, run_id: UUID) -> RetrievalPipelineTrace | None:
-        sql = text("SELECT trace_json FROM retrieval_pipeline_runs_phase34 WHERE tenant_id=:tenant_id AND run_id=:run_id")
+        sql = text("SELECT trace_json FROM retrieval_pipeline_runs WHERE tenant_id=:tenant_id AND run_id=:run_id")
         with self.db.tenant_session(tenant_id) as session:
             value = session.scalar(sql, {"tenant_id": str(tenant_id), "run_id": str(run_id)})
         return RetrievalPipelineTrace.model_validate(value) if value is not None else None

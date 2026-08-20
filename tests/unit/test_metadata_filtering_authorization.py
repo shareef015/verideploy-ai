@@ -75,10 +75,10 @@ def test_keyword_vector_visual_and_preview_sql_apply_all_security_dimensions():
 def test_visual_and_preview_permission_names_are_distinct():
     assert READ_PERMISSION != VISUAL_PERMISSION != PREVIEW_PERMISSION
 
-def test_phase35_migration_adds_metadata_indexes_and_is_reversible():
-    text=Path("src/verideploy/database/migrations/versions/0017_phase35_metadata_filtering_authorization.py").read_text()
+def test_migration_adds_metadata_indexes_and_is_reversible():
+    text=Path("src/verideploy/database/migrations/versions/0017_metadata_filtering_authorization.py").read_text()
     assert 'down_revision="0016_phase34_retrieval_pipeline_orchestration"' in text
-    for token in ("severity","team","occurred_at","required_permission","ix_phase35_retrieval_metadata","ix_phase35_visual_metadata"):
+    for token in ("severity","team","occurred_at","required_permission","ix_retrieval_metadata","ix_visual_metadata"):
         assert token in text
     assert "drop_column" in text and "drop_index" in text
 
@@ -105,7 +105,7 @@ async def test_legacy_and_structured_filters_conflict_to_empty_scope():
     from verideploy.rag.retrieval.service import HybridRetriever
     from verideploy.rag.retrieval.schemas import RetrievalQuery, RetrievalDocumentKind
     class Repo:
-        supports_phase35_scope=True
+        supports_scope=True
         def keyword_search(self,**kwargs):
             assert kwargs["effective_scope"].empty
             return []

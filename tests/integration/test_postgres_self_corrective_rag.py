@@ -31,19 +31,19 @@ def _result():
     return SelfCorrectiveRAGResult(run_id=uuid4(),tenant_id=TENANT,answerable=True,qualified=False,stop_reason=StopReason.SUFFICIENT_EVIDENCE,attempts=[attempt],final_retrieval=pipeline,controller_version="1.0.0")
 
 
-def test_phase36_postgres_history_is_tenant_scoped_and_append_only():
+def test_postgres_history_is_tenant_scoped_and_append_only():
     assert URL
     cfg=Config("alembic.ini"); cfg.set_main_option("sqlalchemy.url",URL); command.upgrade(cfg,"head")
     db=DatabaseManager(URL)
     try:
         with db.engine.begin() as conn:
-            for tenant,slug in ((TENANT,"phase36"),(OTHER,"phase36-other")):
+            for tenant,slug in ((TENANT,"postgres-self-corrective-rag"),(OTHER,"other")):
                 conn.execute(text("INSERT INTO tenants (tenant_id,slug,display_name) VALUES (:id,:slug,:name) ON CONFLICT (tenant_id) DO NOTHING"),{"id":str(tenant),"slug":f"{slug}-{str(tenant)[:8]}","name":slug})
         payload=_result(); repo=PostgresSelfCorrectiveRunRepository(db); repo.save(payload)
         assert repo.get(tenant_id=TENANT,run_id=payload.run_id)==payload
         assert repo.get(tenant_id=OTHER,run_id=payload.run_id) is None
         with pytest.raises(DBAPIError):
             with db.session(tenant_id=TENANT) as session:
-                session.execute(text("UPDATE self_corrective_rag_runs_phase36 SET stop_reason='tampered' WHERE run_id=:run"),{"run":str(payload.run_id)})
+                session.execute(text("UPDATE self_corrective_rag_runs SET stop_reason='tampered' WHERE run_id=:run"),{"run":str(payload.run_id)})
     finally:
         db.dispose()

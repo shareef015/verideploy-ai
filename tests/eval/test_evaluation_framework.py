@@ -14,7 +14,7 @@ DATASET = Path("evals/datasets/smoke/v1.jsonl")
 
 def test_versioned_dataset_loads_and_hashes() -> None:
     cases = load_jsonl_dataset(DATASET)
-    manifest = build_dataset_manifest(path=DATASET, dataset_id="phase51-smoke", version="1.0.0", description="smoke")
+    manifest = build_dataset_manifest(path=DATASET, dataset_id="smoke", version="1.0.0", description="smoke")
     assert len(cases) == 2
     assert manifest.case_count == 2
     assert len(manifest.content_sha256) == 64
@@ -33,7 +33,7 @@ def test_smoke_run_persists_results(tmp_path: Path) -> None:
     store = EvaluationStore(tmp_path / "eval.sqlite3")
     run, results = run_evaluation(
         dataset_path=DATASET,
-        dataset_id="phase51-smoke",
+        dataset_id="smoke",
         dataset_version="1.0.0",
         description="smoke",
         evaluator_names=["exact_fields", "required_fields"],

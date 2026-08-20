@@ -1,8 +1,8 @@
 from pathlib import Path
 
 
-def test_phase17_migration_contract():
-    text = Path("src/verideploy/database/migrations/versions/0005_phase17_video_evidence.py").read_text()
+def test_migration_contract():
+    text = Path("src/verideploy/database/migrations/versions/0005_video_evidence.py").read_text()
     assert 'revision = "0005_phase17_video_evidence"' in text
     assert 'down_revision = "0004_phase16_audio_transcription"' in text
     for table in ("video_evidence_jobs", "video_keyframes", "video_timeline_events"):

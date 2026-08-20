@@ -21,7 +21,7 @@ class VectorIndexConfig(BaseModel):
     migration_revision: str
 
     @model_validator(mode="after")
-    def validate_phase12(self) -> "VectorIndexConfig":
+    def validate(self) -> "VectorIndexConfig":
         if self.distance != "cosine":
             raise ValueError("Phase 12 supports cosine distance only")
         if self.index_type != "hnsw":

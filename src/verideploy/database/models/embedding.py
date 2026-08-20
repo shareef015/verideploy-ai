@@ -9,7 +9,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from verideploy.database.base import Base
 from verideploy.database.vector_type import Vector
 
-PHASE12_VECTOR_DIMENSIONS = 3072  # immutable migration/index decision, not runtime routing logic
+VECTOR_DIMENSIONS = 3072  # immutable migration/index decision, not runtime routing logic
 
 
 class EmbeddingModel(Base):
@@ -32,7 +32,7 @@ class VectorEmbedding(Base):
     __tablename__ = "vector_embeddings"
     __table_args__ = (
         UniqueConstraint("tenant_id", "content_hash", "embedding_model_id", name="uq_vector_embedding_content"),
-        CheckConstraint(f"dimensions = {PHASE12_VECTOR_DIMENSIONS}", name="ck_vector_embeddings_phase12_dimensions"),
+        CheckConstraint(f"dimensions = {VECTOR_DIMENSIONS}", name="ck_vector_embeddings_dimensions"),
         Index("ix_vector_embeddings_tenant_model", "tenant_id", "embedding_model_id"),
     )
 
@@ -46,6 +46,6 @@ class VectorEmbedding(Base):
     state: Mapped[str] = mapped_column(String(24), nullable=False)
     provider_request_id: Mapped[str | None] = mapped_column(String(256), nullable=True)
     prompt_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
-    embedding: Mapped[list[float]] = mapped_column(Vector(PHASE12_VECTOR_DIMENSIONS), nullable=False)
+    embedding: Mapped[list[float]] = mapped_column(Vector(VECTOR_DIMENSIONS), nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)

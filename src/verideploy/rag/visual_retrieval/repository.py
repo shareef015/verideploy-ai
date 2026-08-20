@@ -6,7 +6,7 @@ from verideploy.database.session import DatabaseManager
 from verideploy.rag.visual_retrieval.schemas import RenderedPage, VisualBackend, VisualIndexRecord
 
 class PostgresVisualPageRepository:
-    supports_phase35_scope=True
+    supports_scope=True
     def __init__(self, db: DatabaseManager) -> None:
         if db.engine.dialect.name != "postgresql": raise ValueError("PostgreSQL required")
         self.db=db

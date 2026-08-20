@@ -26,7 +26,7 @@ def common():
     now = datetime(2026, 8, 17, 18, 0, tzinfo=timezone.utc)
     return {
         "confidence_inputs": ConfidenceInputs(source_confidence=0.9, extraction_confidence=0.8, temporal_confidence=1.0, corroboration_count=2, notes=("direct",)),
-        "provenance": Provenance(producer="phase29-importer", method="normalized", source_locator=SourceLocator(source_system="synthetic-incidents", source_record_id="INC-001", locator="incident://INC-001/log/1", observed_at=now), correlation_id="corr-phase30", synthetic=True),
+        "provenance": Provenance(producer="importer", method="normalized", source_locator=SourceLocator(source_system="synthetic-incidents", source_record_id="INC-001", locator="incident://INC-001/log/1", observed_at=now), correlation_id="corr", synthetic=True),
         "retention": RetentionPolicy(retention_class=RetentionClass.AUDIT, retain_until=now + timedelta(days=2555), legal_hold=False),
     }
 
@@ -139,12 +139,12 @@ def test_api_rejects_untrusted_service_and_body_tenant_mismatch():
 
 
 def test_migration_contains_immutable_triggers_rls_and_deferred_lineage_gate():
-    text=Path("src/verideploy/database/migrations/versions/0012_phase30_immutable_evidence.py").read_text()
-    for token in ("evidence_versions_phase30","evidence_parent_links_phase30","FORCE ROW LEVEL SECURITY","phase30_forbid_evidence_mutation","BEFORE UPDATE OR DELETE","DEFERRABLE INITIALLY DEFERRED","phase30_validate_evidence_lineage","version_of"):
+    text=Path("src/verideploy/database/migrations/versions/0012_immutable_evidence.py").read_text()
+    for token in ("evidence_versions","evidence_parent_links","FORCE ROW LEVEL SECURITY","forbid_evidence_mutation","BEFORE UPDATE OR DELETE","DEFERRABLE INITIALLY DEFERRED","validate_evidence_lineage","version_of"):
         assert token in text
 
 
-def test_phase30_routes_registered_in_private_openapi():
+def test_routes_registered_in_private_openapi():
     paths=app.openapi()["paths"]
     assert "/internal/v1/evidence" in paths
     assert "/internal/v1/evidence/{evidence_id}/versions" in paths

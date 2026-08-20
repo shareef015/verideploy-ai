@@ -8,7 +8,7 @@ from .registry import MCPToolRegistry
 from .repository import SqlAlchemyMCPAuditRepository
 from .servers.adapters import HybridKnowledgeBackend, InvestigationIncidentBackend, RuntimeMonitoringBackend
 from verideploy.integrations.factory import create_engineering_integrations
-from .servers.tools import register_phase25_tools
+from .servers.tools import register_tools
 
 
 def create_mcp_gateway(*, retriever, runtime_prometheus) -> SecureMCPGateway:
@@ -21,7 +21,7 @@ def create_mcp_gateway(*, retriever, runtime_prometheus) -> SecureMCPGateway:
                                        candidate_k=settings.retrieval_candidate_k)
     monitoring = RuntimeMonitoringBackend(runtime_prometheus)
     incidents = InvestigationIncidentBackend(SqlAlchemyInvestigationRepository(settings.database_url, create_schema=settings.app_env == "test"))
-    register_phase25_tools(registry, github=github, monitoring=monitoring, knowledge=knowledge, incident=incidents,
+    register_tools(registry, github=github, monitoring=monitoring, knowledge=knowledge, incident=incidents,
                            timeout_seconds=settings.mcp_tool_timeout_seconds)
     audit = SqlAlchemyMCPAuditRepository(settings.database_url, create_schema=settings.app_env == "test")
     return SecureMCPGateway(

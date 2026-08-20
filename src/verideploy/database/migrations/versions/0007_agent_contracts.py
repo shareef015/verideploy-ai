@@ -1,4 +1,4 @@
-"""Phase 19 supervisor, planner, and agent-run persistence."""
+"""Supervisor, planner, and agent-run persistence."""
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
@@ -21,7 +21,7 @@ def _tenant_policy(table: str) -> None:
 
 def upgrade() -> None:
     op.create_table(
-        "agent_runs_phase19",
+        "agent_runs",
         sa.Column("run_id", sa.Uuid(), primary_key=True),
         sa.Column("tenant_id", sa.Uuid(), sa.ForeignKey("tenants.tenant_id", ondelete="CASCADE"), nullable=False),
         sa.Column("agent_name", sa.String(40), nullable=False),
@@ -39,10 +39,10 @@ def upgrade() -> None:
         sa.CheckConstraint("max_tool_calls >= 0 AND max_tool_calls <= 64", name="ck_agent_run_max_tool_calls"),
         sa.CheckConstraint("tool_calls_used >= 0 AND tool_calls_used <= max_tool_calls", name="ck_agent_run_tool_budget"),
     )
-    op.create_index("ix_agent_runs_tenant_agent_status", "agent_runs_phase19", ["tenant_id", "agent_name", "status", "updated_at"])
-    op.create_index("ix_agent_runs_prompt_hash", "agent_runs_phase19", ["tenant_id", "prompt_sha256", "input_sha256"])
-    _tenant_policy("agent_runs_phase19")
+    op.create_index("ix_agent_runs_tenant_agent_status", "agent_runs", ["tenant_id", "agent_name", "status", "updated_at"])
+    op.create_index("ix_agent_runs_prompt_hash", "agent_runs", ["tenant_id", "prompt_sha256", "input_sha256"])
+    _tenant_policy("agent_runs")
 
 
 def downgrade() -> None:
-    op.drop_table("agent_runs_phase19")
+    op.drop_table("agent_runs")

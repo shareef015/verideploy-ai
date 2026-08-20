@@ -118,7 +118,7 @@
   "deployments": [
     {
       "cluster": "nexuspay-development-eu1",
-      "commit_sha": "6b5d26ff29205e0960e08fd9a947064c4777f2a7",
+      "commit_sha": "f4003db1e4a27015a2994b40ff7a66f86ee955f4",
       "deployed_at": "2026-08-15T09:00:00Z",
       "deployment_id": "ff0d00a5-8dcd-59be-9bb5-b92cdcb9973f",
       "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
@@ -130,7 +130,7 @@
     },
     {
       "cluster": "nexuspay-staging-eu1",
-      "commit_sha": "394f5e47bb56255745d74ab7570115956841ef95",
+      "commit_sha": "ec81d5e93f9b7f2874cdb6802fe712874c8b1f3b",
       "deployed_at": "2026-08-16T12:00:00Z",
       "deployment_id": "d89ccb98-58d8-535e-a202-9c73a538a0f5",
       "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
@@ -142,7 +142,7 @@
     },
     {
       "cluster": "nexuspay-production-eu1",
-      "commit_sha": "9cf7bef07e44dd74d1a7f2ffbf34a6cc8feef8bf",
+      "commit_sha": "d42e5c859438e62b85c2d3290c986e75d69c201d",
       "deployed_at": "2026-08-17T06:00:00Z",
       "deployment_id": "811fcb9a-b6c5-59f5-bcd7-4df5036cef17",
       "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
@@ -154,7 +154,7 @@
     },
     {
       "cluster": "nexuspay-development-eu1",
-      "commit_sha": "db96616888dc1dfb249e689f7a3c61c19b5e6133",
+      "commit_sha": "9454cd589dfc9d6989dc90386af86afb96cd83c0",
       "deployed_at": "2026-08-15T09:00:00Z",
       "deployment_id": "3058e91e-4029-5c4e-bc2a-e78b099352c4",
       "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
@@ -166,7 +166,7 @@
     },
     {
       "cluster": "nexuspay-staging-eu1",
-      "commit_sha": "7362c2d739aaf1314f7cf7690ab6a06fdc54ec0f",
+      "commit_sha": "e3bb66fa614e7a2c6d5a4dfce4f2ffef8d8a707b",
       "deployed_at": "2026-08-16T12:00:00Z",
       "deployment_id": "b924c3b9-837e-56e0-8929-4889b53ec14b",
       "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
@@ -178,7 +178,7 @@
     },
     {
       "cluster": "nexuspay-production-eu1",
-      "commit_sha": "d17d7068f06420fcf5cda0a211164c46f2e8f3aa",
+      "commit_sha": "4b9ea3ef80c22daa4fe71896aaba7bbc554dc9dd",
       "deployed_at": "2026-08-17T06:00:00Z",
       "deployment_id": "09d6b782-5596-5a9d-b06a-7b314b605060",
       "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
@@ -190,7 +190,7 @@
     },
     {
       "cluster": "nexuspay-development-eu1",
-      "commit_sha": "5a3a5954b3a6be98a7a9b5653dd349bf9204add9",
+      "commit_sha": "ac00ad98f51ea8d8eccd60ae6b5139b9e6323f1a",
       "deployed_at": "2026-08-15T09:00:00Z",
       "deployment_id": "981a3951-91c1-5f2d-a70b-149279d3590d",
       "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
@@ -202,7 +202,7 @@
     },
     {
       "cluster": "nexuspay-staging-eu1",
-      "commit_sha": "8befd57bc60670669c67724bec287adca881ddb6",
+      "commit_sha": "1e55cb0f2b9ae45d1ab1530b1bd2329621977f0a",
       "deployed_at": "2026-08-16T12:00:00Z",
       "deployment_id": "e5b0710e-48fb-5780-a3e1-2d2d09f63776",
       "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
@@ -214,7 +214,7 @@
     },
     {
       "cluster": "nexuspay-production-eu1",
-      "commit_sha": "ebf1ce9c36dea10376f06303ed4217517ab9aee4",
+      "commit_sha": "c479ea508fb217bf01d7baff4dc97fc376f0b749",
       "deployed_at": "2026-08-17T06:00:00Z",
       "deployment_id": "439c8ba2-ef40-5926-970f-446b63d25619",
       "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
@@ -226,7 +226,7 @@
     },
     {
       "cluster": "nexuspay-development-eu1",
-      "commit_sha": "db51b82acc9bf583a3755d2ecef48e5d5af7c01f",
+      "commit_sha": "60feea950e74d6a5d757dda097afc5d0a733704f",
       "deployed_at": "2026-08-15T09:00:00Z",
       "deployment_id": "07d74b95-0db1-5c49-a9f5-a490b255876a",
       "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
@@ -238,7 +238,7 @@
     },
     {
       "cluster": "nexuspay-staging-eu1",
-      "commit_sha": "cdca4f7127891fa776810bf777af6e562f10b33c",
+      "commit_sha": "da32a54d3ee23ed97140d2672cab6fb40498e4aa",
       "deployed_at": "2026-08-16T12:00:00Z",
       "deployment_id": "2f1bc8a0-b569-5e75-8676-ea9abe86a707",
       "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
@@ -250,7 +250,7 @@
     },
     {
       "cluster": "nexuspay-production-eu1",
-      "commit_sha": "c191150409650663af4115ff9d37cc905ef9bbec",
+      "commit_sha": "dfb141396393cab69ae9832487cf3e1ff875004c",
       "deployed_at": "2026-08-17T06:00:00Z",
       "deployment_id": "2d22a7f7-d1af-5bbe-b56d-b3df3654b7b3",
       "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
@@ -262,7 +262,7 @@
     },
     {
       "cluster": "nexuspay-development-eu1",
-      "commit_sha": "e5dae246abbb4abc5ec9b92afe4b254f44005a28",
+      "commit_sha": "1231d7d96760af4890c021e0ec324562438a6f9d",
       "deployed_at": "2026-08-15T09:00:00Z",
       "deployment_id": "8544dcc2-b811-595e-a064-3df62e6f3082",
       "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
@@ -274,7 +274,7 @@
     },
     {
       "cluster": "nexuspay-staging-eu1",
-      "commit_sha": "f8bc3d11dd2a469db583c2e661e4276588724f10",
+      "commit_sha": "edaf0bda570d720ce3e81a30c50c8f6879737e51",
       "deployed_at": "2026-08-16T12:00:00Z",
       "deployment_id": "40cb401f-3770-51d3-937e-ef19f53c63ad",
       "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
@@ -286,7 +286,7 @@
     },
     {
       "cluster": "nexuspay-production-eu1",
-      "commit_sha": "84ac666f95db736e01fb8c0435498118cdf4905d",
+      "commit_sha": "68087c023818e18c276ce57b56d0e9aa19c5c99f",
       "deployed_at": "2026-08-17T06:00:00Z",
       "deployment_id": "4fd089be-87ec-5869-8307-58000d5e8ad7",
       "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
@@ -298,7 +298,7 @@
     },
     {
       "cluster": "nexuspay-development-eu1",
-      "commit_sha": "1429df8753bd7d0aed95d3b580b6e69104289286",
+      "commit_sha": "b9389e4ffa2c3a5825f4513f5ee50e395cc512d0",
       "deployed_at": "2026-08-15T09:00:00Z",
       "deployment_id": "f3540d86-011d-5d7e-ba92-0afa72bb7ec1",
       "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
@@ -310,7 +310,7 @@
     },
     {
       "cluster": "nexuspay-staging-eu1",
-      "commit_sha": "fe307e1c5e080377da904e936a211432e83315d5",
+      "commit_sha": "ae47fc5d44dd057a4347635246eb6034199ed42c",
       "deployed_at": "2026-08-16T12:00:00Z",
       "deployment_id": "bb0a17b8-ba8d-5f44-bff5-c19c05b78a44",
       "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
@@ -322,7 +322,7 @@
     },
     {
       "cluster": "nexuspay-production-eu1",
-      "commit_sha": "fa59279e0841d1ae7648806cbfb72070023b96bb",
+      "commit_sha": "bad44155bf183204e37e82fc63857ef5a224a463",
       "deployed_at": "2026-08-17T06:00:00Z",
       "deployment_id": "a53e8408-48af-5ce3-bb6c-d86cf240ec34",
       "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
@@ -334,7 +334,7 @@
     },
     {
       "cluster": "nexuspay-development-eu1",
-      "commit_sha": "24288a7bb2865453f8a1c0ed192ab85f6b2e893c",
+      "commit_sha": "ee06c0ea2e2af7e5dfb07e2fd7bf224a7c4ad0c6",
       "deployed_at": "2026-08-15T09:00:00Z",
       "deployment_id": "71546f2d-991b-5d62-b1f5-d137f0db6825",
       "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
@@ -346,7 +346,7 @@
     },
     {
       "cluster": "nexuspay-staging-eu1",
-      "commit_sha": "67cd0ca3bc6d216c40cd7514dd561dbbdd0f7aba",
+      "commit_sha": "652143a96cfadfd02330b079f4c917e800149cda",
       "deployed_at": "2026-08-16T12:00:00Z",
       "deployment_id": "b1970f55-4376-5a8a-83fa-fa02cdc5ad8a",
       "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
@@ -358,7 +358,7 @@
     },
     {
       "cluster": "nexuspay-production-eu1",
-      "commit_sha": "474fe265cc8137572d874ad2fbfb4527266fb65c",
+      "commit_sha": "dd17253dfeedd7e5a6dc8d3240940d031cfa9b1a",
       "deployed_at": "2026-08-17T06:00:00Z",
       "deployment_id": "f2f73e73-b0a6-5feb-92d3-73b1e1ebddd4",
       "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
@@ -370,7 +370,7 @@
     },
     {
       "cluster": "nexuspay-development-eu1",
-      "commit_sha": "685f2005bc6b086e804950864bfadfb67d5d732d",
+      "commit_sha": "32ba001c87f1949e0ce58a78a6d58df3ec7299fa",
       "deployed_at": "2026-08-15T09:00:00Z",
       "deployment_id": "359ca78c-1071-5ddc-aa21-8f0cdaeb93e2",
       "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
@@ -382,7 +382,7 @@
     },
     {
       "cluster": "nexuspay-staging-eu1",
-      "commit_sha": "3b25d148c60a8345719f58b5dfb2c0a19bee5fff",
+      "commit_sha": "025640cec98bc39b1edd9e2fe1881271523856a8",
       "deployed_at": "2026-08-16T12:00:00Z",
       "deployment_id": "0dbe4b5e-74b3-5a18-a4f1-841790d7b332",
       "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
@@ -394,7 +394,7 @@
     },
     {
       "cluster": "nexuspay-production-eu1",
-      "commit_sha": "8f98c61f3c614682641a1caa8826ea40e08b3b9b",
+      "commit_sha": "a8317320bd51bd298ef9c458cfc570dd132a86f3",
       "deployed_at": "2026-08-17T06:00:00Z",
       "deployment_id": "80a55c51-cc22-516a-a59c-bff6cdb5a164",
       "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
@@ -406,7 +406,7 @@
     },
     {
       "cluster": "nexuspay-development-eu1",
-      "commit_sha": "12bba6ab0286d5752f24c05f5bc5f0edea5cc145",
+      "commit_sha": "bf6179b3bcb504506a6d3d82225b4c959a37b5dc",
       "deployed_at": "2026-08-15T09:00:00Z",
       "deployment_id": "bf8b2537-3c2d-5306-b0c5-9f7ea16c6619",
       "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
@@ -418,7 +418,7 @@
     },
     {
       "cluster": "nexuspay-staging-eu1",
-      "commit_sha": "a9a553a23ca2c2362b4907c804a162c8726f379d",
+      "commit_sha": "15b854c88025bae6695ed1f899aa72c9e13c0f92",
       "deployed_at": "2026-08-16T12:00:00Z",
       "deployment_id": "7ed841ea-7780-5fbd-ab2f-81b388058b7d",
       "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
@@ -430,7 +430,7 @@
     },
     {
       "cluster": "nexuspay-production-eu1",
-      "commit_sha": "df29e7933a613cec4cd1cbe32242544248c3a7b9",
+      "commit_sha": "e82f1017f304067e533187f846a39a6083dd5fc8",
       "deployed_at": "2026-08-17T06:00:00Z",
       "deployment_id": "7e7969b8-2f92-5d24-bc37-3fa061972003",
       "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
@@ -442,7 +442,7 @@
     },
     {
       "cluster": "nexuspay-development-eu1",
-      "commit_sha": "7561f5df16017565ffc9ae148a8e40618ade4711",
+      "commit_sha": "d0cc3a5e7077011a6d050e8a0d8b05ff7af9f4e7",
       "deployed_at": "2026-08-15T09:00:00Z",
       "deployment_id": "5ec09897-605a-5b77-b21a-6276be0803a3",
       "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
@@ -454,7 +454,7 @@
     },
     {
       "cluster": "nexuspay-staging-eu1",
-      "commit_sha": "15e7435ba14cb270ccba9583e36d367a44596233",
+      "commit_sha": "19431e7dcba05bcd78bf2cf0ce8fa830acd7ae30",
       "deployed_at": "2026-08-16T12:00:00Z",
       "deployment_id": "403aaa80-63f9-5ec6-affa-4e7a857fd369",
       "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
@@ -466,7 +466,7 @@
     },
     {
       "cluster": "nexuspay-production-eu1",
-      "commit_sha": "a7f03c9d9d8e14bc5594a913ba08ced9bf8f3440",
+      "commit_sha": "d16b93ef1d05f6707850a06d506c728fbdeae67b",
       "deployed_at": "2026-08-17T06:00:00Z",
       "deployment_id": "da5ad944-6b3e-5cb0-84ae-2fca5ddf0bb8",
       "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
@@ -544,8 +544,8 @@
     }
   ],
   "schema_version": "1.0",
-  "seed_sha256": "0c9b6960249fb95557d68508d74d6d0aa9d1b3f1ad243b8c7dd2d7308cd029c1",
-  "seed_version": "nexuspay-phase28-v1",
+  "seed_sha256": "752445f6036fddab83c2028f6c7d82ae78af72a9f25019cc3211baa3cfe77f44",
+  "seed_version": "nexuspay-v1",
   "services": [
     {
       "description": "Public ingress, request routing, authentication handoff, and correlation IDs.",

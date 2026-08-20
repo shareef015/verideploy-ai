@@ -60,7 +60,7 @@ def test_citation_correctness_and_completeness_detect_different_failures() -> No
     assert citation_correctness(wrong, contexts) == 0.0
 
 
-def test_score_observation_emits_all_phase54_metrics() -> None:
+def test_score_observation_emits_all_metrics() -> None:
     result = score_observation(_observation())
     assert result.context_precision == 0.5
     assert result.context_recall == 1.0

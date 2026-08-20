@@ -13,7 +13,7 @@ from verideploy.graphs.runtime import (
     close_postgres_checkpointer,
     create_postgres_checkpointer,
 )
-from verideploy.graphs.smoke_graph import PHASE18_SMOKE_GRAPH
+from verideploy.graphs.smoke_graph import SMOKE_GRAPH
 
 
 @dataclass
@@ -41,7 +41,7 @@ async def create_production_graph_runtime(settings: Settings) -> ProductionGraph
         statement_timeout_ms=settings.db_statement_timeout_ms,
     )
     registry = GraphRegistry()
-    registry.register(PHASE18_SMOKE_GRAPH)
+    registry.register(SMOKE_GRAPH)
     return ProductionGraphRuntime(
         runtime=LangGraphRuntime(registry=registry, repository=repository, checkpointer=checkpointer, durability=settings.langgraph_durability, saved_state_repository=saved_state_repository),
         database=database,

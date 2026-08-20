@@ -88,8 +88,8 @@ def test_private_api_snapshot_path_and_tenant_authorization():
 
 
 def test_migration_has_relational_indexes_rls_temporal_columns_and_tenant_guard():
-    text=Path("src/verideploy/database/migrations/versions/0013_phase31_evidence_graph.py").read_text()
-    for token in ("graph_entities_phase31","graph_edges_phase31","ix_graph_edges_source","ix_graph_edges_target","ix_graph_edges_temporal","occurred_at","valid_from","valid_to","FORCE ROW LEVEL SECURITY","phase31_validate_graph_edge_tenant","phase31_validate_entity_evidence_tenant"):
+    text=Path("src/verideploy/database/migrations/versions/0013_evidence_graph.py").read_text()
+    for token in ("graph_entities","graph_edges","ix_graph_edges_source","ix_graph_edges_target","ix_graph_edges_temporal","occurred_at","valid_from","valid_to","FORCE ROW LEVEL SECURITY","validate_graph_edge_tenant","validate_entity_evidence_tenant"):
         assert token in text
 
 
@@ -106,20 +106,20 @@ def test_gateway_and_frontend_preserve_public_boundary_and_visualize_lineage():
     assert "Evidence Graph & Lineage" in page and "Typed temporal edges" in page
 
 
-def test_phase31_routes_registered_in_openapi():
+def test_routes_registered_in_openapi():
     paths=app.openapi()["paths"]
     assert "/internal/v1/evidence-graph/entities" in paths
     assert "/internal/v1/evidence-graph/edges" in paths
     assert "/internal/v1/evidence-graph/path" in paths
     assert "/internal/v1/evidence-graph/snapshot" in paths
 
-def test_graph_entity_evidence_reference_must_resolve_exact_phase30_record_in_tenant():
+def test_graph_entity_evidence_reference_must_resolve_exact_record_in_tenant():
     from datetime import timedelta
     from verideploy.evidence.repository import InMemoryEvidenceRepository
     from verideploy.evidence.schemas import ConfidenceInputs,EvidenceCreate,EvidenceKind,Provenance,RetentionClass,RetentionPolicy,SourceLocator
     from verideploy.evidence.service import EvidenceService
     evidence_repo=InMemoryEvidenceRepository(); evidence=EvidenceService(evidence_repo)
-    record=evidence.create(EvidenceCreate(tenant_id=TENANT,evidence_id=uuid4(),kind=EvidenceKind.LOG,content={"message":"pool exhausted"},confidence_inputs=ConfidenceInputs(source_confidence=1.0,extraction_confidence=1.0,temporal_confidence=1.0,corroboration_count=1),provenance=Provenance(producer="phase31-test",method="direct",source_locator=SourceLocator(source_system="test",source_record_id="1",locator="test://1",observed_at=NOW),correlation_id="phase31",synthetic=True),retention=RetentionPolicy(retention_class=RetentionClass.AUDIT,retain_until=NOW+timedelta(days=3650))))
+    record=evidence.create(EvidenceCreate(tenant_id=TENANT,evidence_id=uuid4(),kind=EvidenceKind.LOG,content={"message":"pool exhausted"},confidence_inputs=ConfidenceInputs(source_confidence=1.0,extraction_confidence=1.0,temporal_confidence=1.0,corroboration_count=1),provenance=Provenance(producer="test",method="direct",source_locator=SourceLocator(source_system="test",source_record_id="1",locator="test://1",observed_at=NOW),correlation_id="evidence-graph",synthetic=True),retention=RetentionPolicy(retention_class=RetentionClass.AUDIT,retain_until=NOW+timedelta(days=3650))))
     graph=EvidenceGraphService(InMemoryEvidenceGraphRepository(),evidence_repo)
     row=graph.put_entity(GraphEntityCreate(tenant_id=TENANT,entity_type=GraphEntityType.EVIDENCE,natural_key="evidence/immutable",label="Immutable log",reference_uri="evidence://record",evidence_record_id=record.record_id,attributes={},observed_at=NOW))
     assert row.evidence_record_id==record.record_id

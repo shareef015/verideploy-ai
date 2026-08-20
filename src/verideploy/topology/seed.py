@@ -14,7 +14,7 @@ from verideploy.topology.schemas import (
 NAMESPACE = UUID("ab5a3e91-5100-5f3b-a6a6-28d2502f9ee0")
 TENANT_ID = UUID("11111111-1111-4111-8111-111111111111")
 GENERATED_AT = datetime(2026, 8, 17, 18, 0, tzinfo=timezone.utc)
-SEED_VERSION = "nexuspay-phase28-v1"
+SEED_VERSION = "nexuspay-v1"
 
 
 def _id(kind: str, slug: str) -> UUID:
@@ -22,7 +22,7 @@ def _id(kind: str, slug: str) -> UUID:
 
 
 def _commit(slug: str, env: str) -> str:
-    return hashlib.sha1(f"nexuspay:{slug}:{env}:phase28".encode()).hexdigest()
+    return hashlib.sha1(f"nexuspay:{slug}:{env}:".encode()).hexdigest()
 
 
 def _payload_without_digest(snapshot: dict) -> str:

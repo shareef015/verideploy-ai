@@ -112,7 +112,7 @@ class PostgresSavedStateRepository:
         with self.database.tenant_session(tenant_id, statement_timeout_ms=self.statement_timeout_ms) as session:
             sequence = int(session.execute(text("""
                 SELECT COALESCE(MAX(sequence), 0) + 1
-                FROM graph_state_snapshots_phase39
+                FROM graph_state_snapshots
                 WHERE tenant_id=:tenant_id AND run_id=:run_id
             """), {"tenant_id": tenant_id, "run_id": run_id}).scalar_one())
             snapshot = SavedStateSnapshot(
@@ -127,7 +127,7 @@ class PostgresSavedStateRepository:
                 state=canonical,
             )
             session.execute(text("""
-                INSERT INTO graph_state_snapshots_phase39
+                INSERT INTO graph_state_snapshots
                   (snapshot_id, tenant_id, run_id, investigation_id, sequence, snapshot_kind,
                    state_schema_version, serializer_version, encryption_policy_version,
                    state_sha256, migration_history, state_json, created_at)
@@ -178,7 +178,7 @@ class PostgresSavedStateRepository:
                 SELECT snapshot_id, tenant_id, run_id, investigation_id, sequence, snapshot_kind,
                        state_schema_version, serializer_version, encryption_policy_version,
                        state_sha256, migration_history, state_json, created_at
-                FROM graph_state_snapshots_phase39
+                FROM graph_state_snapshots
                 WHERE tenant_id=:tenant_id AND run_id=:run_id
                 ORDER BY sequence DESC {limit_sql}
             """), {"tenant_id": tenant_id, "run_id": run_id}).mappings().all()

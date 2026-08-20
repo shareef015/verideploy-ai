@@ -26,7 +26,7 @@ TENANT = UUID("11111111-1111-4111-8111-111111111111")
 
 
 def make_service() -> HumanApprovalService:
-    return HumanApprovalService(repository=InMemoryApprovalRepository(), signer=ApprovalAuditSigner("phase41-test-signing-secret"))
+    return HumanApprovalService(repository=InMemoryApprovalRepository(), signer=ApprovalAuditSigner("test-signing-secret"))
 
 
 def payload(*, run_id=None, idem="high-risk-action-0001", expiry=3600) -> ApprovalRequestCreate:
@@ -149,9 +149,9 @@ async def test_durable_interrupt_and_resume_requires_approved_review():
     assert "graph.approval.interrupted" in event_types and "graph.approval.resume.authorized" in event_types
 
 
-def test_phase41_migration_has_rls_locking_idempotency_and_append_only_audit():
-    text=Path("src/verideploy/database/migrations/versions/0022_phase41_human_approval.py").read_text()
-    for token in ["approval_requests_phase41","approval_events_phase41","FORCE ROW LEVEL SECURITY","uq_phase41_approval_idempotency","phase41_prevent_event_mutation","phase41_validate_approval_tenant","phase41_validate_event_tenant","phase41_validate_request_transition","phase41_require_signed_transition_event","DEFERRABLE INITIALLY DEFERRED"]:
+def test_migration_has_rls_locking_idempotency_and_append_only_audit():
+    text=Path("src/verideploy/database/migrations/versions/0022_human_approval.py").read_text()
+    for token in ["approval_requests","approval_events","FORCE ROW LEVEL SECURITY","uq_approval_idempotency","prevent_approval_event_mutation","validate_approval_tenant","validate_event_tenant","validate_request_transition","require_signed_transition_event","DEFERRABLE INITIALLY DEFERRED"]:
         assert token in text
     repo=Path("src/verideploy/approvals/repository.py").read_text()
     assert "FOR UPDATE" in repo and "expected_version" in repo

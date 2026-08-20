@@ -28,7 +28,7 @@ class Base(DeclarativeBase):
 
 
 class IngestionJobRow(Base):
-    __tablename__ = "ingestion_jobs_phase4"
+    __tablename__ = "ingestion_jobs"
     __table_args__ = (
         UniqueConstraint("tenant_id", "idempotency_key", name="uq_ingestion_tenant_idempotency_p4"),
         UniqueConstraint("tenant_id", "sha256", "object_key", name="uq_ingestion_object_p4"),
@@ -56,7 +56,7 @@ class IngestionJobRow(Base):
 
 
 class IngestionEventRow(Base):
-    __tablename__ = "ingestion_events_phase4"
+    __tablename__ = "ingestion_events"
     __table_args__ = (
         UniqueConstraint("job_id", "sequence_number", name="uq_ingestion_sequence_p4"),
         UniqueConstraint("event_id", name="uq_ingestion_event_id_p4"),

@@ -15,8 +15,8 @@ from verideploy.llm.test_provider import DeterministicTestProvider
 def request() -> AIRequest:
     return AIRequest(
         tenant_id=uuid4(),
-        correlation_id="corr-phase6",
-        operation="phase6.test",
+        correlation_id="corr",
+        operation=".test",
         model="test-model",
         input="synthetic authorized input",
     )

@@ -1,4 +1,4 @@
-"""Phase 12 PostgreSQL + pgvector foundation.
+"""PostgreSQL + pgvector foundation.
 
 Revision ID: 0001_phase12_pgvector
 Revises: None
@@ -48,7 +48,7 @@ def upgrade() -> None:
     op.execute(
         "INSERT INTO embedding_models "
         "(embedding_model_id, model_name, provider, dimensions, registry_version, index_version) VALUES "
-        "('00000000-0000-4000-8000-000000000012', 'text-embedding-3-large', 'openai', 3072, 1, 'phase12-v1')"
+        "('00000000-0000-4000-8000-000000000012', 'text-embedding-3-large', 'openai', 3072, 1, 'v1')"
     )
     op.create_table(
         "vector_embeddings",
@@ -64,7 +64,7 @@ def upgrade() -> None:
         sa.Column("prompt_tokens", sa.Integer(), nullable=True),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("now()"), nullable=False),
         sa.Column("updated_at", sa.DateTime(timezone=True), server_default=sa.text("now()"), nullable=False),
-        sa.CheckConstraint(f"dimensions = {VECTOR_DIMENSIONS}", name="ck_vector_embeddings_phase12_dimensions"),
+        sa.CheckConstraint(f"dimensions = {VECTOR_DIMENSIONS}", name="ck_vector_embeddings_dimensions"),
         sa.UniqueConstraint("tenant_id", "content_hash", "embedding_model_id", name="uq_vector_embedding_content"),
     )
     op.execute(f"ALTER TABLE vector_embeddings ADD COLUMN embedding vector({VECTOR_DIMENSIONS}) NOT NULL")

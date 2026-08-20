@@ -160,14 +160,14 @@ def test_in_memory_repository_defends_saved_history_from_mutation():
     assert "tampered" not in repo.get(tenant_id=tenant,run_id=saved.run_id).final_retrieval.trace.metadata
 
 
-def test_phase36_migration_rls_append_only_and_attempt_tenant_guard():
-    text=open('src/verideploy/database/migrations/versions/0018_phase36_self_corrective_rag.py').read()
-    for token in ('self_corrective_rag_runs_phase36','self_corrective_rag_attempts_phase36','FORCE ROW LEVEL SECURITY','phase36_prevent_mutation','phase36_validate_attempt_tenant','attempt_number','evidence_score'):
+def test_migration_rls_append_only_and_attempt_tenant_guard():
+    text=open('src/verideploy/database/migrations/versions/0018_self_corrective_rag.py').read()
+    for token in ('self_corrective_rag_runs','self_corrective_rag_attempts','FORCE ROW LEVEL SECURITY','prevent_self_corrective_rag_mutation','validate_attempt_tenant','attempt_number','evidence_score'):
         assert token in text
     assert 'down_revision = "0017_phase35_metadata_filtering_authorization"' in text
 
 
-def test_phase36_api_and_config_contract():
+def test_api_and_config_contract():
     route=open('services/ai/routes/retrieval.py').read(); cfg=open('src/verideploy/config.py').read(); env=open('.env.example').read()
     assert '@router.post("/self-corrective"' in route and '@router.get("/self-corrective/{run_id}"' in route
     for token in ('self_corrective_rag_max_attempts','self_corrective_rag_max_query_rewrites','self_corrective_rag_allow_scope_relaxation','self_corrective_rag_external_search_mode'):

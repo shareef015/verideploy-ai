@@ -42,7 +42,7 @@ class Base(DeclarativeBase):
 
 
 class AIResponseRow(Base):
-    __tablename__ = "ai_responses_phase8"
+    __tablename__ = "ai_responses"
     __table_args__ = (UniqueConstraint("tenant_id", "provider_response_id", name="uq_ai_response_tenant_provider_p8"),)
 
     provider_response_id: Mapped[str] = mapped_column(String(256), primary_key=True)

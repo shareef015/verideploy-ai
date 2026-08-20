@@ -134,9 +134,9 @@ def test_operational_replay_is_deterministic_and_sequence_bounded():
     assert a.replay_sha256==b.replay_sha256 and a.event_count==2 and tail.event_count==1
 
 
-def test_phase42_migration_has_rls_idempotency_stuck_indexes_and_append_only_events():
-    src=Path('src/verideploy/database/migrations/versions/0023_phase42_long_running_workflow_durability.py').read_text()
-    for token in ['workflow_leases_phase42','workflow_steps_phase42','workflow_durability_events_phase42','uq_phase42_step_idempotency','ix_phase42_lease_stuck','FORCE ROW LEVEL SECURITY','phase42_validate_run_tenant','phase42_validate_step_transition','phase42 completed idempotent step is terminal','phase42_prevent_event_mutation']:
+def test_migration_has_rls_idempotency_stuck_indexes_and_append_only_events():
+    src=Path('src/verideploy/database/migrations/versions/0023_long_running_workflow_durability.py').read_text()
+    for token in ['workflow_leases','workflow_steps','workflow_durability_events','uq_step_idempotency','ix_lease_stuck','FORCE ROW LEVEL SECURITY','validate_run_tenant','validate_step_transition','completed idempotent step is terminal','prevent_durability_event_mutation']:
         assert token in src
     repo=Path('src/verideploy/graphs/durability_repository.py').read_text()
     assert 'FOR UPDATE' in repo and 'expected_version' in repo and 'expires_at>:n' in repo

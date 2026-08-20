@@ -48,7 +48,7 @@ class Base(DeclarativeBase):
 
 
 class InvestigationRow(Base):
-    __tablename__ = "investigations_phase3"
+    __tablename__ = "investigation_records"
     __table_args__ = (UniqueConstraint("tenant_id", "idempotency_key", name="uq_investigation_tenant_idempotency_p3"),)
 
     investigation_id: Mapped[str] = mapped_column(String(36), primary_key=True)
@@ -71,7 +71,7 @@ class InvestigationRow(Base):
 
 
 class InvestigationEventRow(Base):
-    __tablename__ = "investigation_events_phase3"
+    __tablename__ = "investigation_events"
     __table_args__ = (
         UniqueConstraint("investigation_id", "sequence_number", name="uq_investigation_sequence_p3"),
         UniqueConstraint("event_id", name="uq_investigation_event_id_p3"),

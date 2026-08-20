@@ -1,3 +1,3 @@
-from .performance import Phase77Checkpoint, Phase77ScenarioResult, run_phase77_checkpoint
+from .performance import OrchestrationPerformanceCheckpoint, OrchestrationScenarioResult, run_orchestration_checkpoint
 
-__all__ = ["Phase77Checkpoint", "Phase77ScenarioResult", "run_phase77_checkpoint"]
+__all__ = ["OrchestrationPerformanceCheckpoint", "OrchestrationScenarioResult", "run_orchestration_checkpoint"]

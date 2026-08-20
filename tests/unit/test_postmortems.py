@@ -14,14 +14,14 @@ from verideploy.postmortems.service import PostmortemEligibilityError, Postmorte
 
 
 def stack(tmp_path):
-    url=f"sqlite:///{tmp_path/'phase5.db'}"
+    url=f"sqlite:///{tmp_path/'.db'}"
     investigations=InvestigationService(SqlAlchemyInvestigationRepository(url, create_schema=True))
     postmortems=PostmortemService(SqlAlchemyPostmortemRepository(url, create_schema=True), investigations)
     return investigations, postmortems
 
 
 def completed_investigation(service: InvestigationService, tenant, user):
-    cmd=CreateInvestigationCommand(investigation_id=uuid4(),tenant_id=tenant,requested_by=user,idempotency_key="incident-phase5-001",query="Why did checkout latency increase after the production deployment?")
+    cmd=CreateInvestigationCommand(investigation_id=uuid4(),tenant_id=tenant,requested_by=user,idempotency_key="incident-001",query="Why did checkout latency increase after the production deployment?")
     record,_=service.accept(cmd); service.initialize(tenant,record.investigation_id)
     return service._repository.transition(tenant,record.investigation_id,InvestigationStatus.COMPLETED)  # lifecycle fixture
 
@@ -36,12 +36,12 @@ def command(investigation, user):
         remediation_actions=["Restore the previous connection-pool configuration"],prevention_actions=["Add release checks for database pool saturation"],limitations=["No packet capture was available"],
         citations=[Citation(claim="Latency regression followed the release",evidence_ids=["ev-release-001","ev-trace-001"]),Citation(claim="Database pool pressure is the reviewed root cause",evidence_ids=["ev-log-001","ev-trace-001"])],
     )
-    return CreatePostmortemCommand(postmortem_id=uuid4(),tenant_id=investigation.tenant_id,investigation_id=investigation.investigation_id,requested_by=user,correlation_id=investigation.correlation_id,idempotency_key="postmortem-phase5-001",title="Checkout latency incident postmortem",reviewed_evidence=bundle)
+    return CreatePostmortemCommand(postmortem_id=uuid4(),tenant_id=investigation.tenant_id,investigation_id=investigation.investigation_id,requested_by=user,correlation_id=investigation.correlation_id,idempotency_key="postmortem-001",title="Checkout latency incident postmortem",reviewed_evidence=bundle)
 
 
 def test_incomplete_investigation_cannot_generate_postmortem(tmp_path):
     investigations,postmortems=stack(tmp_path); tenant,user=uuid4(),uuid4()
-    cmd=CreateInvestigationCommand(investigation_id=uuid4(),tenant_id=tenant,requested_by=user,idempotency_key="incident-phase5-002",query="Investigate a production incident using available evidence sources.")
+    cmd=CreateInvestigationCommand(investigation_id=uuid4(),tenant_id=tenant,requested_by=user,idempotency_key="incident-002",query="Investigate a production incident using available evidence sources.")
     inv,_=investigations.accept(cmd)
     with pytest.raises(PostmortemEligibilityError): postmortems.create(command(inv,user))
 

@@ -5,7 +5,7 @@ from typing import Any
 from verideploy.graphs.runtime import DeterministicNodeWrapper, GraphDefinition, GraphExecutionState
 
 
-def build_phase18_smoke_graph(checkpointer: Any) -> Any:
+def build_smoke_graph(checkpointer: Any) -> Any:
     try:
         from langgraph.graph import END, START, StateGraph
     except ImportError as exc:  # pragma: no cover - production dependency
@@ -28,9 +28,9 @@ def build_phase18_smoke_graph(checkpointer: Any) -> Any:
     return graph.compile(checkpointer=checkpointer)
 
 
-PHASE18_SMOKE_GRAPH = GraphDefinition(
-    name="phase18_runtime_smoke",
+SMOKE_GRAPH = GraphDefinition(
+    name="runtime_smoke",
     version="1.0.0",
-    factory=build_phase18_smoke_graph,
+    factory=build_smoke_graph,
     description="Production runtime/checkpoint smoke graph; contains no business-agent logic.",
 )

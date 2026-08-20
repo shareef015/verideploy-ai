@@ -54,8 +54,8 @@ class FakeLangSmithClient:
 def _request() -> AIRequest:
     return AIRequest(
         tenant_id=uuid4(),
-        correlation_id="corr-phase49",
-        operation="phase49.test",
+        correlation_id="corr",
+        operation=".test",
         model="test-model",
         input="authorized synthetic input",
         metadata={"prompt_name": "rca", "prompt_version": "1.3", "prompt_sha256": "a" * 64},

@@ -49,7 +49,7 @@ class GenericToolOutput(BaseModel):
     data: dict[str, Any] = Field(default_factory=dict)
 
 
-def register_phase25_tools(registry: MCPToolRegistry, *, github: GitHubBackend, monitoring: MonitoringBackend,
+def register_tools(registry: MCPToolRegistry, *, github: GitHubBackend, monitoring: MonitoringBackend,
                            knowledge: KnowledgeBackend, incident: IncidentBackend, timeout_seconds: float = 15.0) -> None:
     async def repo_get(args: dict[str, Any], _: MCPCallerContext):
         return {"data": await github.repository_get(args["owner"], args["repo"])}

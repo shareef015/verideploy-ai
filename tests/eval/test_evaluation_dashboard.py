@@ -13,7 +13,7 @@ def run(run_id: str, score: float, minute: int, *, model: str, prompt: str, retr
         dataset_version="1.0.0",
         dataset_sha256="a" * 64,
         evaluator_names=["quality", "safety"],
-        runner_name="phase59-test",
+        runner_name="test",
         total_cases=2,
         passed_cases=2,
         failed_cases=0,

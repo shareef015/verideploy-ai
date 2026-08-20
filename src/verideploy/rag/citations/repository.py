@@ -88,7 +88,7 @@ class PostgresCitationRepository:
     def save_bundle(self, bundle: CitationBundle) -> None:
         with self.db.transaction(bundle.tenant_id) as s:
             for c in bundle.citations:
-                s.execute(text("""INSERT INTO citations_phase38
+                s.execute(text("""INSERT INTO citations
                     (citation_id,tenant_id,document_id,chunk_id,source_key,title,source_version,evidence_sha256,locator_kind,locator_json,required_permission,service,environment,team,document_kind,deep_link)
                     VALUES (:id,:tenant,:document,:chunk,:source,:title,:version,:sha,:kind,CAST(:locator AS jsonb),:perm,:service,:env,:team,:doc_kind,:link)
                     ON CONFLICT (citation_id) DO NOTHING"""),{
@@ -96,7 +96,7 @@ class PostgresCitationRepository:
                     "title":c.title,"version":c.source_version,"sha":c.evidence_sha256,"kind":c.locator.kind,"locator":json.dumps(c.locator.model_dump(mode="json"),sort_keys=True),
                     "perm":c.required_permission,"service":c.service,"env":c.environment,"team":c.team,"doc_kind":c.document_kind,"link":c.deep_link})
             for l in bundle.mappings:
-                s.execute(text("""INSERT INTO claim_citations_phase38
+                s.execute(text("""INSERT INTO claim_citations
                     (tenant_id,verification_id,claim_id,citation_id,entailment_score,entails_released_claim,claim_qualified)
                     VALUES (:tenant,:verification,:claim,:citation,:score,:entails,:qualified)
                     ON CONFLICT DO NOTHING"""),{"tenant":str(bundle.tenant_id),"verification":str(l.verification_id),"claim":l.claim_id,"citation":str(l.citation_id),"score":l.entailment_score,"entails":l.entails_released_claim,"qualified":l.claim_qualified})
@@ -107,13 +107,13 @@ class PostgresCitationRepository:
 
     def get_citation(self, *, tenant_id: UUID, citation_id: UUID) -> CitationRecord | None:
         with self.db.transaction(tenant_id) as s:
-            row=s.execute(text("SELECT * FROM citations_phase38 WHERE tenant_id=:tenant AND citation_id=:id"),{"tenant":str(tenant_id),"id":str(citation_id)}).mappings().first()
+            row=s.execute(text("SELECT * FROM citations WHERE tenant_id=:tenant AND citation_id=:id"),{"tenant":str(tenant_id),"id":str(citation_id)}).mappings().first()
         return self._record(row) if row else None
 
     def list_claim_links(self, *, tenant_id: UUID, verification_id: UUID, claim_id: str) -> list[ClaimCitationLink]:
         with self.db.transaction(tenant_id) as s:
             rows=s.execute(text("""SELECT verification_id,claim_id,citation_id,entailment_score,entails_released_claim,claim_qualified
-                FROM claim_citations_phase38 WHERE tenant_id=:tenant AND verification_id=:verification AND claim_id=:claim ORDER BY citation_id"""),{"tenant":str(tenant_id),"verification":str(verification_id),"claim":claim_id}).mappings().all()
+                FROM claim_citations WHERE tenant_id=:tenant AND verification_id=:verification AND claim_id=:claim ORDER BY citation_id"""),{"tenant":str(tenant_id),"verification":str(verification_id),"claim":claim_id}).mappings().all()
         return [ClaimCitationLink(**dict(r)) for r in rows]
 
 
@@ -130,7 +130,7 @@ class PostgresCitationSourceRepository:
 
     def preview(self, *, citation: CitationRecord, scope: EffectiveRetrievalScope, max_chars: int = 2000) -> CitationPreview | None:
         if scope.empty or citation.required_permission not in scope.permissions:return None
-        sql=text("""SELECT left(c.content,:max_chars) content FROM citations_phase38 x
+        sql=text("""SELECT left(c.content,:max_chars) content FROM citations x
             JOIN retrieval_chunks c ON c.chunk_id=x.chunk_id AND c.tenant_id=x.tenant_id
             JOIN retrieval_documents d ON d.document_id=x.document_id AND d.tenant_id=x.tenant_id
             WHERE x.tenant_id=:tenant AND x.citation_id=:citation

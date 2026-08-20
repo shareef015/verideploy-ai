@@ -127,7 +127,7 @@ class HybridCriticFollowupRetrieval:
                     evidence_id=evidence_id,
                     tenant_id=tenant_id,
                     channel=EvidenceChannel.TEXT,
-                    source_system="phase13-hybrid-retrieval",
+                    source_system="hybrid-retrieval",
                     source_id=str(hit.chunk_id),
                     source_key=hit.source_key,
                     title=hit.title,

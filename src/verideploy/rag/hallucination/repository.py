@@ -36,7 +36,7 @@ class PostgresHallucinationProtectionRepository:
         payload = result.model_dump(mode="json")
         with self.db.transaction(result.tenant_id) as session:
             session.execute(text("""
-                INSERT INTO hallucination_protection_runs_phase37
+                INSERT INTO hallucination_protection_runs
                   (verification_id, tenant_id, self_corrective_run_id, verifier_version, protected,
                    supported_count, uncertain_count, unsupported_count, unsupported_material_rate,
                    prompt_injection_evidence_count, result_json)
@@ -54,7 +54,7 @@ class PostgresHallucinationProtectionRepository:
             })
             for claim in result.claims:
                 session.execute(text("""
-                    INSERT INTO hallucination_claim_verifications_phase37
+                    INSERT INTO hallucination_claim_verifications
                       (verification_id, claim_id, tenant_id, label, action, material, proposed_confidence,
                        adjusted_confidence, claim_json)
                     VALUES (:verification_id, :claim_id, :tenant_id, :label, :action, :material,
@@ -70,7 +70,7 @@ class PostgresHallucinationProtectionRepository:
     def get(self, *, tenant_id: UUID, verification_id: UUID) -> HallucinationProtectionResult | None:
         with self.db.transaction(tenant_id) as session:
             row = session.execute(text("""
-                SELECT result_json FROM hallucination_protection_runs_phase37
+                SELECT result_json FROM hallucination_protection_runs
                 WHERE tenant_id=:tenant_id AND verification_id=:verification_id
             """), {"tenant_id": str(tenant_id), "verification_id": str(verification_id)}).scalar_one_or_none()
         return HallucinationProtectionResult.model_validate(row) if row else None

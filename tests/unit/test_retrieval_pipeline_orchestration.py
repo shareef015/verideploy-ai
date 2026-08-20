@@ -105,8 +105,8 @@ async def test_trace_repository_is_immutable_by_copy():
 
 
 def test_migration_persists_runs_decisions_rls_and_append_only():
-    src=open('src/verideploy/database/migrations/versions/0016_phase34_retrieval_pipeline_orchestration.py').read()
-    for token in ('retrieval_pipeline_runs_phase34','retrieval_ranking_decisions_phase34','FORCE ROW LEVEL SECURITY','phase34_prevent_trace_mutation','input_sha256','context_sha256','source_version'):
+    src=open('src/verideploy/database/migrations/versions/0016_retrieval_pipeline_orchestration.py').read()
+    for token in ('retrieval_pipeline_runs','retrieval_ranking_decisions','FORCE ROW LEVEL SECURITY','prevent_trace_mutation','input_sha256','context_sha256','source_version'):
         assert token in src
     assert 'down_revision = "0015_phase33_postgres_performance_reliability"' in src
 

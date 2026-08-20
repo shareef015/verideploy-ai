@@ -37,7 +37,7 @@ def test_metadata_filter_correctness_detects_cross_tenant_hit() -> None:
     assert metadata_filter_correctness(hits, {"tenant_id": "t1", "authorized": True}) == 0.5
 
 
-def test_score_observation_emits_all_phase53_metrics() -> None:
+def test_score_observation_emits_all_metrics() -> None:
     observation = RetrievalObservation(
         case_id="retrieval-001",
         retriever="dense",

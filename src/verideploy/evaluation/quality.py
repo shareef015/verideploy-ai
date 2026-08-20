@@ -11,7 +11,7 @@ from typing import Any
 from verideploy.evaluation.datasets import load_jsonl_dataset
 from verideploy.evaluation.models import EvalCase
 
-PHASE52_EXPECTED_COUNTS: dict[str, int] = {
+EXPECTED_COUNTS: dict[str, int] = {
     "retrieval": 100,
     "rca": 80,
     "release_risk": 80,
@@ -20,7 +20,7 @@ PHASE52_EXPECTED_COUNTS: dict[str, int] = {
     "hallucination": 60,
     "citation": 60,
 }
-PHASE52_TOTAL_CASES = sum(PHASE52_EXPECTED_COUNTS.values())
+TOTAL_CASES = sum(EXPECTED_COUNTS.values())
 
 _REQUIRED_GROUND_TRUTH_KEYS: dict[str, frozenset[str]] = {
     "retrieval": frozenset({"relevant_source_ids", "must_retrieve_at_k"}),
@@ -131,10 +131,10 @@ def validate_dataset(path: Path) -> DatasetQualityReport:
     category_counts = dict(sorted(Counter(case.category for case in cases).items()))
     issues: list[DatasetQualityIssue] = []
 
-    if len(cases) != PHASE52_TOTAL_CASES:
-        issues.append(DatasetQualityIssue("case_count", f"expected {PHASE52_TOTAL_CASES}, got {len(cases)}"))
-    if category_counts != dict(sorted(PHASE52_EXPECTED_COUNTS.items())):
-        issues.append(DatasetQualityIssue("category_counts", f"expected {PHASE52_EXPECTED_COUNTS}, got {category_counts}"))
+    if len(cases) != TOTAL_CASES:
+        issues.append(DatasetQualityIssue("case_count", f"expected {TOTAL_CASES}, got {len(cases)}"))
+    if category_counts != dict(sorted(EXPECTED_COUNTS.items())):
+        issues.append(DatasetQualityIssue("category_counts", f"expected {EXPECTED_COUNTS}, got {category_counts}"))
 
     fingerprints: dict[str, str] = {}
     for case in cases:
@@ -156,7 +156,7 @@ def validate_dataset(path: Path) -> DatasetQualityReport:
     )
 
 
-def assert_phase52_dataset_quality(path: Path) -> DatasetQualityReport:
+def assert_dataset_quality(path: Path) -> DatasetQualityReport:
     report = validate_dataset(path)
     if not report.passed:
         detail = "; ".join(f"{issue.code}:{issue.case_id or '-'}:{issue.message}" for issue in report.issues[:20])

@@ -1,4 +1,4 @@
-"""Phase 18 LangGraph production runtime metadata.
+"""LangGraph production runtime metadata.
 
 Revision ID: 0006_phase18_langgraph_runtime
 Revises: 0005_phase17_video_evidence
@@ -28,7 +28,7 @@ def _tenant_policy(table: str) -> None:
 
 def upgrade() -> None:
     op.create_table(
-        "graph_runs_phase18",
+        "graph_runs",
         sa.Column("run_id", sa.Uuid(), primary_key=True),
         sa.Column("tenant_id", sa.Uuid(), sa.ForeignKey("tenants.tenant_id", ondelete="CASCADE"), nullable=False),
         sa.Column("thread_id", sa.String(255), nullable=False),
@@ -44,10 +44,10 @@ def upgrade() -> None:
         sa.UniqueConstraint("tenant_id", "thread_id", name="uq_graph_run_tenant_thread"),
     )
     op.create_table(
-        "graph_runtime_events_phase18",
+        "graph_runtime_events",
         sa.Column("event_id", sa.Uuid(), primary_key=True),
         sa.Column("tenant_id", sa.Uuid(), sa.ForeignKey("tenants.tenant_id", ondelete="CASCADE"), nullable=False),
-        sa.Column("run_id", sa.Uuid(), sa.ForeignKey("graph_runs_phase18.run_id", ondelete="CASCADE"), nullable=False),
+        sa.Column("run_id", sa.Uuid(), sa.ForeignKey("graph_runs.run_id", ondelete="CASCADE"), nullable=False),
         sa.Column("sequence_number", sa.Integer(), nullable=False),
         sa.Column("event_type", sa.String(120), nullable=False),
         sa.Column("node_name", sa.String(160), nullable=True),
@@ -55,12 +55,12 @@ def upgrade() -> None:
         sa.Column("occurred_at", sa.DateTime(timezone=True), server_default=sa.text("now()"), nullable=False),
         sa.UniqueConstraint("tenant_id", "run_id", "sequence_number", name="uq_graph_event_sequence"),
     )
-    op.create_index("ix_graph_runs_tenant_status", "graph_runs_phase18", ["tenant_id", "status", "updated_at"])
-    op.create_index("ix_graph_events_tenant_run_sequence", "graph_runtime_events_phase18", ["tenant_id", "run_id", "sequence_number"])
-    _tenant_policy("graph_runs_phase18")
-    _tenant_policy("graph_runtime_events_phase18")
+    op.create_index("ix_graph_runs_tenant_status", "graph_runs", ["tenant_id", "status", "updated_at"])
+    op.create_index("ix_graph_events_tenant_run_sequence", "graph_runtime_events", ["tenant_id", "run_id", "sequence_number"])
+    _tenant_policy("graph_runs")
+    _tenant_policy("graph_runtime_events")
 
 
 def downgrade() -> None:
-    op.drop_table("graph_runtime_events_phase18")
-    op.drop_table("graph_runs_phase18")
+    op.drop_table("graph_runtime_events")
+    op.drop_table("graph_runs")

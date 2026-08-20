@@ -36,7 +36,7 @@ def test_postgres_keyword_dense_and_tenant_isolation() -> None:
     model_id = "00000000-0000-4000-8000-000000000012"
 
     with engine.begin() as connection:
-        for tenant, slug in ((tenant_a, "phase13-a"), (tenant_b, "phase13-b")):
+        for tenant, slug in ((tenant_a, "a"), (tenant_b, "b")):
             connection.execute(
                 text("INSERT INTO tenants (tenant_id, slug, display_name) VALUES (:id,:slug,:name) ON CONFLICT DO NOTHING"),
                 {"id": str(tenant), "slug": f"{slug}-{tenant}", "name": slug},

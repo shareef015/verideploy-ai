@@ -7,7 +7,7 @@ import pytest
 from pydantic import ValidationError
 
 from verideploy.agents.contracts import AgentAuthorization, AgentRequest, ToolBudget, ToolPermission, SupervisorDecision, AgentPlan, PlanStep
-from verideploy.agents.prompts import build_phase19_prompt_registry
+from verideploy.agents.prompts import build_prompt_registry
 from verideploy.agents.repository import InMemoryAgentRunRepository
 from verideploy.agents.runtime import RuntimeEvidenceAgent, RuntimeQueryAnalysis
 from verideploy.agents.runtime_tools import RuntimeSource, RuntimeToolResult, RuntimePoint, SyntheticRuntimeTool
@@ -62,7 +62,7 @@ def test_duplicate_sources_rejected():
 @pytest.mark.asyncio
 async def test_permission_required_before_model_or_tools():
     r=req(); model=FakeModel(analysis()); tool=RecordingTool(RuntimeSource.PROMETHEUS)
-    agent=RuntimeEvidenceAgent(model=model,prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:tool})
+    agent=RuntimeEvidenceAgent(model=model,prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:tool})
     with pytest.raises(PermissionError): await agent.run(r,authorization=auth(r,False),budget=ToolBudget(max_calls=2))
     assert not model.calls and not tool.calls
 
@@ -70,7 +70,7 @@ async def test_permission_required_before_model_or_tools():
 @pytest.mark.asyncio
 async def test_trusted_scope_and_baseline_are_authoritative_and_reproducible():
     r=req(); p=RecordingTool(RuntimeSource.PROMETHEUS); l=RecordingTool(RuntimeSource.LOG)
-    agent=RuntimeEvidenceAgent(model=FakeModel(analysis()),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:p,RuntimeSource.LOG:l})
+    agent=RuntimeEvidenceAgent(model=FakeModel(analysis()),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:p,RuntimeSource.LOG:l})
     result=await agent.run(r,authorization=auth(r),budget=ToolBudget(max_calls=2))
     q=p.calls[0]
     assert q.start==datetime(2026,8,17,14,tzinfo=timezone.utc) and q.end==datetime(2026,8,17,15,tzinfo=timezone.utc)
@@ -81,7 +81,7 @@ async def test_trusted_scope_and_baseline_are_authoritative_and_reproducible():
 @pytest.mark.asyncio
 async def test_model_cannot_broaden_service_environment_or_time_scope():
     for changed in [analysis(service='payments'), analysis(environment='staging'), analysis(window_end='2026-08-17T18:05:00+03:00')]:
-        r=req(); agent=RuntimeEvidenceAgent(model=FakeModel(changed),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={s:SyntheticRuntimeTool(s) for s in RuntimeSource})
+        r=req(); agent=RuntimeEvidenceAgent(model=FakeModel(changed),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={s:SyntheticRuntimeTool(s) for s in RuntimeSource})
         with pytest.raises(PermissionError, match='cannot'):
             await agent.run(r,authorization=auth(r),budget=ToolBudget(max_calls=4))
 
@@ -89,7 +89,7 @@ async def test_model_cannot_broaden_service_environment_or_time_scope():
 @pytest.mark.asyncio
 async def test_budget_rejects_plan_before_runtime_tools_execute():
     r=req(); p=RecordingTool(RuntimeSource.PROMETHEUS); l=RecordingTool(RuntimeSource.LOG)
-    agent=RuntimeEvidenceAgent(model=FakeModel(analysis()),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:p,RuntimeSource.LOG:l})
+    agent=RuntimeEvidenceAgent(model=FakeModel(analysis()),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:p,RuntimeSource.LOG:l})
     with pytest.raises(RuntimeError, match='exceeds tool-call budget'): await agent.run(r,authorization=auth(r),budget=ToolBudget(max_calls=1))
     assert not p.calls and not l.calls
 
@@ -97,7 +97,7 @@ async def test_budget_rejects_plan_before_runtime_tools_execute():
 @pytest.mark.asyncio
 async def test_source_failure_degrades_without_shifting_other_source_windows():
     r=req(); p=RecordingTool(RuntimeSource.PROMETHEUS, fail=True); l=RecordingTool(RuntimeSource.LOG)
-    agent=RuntimeEvidenceAgent(model=FakeModel(analysis()),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:p,RuntimeSource.LOG:l})
+    agent=RuntimeEvidenceAgent(model=FakeModel(analysis()),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:p,RuntimeSource.LOG:l})
     result=await agent.run(r,authorization=auth(r),budget=ToolBudget(max_calls=2))
     assert result.sufficiency.sufficient is True and 'runtime_source_failure' in result.sufficiency.reason_codes
     assert result.sufficiency.failed_sources==1 and result.sufficiency.successful_sources==1
@@ -108,16 +108,16 @@ async def test_source_failure_degrades_without_shifting_other_source_windows():
 @pytest.mark.asyncio
 async def test_all_source_failures_are_explicitly_insufficient():
     r=req(); p=RecordingTool(RuntimeSource.PROMETHEUS,fail=True); l=RecordingTool(RuntimeSource.LOG,fail=True)
-    result=await RuntimeEvidenceAgent(model=FakeModel(analysis()),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:p,RuntimeSource.LOG:l}).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2))
+    result=await RuntimeEvidenceAgent(model=FakeModel(analysis()),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:p,RuntimeSource.LOG:l}).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2))
     assert result.evidence==[] and result.sufficiency.sufficient is False
     assert {'insufficient_runtime_evidence','insufficient_runtime_sources','runtime_source_failure'} <= set(result.sufficiency.reason_codes)
 
 
 @pytest.mark.asyncio
-async def test_anomaly_and_phase15_runtime_evidence_are_deterministic():
+async def test_anomaly_and_runtime_evidence_are_deterministic():
     r=req(); p=RecordingTool(RuntimeSource.PROMETHEUS,current=30,baseline=10)
     one=analysis(sources=[{'source':'prometheus','query':'up'}])
-    agent=RuntimeEvidenceAgent(model=FakeModel(one),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:p})
+    agent=RuntimeEvidenceAgent(model=FakeModel(one),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),tools={RuntimeSource.PROMETHEUS:p})
     result=await agent.run(r,authorization=auth(r),budget=ToolBudget(max_calls=1),anomaly_percent_threshold=50)
     assert result.anomalies[0].anomalous is True and result.anomalies[0].percent_change==pytest.approx(200)
     ev=result.evidence[0]
@@ -135,8 +135,8 @@ async def test_synthetic_adapter_is_reproducible_for_same_scope():
     assert a.model_dump()==b.model_dump()
 
 
-def test_phase22_prompt_and_supervisor_planner_contracts():
-    registry=build_phase19_prompt_registry()
+def test_prompt_and_supervisor_planner_contracts():
+    registry=build_prompt_registry()
     assert len(registry.get('runtime_evidence','1.0.0').sha256)==64
     assert len(registry.get('supervisor','1.3.0').sha256)==64
     d=SupervisorDecision(route='runtime_evidence',rationale='runtime signals needed',confidence=.9,required_permissions=['runtime.evidence.read'])

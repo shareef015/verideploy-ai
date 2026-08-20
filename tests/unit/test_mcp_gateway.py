@@ -14,7 +14,7 @@ from verideploy.mcp.errors import (
 from verideploy.mcp.gateway import SecureMCPGateway
 from verideploy.mcp.registry import MCPToolRegistry
 from verideploy.mcp.repository import InMemoryMCPAuditRepository
-from verideploy.mcp.servers.tools import register_phase25_tools
+from verideploy.mcp.servers.tools import register_tools
 
 
 class FakeGitHub:
@@ -48,7 +48,7 @@ class FakeIncident:
 def build(*, writes=False, timeout=0.05, threshold=2):
     gh, mon, kb, inc = FakeGitHub(), FakeMonitoring(), FakeKnowledge(), FakeIncident()
     reg = MCPToolRegistry()
-    register_phase25_tools(reg, github=gh, monitoring=mon, knowledge=kb, incident=inc, timeout_seconds=timeout)
+    register_tools(reg, github=gh, monitoring=mon, knowledge=kb, incident=inc, timeout_seconds=timeout)
     audit = InMemoryMCPAuditRepository()
     gw = SecureMCPGateway(registry=reg, audit=audit, external_writes_enabled=writes,
                           breaker_threshold=threshold, breaker_reset_seconds=60)

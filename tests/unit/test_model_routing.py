@@ -53,7 +53,7 @@ def controller() -> InMemoryRequestController:
 def request(operation: str, role: ModelRole | None = None, model: str | None = None) -> AIRequest:
     return AIRequest(
         tenant_id=uuid4(),
-        correlation_id="corr-phase7",
+        correlation_id="corr",
         operation=operation,
         model_role=role,
         model=model,

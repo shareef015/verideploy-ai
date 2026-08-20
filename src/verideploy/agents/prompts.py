@@ -43,7 +43,7 @@ class PromptRegistry:
             raise KeyError(f"unknown prompt: {name}@{version}") from exc
 
 
-def build_phase19_prompt_registry(root: str | Path = ".") -> PromptRegistry:
+def build_prompt_registry(root: str | Path = ".") -> PromptRegistry:
     root = Path(root)
     registry = PromptRegistry()
     for name in ("supervisor", "planner", "github"):

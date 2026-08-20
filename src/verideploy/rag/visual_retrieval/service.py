@@ -8,7 +8,7 @@ from verideploy.rag.visual_retrieval.schemas import *
 from verideploy.rag.access.schemas import RetrievalAuthorizationScope, build_effective_scope, VISUAL_PERMISSION
 
 class VisualDocumentService:
-    def __init__(self,*,repository:PostgresVisualPageRepository,adapter:VisualRetrieverAdapter,renderer:PdfPageRenderer|None=None,index_root:str|Path="data/processed/visual_index",index_version:str="phase14-v1") -> None:
+    def __init__(self,*,repository:PostgresVisualPageRepository,adapter:VisualRetrieverAdapter,renderer:PdfPageRenderer|None=None,index_root:str|Path="data/processed/visual_index",index_version:str="v1") -> None:
         self.repository=repository;self.adapter=adapter;self.renderer=renderer;self.index_root=Path(index_root);self.index_version=index_version
     def index_pdf(self, *, tenant_id, document_id, source_key:str, title:str, pdf_bytes:bytes, service:str|None=None, environment:str|None=None, document_kind:str="general", severity:str|None=None, team:str|None=None, occurred_at=None, required_permission:str="retrieval.visual.read"):
         if self.renderer is None: raise RuntimeError("PDF renderer is not configured")
@@ -32,7 +32,7 @@ class VisualDocumentService:
         if authorization.tenant_id!=q.tenant_id: raise PermissionError("visual retrieval authorization tenant mismatch")
         scope=build_effective_scope(authorization=authorization,requested=q.metadata_filters,required_permission=VISUAL_PERMISSION)
         kwargs={"tenant_id":q.tenant_id,"backend":self.adapter.backend,"model_name":self.adapter.model_name,"document_id":q.document_id}
-        if getattr(self.repository,"supports_phase35_scope",False): kwargs["effective_scope"]=scope
+        if getattr(self.repository,"supports_scope",False): kwargs["effective_scope"]=scope
         rows=self.repository.list_indexed_pages(**kwargs)
         hits=[]
         for row in rows:

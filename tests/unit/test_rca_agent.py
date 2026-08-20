@@ -17,7 +17,7 @@ from verideploy.agents.contracts import (
     SupervisorDecision,
     ToolPermission,
 )
-from verideploy.agents.prompts import build_phase19_prompt_registry
+from verideploy.agents.prompts import build_prompt_registry
 from verideploy.agents.rca import RCAAgent, RCAProposal
 from verideploy.agents.repository import InMemoryAgentRunRepository
 from verideploy.rag.fusion.schemas import EvidenceChannel, EvidenceLocator, NormalizedEvidence
@@ -85,7 +85,7 @@ def test_rca_schema_requires_contiguous_ranks_and_support_only_causal_links():
 @pytest.mark.asyncio
 async def test_permission_required_before_model_call():
     r=request(); a,b,c=evidence_set(r); model=FakeModel(proposal(a,b,c))
-    agent=RCAAgent(model=model,prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository())
+    agent=RCAAgent(model=model,prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository())
     with pytest.raises(PermissionError): await agent.run(r,authorization=auth(r,False),evidence=[a,b,c])
     assert model.calls==[]
 
@@ -93,7 +93,7 @@ async def test_permission_required_before_model_call():
 @pytest.mark.asyncio
 async def test_unknown_evidence_reference_rejected_and_run_failed():
     r=request(); a,b,c=evidence_set(r); out=proposal(a,b,c); unknown=str(uuid4()); out['hypotheses'][0]['supporting_evidence_ids'][1]=unknown; out['hypotheses'][0]['causal_links'][0]['target_evidence_id']=unknown
-    repo=InMemoryAgentRunRepository(); agent=RCAAgent(model=FakeModel(out),prompts=build_phase19_prompt_registry(),repository=repo)
+    repo=InMemoryAgentRunRepository(); agent=RCAAgent(model=FakeModel(out),prompts=build_prompt_registry(),repository=repo)
     with pytest.raises(ValueError,match='unknown evidence'):
         await agent.run(r,authorization=auth(r),evidence=[a,b,c])
     assert list(repo.records.values())[0].status.value=='FAILED'
@@ -102,7 +102,7 @@ async def test_unknown_evidence_reference_rejected_and_run_failed():
 @pytest.mark.asyncio
 async def test_root_cause_trigger_separation_and_temporal_causal_scoring():
     r=request(); a,b,c=evidence_set(r)
-    result=await RCAAgent(model=FakeModel(proposal(a,b,c)),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository()).run(r,authorization=auth(r),evidence=[a,b,c])
+    result=await RCAAgent(model=FakeModel(proposal(a,b,c)),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository()).run(r,authorization=auth(r),evidence=[a,b,c])
     assert result.sufficiency.root_cause_determined is True
     assert result.sufficiency.top_hypothesis_id=='hyp-01'
     assert len(result.root_causes)==1 and len(result.triggers)==1
@@ -114,7 +114,7 @@ async def test_root_cause_trigger_separation_and_temporal_causal_scoring():
 async def test_disconfirming_evidence_reduces_confidence_and_blocks_determined_cause():
     r=request(); a,b,c=evidence_set(r); d=ev(r.tenant_id,EvidenceChannel.RUNTIME,'Pool health','pool remained below 50 percent',minute=2)
     out=proposal(a,b,c,disconfirm=d,confidence=.75)
-    result=await RCAAgent(model=FakeModel(out),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository()).run(r,authorization=auth(r),evidence=[a,b,c,d],min_root_confidence=.7)
+    result=await RCAAgent(model=FakeModel(out),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository()).run(r,authorization=auth(r),evidence=[a,b,c,d],min_root_confidence=.7)
     assert result.root_causes[0].contradiction_count==1
     assert result.sufficiency.root_cause_determined is False
     assert 'root_cause_support_or_confidence_insufficient' in result.sufficiency.reason_codes
@@ -123,7 +123,7 @@ async def test_disconfirming_evidence_reduces_confidence_and_blocks_determined_c
 @pytest.mark.asyncio
 async def test_insufficient_support_never_declares_root_cause():
     r=request(); a,b,c=evidence_set(r); out=proposal(a,b,c); out['hypotheses'][0]['supporting_evidence_ids']=[str(a.evidence_id)]; out['hypotheses'][0]['causal_links']=[]
-    result=await RCAAgent(model=FakeModel(out),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository()).run(r,authorization=auth(r),evidence=[a,b,c],min_root_support=2)
+    result=await RCAAgent(model=FakeModel(out),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository()).run(r,authorization=auth(r),evidence=[a,b,c],min_root_support=2)
     assert result.sufficiency.root_cause_determined is False
     assert result.sufficiency.top_hypothesis_id is None
 
@@ -131,7 +131,7 @@ async def test_insufficient_support_never_declares_root_cause():
 @pytest.mark.asyncio
 async def test_required_channel_missing_is_explicit():
     r=request(); a,b,c=evidence_set(r)
-    result=await RCAAgent(model=FakeModel(proposal(a,b,c)),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository()).run(r,authorization=auth(r),evidence=[a,b,c],required_channels=[EvidenceChannel.VISUAL])
+    result=await RCAAgent(model=FakeModel(proposal(a,b,c)),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository()).run(r,authorization=auth(r),evidence=[a,b,c],required_channels=[EvidenceChannel.VISUAL])
     assert result.sufficiency.root_cause_determined is False
     assert 'required_evidence_channel_missing' in result.sufficiency.reason_codes
 
@@ -140,7 +140,7 @@ async def test_required_channel_missing_is_explicit():
 async def test_cross_tenant_and_trusted_scope_evidence_rejected():
     r=request(); a,b,c=evidence_set(r)
     wrong=a.model_copy(update={'tenant_id':uuid4()})
-    agent=RCAAgent(model=FakeModel(proposal(a,b,c)),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository())
+    agent=RCAAgent(model=FakeModel(proposal(a,b,c)),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository())
     with pytest.raises(PermissionError,match='tenant'): await agent.run(r,authorization=auth(r),evidence=[wrong,b,c])
     wrong_scope=b.model_copy(update={'provenance':{'service':'payments','environment':'production'}})
     with pytest.raises(PermissionError,match='service'): await agent.run(r,authorization=auth(r),evidence=[a,wrong_scope,c])
@@ -149,7 +149,7 @@ async def test_cross_tenant_and_trusted_scope_evidence_rejected():
 @pytest.mark.asyncio
 async def test_evidence_maximum_is_enforced_before_model():
     r=request(); a,b,c=evidence_set(r); model=FakeModel(proposal(a,b,c))
-    agent=RCAAgent(model=model,prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository())
+    agent=RCAAgent(model=model,prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository())
     with pytest.raises(ValueError,match='maximum'): await agent.run(r,authorization=auth(r),evidence=[a,b,c],max_evidence=2)
     assert not model.calls
 
@@ -159,7 +159,7 @@ def test_supervisor_planner_and_prompt_versions_include_rca():
     with pytest.raises(ValidationError,match='rca.analysis.read'):
         SupervisorDecision.model_validate({'route':'rca','rationale':'RCA needed','confidence':.9,'required_permissions':[]})
     AgentPlan.model_validate({'rationale':'collect then analyze','steps':[{'step_id':'step-01','agent':'runtime_evidence','objective':'collect telemetry','required_permissions':['runtime.evidence.read'],'max_tool_calls':2,'depends_on':[]},{'step_id':'step-02','agent':'rca','objective':'rank causes','required_permissions':['rca.analysis.read'],'max_tool_calls':0,'depends_on':['step-01']}]})
-    reg=build_phase19_prompt_registry()
+    reg=build_prompt_registry()
     assert reg.get('rca','1.0.0').sha256
     assert reg.get('supervisor','1.4.0').sha256 and reg.get('planner','1.4.0').sha256
 
@@ -167,7 +167,7 @@ def test_supervisor_planner_and_prompt_versions_include_rca():
 @pytest.mark.asyncio
 async def test_agent_run_persists_prompt_and_input_hash():
     r=request(); a,b,c=evidence_set(r); repo=InMemoryAgentRunRepository()
-    result=await RCAAgent(model=FakeModel(proposal(a,b,c)),prompts=build_phase19_prompt_registry(),repository=repo).run(r,authorization=auth(r),evidence=[a,b,c])
+    result=await RCAAgent(model=FakeModel(proposal(a,b,c)),prompts=build_prompt_registry(),repository=repo).run(r,authorization=auth(r),evidence=[a,b,c])
     record=list(repo.records.values())[0]
     assert record.status.value=='COMPLETED' and record.prompt_name=='rca' and record.prompt_version=='1.0.0'
     assert len(record.prompt_sha256)==64 and len(record.input_sha256)==64 and record.output['sufficiency']['root_cause_determined'] is True
@@ -177,7 +177,7 @@ def test_private_rca_endpoint_enforces_service_tenant_and_user_scope():
     r=request(); a,b,c=evidence_set(r)
     class Stub:
         async def run(self,*args,**kwargs):
-            return await RCAAgent(model=FakeModel(proposal(a,b,c)),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository()).run(*args,**kwargs)
+            return await RCAAgent(model=FakeModel(proposal(a,b,c)),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository()).run(*args,**kwargs)
     app.dependency_overrides[get_rca_agent]=lambda: Stub()
     payload={'request':r.model_dump(mode='json'),'permissions':['rca.analysis.read'],'evidence':[x.model_dump(mode='json') for x in [a,b,c]],'required_channels':['runtime','text']}
     headers={'x-internal-service':'bad','x-tenant-id':str(r.tenant_id),'x-user-id':r.user_id}

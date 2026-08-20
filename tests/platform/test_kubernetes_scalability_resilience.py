@@ -46,7 +46,7 @@ def test_canary_and_migration_paths_are_explicit_and_safe() -> None:
     assert "--atomic" in deploy_script
 
 
-def test_phase66_deployment_validation_gate_passes() -> None:
+def test_deployment_validation_gate_passes() -> None:
     report = validate()
     assert report["passed"] is True
     assert report["findings"] == []

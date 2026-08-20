@@ -7,7 +7,7 @@ from .core import AuditActor, AuditEvent, AuditResult, AuditSearchQuery, AuditTr
 
 class SqlAuditRepository:
     metadata=sa.MetaData()
-    table=sa.Table('audit_events_phase63',metadata,
+    table=sa.Table('audit_compliance_events',metadata,
       sa.Column('audit_id',sa.Uuid(),primary_key=True), sa.Column('tenant_id',sa.Uuid(),nullable=False), sa.Column('sequence',sa.BigInteger(),nullable=False),
       sa.Column('occurred_at',sa.DateTime(timezone=True),nullable=False), sa.Column('actor_type',sa.String(24),nullable=False), sa.Column('actor_id',sa.String(256),nullable=False), sa.Column('actor_roles',JSONB,nullable=False), sa.Column('service_id',sa.String(160)),
       sa.Column('action',sa.String(256),nullable=False), sa.Column('result',sa.String(24),nullable=False), sa.Column('resource_type',sa.String(128),nullable=False), sa.Column('resource_id',sa.String(256),nullable=False),

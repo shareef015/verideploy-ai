@@ -167,14 +167,14 @@ async def test_runtime_upgrades_failed_active_checkpoint_before_resume_and_prese
     assert state_repo.latest_snapshot(tenant_id=tenant, run_id=run_id).state_schema_version == 3
 
 
-def test_phase39_migration_has_rls_append_only_and_tenant_guard():
-    migration = Path("src/verideploy/database/migrations/versions/0021_phase39_langgraph_state_reducers.py").read_text()
+def test_migration_has_rls_append_only_and_tenant_guard():
+    migration = Path("src/verideploy/database/migrations/versions/0021_langgraph_state_reducers.py").read_text()
     assert 'revision = "0021_phase39_langgraph_state_reducers"' in migration
     assert 'down_revision = "0020_phase38_citation_architecture"' in migration
-    assert "graph_state_snapshots_phase39" in migration
+    assert "graph_state_snapshots" in migration
     assert "ENABLE ROW LEVEL SECURITY" in migration and "FORCE ROW LEVEL SECURITY" in migration
-    assert "phase39_prevent_state_mutation" in migration
-    assert "phase39_validate_state_run_tenant" in migration
+    assert "prevent_state_mutation" in migration
+    assert "validate_state_run_tenant" in migration
     assert "state_schema_version" in migration and "state_sha256" in migration
 
 

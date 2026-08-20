@@ -1,8 +1,8 @@
 from pathlib import Path
 
 
-def test_phase16_migration_has_transcript_tables_rls_and_idempotent_constraints():
-    text = Path("src/verideploy/database/migrations/versions/0004_phase16_audio_transcription.py").read_text()
+def test_migration_has_transcript_tables_rls_and_idempotent_constraints():
+    text = Path("src/verideploy/database/migrations/versions/0004_audio_transcription.py").read_text()
     assert '"audio_transcriptions"' in text
     assert '"audio_transcript_segments"' in text
     assert "ENABLE ROW LEVEL SECURITY" in text

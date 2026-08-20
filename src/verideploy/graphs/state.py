@@ -9,8 +9,8 @@ from datetime import datetime, timezone
 from typing import Annotated, Any, TypedDict
 
 CURRENT_STATE_SCHEMA_VERSION = 3
-STATE_SERIALIZER_VERSION = "phase39-canonical-json-v1"
-STATE_ENCRYPTION_POLICY_VERSION = "phase39-reference-only-v1"
+STATE_SERIALIZER_VERSION = "canonical-json-v1"
+STATE_ENCRYPTION_POLICY_VERSION = "reference-only-v1"
 
 
 class StateMigrationError(ValueError):

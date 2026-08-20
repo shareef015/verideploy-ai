@@ -64,7 +64,7 @@ class InMemoryAgentRunRepository:
 
 class Base(DeclarativeBase): pass
 class AgentRunRow(Base):
-    __tablename__ = "agent_runs_phase19"
+    __tablename__ = "agent_runs"
     run_id: Mapped[UUID] = mapped_column(Uuid, primary_key=True)
     tenant_id: Mapped[UUID] = mapped_column(Uuid, nullable=False, index=True)
     agent_name: Mapped[str] = mapped_column(String(40), nullable=False)

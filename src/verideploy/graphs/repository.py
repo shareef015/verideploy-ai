@@ -19,7 +19,7 @@ class SqlAlchemyGraphRuntimeRepository:
         now = datetime.now(timezone.utc)
         with self.database.tenant_session(tenant_id, statement_timeout_ms=self.statement_timeout_ms) as session:
             session.execute(text("""
-                INSERT INTO graph_runs_phase18
+                INSERT INTO graph_runs
                     (run_id, tenant_id, thread_id, graph_name, graph_version, correlation_id, status, last_sequence, created_at, updated_at)
                 VALUES (:run_id, :tenant_id, :thread_id, :graph_name, :graph_version, :correlation_id, :status, 0, :now, :now)
                 ON CONFLICT (tenant_id, run_id) DO NOTHING
@@ -35,7 +35,7 @@ class SqlAlchemyGraphRuntimeRepository:
             row = session.execute(text("""
                 SELECT run_id, tenant_id, thread_id, graph_name, graph_version, correlation_id,
                        status, last_sequence, error_code, created_at, updated_at
-                FROM graph_runs_phase18 WHERE tenant_id=:tenant_id AND run_id=:run_id
+                FROM graph_runs WHERE tenant_id=:tenant_id AND run_id=:run_id
             """), {"tenant_id": tenant_id, "run_id": run_id}).mappings().first()
         return None if row is None else GraphRunRecord.model_validate(dict(row))
 
@@ -43,7 +43,7 @@ class SqlAlchemyGraphRuntimeRepository:
         now = datetime.now(timezone.utc)
         with self.database.tenant_session(tenant_id, statement_timeout_ms=self.statement_timeout_ms) as session:
             result = session.execute(text("""
-                UPDATE graph_runs_phase18 SET status=:status, error_code=:error_code, updated_at=:now
+                UPDATE graph_runs SET status=:status, error_code=:error_code, updated_at=:now
                 WHERE tenant_id=:tenant_id AND run_id=:run_id
             """), {"status": status.value, "error_code": error_code, "now": now, "tenant_id": tenant_id, "run_id": run_id})
             if result.rowcount != 1:
@@ -57,7 +57,7 @@ class SqlAlchemyGraphRuntimeRepository:
         now = datetime.now(timezone.utc)
         with self.database.tenant_session(tenant_id, statement_timeout_ms=self.statement_timeout_ms) as session:
             row = session.execute(text("""
-                UPDATE graph_runs_phase18 SET last_sequence=last_sequence+1, updated_at=:now
+                UPDATE graph_runs SET last_sequence=last_sequence+1, updated_at=:now
                 WHERE tenant_id=:tenant_id AND run_id=:run_id
                 RETURNING last_sequence
             """), {"now": now, "tenant_id": tenant_id, "run_id": run_id}).mappings().first()
@@ -70,7 +70,7 @@ class SqlAlchemyGraphRuntimeRepository:
                 payload=payload or {}, occurred_at=now,
             )
             session.execute(text("""
-                INSERT INTO graph_runtime_events_phase18
+                INSERT INTO graph_runtime_events
                     (event_id, tenant_id, run_id, sequence_number, event_type, node_name, payload, occurred_at)
                 VALUES (:event_id, :tenant_id, :run_id, :sequence_number, :event_type, :node_name, CAST(:payload AS jsonb), :occurred_at)
             """), {"event_id": event.event_id, "tenant_id": tenant_id, "run_id": run_id, "sequence_number": event.sequence_number, "event_type": event_type, "node_name": node_name, "payload": json.dumps(event.payload, separators=(",", ":"), sort_keys=True), "occurred_at": now})
@@ -84,7 +84,7 @@ class SqlAlchemyGraphRuntimeRepository:
         with self.database.tenant_session(tenant_id, statement_timeout_ms=self.statement_timeout_ms) as session:
             rows = session.execute(text("""
                 SELECT event_id, tenant_id, run_id, sequence_number, event_type, node_name, payload, occurred_at
-                FROM graph_runtime_events_phase18
+                FROM graph_runtime_events
                 WHERE tenant_id=:tenant_id AND run_id=:run_id AND sequence_number>:after_sequence
                 ORDER BY sequence_number
             """), {"tenant_id": tenant_id, "run_id": run_id, "after_sequence": after_sequence}).mappings().all()

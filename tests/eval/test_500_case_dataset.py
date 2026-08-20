@@ -4,17 +4,17 @@ import json
 from pathlib import Path
 
 from verideploy.evaluation.datasets import load_jsonl_dataset
-from verideploy.evaluation.quality import PHASE52_EXPECTED_COUNTS, PHASE52_TOTAL_CASES, validate_dataset
+from verideploy.evaluation.quality import EXPECTED_COUNTS, TOTAL_CASES, validate_dataset
 
 DATASET = Path("evals/datasets/verideploy-500/v1.jsonl")
 MANIFEST = Path("evals/datasets/verideploy-500/manifest.json")
 
 
-def test_phase52_dataset_has_exact_required_shape() -> None:
+def test_dataset_has_exact_required_shape() -> None:
     cases = load_jsonl_dataset(DATASET)
     report = validate_dataset(DATASET)
-    assert len(cases) == PHASE52_TOTAL_CASES == 500
-    assert report.category_counts == dict(sorted(PHASE52_EXPECTED_COUNTS.items()))
+    assert len(cases) == TOTAL_CASES == 500
+    assert report.category_counts == dict(sorted(EXPECTED_COUNTS.items()))
     assert report.unique_case_ids == 500
     assert report.unique_content_fingerprints == 500
     assert report.passed is True
@@ -32,7 +32,7 @@ def test_every_case_has_ground_truth_and_required_sources() -> None:
 def test_manifest_matches_dataset_and_records_clean_quality_gate() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     assert manifest["case_count"] == 500
-    assert manifest["categories"] == dict(sorted(PHASE52_EXPECTED_COUNTS.items()))
+    assert manifest["categories"] == dict(sorted(EXPECTED_COUNTS.items()))
     assert len(manifest["content_sha256"]) == 64
     assert manifest["quality_gate"]["passed"] is True
     assert manifest["quality_gate"]["issues"] == []

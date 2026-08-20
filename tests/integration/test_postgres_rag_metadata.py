@@ -20,7 +20,7 @@ def test_postgres_document_kind_filter_is_tenant_scoped() -> None:
     engine = create_engine(POSTGRES_URL, future=True)
     tenant = uuid4(); runbook_doc = uuid4(); architecture_doc = uuid4(); runbook_chunk = uuid4(); architecture_chunk = uuid4()
     with engine.begin() as connection:
-        connection.execute(text("INSERT INTO tenants (tenant_id,slug,display_name) VALUES (:id,:slug,'phase20') ON CONFLICT DO NOTHING"), {"id":str(tenant),"slug":f"phase20-{tenant}"})
+        connection.execute(text("INSERT INTO tenants (tenant_id,slug,display_name) VALUES (:id,:slug,'postgres-rag-metadata') ON CONFLICT DO NOTHING"), {"id":str(tenant),"slug":f"{tenant}"})
         connection.execute(text("SELECT set_config('app.tenant_id', :tenant, true)"), {"tenant":str(tenant)})
         for doc, chunk, source, kind, content, hash_char in (
             (runbook_doc, runbook_chunk, "db-runbook", "runbook", "checkout database pool recovery restart", "a"),

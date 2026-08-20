@@ -14,7 +14,7 @@ class QueryTelemetryRepository:
         query_event_id = uuid4()
         with self.db.tenant_session(tenant_id) as session:
             session.execute(text('''
-                INSERT INTO database_query_telemetry_phase33
+                INSERT INTO database_query_telemetry
                 (query_event_id, tenant_id, fingerprint, operation, duration_ms, row_count, application_name, observed_at, payload)
                 VALUES (:id, :tenant, :fp, :op, :duration, :rows, :app, :observed, '{}'::jsonb)
             '''), {

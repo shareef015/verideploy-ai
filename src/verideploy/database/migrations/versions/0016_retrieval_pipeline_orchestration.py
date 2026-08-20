@@ -1,4 +1,4 @@
-"""Phase 34 traceable retrieval pipeline orchestration."""
+"""Traceable retrieval pipeline orchestration."""
 from alembic import op
 import sqlalchemy as sa
 
@@ -20,7 +20,7 @@ def _rls(table: str) -> None:
 
 def upgrade() -> None:
     op.create_table(
-        "retrieval_pipeline_runs_phase34",
+        "retrieval_pipeline_runs",
         sa.Column("run_id", sa.Uuid(), primary_key=True),
         sa.Column("tenant_id", sa.Uuid(), sa.ForeignKey("tenants.tenant_id", ondelete="CASCADE"), nullable=False),
         sa.Column("pipeline_version", sa.String(32), nullable=False),
@@ -29,17 +29,17 @@ def upgrade() -> None:
         sa.Column("trace_json", sa.JSON(), nullable=False),
         sa.Column("context_sha256", sa.String(64), nullable=False),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("now()"), nullable=False),
-        sa.CheckConstraint("length(input_sha256)=64", name="ck_phase34_run_input_hash"),
-        sa.CheckConstraint("length(context_sha256)=64", name="ck_phase34_run_context_hash"),
+        sa.CheckConstraint("length(input_sha256)=64", name="ck_run_input_hash"),
+        sa.CheckConstraint("length(context_sha256)=64", name="ck_run_context_hash"),
     )
-    op.create_index("ix_phase34_runs_tenant_created", "retrieval_pipeline_runs_phase34", ["tenant_id", "created_at"])
-    op.create_index("ix_phase34_runs_input_hash", "retrieval_pipeline_runs_phase34", ["tenant_id", "input_sha256"])
-    _rls("retrieval_pipeline_runs_phase34")
+    op.create_index("ix_retrieval_pipeline_runs_tenant_created", "retrieval_pipeline_runs", ["tenant_id", "created_at"])
+    op.create_index("ix_runs_input_hash", "retrieval_pipeline_runs", ["tenant_id", "input_sha256"])
+    _rls("retrieval_pipeline_runs")
 
     op.create_table(
-        "retrieval_ranking_decisions_phase34",
+        "retrieval_ranking_decisions",
         sa.Column("decision_id", sa.Uuid(), primary_key=True),
-        sa.Column("run_id", sa.Uuid(), sa.ForeignKey("retrieval_pipeline_runs_phase34.run_id", ondelete="CASCADE"), nullable=False),
+        sa.Column("run_id", sa.Uuid(), sa.ForeignKey("retrieval_pipeline_runs.run_id", ondelete="CASCADE"), nullable=False),
         sa.Column("tenant_id", sa.Uuid(), sa.ForeignKey("tenants.tenant_id", ondelete="CASCADE"), nullable=False),
         sa.Column("stage", sa.String(32), nullable=False),
         sa.Column("ordinal", sa.Integer(), nullable=False),
@@ -53,25 +53,25 @@ def upgrade() -> None:
         sa.Column("components", sa.JSON(), nullable=False, server_default=sa.text("'{}'::jsonb")),
         sa.Column("source_version", sa.String(64), nullable=True),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.text("now()"), nullable=False),
-        sa.UniqueConstraint("run_id", "stage", "ordinal", name="uq_phase34_run_stage_ordinal"),
-        sa.CheckConstraint("ordinal > 0", name="ck_phase34_decision_ordinal"),
-        sa.CheckConstraint("action IN ('keep','drop','score','select')", name="ck_phase34_decision_action"),
+        sa.UniqueConstraint("run_id", "stage", "ordinal", name="uq_run_stage_ordinal"),
+        sa.CheckConstraint("ordinal > 0", name="ck_decision_ordinal"),
+        sa.CheckConstraint("action IN ('keep','drop','score','select')", name="ck_decision_action"),
     )
-    op.create_index("ix_phase34_decisions_run_stage", "retrieval_ranking_decisions_phase34", ["tenant_id", "run_id", "stage", "ordinal"])
-    op.create_index("ix_phase34_decisions_chunk", "retrieval_ranking_decisions_phase34", ["tenant_id", "chunk_id", "created_at"])
-    _rls("retrieval_ranking_decisions_phase34")
+    op.create_index("ix_decisions_run_stage", "retrieval_ranking_decisions", ["tenant_id", "run_id", "stage", "ordinal"])
+    op.create_index("ix_decisions_chunk", "retrieval_ranking_decisions", ["tenant_id", "chunk_id", "created_at"])
+    _rls("retrieval_ranking_decisions")
 
     op.execute(sa.text("""
-    CREATE OR REPLACE FUNCTION phase34_prevent_trace_mutation() RETURNS trigger AS $$
+    CREATE OR REPLACE FUNCTION prevent_trace_mutation() RETURNS trigger AS $$
     BEGIN
-        RAISE EXCEPTION 'phase34 retrieval traces are append-only';
+        RAISE EXCEPTION 'retrieval traces are append-only';
     END; $$ LANGUAGE plpgsql
     """))
-    for table in ("retrieval_pipeline_runs_phase34", "retrieval_ranking_decisions_phase34"):
-        op.execute(sa.text(f"CREATE TRIGGER trg_{table}_immutable BEFORE UPDATE OR DELETE ON {table} FOR EACH ROW EXECUTE FUNCTION phase34_prevent_trace_mutation()"))
+    for table in ("retrieval_pipeline_runs", "retrieval_ranking_decisions"):
+        op.execute(sa.text(f"CREATE TRIGGER trg_{table}_immutable BEFORE UPDATE OR DELETE ON {table} FOR EACH ROW EXECUTE FUNCTION prevent_trace_mutation()"))
 
 
 def downgrade() -> None:
-    op.execute(sa.text("DROP TABLE IF EXISTS retrieval_ranking_decisions_phase34 CASCADE"))
-    op.execute(sa.text("DROP TABLE IF EXISTS retrieval_pipeline_runs_phase34 CASCADE"))
-    op.execute(sa.text("DROP FUNCTION IF EXISTS phase34_prevent_trace_mutation()"))
+    op.execute(sa.text("DROP TABLE IF EXISTS retrieval_ranking_decisions CASCADE"))
+    op.execute(sa.text("DROP TABLE IF EXISTS retrieval_pipeline_runs CASCADE"))
+    op.execute(sa.text("DROP FUNCTION IF EXISTS prevent_trace_mutation()"))

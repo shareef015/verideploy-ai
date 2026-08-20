@@ -6,7 +6,7 @@ import pytest
 from pydantic import ValidationError
 
 from verideploy.agents.contracts import AgentAuthorization, AgentRequest, ToolBudget, ToolPermission
-from verideploy.agents.prompts import build_phase19_prompt_registry
+from verideploy.agents.prompts import build_prompt_registry
 from verideploy.agents.repository import InMemoryAgentRunRepository
 from verideploy.agents.visual import VisualEvidenceAgent, VisualQueryAnalysis
 from verideploy.multimodal.image_intelligence import (
@@ -89,7 +89,7 @@ def test_visual_query_contract_rejects_intent_analysis_mismatch():
 @pytest.mark.asyncio
 async def test_permission_is_required_before_model_or_tools():
     r=req(); model=FakeModel(analysis()); search=FakeSearch([hit()]); analyzer=FakeAnalyzer()
-    agent=VisualEvidenceAgent(model=model,prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),search=search,analyzer=analyzer)
+    agent=VisualEvidenceAgent(model=model,prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),search=search,analyzer=analyzer)
     with pytest.raises(PermissionError):
         await agent.run(r,authorization=auth(r,False),budget=ToolBudget(max_calls=2))
     assert model.calls==[] and search.calls==[] and analyzer.calls==[]
@@ -98,7 +98,7 @@ async def test_permission_is_required_before_model_or_tools():
 @pytest.mark.asyncio
 async def test_architecture_search_analysis_evidence_locator_and_confidence():
     r=req(); h=hit(); repo=InMemoryAgentRunRepository()
-    agent=VisualEvidenceAgent(model=FakeModel(analysis()),prompts=build_phase19_prompt_registry(),repository=repo,search=FakeSearch([h]),analyzer=FakeAnalyzer())
+    agent=VisualEvidenceAgent(model=FakeModel(analysis()),prompts=build_prompt_registry(),repository=repo,search=FakeSearch([h]),analyzer=FakeAnalyzer())
     result=await agent.run(r,authorization=auth(r),budget=ToolBudget(max_calls=3),min_short_side=720,min_confidence=.55,max_analyses=2)
     assert result.tool_calls_used==2 and result.sufficiency.sufficient is True
     item=result.evidence[0]
@@ -111,7 +111,7 @@ async def test_architecture_search_analysis_evidence_locator_and_confidence():
 async def test_dashboard_analysis_uses_dashboard_contract():
     r=req(); model=FakeModel(analysis(intent="dashboard",analysis_type="dashboard",normalized_query="checkout latency dashboard"))
     analyzer=FakeAnalyzer()
-    result=await VisualEvidenceAgent(model=model,prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=analyzer).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2),max_analyses=1)
+    result=await VisualEvidenceAgent(model=model,prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=analyzer).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2),max_analyses=1)
     assert analyzer.calls[0][2] is ImageAnalysisType.DASHBOARD
     assert result.evidence[0].analysis_type is ImageAnalysisType.DASHBOARD
 
@@ -119,7 +119,7 @@ async def test_dashboard_analysis_uses_dashboard_contract():
 @pytest.mark.asyncio
 async def test_missing_visual_evidence_is_explicit_and_does_not_call_analyzer():
     r=req(); analyzer=FakeAnalyzer()
-    result=await VisualEvidenceAgent(model=FakeModel(analysis()),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([]),analyzer=analyzer).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2))
+    result=await VisualEvidenceAgent(model=FakeModel(analysis()),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([]),analyzer=analyzer).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2))
     assert analyzer.calls==[]
     assert result.sufficiency.sufficient is False
     assert "no_visual_evidence" in result.sufficiency.reason_codes
@@ -128,7 +128,7 @@ async def test_missing_visual_evidence_is_explicit_and_does_not_call_analyzer():
 @pytest.mark.asyncio
 async def test_low_resolution_is_qualified_not_silently_accepted():
     r=req(); analyzer=FakeAnalyzer(width=640,height=480)
-    result=await VisualEvidenceAgent(model=FakeModel(analysis(top_k=1)),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=analyzer).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2),min_short_side=720,max_analyses=1)
+    result=await VisualEvidenceAgent(model=FakeModel(analysis(top_k=1)),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=analyzer).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2),min_short_side=720,max_analyses=1)
     assert result.sufficiency.sufficient is False
     assert "low_resolution" in result.sufficiency.reason_codes
     assert result.evidence[0].confidence_level=="low"
@@ -139,14 +139,14 @@ async def test_missing_locator_is_explicitly_insufficient():
     def result_factory(image_id):
         return ArchitectureAnalysisResult(image_id=image_id,summary="diagram",observations=[VisualObservation(observation_id="o",image_id=image_id,statement="service box",confidence=.9)],components=[],relationships=[],limitations=[])
     r=req(); analyzer=FakeAnalyzer(result_factory=result_factory)
-    result=await VisualEvidenceAgent(model=FakeModel(analysis(top_k=1)),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=analyzer).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2),max_analyses=1)
+    result=await VisualEvidenceAgent(model=FakeModel(analysis(top_k=1)),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=analyzer).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2),max_analyses=1)
     assert "missing_evidence_locators" in result.sufficiency.reason_codes
 
 
 @pytest.mark.asyncio
 async def test_failed_visual_analysis_degrades_to_explicit_unavailable():
     r=req(); analyzer=FakeAnalyzer(fail=True)
-    result=await VisualEvidenceAgent(model=FakeModel(analysis(top_k=1)),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=analyzer).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2),max_analyses=1)
+    result=await VisualEvidenceAgent(model=FakeModel(analysis(top_k=1)),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=analyzer).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2),max_analyses=1)
     assert result.evidence==[]
     assert "visual_analysis_unavailable" in result.sufficiency.reason_codes
 
@@ -154,7 +154,7 @@ async def test_failed_visual_analysis_degrades_to_explicit_unavailable():
 @pytest.mark.asyncio
 async def test_cross_tenant_analysis_provenance_is_rejected():
     r=req(); analyzer=FakeAnalyzer(tenant_override=uuid4())
-    agent=VisualEvidenceAgent(model=FakeModel(analysis(top_k=1)),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=analyzer)
+    agent=VisualEvidenceAgent(model=FakeModel(analysis(top_k=1)),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=analyzer)
     with pytest.raises(PermissionError, match="tenant mismatch"):
         await agent.run(r,authorization=auth(r),budget=ToolBudget(max_calls=2),max_analyses=1)
 
@@ -163,17 +163,17 @@ async def test_cross_tenant_analysis_provenance_is_rejected():
 async def test_trusted_document_scope_cannot_be_broadened_and_omission_inherits_scope():
     document_id=uuid4(); r=req({"document_id":str(document_id)})
     search=FakeSearch([])
-    agent=VisualEvidenceAgent(model=FakeModel(analysis(document_id=None)),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),search=search,analyzer=FakeAnalyzer())
+    agent=VisualEvidenceAgent(model=FakeModel(analysis(document_id=None)),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),search=search,analyzer=FakeAnalyzer())
     await agent.run(r,authorization=auth(r),budget=ToolBudget(max_calls=2))
     assert search.calls[0].document_id==document_id
-    bad=VisualEvidenceAgent(model=FakeModel(analysis(document_id=str(uuid4()))),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([]),analyzer=FakeAnalyzer())
+    bad=VisualEvidenceAgent(model=FakeModel(analysis(document_id=str(uuid4()))),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([]),analyzer=FakeAnalyzer())
     with pytest.raises(PermissionError, match="cannot broaden"):
         await bad.run(r,authorization=auth(r),budget=ToolBudget(max_calls=2))
 
 
-def test_phase21_prompt_versions_and_contract_extensions():
+def test_prompt_versions_and_contract_extensions():
     from verideploy.agents.contracts import AgentPlan, PlanStep, SupervisorDecision
-    registry=build_phase19_prompt_registry()
+    registry=build_prompt_registry()
     assert len(registry.get("visual_evidence","1.0.0").sha256)==64
     assert len(registry.get("supervisor","1.2.0").sha256)==64
     decision=SupervisorDecision(route="visual_evidence",rationale="diagram required",confidence=.9,required_permissions=["visual.evidence.read"])
@@ -191,7 +191,7 @@ async def test_architecture_components_and_relationships_preserve_observation_li
             components=[ArchitectureComponent(name="checkout",component_type="service",based_on_observation_ids=["obs-arch"])],
             relationships=[ArchitectureRelationship(source="checkout",target="Redis",relationship="connects_to",based_on_observation_ids=["obs-arch"])],
             limitations=[])
-    r=req(); result=await VisualEvidenceAgent(model=FakeModel(analysis(top_k=1)),prompts=build_phase19_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=FakeAnalyzer(result_factory=result_factory)).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2),max_analyses=1)
+    r=req(); result=await VisualEvidenceAgent(model=FakeModel(analysis(top_k=1)),prompts=build_prompt_registry(),repository=InMemoryAgentRunRepository(),search=FakeSearch([hit()]),analyzer=FakeAnalyzer(result_factory=result_factory)).run(r,authorization=auth(r),budget=ToolBudget(max_calls=2),max_analyses=1)
     kinds={item.kind for item in result.evidence[0].derived_findings}
     assert {"architecture_component","architecture_relationship"} <= kinds
     assert all("obs-arch" in item.based_on_observation_ids for item in result.evidence[0].derived_findings)

@@ -68,7 +68,7 @@ def _vector_literal(values: list[float]) -> str:
 
 class PostgresHybridRetrievalRepository(RetrievalRepository):
     """PostgreSQL FTS + pgvector repository with explicit tenant filtering and RLS context."""
-    supports_phase35_scope = True
+    supports_scope = True
 
     def __init__(self, db: DatabaseManager) -> None:
         if db.engine.dialect.name != "postgresql":

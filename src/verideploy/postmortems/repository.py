@@ -30,7 +30,7 @@ class Base(DeclarativeBase):
 
 
 class PostmortemRow(Base):
-    __tablename__ = "postmortems_phase5"
+    __tablename__ = "postmortems"
     __table_args__ = (UniqueConstraint("tenant_id", "idempotency_key", name="uq_postmortem_tenant_idempotency_p5"),)
     postmortem_id: Mapped[str] = mapped_column(String(36), primary_key=True)
     tenant_id: Mapped[str] = mapped_column(String(36), index=True)

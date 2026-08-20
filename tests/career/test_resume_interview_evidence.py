@@ -3,17 +3,17 @@ from verideploy.career.interview_evidence import build_report, load_config, reso
 
 ROOT=Path(__file__).resolve().parents[2]
 
-def test_phase84_all_metric_sources_resolve_to_repository_evidence():
+def test_all_metric_sources_resolve_to_repository_evidence():
     metrics=resolve_metrics(ROOT)
     assert len(metrics) >= 20
     assert all(m["qualifier"] for m in metrics.values())
 
 
-def test_phase84_resume_claims_have_no_unmeasured_numeric_literals():
+def test_resume_claims_have_no_unmeasured_numeric_literals():
     assert validate(ROOT) == []
 
 
-def test_phase84_generates_recruiter_ready_resume_and_star_evidence():
+def test_generates_recruiter_ready_resume_and_star_evidence():
     report=build_report(ROOT)
     assert report["gate"] == "pass"
     assert len(report["resume_bullets"]) >= 5
@@ -21,7 +21,7 @@ def test_phase84_generates_recruiter_ready_resume_and_star_evidence():
     assert len(report["recruiter_questions"]) >= 10
 
 
-def test_phase84_cost_latency_claims_are_explicitly_qualified():
+def test_cost_latency_claims_are_explicitly_qualified():
     cfg=load_config(ROOT)
     qualifiers={m["id"]:m["qualifier"] for m in cfg["metrics"]}
     assert "not production network latency" in qualifiers["rag_cold_p95_ms"]
@@ -29,7 +29,7 @@ def test_phase84_cost_latency_claims_are_explicitly_qualified():
     assert "not an incurred production charge" in qualifiers["demo_estimated_cost_usd"]
 
 
-def test_phase84_preserves_phase83_evidence_backed_skill_claims():
+def test_preserves_evidence_backed_skill_claims():
     report=build_report(ROOT)
     text="\n".join(x["text"] for x in report["resume_bullets"])
     assert "14 AI-engineering skill claims" in text

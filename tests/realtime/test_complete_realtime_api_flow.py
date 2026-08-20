@@ -10,7 +10,7 @@ from workers.investigation.investigation_worker import handle_create
 
 def test_incident_worker_completes_rca_with_citations_audit_and_order(tmp_path):
     service=InvestigationService(SqlAlchemyInvestigationRepository(f"sqlite:///{tmp_path/'i.db'}", create_schema=True))
-    cmd=CreateInvestigationCommand(investigation_id=uuid4(),tenant_id=uuid4(),requested_by=uuid4(),idempotency_key="phase70-incident",query="Why did checkout latency increase immediately after the release?")
+    cmd=CreateInvestigationCommand(investigation_id=uuid4(),tenant_id=uuid4(),requested_by=uuid4(),idempotency_key="incident",query="Why did checkout latency increase immediately after the release?")
     emitted=[]
     async def emit(t,p): emitted.append((t,p))
     asyncio.run(handle_create(cmd.model_dump_json().encode(),service,emit,complete_workflow=True))

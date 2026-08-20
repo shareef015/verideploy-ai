@@ -97,8 +97,8 @@ def deterministic_fixtures(*, partial: bool = False) -> list[EvidenceFixture]:
 
 def run_checkpoint(root: Path) -> dict:
     policy = load_policy(root)
-    clean = [process_fixture(x, tenant_id="tenant-phase78", policy=policy) for x in deterministic_fixtures()]
-    partial = [process_fixture(x, tenant_id="tenant-phase78", policy=policy) for x in deterministic_fixtures(partial=True)]
+    clean = [process_fixture(x, tenant_id="tenant", policy=policy) for x in deterministic_fixtures()]
+    partial = [process_fixture(x, tenant_id="tenant", policy=policy) for x in deterministic_fixtures(partial=True)]
     clean_fusion = fuse(clean, policy=policy)
     partial_fusion = fuse(partial, policy=policy)
     redaction_ok = all((r.redacted_text is None) or ("@" not in r.redacted_text and "sk-demo-secret" not in r.redacted_text) for r in clean)

@@ -18,18 +18,18 @@ TENANT=UUID("11111111-1111-4111-8111-111111111111")
 OTHER=UUID("22222222-2222-4222-8222-222222222222")
 
 
-def test_phase37_postgres_history_is_tenant_scoped_and_append_only():
+def test_postgres_history_is_tenant_scoped_and_append_only():
     assert URL
     cfg=Config("alembic.ini"); cfg.set_main_option("sqlalchemy.url",URL); command.upgrade(cfg,"head")
     db=DatabaseManager(URL)
     source_run=uuid4(); verification=uuid4()
     try:
         with db.engine.begin() as conn:
-            for tenant,slug in ((TENANT,"phase37"),(OTHER,"phase37-other")):
+            for tenant,slug in ((TENANT,"postgres-hallucination-protection"),(OTHER,"other")):
                 conn.execute(text("INSERT INTO tenants (tenant_id,slug,display_name) VALUES (:id,:slug,:name) ON CONFLICT (tenant_id) DO NOTHING"),{"id":str(tenant),"slug":f"{slug}-{str(tenant)[:8]}","name":slug})
-        # Create the required Phase36 parent under tenant scope using a minimal JSON payload; FK/tenant guard is the subject here.
+        # Create the required  parent under tenant scope using a minimal JSON payload; FK/tenant guard is the subject here.
         with db.session(tenant_id=TENANT) as session:
-            session.execute(text("""INSERT INTO self_corrective_rag_runs_phase36
+            session.execute(text("""INSERT INTO self_corrective_rag_runs
                 (run_id,tenant_id,controller_version,stop_reason,answerable,qualified,result_json)
                 VALUES (:run,:tenant,'1.0.0','sufficient_evidence',true,false,CAST(:payload AS jsonb))"""),
                 {"run":str(source_run),"tenant":str(TENANT),"payload":'{"stub":true}'})
@@ -40,6 +40,6 @@ def test_phase37_postgres_history_is_tenant_scoped_and_append_only():
         assert repo.get(tenant_id=OTHER,verification_id=verification) is None
         with pytest.raises(DBAPIError):
             with db.session(tenant_id=TENANT) as session:
-                session.execute(text("UPDATE hallucination_protection_runs_phase37 SET protected=false WHERE verification_id=:id"),{"id":str(verification)})
+                session.execute(text("UPDATE hallucination_protection_runs SET protected=false WHERE verification_id=:id"),{"id":str(verification)})
     finally:
         db.dispose()

@@ -1,4 +1,4 @@
-"""Phase 29 deterministic synthetic incident dataset persistence."""
+"""Deterministic synthetic incident dataset persistence."""
 from alembic import op
 import sqlalchemy as sa
 
@@ -10,7 +10,7 @@ depends_on = None
 
 def upgrade() -> None:
     op.create_table(
-        "synthetic_incidents_phase29",
+        "synthetic_incidents",
         sa.Column("incident_id", sa.Uuid(), primary_key=True),
         sa.Column("tenant_id", sa.Uuid(), sa.ForeignKey("tenants.tenant_id", ondelete="CASCADE"), nullable=False),
         sa.Column("family_id", sa.Uuid(), nullable=False),
@@ -25,16 +25,16 @@ def upgrade() -> None:
         sa.CheckConstraint("failure_mode IN ('db_pool_exhaustion','incompatible_schema_migration','tls_certificate_expiry','cache_memory_pressure','consumer_lag','downstream_timeout','cpu_saturation','bad_configuration')", name="ck_synthetic_incident_failure_mode"),
         sa.UniqueConstraint("tenant_id", "family_id", name="uq_synthetic_incident_family"),
     )
-    op.create_index("ix_synthetic_incident_label_split", "synthetic_incidents_phase29", ["tenant_id", "failure_mode", "split"])
-    op.create_index("ix_synthetic_incident_service_time", "synthetic_incidents_phase29", ["tenant_id", "primary_service_id", "started_at"])
-    op.execute(sa.text("ALTER TABLE synthetic_incidents_phase29 ENABLE ROW LEVEL SECURITY"))
-    op.execute(sa.text("ALTER TABLE synthetic_incidents_phase29 FORCE ROW LEVEL SECURITY"))
+    op.create_index("ix_synthetic_incident_label_split", "synthetic_incidents", ["tenant_id", "failure_mode", "split"])
+    op.create_index("ix_synthetic_incident_service_time", "synthetic_incidents", ["tenant_id", "primary_service_id", "started_at"])
+    op.execute(sa.text("ALTER TABLE synthetic_incidents ENABLE ROW LEVEL SECURITY"))
+    op.execute(sa.text("ALTER TABLE synthetic_incidents FORCE ROW LEVEL SECURITY"))
     op.execute(sa.text(
-        "CREATE POLICY synthetic_incidents_phase29_tenant_isolation ON synthetic_incidents_phase29 "
+        "CREATE POLICY synthetic_incidents_tenant_isolation ON synthetic_incidents "
         "USING (tenant_id = NULLIF(current_setting('app.tenant_id', true), '')::uuid) "
         "WITH CHECK (tenant_id = NULLIF(current_setting('app.tenant_id', true), '')::uuid)"
     ))
 
 
 def downgrade() -> None:
-    op.drop_table("synthetic_incidents_phase29")
+    op.drop_table("synthetic_incidents")

@@ -3,13 +3,13 @@ from pathlib import Path
 from verideploy.config import Settings
 
 
-def test_phase18_config_has_sync_durability_and_timeout():
+def test_config_has_sync_durability_and_timeout():
     settings = Settings(app_env="test")
     assert settings.langgraph_durability == "sync"
     assert settings.langgraph_default_timeout_seconds == 300
 
 
-def test_phase18_declares_real_langgraph_runtime_dependencies():
+def test_declares_real_langgraph_runtime_dependencies():
     text = Path("pyproject.toml").read_text()
     assert '"langgraph>=0.6,<2"' in text
     assert '"langgraph-checkpoint-postgres>=2,<4"' in text

@@ -13,7 +13,7 @@ from verideploy.incidents.schemas import (
 from verideploy.topology.seed import NAMESPACE, build_nexuspay_topology
 
 DATASET_NAMESPACE = UUID("d7bddf15-a7fd-5e74-9caa-ffec9985a929")
-SEED_VERSION = "nexuspay-phase29-v1"
+SEED_VERSION = "nexuspay-v1"
 SEED = 29029
 GENERATED_AT = datetime(2026, 8, 17, 18, 30, tzinfo=timezone.utc)
 

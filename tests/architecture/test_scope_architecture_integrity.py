@@ -1,7 +1,7 @@
 from pathlib import Path
 from verideploy.architecture.integrity import validate_architecture
 ROOT=Path(__file__).resolve().parents[2]
-def test_phase81_gate_passes(): assert validate_architecture(ROOT)["valid"]
+def test_gate_passes(): assert validate_architecture(ROOT)["valid"]
 def test_no_demo_reviewer_runtime_fallback():
     text=(ROOT/"apps/gateway/src/approvals/approvals.service.ts").read_text(); assert "demo-reviewer" not in text and "GATEWAY_APPROVAL_REVIEWER" not in text
 def test_approval_uses_authenticated_identity():

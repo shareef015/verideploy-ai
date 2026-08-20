@@ -37,7 +37,7 @@ class KnowledgeCorpusIngestor:
         self.writer = writer
         self.embedding_pipeline = embedding_pipeline
 
-    async def ingest(self, *, correlation_id: str = "phase27-knowledge-ingestion") -> KnowledgeIngestionResult:
+    async def ingest(self, *, correlation_id: str = "knowledge-ingestion") -> KnowledgeIngestionResult:
         document_count = 0
         chunk_count = 0
         embedding_inputs: list[EmbeddingInput] = []

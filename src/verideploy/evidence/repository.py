@@ -104,20 +104,20 @@ class PostgresEvidenceRepository(EvidenceRepository):
         self.db = db
 
     def _parents(self, session: Any, record_id: UUID) -> tuple[EvidenceParent, ...]:
-        rows = session.execute(text("SELECT parent_record_id, relation FROM evidence_parent_links_phase30 WHERE child_record_id=:rid ORDER BY parent_record_id"), {"rid": str(record_id)}).mappings()
+        rows = session.execute(text("SELECT parent_record_id, relation FROM evidence_parent_links WHERE child_record_id=:rid ORDER BY parent_record_id"), {"rid": str(record_id)}).mappings()
         return tuple(EvidenceParent.model_validate(dict(r)) for r in rows)
 
     def insert(self, record: EvidenceRecord) -> EvidenceRecord:
         with self.db.tenant_session(record.tenant_id, statement_timeout_ms=15_000) as session:
             for parent in record.parents:
-                found = session.execute(text("SELECT tenant_id FROM evidence_versions_phase30 WHERE record_id=:rid"), {"rid": str(parent.parent_record_id)}).scalar_one_or_none()
+                found = session.execute(text("SELECT tenant_id FROM evidence_versions WHERE record_id=:rid"), {"rid": str(parent.parent_record_id)}).scalar_one_or_none()
                 if found is None:
                     raise EvidenceNotFoundError("parent evidence record not found")
                 if UUID(str(found)) != record.tenant_id:
                     raise EvidenceTenantViolation("parent evidence belongs to another tenant")
             payload = record.model_dump(mode="json")
             session.execute(text("""
-                INSERT INTO evidence_versions_phase30
+                INSERT INTO evidence_versions
                 (record_id,evidence_id,tenant_id,version,is_derived,kind,content,content_sha256,object_reference,confidence_inputs,provenance,retention,created_at)
                 VALUES (:record_id,:evidence_id,:tenant_id,:version,:is_derived,:kind,CAST(:content AS jsonb),:content_sha256,CAST(:object_reference AS jsonb),CAST(:confidence_inputs AS jsonb),CAST(:provenance AS jsonb),CAST(:retention AS jsonb),:created_at)
             """), {
@@ -128,7 +128,7 @@ class PostgresEvidenceRepository(EvidenceRepository):
                 "retention": __import__("json").dumps(payload["retention"]), "created_at": record.created_at,
             })
             for parent in record.parents:
-                session.execute(text("INSERT INTO evidence_parent_links_phase30 (tenant_id,parent_record_id,child_record_id,relation) VALUES (:tenant,:parent,:child,:relation)"), {
+                session.execute(text("INSERT INTO evidence_parent_links (tenant_id,parent_record_id,child_record_id,relation) VALUES (:tenant,:parent,:child,:relation)"), {
                     "tenant": str(record.tenant_id), "parent": str(parent.parent_record_id), "child": str(record.record_id), "relation": parent.relation.value,
                 })
             session.commit()
@@ -136,24 +136,24 @@ class PostgresEvidenceRepository(EvidenceRepository):
 
     def get_record(self, *, tenant_id: UUID, record_id: UUID) -> EvidenceRecord | None:
         with self.db.tenant_session(tenant_id) as session:
-            row = session.execute(text("SELECT * FROM evidence_versions_phase30 WHERE tenant_id=:tenant AND record_id=:rid"), {"tenant": str(tenant_id), "rid": str(record_id)}).mappings().first()
+            row = session.execute(text("SELECT * FROM evidence_versions WHERE tenant_id=:tenant AND record_id=:rid"), {"tenant": str(tenant_id), "rid": str(record_id)}).mappings().first()
             return _record_from_mapping(dict(row), self._parents(session, record_id)) if row else None
 
     def get_latest(self, *, tenant_id: UUID, evidence_id: UUID) -> EvidenceRecord | None:
         with self.db.tenant_session(tenant_id) as session:
-            row = session.execute(text("SELECT * FROM evidence_versions_phase30 WHERE tenant_id=:tenant AND evidence_id=:eid ORDER BY version DESC LIMIT 1"), {"tenant": str(tenant_id), "eid": str(evidence_id)}).mappings().first()
+            row = session.execute(text("SELECT * FROM evidence_versions WHERE tenant_id=:tenant AND evidence_id=:eid ORDER BY version DESC LIMIT 1"), {"tenant": str(tenant_id), "eid": str(evidence_id)}).mappings().first()
             return _record_from_mapping(dict(row), self._parents(session, row["record_id"])) if row else None
 
     def list_versions(self, *, tenant_id: UUID, evidence_id: UUID) -> tuple[EvidenceRecord, ...]:
         with self.db.tenant_session(tenant_id) as session:
-            rows = session.execute(text("SELECT * FROM evidence_versions_phase30 WHERE tenant_id=:tenant AND evidence_id=:eid ORDER BY version"), {"tenant": str(tenant_id), "eid": str(evidence_id)}).mappings().all()
+            rows = session.execute(text("SELECT * FROM evidence_versions WHERE tenant_id=:tenant AND evidence_id=:eid ORDER BY version"), {"tenant": str(tenant_id), "eid": str(evidence_id)}).mappings().all()
             return tuple(_record_from_mapping(dict(row), self._parents(session, row["record_id"])) for row in rows)
 
     def children_of(self, *, tenant_id: UUID, record_id: UUID) -> tuple[EvidenceRecord, ...]:
         with self.db.tenant_session(tenant_id) as session:
             rows = session.execute(text("""
-                SELECT e.* FROM evidence_versions_phase30 e
-                JOIN evidence_parent_links_phase30 l ON l.child_record_id=e.record_id
+                SELECT e.* FROM evidence_versions e
+                JOIN evidence_parent_links l ON l.child_record_id=e.record_id
                 WHERE l.tenant_id=:tenant AND l.parent_record_id=:rid ORDER BY e.created_at,e.record_id
             """), {"tenant": str(tenant_id), "rid": str(record_id)}).mappings().all()
             return tuple(_record_from_mapping(dict(row), self._parents(session, row["record_id"])) for row in rows)

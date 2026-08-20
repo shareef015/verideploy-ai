@@ -36,7 +36,7 @@ class PostgresSelfCorrectiveRunRepository:
         payload = result.model_dump(mode="json")
         with self.db.transaction(result.tenant_id) as session:
             session.execute(text("""
-                INSERT INTO self_corrective_rag_runs_phase36
+                INSERT INTO self_corrective_rag_runs
                   (run_id, tenant_id, controller_version, stop_reason, answerable, qualified, result_json)
                 VALUES (:run_id, :tenant_id, :version, :stop_reason, :answerable, :qualified, CAST(:result_json AS jsonb))
             """), {
@@ -46,7 +46,7 @@ class PostgresSelfCorrectiveRunRepository:
             })
             for attempt in result.attempts:
                 session.execute(text("""
-                    INSERT INTO self_corrective_rag_attempts_phase36
+                    INSERT INTO self_corrective_rag_attempts
                       (run_id, tenant_id, attempt_number, action, query_text, requested_scope_relaxed,
                        retrieval_run_id, evidence_grade, evidence_score, scope_fingerprint, attempt_json)
                     VALUES (:run_id, :tenant_id, :attempt, :action, :query, :relaxed,
@@ -61,5 +61,5 @@ class PostgresSelfCorrectiveRunRepository:
 
     def get(self, *, tenant_id: UUID, run_id: UUID) -> SelfCorrectiveRAGResult | None:
         with self.db.transaction(tenant_id) as session:
-            row = session.execute(text("SELECT result_json FROM self_corrective_rag_runs_phase36 WHERE tenant_id=:tenant_id AND run_id=:run_id"), {"tenant_id": str(tenant_id), "run_id": str(run_id)}).scalar_one_or_none()
+            row = session.execute(text("SELECT result_json FROM self_corrective_rag_runs WHERE tenant_id=:tenant_id AND run_id=:run_id"), {"tenant_id": str(tenant_id), "run_id": str(run_id)}).scalar_one_or_none()
         return SelfCorrectiveRAGResult.model_validate(row) if row else None

@@ -1,4 +1,4 @@
-"""Phase 28 NexusPay service topology persistence."""
+"""NexusPay service topology persistence."""
 from alembic import op
 import sqlalchemy as sa
 

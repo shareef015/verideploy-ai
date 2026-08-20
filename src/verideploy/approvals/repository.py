@@ -95,7 +95,7 @@ class PostgresApprovalRepository:
     def create_or_get(self, request: ApprovalRequest, event: ApprovalEvent) -> ApprovalRequest:
         with self.database.tenant_session(request.tenant_id, statement_timeout_ms=self.statement_timeout_ms) as session:
             row = session.execute(text("""
-                INSERT INTO approval_requests_phase41
+                INSERT INTO approval_requests
                   (approval_id,tenant_id,run_id,investigation_id,action_type,action_payload,risk,risk_score,requested_by,
                    evidence_summary,policy,idempotency_key,status,reviewer_id,delegated_to,decision_comment,version,
                    expires_at,created_at,updated_at)
@@ -118,7 +118,7 @@ class PostgresApprovalRepository:
             if row is not None:
                 self._insert_event(session, event)
             if row is None:
-                approval_id = session.execute(text("SELECT approval_id FROM approval_requests_phase41 WHERE tenant_id=:tenant_id AND idempotency_key=:key"), {"tenant_id": request.tenant_id, "key": request.idempotency_key}).scalar_one()
+                approval_id = session.execute(text("SELECT approval_id FROM approval_requests WHERE tenant_id=:tenant_id AND idempotency_key=:key"), {"tenant_id": request.tenant_id, "key": request.idempotency_key}).scalar_one()
             else:
                 approval_id = row["approval_id"]
             session.commit()
@@ -129,13 +129,13 @@ class PostgresApprovalRepository:
 
     def get(self, *, tenant_id: UUID, approval_id: UUID) -> ApprovalRequest | None:
         with self.database.tenant_session(tenant_id, statement_timeout_ms=self.statement_timeout_ms) as session:
-            row = session.execute(text("SELECT * FROM approval_requests_phase41 WHERE tenant_id=:tenant_id AND approval_id=:approval_id"), {"tenant_id": tenant_id, "approval_id": approval_id}).mappings().first()
+            row = session.execute(text("SELECT * FROM approval_requests WHERE tenant_id=:tenant_id AND approval_id=:approval_id"), {"tenant_id": tenant_id, "approval_id": approval_id}).mappings().first()
         return None if row is None else self._request(row)
 
     def list_queue(self, *, tenant_id: UUID, reviewer_id: str | None = None) -> list[ApprovalRequest]:
         with self.database.tenant_session(tenant_id, statement_timeout_ms=self.statement_timeout_ms) as session:
             rows = session.execute(text("""
-                SELECT * FROM approval_requests_phase41
+                SELECT * FROM approval_requests
                 WHERE tenant_id=:tenant_id AND status IN ('pending','in_review','changes_requested')
                   AND (:reviewer_id IS NULL OR delegated_to IS NULL OR delegated_to=:reviewer_id OR reviewer_id=:reviewer_id)
                 ORDER BY risk_score DESC, expires_at ASC, created_at ASC, approval_id ASC
@@ -146,7 +146,7 @@ class PostgresApprovalRepository:
         allowed = tuple(status.value for status in sorted(allowed_statuses, key=lambda s: s.value))
         with self.database.tenant_session(tenant_id, statement_timeout_ms=self.statement_timeout_ms) as session:
             current = session.execute(text("""
-                SELECT status,version FROM approval_requests_phase41
+                SELECT status,version FROM approval_requests
                 WHERE tenant_id=:tenant_id AND approval_id=:approval_id
                 FOR UPDATE
             """), {"tenant_id": tenant_id, "approval_id": approval_id}).mappings().first()
@@ -155,7 +155,7 @@ class PostgresApprovalRepository:
             if int(current["version"]) != expected_version or current["status"] not in allowed:
                 raise ApprovalConflictError("approval state changed concurrently")
             session.execute(text("""
-                UPDATE approval_requests_phase41 SET
+                UPDATE approval_requests SET
                   status=:status,reviewer_id=:reviewer_id,delegated_to=:delegated_to,decision_comment=:decision_comment,
                   version=:version,updated_at=:updated_at
                 WHERE tenant_id=:tenant_id AND approval_id=:approval_id AND version=:expected_version
@@ -172,7 +172,7 @@ class PostgresApprovalRepository:
 
     def _insert_event(self, session, event: ApprovalEvent) -> None:
         session.execute(text("""
-            INSERT INTO approval_events_phase41
+            INSERT INTO approval_events
               (event_id,approval_id,tenant_id,sequence,event_type,actor_id,actor_role,payload,previous_status,new_status,
                signed_payload_sha256,signature,occurred_at)
             VALUES
@@ -189,5 +189,5 @@ class PostgresApprovalRepository:
 
     def list_events(self, *, tenant_id: UUID, approval_id: UUID) -> list[ApprovalEvent]:
         with self.database.tenant_session(tenant_id, statement_timeout_ms=self.statement_timeout_ms) as session:
-            rows = session.execute(text("SELECT * FROM approval_events_phase41 WHERE tenant_id=:tenant_id AND approval_id=:approval_id ORDER BY sequence"), {"tenant_id": tenant_id, "approval_id": approval_id}).mappings().all()
+            rows = session.execute(text("SELECT * FROM approval_events WHERE tenant_id=:tenant_id AND approval_id=:approval_id ORDER BY sequence"), {"tenant_id": tenant_id, "approval_id": approval_id}).mappings().all()
         return [self._event(row) for row in rows]

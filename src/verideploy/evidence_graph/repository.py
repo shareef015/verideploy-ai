@@ -109,7 +109,7 @@ class PostgresEvidenceGraphRepository(EvidenceGraphRepository):
     def upsert_entity(self, entity: GraphEntity) -> GraphEntity:
         with self.db.tenant_session(entity.tenant_id) as s:
             row=s.execute(text("""
-                INSERT INTO graph_entities_phase31(entity_id,tenant_id,entity_type,natural_key,label,reference_uri,evidence_record_id,attributes,observed_at,created_at)
+                INSERT INTO graph_entities(entity_id,tenant_id,entity_type,natural_key,label,reference_uri,evidence_record_id,attributes,observed_at,created_at)
                 VALUES(:entity_id,:tenant_id,:entity_type,:natural_key,:label,:reference_uri,:evidence_record_id,CAST(:attributes AS jsonb),:observed_at,:created_at)
                 ON CONFLICT (tenant_id,entity_type,natural_key) DO UPDATE SET label=EXCLUDED.label, reference_uri=EXCLUDED.reference_uri,
                     evidence_record_id=EXCLUDED.evidence_record_id, attributes=EXCLUDED.attributes, observed_at=EXCLUDED.observed_at
@@ -119,28 +119,28 @@ class PostgresEvidenceGraphRepository(EvidenceGraphRepository):
     def upsert_edge(self, edge: GraphEdge) -> GraphEdge:
         with self.db.tenant_session(edge.tenant_id) as s:
             row=s.execute(text("""
-                INSERT INTO graph_edges_phase31(edge_id,tenant_id,source_entity_id,target_entity_id,relationship,confidence,occurred_at,valid_from,valid_to,attributes,created_at)
+                INSERT INTO graph_edges(edge_id,tenant_id,source_entity_id,target_entity_id,relationship,confidence,occurred_at,valid_from,valid_to,attributes,created_at)
                 VALUES(:edge_id,:tenant_id,:source_entity_id,:target_entity_id,:relationship,:confidence,:occurred_at,:valid_from,:valid_to,CAST(:attributes AS jsonb),:created_at)
                 ON CONFLICT (edge_id) DO NOTHING RETURNING *
             """),{**edge.model_dump(),"relationship":edge.relationship.value,"attributes":__import__('json').dumps(edge.attributes)}).mappings().first()
-            if row is None: row=s.execute(text("SELECT * FROM graph_edges_phase31 WHERE tenant_id=:tenant AND edge_id=:edge"),{"tenant":str(edge.tenant_id),"edge":str(edge.edge_id)}).mappings().one()
+            if row is None: row=s.execute(text("SELECT * FROM graph_edges WHERE tenant_id=:tenant AND edge_id=:edge"),{"tenant":str(edge.tenant_id),"edge":str(edge.edge_id)}).mappings().one()
             s.commit(); return self._edge(dict(row))
 
     def get_entity(self, *, tenant_id: UUID, entity_id: UUID) -> GraphEntity | None:
         with self.db.tenant_session(tenant_id) as s:
-            row=s.execute(text("SELECT * FROM graph_entities_phase31 WHERE tenant_id=:tenant AND entity_id=:id"),{"tenant":str(tenant_id),"id":str(entity_id)}).mappings().first(); return self._entity(dict(row)) if row else None
+            row=s.execute(text("SELECT * FROM graph_entities WHERE tenant_id=:tenant AND entity_id=:id"),{"tenant":str(tenant_id),"id":str(entity_id)}).mappings().first(); return self._entity(dict(row)) if row else None
     def list_entities(self, *, tenant_id: UUID) -> tuple[GraphEntity,...]:
         with self.db.tenant_session(tenant_id) as s:
-            rows=s.execute(text("SELECT * FROM graph_entities_phase31 WHERE tenant_id=:tenant ORDER BY entity_type,natural_key"),{"tenant":str(tenant_id)}).mappings().all(); return tuple(self._entity(dict(r)) for r in rows)
+            rows=s.execute(text("SELECT * FROM graph_entities WHERE tenant_id=:tenant ORDER BY entity_type,natural_key"),{"tenant":str(tenant_id)}).mappings().all(); return tuple(self._entity(dict(r)) for r in rows)
     def list_edges(self, *, tenant_id: UUID) -> tuple[GraphEdge,...]:
         with self.db.tenant_session(tenant_id) as s:
-            rows=s.execute(text("SELECT * FROM graph_edges_phase31 WHERE tenant_id=:tenant ORDER BY source_entity_id,relationship,target_entity_id"),{"tenant":str(tenant_id)}).mappings().all(); return tuple(self._edge(dict(r)) for r in rows)
+            rows=s.execute(text("SELECT * FROM graph_edges WHERE tenant_id=:tenant ORDER BY source_entity_id,relationship,target_entity_id"),{"tenant":str(tenant_id)}).mappings().all(); return tuple(self._edge(dict(r)) for r in rows)
     def neighbors(self, *, tenant_id: UUID, entity_id: UUID) -> tuple[tuple[GraphEdge,GraphEntity],...]:
         if self.get_entity(tenant_id=tenant_id,entity_id=entity_id) is None: raise GraphNotFoundError("graph entity not found")
         with self.db.tenant_session(tenant_id) as s:
             rows=s.execute(text("""
                 SELECT e.*, n.entity_id AS n_entity_id,n.tenant_id AS n_tenant_id,n.entity_type AS n_entity_type,n.natural_key AS n_natural_key,n.label AS n_label,n.reference_uri AS n_reference_uri,n.evidence_record_id AS n_evidence_record_id,n.attributes AS n_attributes,n.observed_at AS n_observed_at,n.created_at AS n_created_at
-                FROM graph_edges_phase31 e JOIN graph_entities_phase31 n ON n.tenant_id=e.tenant_id AND n.entity_id=CASE WHEN e.source_entity_id=:id THEN e.target_entity_id ELSE e.source_entity_id END
+                FROM graph_edges e JOIN graph_entities n ON n.tenant_id=e.tenant_id AND n.entity_id=CASE WHEN e.source_entity_id=:id THEN e.target_entity_id ELSE e.source_entity_id END
                 WHERE e.tenant_id=:tenant AND (e.source_entity_id=:id OR e.target_entity_id=:id)
                 ORDER BY e.relationship,n.entity_id
             """),{"tenant":str(tenant_id),"id":str(entity_id)}).mappings().all()
@@ -156,7 +156,7 @@ class PostgresEvidenceGraphRepository(EvidenceGraphRepository):
                   SELECT ARRAY[CAST(:source AS uuid)] AS nodes, ARRAY[]::uuid[] AS edges, CAST(:source AS uuid) AS current, 0 AS depth
                   UNION ALL
                   SELECT w.nodes || e.target_entity_id, w.edges || e.edge_id, e.target_entity_id, w.depth+1
-                  FROM walk w JOIN graph_edges_phase31 e ON e.tenant_id=:tenant AND e.source_entity_id=w.current
+                  FROM walk w JOIN graph_edges e ON e.tenant_id=:tenant AND e.source_entity_id=w.current
                   WHERE w.depth < :max_depth AND NOT e.target_entity_id = ANY(w.nodes)
                 )
                 SELECT nodes,edges FROM walk WHERE current=CAST(:target AS uuid) ORDER BY depth LIMIT 1
@@ -164,7 +164,7 @@ class PostgresEvidenceGraphRepository(EvidenceGraphRepository):
             if not row: return None
             entities=[]; edges=[]
             for eid in row["nodes"]:
-                er=s.execute(text("SELECT * FROM graph_entities_phase31 WHERE tenant_id=:tenant AND entity_id=:id"),{"tenant":str(tenant_id),"id":str(eid)}).mappings().one(); entities.append(self._entity(dict(er)))
+                er=s.execute(text("SELECT * FROM graph_entities WHERE tenant_id=:tenant AND entity_id=:id"),{"tenant":str(tenant_id),"id":str(eid)}).mappings().one(); entities.append(self._entity(dict(er)))
             for edge_id in row["edges"]:
-                rr=s.execute(text("SELECT * FROM graph_edges_phase31 WHERE tenant_id=:tenant AND edge_id=:id"),{"tenant":str(tenant_id),"id":str(edge_id)}).mappings().one(); edges.append(self._edge(dict(rr)))
+                rr=s.execute(text("SELECT * FROM graph_edges WHERE tenant_id=:tenant AND edge_id=:id"),{"tenant":str(tenant_id),"id":str(edge_id)}).mappings().one(); edges.append(self._edge(dict(rr)))
             return tuple(entities),tuple(edges)

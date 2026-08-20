@@ -12,7 +12,7 @@ from verideploy.agents.contracts import (
     ToolBudget,
     ToolPermission,
 )
-from verideploy.agents.prompts import build_phase19_prompt_registry
+from verideploy.agents.prompts import build_prompt_registry
 from verideploy.agents.rag import RAGAgent, RAGQueryAnalysis
 from verideploy.agents.repository import InMemoryAgentRunRepository
 from verideploy.rag.retrieval.schemas import (
@@ -64,7 +64,7 @@ def _request():
     return AgentRequest(
         tenant_id=tenant,
         user_id="analyst-1",
-        correlation_id="corr-phase20",
+        correlation_id="corr",
         objective="Find checkout database pool incidents and the recovery runbook",
         context={"service": "checkout", "environment": "production"},
     )
@@ -128,7 +128,7 @@ def test_query_analysis_rejects_intent_without_matching_document_kind_and_duplic
 @pytest.mark.asyncio
 async def test_rag_agent_requires_retrieval_permission_before_model_or_tools():
     req = _request(); model = FakeModel(_analysis()); tools = FakeRetrieval(tenant=req.tenant_id)
-    agent = RAGAgent(model=model, prompts=build_phase19_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
+    agent = RAGAgent(model=model, prompts=build_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
     with pytest.raises(PermissionError):
         await agent.run(req, authorization=_auth(req, False), budget=ToolBudget(max_calls=1), model_name="m", dimensions=3, candidate_k=10)
     assert model.calls == [] and tools.calls == []
@@ -138,7 +138,7 @@ async def test_rag_agent_requires_retrieval_permission_before_model_or_tools():
 async def test_agent_selects_keyword_mode_without_changing_metadata_scope():
     req = _request(); hit = _hit(channel=RetrievalChannel.KEYWORD)
     model = FakeModel(_analysis(retrieval_mode="keyword")); tools = FakeRetrieval(tenant=req.tenant_id, hits_by_query={"checkout database pool exhaustion": [hit]})
-    agent = RAGAgent(model=model, prompts=build_phase19_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
+    agent = RAGAgent(model=model, prompts=build_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
     result = await agent.run(req, authorization=_auth(req), budget=ToolBudget(max_calls=1), model_name="m", dimensions=3, candidate_k=10, min_evidence=1)
     query, mode = tools.calls[0]
     assert mode is RetrievalChannel.KEYWORD
@@ -156,7 +156,7 @@ async def test_agent_executes_bounded_query_expansion_and_deduplicates_chunks():
         "postgres connection saturation": [stronger],
         "checkout connection leak": [],
     })
-    repo = InMemoryAgentRunRepository(); agent = RAGAgent(model=model, prompts=build_phase19_prompt_registry(), repository=repo, retrieval=tools)
+    repo = InMemoryAgentRunRepository(); agent = RAGAgent(model=model, prompts=build_prompt_registry(), repository=repo, retrieval=tools)
     result = await agent.run(req, authorization=_auth(req), budget=ToolBudget(max_calls=3), model_name="m", dimensions=3, candidate_k=10, min_evidence=1)
     assert len(tools.calls) == 3 and result.tool_calls_used == 3
     assert len(result.evidence) == 1
@@ -170,7 +170,7 @@ async def test_agent_executes_bounded_query_expansion_and_deduplicates_chunks():
 async def test_agent_refuses_expansion_plan_over_budget_before_retrieval():
     req = _request(); model = FakeModel(_analysis(query_expansions=["one", "two"]))
     tools = FakeRetrieval(tenant=req.tenant_id); repo = InMemoryAgentRunRepository()
-    agent = RAGAgent(model=model, prompts=build_phase19_prompt_registry(), repository=repo, retrieval=tools)
+    agent = RAGAgent(model=model, prompts=build_prompt_registry(), repository=repo, retrieval=tools)
     with pytest.raises(RuntimeError, match="exceeds tool-call budget"):
         await agent.run(req, authorization=_auth(req), budget=ToolBudget(max_calls=2), model_name="m", dimensions=3, candidate_k=10)
     assert tools.calls == []
@@ -180,7 +180,7 @@ async def test_agent_refuses_expansion_plan_over_budget_before_retrieval():
 @pytest.mark.asyncio
 async def test_agent_rejects_model_attempt_to_broaden_trusted_service_scope():
     req = _request(); model = FakeModel(_analysis(service="payments")); tools = FakeRetrieval(tenant=req.tenant_id)
-    agent = RAGAgent(model=model, prompts=build_phase19_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
+    agent = RAGAgent(model=model, prompts=build_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
     with pytest.raises(PermissionError, match="cannot broaden"):
         await agent.run(req, authorization=_auth(req), budget=ToolBudget(max_calls=1), model_name="m", dimensions=3, candidate_k=10)
     assert tools.calls == []
@@ -189,7 +189,7 @@ async def test_agent_rejects_model_attempt_to_broaden_trusted_service_scope():
 @pytest.mark.asyncio
 async def test_agent_rejects_cross_tenant_retrieval_result():
     req = _request(); model = FakeModel(_analysis()); tools = FakeRetrieval(tenant=uuid4())
-    agent = RAGAgent(model=model, prompts=build_phase19_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
+    agent = RAGAgent(model=model, prompts=build_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
     with pytest.raises(PermissionError, match="tenant mismatch"):
         await agent.run(req, authorization=_auth(req), budget=ToolBudget(max_calls=1), model_name="m", dimensions=3, candidate_k=10)
 
@@ -199,19 +199,19 @@ async def test_evidence_sufficiency_is_deterministic_and_reports_missing_kind():
     req = _request(); runbook = _hit(kind=RetrievalDocumentKind.RUNBOOK, source="runbook-db")
     model = FakeModel(_analysis(intent="general", document_kinds=["historical_incident", "runbook"]))
     tools = FakeRetrieval(tenant=req.tenant_id, hits_by_query={"checkout database pool exhaustion": [runbook]})
-    agent = RAGAgent(model=model, prompts=build_phase19_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
+    agent = RAGAgent(model=model, prompts=build_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
     result = await agent.run(req, authorization=_auth(req), budget=ToolBudget(max_calls=1), model_name="m", dimensions=3, candidate_k=10, min_evidence=1)
     assert result.sufficiency.sufficient is False
     assert result.sufficiency.reason_codes == ["required_document_kind_missing"]
 
 
-def test_phase20_migration_and_versioned_prompts_exist():
-    migration = Path("src/verideploy/database/migrations/versions/0008_phase20_rag_agent.py").read_text()
+def test_migration_and_versioned_prompts_exist():
+    migration = Path("src/verideploy/database/migrations/versions/0008_rag_agent.py").read_text()
     assert 'revision = "0008_phase20_rag_agent"' in migration
     assert 'down_revision = "0007_phase19_agent_contracts"' in migration
     assert "document_kind" in migration and "historical_incident" in migration
     assert Path("prompts/rag/v1.0.0.txt").exists()
-    registry = build_phase19_prompt_registry()
+    registry = build_prompt_registry()
     assert len(registry.get("rag", "1.0.0").sha256) == 64
     assert len(registry.get("supervisor", "1.1.0").sha256) == 64
 
@@ -220,13 +220,13 @@ async def test_trusted_metadata_scope_is_applied_when_model_omits_filters():
     req = _request(); hit = _hit()
     model = FakeModel(_analysis(service=None, environment=None))
     tools = FakeRetrieval(tenant=req.tenant_id, hits_by_query={"checkout database pool exhaustion": [hit]})
-    agent = RAGAgent(model=model, prompts=build_phase19_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
+    agent = RAGAgent(model=model, prompts=build_prompt_registry(), repository=InMemoryAgentRunRepository(), retrieval=tools)
     await agent.run(req, authorization=_auth(req), budget=ToolBudget(max_calls=1), model_name="m", dimensions=3, candidate_k=10, min_evidence=1)
     actual = tools.calls[0][0]
     assert actual.service == "checkout" and actual.environment == "production"
 
 
-def test_phase20_extends_supervisor_and_planner_contracts_with_rag_without_write_permissions():
+def test_extends_supervisor_and_planner_contracts_with_rag_without_write_permissions():
     from verideploy.agents.contracts import AgentPlan, PlanStep, SupervisorDecision
     decision = SupervisorDecision(route="rag", rationale="retrieve incident evidence", confidence=0.9, required_permissions=["rag.retrieval.read"])
     plan = AgentPlan(rationale="retrieve then inspect", steps=[PlanStep(step_id="step-01", agent="rag", objective="find runbook", required_permissions=["rag.retrieval.read"], max_tool_calls=2)])

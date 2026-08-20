@@ -3,7 +3,7 @@ import json
 from verideploy.recruiter.package import validate_recruiter_package
 ROOT=Path(__file__).resolve().parents[2]
 
-def test_phase85_gate_passes():
+def test_gate_passes():
     r=validate_recruiter_package(ROOT); assert r['gate']=='pass', r['findings']; assert r['screenshots']==3
 
 def test_root_readme_is_current_and_dual_audience():

@@ -3,7 +3,7 @@ import json
 from verideploy.release_handoff import validate_final_release
 ROOT=Path(__file__).resolve().parents[2]
 
-def test_phase86_final_release_gate_passes():
+def test_final_release_gate_passes():
     r=validate_final_release(ROOT); assert r['gate']=='pass', r['findings']; assert r['versioned_images']==4
 
 def test_versioned_images_and_helm_release_are_aligned():

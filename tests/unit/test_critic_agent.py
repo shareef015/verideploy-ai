@@ -11,7 +11,7 @@ from services.ai.agents import get_critic_agent
 from services.ai.main import app
 from verideploy.agents.contracts import AgentAuthorization, AgentPlan, AgentRequest, SupervisorDecision, ToolBudget, ToolPermission
 from verideploy.agents.critic import ClaimVerdict, CriticAgent
-from verideploy.agents.prompts import build_phase19_prompt_registry
+from verideploy.agents.prompts import build_prompt_registry
 from verideploy.agents.rca import (
     RCAAgentResult, RCAHypothesisAssessment, RCAHypothesisKind, RCASufficiency,
 )
@@ -59,7 +59,7 @@ def rca_result(a, b, *, statement="Database connection pool exhaustion caused ch
 
 
 def agent(followup=None, repo=None):
-    return CriticAgent(model=DummyModel(),prompts=build_phase19_prompt_registry(),repository=repo or InMemoryAgentRunRepository(),followup=followup)
+    return CriticAgent(model=DummyModel(),prompts=build_prompt_registry(),repository=repo or InMemoryAgentRunRepository(),followup=followup)
 
 
 @pytest.mark.asyncio
@@ -155,7 +155,7 @@ def test_supervisor_planner_and_prompt_versions_include_critic():
         {"step_id":"step-01","agent":"rca","objective":"rank causes","required_permissions":["rca.analysis.read"],"max_tool_calls":0,"depends_on":[]},
         {"step_id":"step-02","agent":"critic","objective":"challenge RCA","required_permissions":["critic.analysis.read"],"max_tool_calls":2,"depends_on":["step-01"]},
     ]})
-    reg=build_phase19_prompt_registry(); assert reg.get("critic","1.0.0").sha256; assert reg.get("supervisor","1.5.0").sha256; assert reg.get("planner","1.5.0").sha256
+    reg=build_prompt_registry(); assert reg.get("critic","1.0.0").sha256; assert reg.get("supervisor","1.5.0").sha256; assert reg.get("planner","1.5.0").sha256
 
 
 @pytest.mark.asyncio

@@ -27,7 +27,7 @@ from verideploy.llm.responses import (
 def req() -> AIRequest:
     return AIRequest(
         tenant_id=uuid4(),
-        correlation_id="corr-phase8",
+        correlation_id="corr",
         operation="standard_rag",
         model="configured-model",
         input="Find the deployment owner",
@@ -48,7 +48,7 @@ def req() -> AIRequest:
         tool_choice=AIFunctionToolChoice(name="lookup_service_owner"),
         previous_response_id="resp_previous",
         store_provider_response=True,
-        metadata={"workflow": "phase8"},
+        metadata={"workflow": "responses-api-adapter"},
     )
 
 
@@ -96,7 +96,7 @@ class FakeClient:
 
 def provider_response(status: str = "completed"):
     return SimpleNamespace(
-        id="resp_phase8_123",
+        id="resp_123",
         status=status,
         output_text="The owner is Platform Engineering.",
         output=[
@@ -132,7 +132,7 @@ async def test_nonstreaming_maps_full_responses_request_and_result_contract() ->
     assert call["store"] is True
     assert call["tools"][0]["name"] == "lookup_service_owner"
     assert call["tool_choice"] == {"type": "function", "name": "lookup_service_owner"}
-    assert result.provider_response_id == "resp_phase8_123"
+    assert result.provider_response_id == "resp_123"
     assert result.provider_request_id == "req_openai_123"
     assert result.response_status is AIResponseStatus.COMPLETED
     assert result.tool_calls[0].call_id == "call_owner_1"
@@ -146,7 +146,7 @@ async def test_streaming_and_nonstreaming_finish_with_same_typed_result_contract
     fake = FakeResponses(
         response=final,
         stream_events=[
-            SimpleNamespace(type="response.created", response=SimpleNamespace(id="resp_phase8_123")),
+            SimpleNamespace(type="response.created", response=SimpleNamespace(id="resp_123")),
             SimpleNamespace(type="response.output_text.delta", delta="The owner is "),
             SimpleNamespace(type="response.output_text.delta", delta="Platform Engineering."),
             SimpleNamespace(type="response.completed", response=final),

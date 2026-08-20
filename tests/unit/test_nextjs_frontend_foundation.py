@@ -8,7 +8,7 @@ PLATFORM=WEB/'app/(platform)'
 def _source(root: Path, suffixes={'.ts','.tsx'}):
     return '\n'.join(p.read_text(errors='ignore') for p in root.rglob('*') if p.is_file() and p.suffix in suffixes)
 
-def test_phase44_version_and_frontend_dependencies():
+def test_version_and_frontend_dependencies():
     assert tuple(map(int,(ROOT/'src/verideploy/__init__.py').read_text().split('\"')[1].split('.'))) >= (0,44,0)
     package=json.loads((WEB/'package.json').read_text())
     assert tuple(map(int,package['version'].split('.'))) >= (0,44,0)

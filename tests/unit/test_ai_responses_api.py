@@ -16,7 +16,7 @@ from verideploy.llm.test_provider import DeterministicTestProvider
 
 def gateway() -> AIGateway:
     return AIGateway(
-        provider=DeterministicTestProvider(output_text="phase8-private-ok"),
+        provider=DeterministicTestProvider(output_text="private-ok"),
         controller=InMemoryRequestController(LocalControlPolicy(100, Decimal("10"))),
         response_persistence=InMemoryResponsePersistence(),
         max_attempts=1,
@@ -54,7 +54,7 @@ def test_private_responses_endpoint_executes_and_persists() -> None:
         response = client.post("/internal/v1/ai/responses", json=payload(tenant), headers=headers)
         assert response.status_code == 200
         body = response.json()
-        assert body["output_text"] == "phase8-private-ok"
+        assert body["output_text"] == "private-ok"
         response_id = body["provider_response_id"]
         fetched = client.get(f"/internal/v1/ai/responses/{response_id}", headers=headers)
         assert fetched.status_code == 200

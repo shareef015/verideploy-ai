@@ -21,7 +21,7 @@ class TunedChunk:
 
 
 @dataclass(frozen=True)
-class Phase76Checkpoint:
+class RagPerformanceCheckpoint:
     passed: bool
     clean_index_fingerprint: str
     metrics: dict[str, float]
@@ -84,7 +84,7 @@ def _clean_index_fingerprint() -> str:
     return hashlib.sha256(json.dumps(canonical, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
-def run_phase76_checkpoint(policy_path: Path | None = None) -> Phase76Checkpoint:
+def run_rag_checkpoint(policy_path: Path | None = None) -> RagPerformanceCheckpoint:
     root = Path(__file__).resolve().parents[4]
     policy_path = policy_path or root / "config/rag/checkpoint.json"
     policy = json.loads(policy_path.read_text())
@@ -162,7 +162,7 @@ def run_phase76_checkpoint(policy_path: Path | None = None) -> Phase76Checkpoint
     if hit_ratio < float(policy["cache"]["minimum_hit_ratio_after_warmup"]):
         failures.append("retrieval cache hit ratio below policy")
 
-    return Phase76Checkpoint(
+    return RagPerformanceCheckpoint(
         passed=not failures,
         clean_index_fingerprint=_clean_index_fingerprint(),
         metrics=metrics,

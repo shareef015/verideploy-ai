@@ -1,4 +1,4 @@
-"""Phase 16 audio transcription persistence.
+"""Audio transcription persistence.
 
 Revision ID: 0004_phase16_audio_transcription
 Revises: 0003_phase14_visual_document_retrieval

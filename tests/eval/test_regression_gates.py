@@ -9,7 +9,7 @@ from verideploy.evaluation.storage import EvaluationStore
 def manifest(run_id: str, aggregate: float, *, model: str = "gpt-a", prompt: str = "1", retriever: str = "dense", failed: int = 0) -> RunManifest:
     return RunManifest(
         run_id=run_id, dataset_id="verideploy-500", dataset_version="1.0.0", dataset_sha256="a"*64,
-        evaluator_names=["quality"], runner_name="phase60-test", total_cases=100,
+        evaluator_names=["quality"], runner_name="test", total_cases=100,
         passed_cases=100-failed, failed_cases=failed, aggregate_score=aggregate,
         started_at=datetime(2026,8,19,6,0,tzinfo=UTC), completed_at=datetime(2026,8,19,6,1,tzinfo=UTC), status="completed",
         reproducibility=ReproducibilityMetadata(python_version="3.12", platform="test", git_commit="abc", git_dirty=False, seed=60, dependency_fingerprint="fp", environment="ci"),

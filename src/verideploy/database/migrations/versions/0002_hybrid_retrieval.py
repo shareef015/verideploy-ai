@@ -1,4 +1,4 @@
-"""Phase 13 hybrid retrieval corpus and PostgreSQL FTS index.
+"""Hybrid retrieval corpus and PostgreSQL FTS index.
 
 Revision ID: 0002_phase13_hybrid_retrieval
 Revises: 0001_phase12_pgvector

@@ -125,14 +125,14 @@ def test_saved_verification_history_is_deep_copy_immutable():
     assert saved is not None and "tampered" not in saved.metadata
 
 
-def test_phase37_migration_has_append_only_rls_and_tenant_guards():
-    text=open('src/verideploy/database/migrations/versions/0019_phase37_hallucination_protection.py').read()
-    for token in ('hallucination_protection_runs_phase37','hallucination_claim_verifications_phase37','FORCE ROW LEVEL SECURITY','phase37_prevent_mutation','phase37_validate_claim_tenant','phase37_validate_source_tenant'):
+def test_migration_has_append_only_rls_and_tenant_guards():
+    text=open('src/verideploy/database/migrations/versions/0019_hallucination_protection.py').read()
+    for token in ('hallucination_protection_runs','hallucination_claim_verifications','FORCE ROW LEVEL SECURITY','prevent_hallucination_protection_mutation','validate_claim_tenant','validate_source_tenant'):
         assert token in text
     assert 'down_revision = "0018_phase36_self_corrective_rag"' in text
 
 
-def test_phase37_api_config_and_version_contract():
+def test_api_config_and_version_contract():
     route=open('services/ai/routes/retrieval.py').read(); cfg=open('src/verideploy/config.py').read(); env=open('.env.example').read()
     assert '@router.post("/hallucination-protect"' in route and '@router.get("/hallucination-protect/{verification_id}"' in route
     for token in ('hallucination_supported_threshold','hallucination_uncertain_threshold','hallucination_contradiction_threshold','hallucination_unsupported_material_threshold'):

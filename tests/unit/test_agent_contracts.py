@@ -12,7 +12,7 @@ from verideploy.agents.contracts import (
 )
 from verideploy.agents.github import GitHubAgent
 from verideploy.agents.planner import PlanningAgent
-from verideploy.agents.prompts import build_phase19_prompt_registry
+from verideploy.agents.prompts import build_prompt_registry
 from verideploy.agents.repository import InMemoryAgentRunRepository
 from verideploy.agents.supervisor import SupervisorAgent
 
@@ -39,7 +39,7 @@ def auth(req, *permissions):
 
 
 def test_prompt_registry_is_versioned_and_hash_stable():
-    a=build_phase19_prompt_registry(); b=build_phase19_prompt_registry()
+    a=build_prompt_registry(); b=build_prompt_registry()
     assert a.get("supervisor","1.0.0").sha256 == b.get("supervisor","1.0.0").sha256
     assert len(a.get("github","1.0.0").sha256) == 64
 
@@ -65,7 +65,7 @@ def test_tool_budget_is_hard_bounded():
 @pytest.mark.asyncio
 async def test_supervisor_route_is_schema_valid_authorized_and_persisted():
     req=request(); repo=InMemoryAgentRunRepository(); model=FakeModel([{"route":"github","rationale":"single repository read","confidence":0.93,"required_permissions":["github.repository.read"]}])
-    agent=SupervisorAgent(model=model, prompts=build_phase19_prompt_registry(), repository=repo)
+    agent=SupervisorAgent(model=model, prompts=build_prompt_registry(), repository=repo)
     out=await agent.run(req, authorization=auth(req, ToolPermission.GITHUB_REPOSITORY_READ))
     assert out.route == "github"
     record=next(iter(repo.records.values())); assert record.status.value == "COMPLETED" and record.prompt_sha256 and record.input_sha256
@@ -74,7 +74,7 @@ async def test_supervisor_route_is_schema_valid_authorized_and_persisted():
 @pytest.mark.asyncio
 async def test_supervisor_cannot_escalate_permissions():
     req=request(); repo=InMemoryAgentRunRepository(); model=FakeModel([{"route":"github","rationale":"need commit","confidence":0.8,"required_permissions":["github.commit.read"]}])
-    agent=SupervisorAgent(model=model, prompts=build_phase19_prompt_registry(), repository=repo)
+    agent=SupervisorAgent(model=model, prompts=build_prompt_registry(), repository=repo)
     with pytest.raises(PermissionError): await agent.run(req, authorization=auth(req, ToolPermission.GITHUB_REPOSITORY_READ))
     assert next(iter(repo.records.values())).status.value == "FAILED"
 
@@ -82,20 +82,20 @@ async def test_supervisor_cannot_escalate_permissions():
 @pytest.mark.asyncio
 async def test_planner_enforces_total_tool_budget_and_authorization():
     req=request(); repo=InMemoryAgentRunRepository(); model=FakeModel([{"rationale":"inspect repo and workflow","steps":[{"step_id":"step-01","agent":"github","objective":"repo","required_permissions":["github.repository.read"],"max_tool_calls":2,"depends_on":[]},{"step_id":"step-02","agent":"github","objective":"workflow","required_permissions":["github.workflow.read"],"max_tool_calls":2,"depends_on":["step-01"]}]}])
-    agent=PlanningAgent(model=model, prompts=build_phase19_prompt_registry(), repository=repo)
+    agent=PlanningAgent(model=model, prompts=build_prompt_registry(), repository=repo)
     out=await agent.run(req, authorization=auth(req, ToolPermission.GITHUB_REPOSITORY_READ, ToolPermission.GITHUB_WORKFLOW_READ), max_total_tool_calls=4)
     assert [s.step_id for s in out.steps] == ["step-01","step-02"]
 
     repo2=InMemoryAgentRunRepository(); model2=FakeModel([{"rationale":"too large","steps":[{"step_id":"step-01","agent":"github","objective":"repo","required_permissions":[],"max_tool_calls":5,"depends_on":[]}]}])
     with pytest.raises(RuntimeError, match="exceeds"):
-        await PlanningAgent(model=model2,prompts=build_phase19_prompt_registry(),repository=repo2).run(req, authorization=auth(req), max_total_tool_calls=4)
+        await PlanningAgent(model=model2,prompts=build_prompt_registry(),repository=repo2).run(req, authorization=auth(req), max_total_tool_calls=4)
     assert next(iter(repo2.records.values())).status.value == "FAILED"
 
 
 @pytest.mark.asyncio
 async def test_github_agent_executes_only_authorized_reads_with_budget():
     req=request(); repo=InMemoryAgentRunRepository(); tools=FakeGitHubTools(); model=FakeModel([{"rationale":"read repository","calls":[{"call_id":"call-01","permission":"github.repository.read","operation":"repository.get","arguments":{"repo":"acme/checkout"}}]}])
-    agent=GitHubAgent(model=model,prompts=build_phase19_prompt_registry(),repository=repo,tools=tools)
+    agent=GitHubAgent(model=model,prompts=build_prompt_registry(),repository=repo,tools=tools)
     out=await agent.run(req, authorization=auth(req, ToolPermission.GITHUB_REPOSITORY_READ), budget=ToolBudget(max_calls=1))
     assert out.tool_calls_used == 1 and tools.calls == [("repository.get", {"repo":"acme/checkout"})]
     assert out.findings[0].source_call_ids == ["call-01"]
@@ -105,17 +105,17 @@ async def test_github_agent_executes_only_authorized_reads_with_budget():
 @pytest.mark.asyncio
 async def test_github_agent_refuses_plan_over_remaining_budget_before_tool_execution():
     req=request(); tools=FakeGitHubTools(); repo=InMemoryAgentRunRepository(); model=FakeModel([{"rationale":"two reads","calls":[{"call_id":"call-01","permission":"github.repository.read","operation":"repository.get","arguments":{}},{"call_id":"call-02","permission":"github.commit.read","operation":"commit.get","arguments":{}}]}])
-    agent=GitHubAgent(model=model,prompts=build_phase19_prompt_registry(),repository=repo,tools=tools)
+    agent=GitHubAgent(model=model,prompts=build_prompt_registry(),repository=repo,tools=tools)
     with pytest.raises(RuntimeError, match="exceeds"):
         await agent.run(req, authorization=auth(req, ToolPermission.GITHUB_REPOSITORY_READ, ToolPermission.GITHUB_COMMIT_READ), budget=ToolBudget(max_calls=1))
     assert tools.calls == []
 
 
-def test_phase19_migration_and_prompts_exist():
-    text=Path("src/verideploy/database/migrations/versions/0007_phase19_agent_contracts.py").read_text()
+def test_migration_and_prompts_exist():
+    text=Path("src/verideploy/database/migrations/versions/0007_agent_contracts.py").read_text()
     assert 'revision = "0007_phase19_agent_contracts"' in text
     assert 'down_revision = "0006_phase18_langgraph_runtime"' in text
-    assert '"agent_runs_phase19"' in text
+    assert '"agent_runs"' in text
     assert "FORCE ROW LEVEL SECURITY" in text
     assert "ck_agent_run_tool_budget" in text
     assert all(Path(f"prompts/{name}/v1.0.0.txt").exists() for name in ("supervisor","planner","github"))

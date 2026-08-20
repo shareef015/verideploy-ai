@@ -32,7 +32,7 @@ from verideploy.llm.structured_schemas import (
 def request() -> AIRequest:
     return AIRequest(
         tenant_id=uuid4(),
-        correlation_id="corr-phase10",
+        correlation_id="corr",
         operation="evidence_fusion",
         model="test-model",
         input="Return the structured result.",

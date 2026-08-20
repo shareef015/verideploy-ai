@@ -219,7 +219,7 @@ def test_langgraph_send_adapter_is_planner_ordered():
 
 
 @pytest.mark.asyncio
-async def test_live_node_events_are_persisted_through_existing_phase18_runtime_event_store():
+async def test_live_node_events_are_persisted_through_existing_runtime_event_store():
     repo = InMemoryGraphRuntimeRepository()
     tenant, run_id = uuid4(), uuid4()
     repo.create_run(
@@ -265,7 +265,7 @@ async def test_parallel_execution_reduces_wall_time_against_same_sequential_work
     assert parallel.wall_time_ms < sequential.wall_time_ms * 0.65
 
 
-def test_phase40_config_and_version_are_wired():
+def test_config_and_version_are_wired():
     config = Path("src/verideploy/config.py").read_text()
     env = Path(".env.example").read_text()
     version = Path("src/verideploy/__init__.py").read_text()

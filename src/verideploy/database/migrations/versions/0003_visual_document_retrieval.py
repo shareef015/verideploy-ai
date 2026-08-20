@@ -1,4 +1,4 @@
-"""Phase 14 visual document retrieval indexes.
+"""Visual document retrieval indexes.
 
 Revision ID: 0003_phase14_visual_document_retrieval
 Revises: 0002_phase13_hybrid_retrieval

@@ -1,4 +1,4 @@
-"""Phase 20 retrieval document kinds for RAGAgent metadata filtering.
+"""Retrieval document kinds for RAGAgent metadata filtering.
 
 Revision ID: 0008_phase20_rag_agent
 Revises: 0007_phase19_agent_contracts

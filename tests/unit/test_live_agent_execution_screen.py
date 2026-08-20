@@ -30,7 +30,7 @@ def test_frontend_reconnect_uses_persisted_sequence_and_authoritative_refresh():
  page=(ROOT/'apps/web/app/(platform)/agent-execution/page.tsx').read_text();assert 'String(base.last_sequence)' in page and 'Math.min(...seqs)!==current.last_sequence+1' in page and 'await refresh()' in page
 def test_public_openapi_exposes_only_nest_boundary():
  c=(ROOT/'contracts/openapi/gateway.yaml').read_text(); assert '/agent-execution/{runId}:' in c and 'streamAgentExecutionEvents' in c and '/internal/v1' not in c
-def test_phase47_version_and_no_new_database_authority():
+def test_version_and_no_new_database_authority():
  from packaging.version import Version
  import re
  v=re.search(r'\d+\.\d+\.\d+', (ROOT/'src/verideploy/__init__.py').read_text()).group(0)

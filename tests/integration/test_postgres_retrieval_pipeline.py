@@ -19,12 +19,12 @@ TENANT=UUID("11111111-1111-4111-8111-111111111111")
 OTHER=UUID("22222222-2222-4222-8222-222222222222")
 
 
-def test_phase34_postgres_trace_is_persisted_tenant_scoped_and_append_only():
+def test_postgres_trace_is_persisted_tenant_scoped_and_append_only():
     cfg=Config("alembic.ini"); cfg.set_main_option("sqlalchemy.url",URL); command.upgrade(cfg,"head")
     db=DatabaseManager(URL)
     try:
         with db.engine.begin() as conn:
-            for tenant,slug in ((TENANT,"phase34"),(OTHER,"phase34-other")):
+            for tenant,slug in ((TENANT,"postgres-retrieval-pipeline"),(OTHER,"other")):
                 conn.execute(text("INSERT INTO tenants (tenant_id,slug,display_name) VALUES (:id,:slug,:name) ON CONFLICT (tenant_id) DO NOTHING"),{"id":str(tenant),"slug":f"{slug}-{str(tenant)[:8]}","name":slug})
         run=uuid4(); chunk=uuid4(); doc=uuid4()
         trace=RetrievalPipelineTrace(
@@ -39,6 +39,6 @@ def test_phase34_postgres_trace_is_persisted_tenant_scoped_and_append_only():
         assert repo.get(tenant_id=OTHER,run_id=run) is None
         with pytest.raises(DBAPIError):
             with db.session(tenant_id=TENANT) as session:
-                session.execute(text("UPDATE retrieval_pipeline_runs_phase34 SET query_text='tampered' WHERE run_id=:run"),{"run":str(run)})
+                session.execute(text("UPDATE retrieval_pipeline_runs SET query_text='tampered' WHERE run_id=:run"),{"run":str(run)})
     finally:
         db.dispose()

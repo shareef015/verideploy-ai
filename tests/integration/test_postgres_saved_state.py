@@ -18,7 +18,7 @@ def _sync_url(url: str) -> str:
     return url.replace("postgresql+asyncpg://", "postgresql+psycopg://").replace("postgresql://", "postgresql+psycopg://", 1)
 
 
-def test_phase39_postgres_state_roundtrip_rls_and_append_only(tmp_path):
+def test_postgres_state_roundtrip_rls_and_append_only(tmp_path):
     from alembic import command
     from alembic.config import Config
 
@@ -31,11 +31,11 @@ def test_phase39_postgres_state_roundtrip_rls_and_append_only(tmp_path):
     engine = create_engine(url)
     with engine.begin() as conn:
         for tenant_id in (tenant, other):
-            conn.execute(text("INSERT INTO tenants (tenant_id, name) VALUES (:id, :name) ON CONFLICT DO NOTHING"), {"id": tenant_id, "name": f"phase39-{tenant_id}"})
+            conn.execute(text("INSERT INTO tenants (tenant_id, name) VALUES (:id, :name) ON CONFLICT DO NOTHING"), {"id": tenant_id, "name": f"{tenant_id}"})
         conn.execute(text("""
-            INSERT INTO graph_runs_phase18
+            INSERT INTO graph_runs
               (run_id, tenant_id, thread_id, graph_name, graph_version, correlation_id, status, last_sequence, created_at, updated_at)
-            VALUES (:run, :tenant, :thread, 'phase39-live', '1', 'corr', 'RUNNING', 0, now(), now())
+            VALUES (:run, :tenant, :thread, 'live', '1', 'corr', 'RUNNING', 0, now(), now())
         """), {"run": run_id, "tenant": tenant, "thread": str(run_id)})
     engine.dispose()
 
@@ -50,7 +50,7 @@ def test_phase39_postgres_state_roundtrip_rls_and_append_only(tmp_path):
 
     with manager.tenant_session(tenant) as session:
         with pytest.raises(Exception, match="append-only"):
-            session.execute(text("UPDATE graph_state_snapshots_phase39 SET snapshot_kind='result' WHERE snapshot_id=:id"), {"id": snapshot.snapshot_id})
+            session.execute(text("UPDATE graph_state_snapshots SET snapshot_kind='result' WHERE snapshot_id=:id"), {"id": snapshot.snapshot_id})
             session.commit()
         session.rollback()
     manager.dispose()

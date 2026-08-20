@@ -8,24 +8,24 @@ from verideploy.config import get_settings
 ROOT=Path(__file__).resolve().parents[2]
 
 def test_hmac_service_auth_rejects_unsigned_when_required(monkeypatch):
-    monkeypatch.setenv('APP_ENV','test');monkeypatch.setenv('INTERNAL_SERVICE_AUTH_REQUIRED','true');monkeypatch.setenv('INTERNAL_SERVICE_AUTH_SECRET','phase43-secret');get_settings.cache_clear()
+    monkeypatch.setenv('APP_ENV','test');monkeypatch.setenv('INTERNAL_SERVICE_AUTH_REQUIRED','true');monkeypatch.setenv('INTERNAL_SERVICE_AUTH_SECRET','secret');get_settings.cache_clear()
     app=FastAPI();app.add_middleware(InternalServiceAuthMiddleware)
     @app.get('/internal/v1/ping')
     def ping():return {'ok':True}
     client=TestClient(app)
     r=client.get('/internal/v1/ping',headers={'x-internal-service':'verideploy-gateway','x-tenant-id':'tenant-a','x-correlation-id':'corr-a'})
     assert r.status_code==401 and r.json()['error']['code']=='INTERNAL_SERVICE_SIGNATURE_REQUIRED'
-    ts=str(int(time.time()));path='/internal/v1/ping';sig=sign_internal_request(secret='phase43-secret',method='GET',path_with_query=path,tenant='tenant-a',correlation='corr-a',timestamp=ts)
+    ts=str(int(time.time()));path='/internal/v1/ping';sig=sign_internal_request(secret='secret',method='GET',path_with_query=path,tenant='tenant-a',correlation='corr-a',timestamp=ts)
     r=client.get(path,headers={'x-internal-service':'verideploy-gateway','x-tenant-id':'tenant-a','x-correlation-id':'corr-a','x-service-auth-timestamp':ts,'x-service-auth-signature':sig})
     assert r.status_code==200
     get_settings.cache_clear()
 
 def test_tampered_signature_fails(monkeypatch):
-    monkeypatch.setenv('APP_ENV','test');monkeypatch.setenv('INTERNAL_SERVICE_AUTH_REQUIRED','true');monkeypatch.setenv('INTERNAL_SERVICE_AUTH_SECRET','phase43-secret');get_settings.cache_clear()
+    monkeypatch.setenv('APP_ENV','test');monkeypatch.setenv('INTERNAL_SERVICE_AUTH_REQUIRED','true');monkeypatch.setenv('INTERNAL_SERVICE_AUTH_SECRET','secret');get_settings.cache_clear()
     app=FastAPI();app.add_middleware(InternalServiceAuthMiddleware)
     @app.post('/internal/v1/ping')
     async def ping():return {'ok':True}
-    ts=str(int(time.time()));sig=sign_internal_request(secret='phase43-secret',method='POST',path_with_query='/internal/v1/ping',tenant='tenant-a',correlation='corr-a',timestamp=ts,body='{}')
+    ts=str(int(time.time()));sig=sign_internal_request(secret='secret',method='POST',path_with_query='/internal/v1/ping',tenant='tenant-a',correlation='corr-a',timestamp=ts,body='{}')
     r=TestClient(app).post('/internal/v1/ping',content='{"tampered":true}',headers={'content-type':'application/json','x-internal-service':'verideploy-gateway','x-tenant-id':'tenant-a','x-correlation-id':'corr-a','x-service-auth-timestamp':ts,'x-service-auth-signature':sig})
     assert r.status_code==401
     get_settings.cache_clear()
@@ -73,14 +73,14 @@ def test_upload_handoff_is_object_store_not_python_and_is_idempotent():
     assert 'createUploadHandoff' in storage and 'HeadObjectCommand' in storage and 'getSignedUrl' in storage
     assert 'stored object sha256 metadata mismatch' in storage
 
-def test_openapi_public_contract_has_phase43_paths_and_no_internal_paths():
+def test_openapi_public_contract_has_paths_and_no_internal_paths():
     import yaml
     d=yaml.safe_load((ROOT/'contracts/openapi/gateway.yaml').read_text())
     assert tuple(map(int,d['info']['version'].split('.'))) >= (0,43,0)
     assert '/investigations/page' in d['paths'] and '/ingestion/uploads/handoff' in d['paths'] and '/ingestion/uploads/{jobId}/complete' in d['paths']
     assert not any('/internal/' in p for p in d['paths'])
 
-def test_phase43_version_and_env_contract():
+def test_version_and_env_contract():
     version=(ROOT/'src/verideploy/__init__.py').read_text().strip().split('\"')[1]
     assert tuple(map(int,version.split('.'))) >= (0,43,0)
     env=(ROOT/'.env.example').read_text()

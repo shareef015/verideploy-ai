@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 WEB=ROOT/'apps/web'; GATE=ROOT/'apps/gateway'; SCREEN=WEB/'components/release-risk/release-risk-screen.tsx'
 
-def test_phase45_version_and_ag_grid_dependencies():
+def test_version_and_ag_grid_dependencies():
     assert Version((ROOT/'src/verideploy/__init__.py').read_text().split('\"')[1]) >= Version('0.45.0')
     pkg=json.loads((WEB/'package.json').read_text()); assert Version(pkg['version']) >= Version('0.45.0')
     assert 'ag-grid-react' in pkg['dependencies'] and 'ag-grid-community' in pkg['dependencies']
@@ -46,7 +46,7 @@ def test_stale_state_indicator_is_time_bounded_and_live_aware():
     assert '["ACCEPTED","QUEUED","RUNNING"]' in s
 
 def test_release_file_metadata_is_real_persisted_input_not_mock_rows():
-    schema=(ROOT/'src/verideploy/releases/schemas.py').read_text(); repo=(ROOT/'src/verideploy/releases/repository.py').read_text(); migration=(ROOT/'src/verideploy/database/migrations/versions/0024_phase45_release_risk_screen.py').read_text()
+    schema=(ROOT/'src/verideploy/releases/schemas.py').read_text(); repo=(ROOT/'src/verideploy/releases/repository.py').read_text(); migration=(ROOT/'src/verideploy/database/migrations/versions/0024_release_risk_screen.py').read_text()
     assert 'class ChangedFileInput' in schema and 'changed_file_details' in schema
     assert 'changed_files_json' in repo and 'changed_files_json' in migration
     assert 'changed_file_details length must equal policy.changed_files' in schema

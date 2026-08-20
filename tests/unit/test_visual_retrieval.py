@@ -64,8 +64,8 @@ def test_colpali_dependency_is_optional():
     except ImportError:
         with pytest.raises(RuntimeError): ColPaliAdapter()
 
-def test_phase14_migration_contract():
-    text=Path('src/verideploy/database/migrations/versions/0003_phase14_visual_document_retrieval.py').read_text()
+def test_migration_contract():
+    text=Path('src/verideploy/database/migrations/versions/0003_visual_document_retrieval.py').read_text()
     for marker in ('visual_documents','visual_pages','visual_page_indexes','ENABLE ROW LEVEL SECURITY','FORCE ROW LEVEL SECURITY'):
         assert marker in text
 

@@ -1,4 +1,4 @@
-"""Phase 17 video evidence persistence.
+"""Video evidence persistence.
 
 Revision ID: 0005_phase17_video_evidence
 Revises: 0004_phase16_audio_transcription

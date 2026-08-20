@@ -17,7 +17,7 @@ from verideploy.graphs.state import append_unique, merge_maps, state_sha256
 
 
 PARALLEL_PLAN_NAMESPACE = UUID("3659566d-4cd3-5de6-882d-61a6c7f0572d")
-PHASE40_PARALLEL_VERSION = "phase40-dynamic-parallel-v1"
+PARALLEL_VERSION = "dynamic-parallel-v1"
 
 
 class ParallelTaskStatus(StrEnum):
@@ -92,7 +92,7 @@ class ParallelTaskResult(BaseModel):
 class ParallelExecutionResult(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
     plan_id: UUID
-    parallel_version: str = PHASE40_PARALLEL_VERSION
+    parallel_version: str = PARALLEL_VERSION
     results: tuple[ParallelTaskResult, ...]
     state_update: dict[str, Any]
     state_update_sha256: str

@@ -12,12 +12,12 @@ WEB=ROOT/'apps/web'
 
 
 def make_service(tmp_path):
-    return InvestigationService(SqlAlchemyInvestigationRepository(f"sqlite:///{tmp_path/'phase46.db'}",create_schema=True))
+    return InvestigationService(SqlAlchemyInvestigationRepository(f"sqlite:///{tmp_path/'.db'}",create_schema=True))
 
 
 def make_running(tmp_path):
     service=make_service(tmp_path); tenant=uuid4(); investigation=uuid4(); user=uuid4()
-    cmd=CreateInvestigationCommand(investigation_id=investigation,tenant_id=tenant,requested_by=user,idempotency_key='phase46-investigation-001',query='Why did checkout latency increase immediately after the production release?')
+    cmd=CreateInvestigationCommand(investigation_id=investigation,tenant_id=tenant,requested_by=user,idempotency_key='investigation-001',query='Why did checkout latency increase immediately after the production release?')
     record,_=service.accept(cmd); record,_=service.initialize(tenant,investigation)
     return service,tenant,investigation,record
 
@@ -111,7 +111,7 @@ def test_public_openapi_exposes_projection_but_no_private_python_route():
     match=re.search(r'^\s*version:\s*(\d+)\.(\d+)\.(\d+)\s*$',contract,re.M); assert match and tuple(map(int,match.groups())) >= (0,46,0)
 
 
-def test_phase46_version_and_no_new_database_authority():
+def test_version_and_no_new_database_authority():
     import re
     match=re.search(r'(\d+)\.(\d+)\.(\d+)',(ROOT/'src/verideploy/__init__.py').read_text()); assert match and tuple(map(int,match.groups())) >= (0,46,0)
     assert not list((ROOT/'src/verideploy/database/migrations/versions').glob('0025_phase46*'))

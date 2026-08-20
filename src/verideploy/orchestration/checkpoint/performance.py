@@ -16,7 +16,7 @@ from verideploy.graphs.durability import InMemoryDurabilityRepository, StepStatu
 
 
 @dataclass(frozen=True)
-class Phase77ScenarioResult:
+class OrchestrationScenarioResult:
     case_id: str
     completed: bool
     retry_count: int
@@ -27,7 +27,7 @@ class Phase77ScenarioResult:
     path: tuple[str, ...]
 
 
-class Phase77Checkpoint:
+class OrchestrationPerformanceCheckpoint:
     """Deterministic checkpoint over the existing production agentic architecture.
 
     This does not replace LangGraph or the specialist agents. It exercises the same
@@ -41,12 +41,12 @@ class Phase77Checkpoint:
         self.retry_budget = int(policy["retry_budget"])
 
     @classmethod
-    def from_file(cls, path: Path) -> "Phase77Checkpoint":
+    def from_file(cls, path: Path) -> "OrchestrationPerformanceCheckpoint":
         return cls(json.loads(path.read_text()))
 
     def _ids(self, case_id: str) -> tuple[UUID, UUID]:
-        tenant = uuid5(NAMESPACE_URL, f"verideploy:phase77:{case_id}:tenant")
-        run = uuid5(NAMESPACE_URL, f"verideploy:phase77:{case_id}:run")
+        tenant = uuid5(NAMESPACE_URL, f"verideploy::{case_id}:tenant")
+        run = uuid5(NAMESPACE_URL, f"verideploy::{case_id}:run")
         return tenant, run
 
     def _durability_recovery(self, case_id: str, *, inject_retry: bool) -> tuple[int, bool]:
@@ -71,7 +71,7 @@ class Phase77Checkpoint:
         repo.release_lease(tenant_id=tenant, run_id=run, owner_id="worker-b", lease_token=lease2.lease_token)
         return retry_count, recovered
 
-    def run_scenario(self, scenario: dict[str, Any]) -> tuple[Phase77ScenarioResult, AgentObservation]:
+    def run_scenario(self, scenario: dict[str, Any]) -> tuple[OrchestrationScenarioResult, AgentObservation]:
         case_id = str(scenario["case_id"])
         expected_path = tuple(str(x) for x in scenario["path"])
         expected_plan = tuple(str(x) for x in scenario["plan"])
@@ -116,7 +116,7 @@ class Phase77Checkpoint:
             correlation_id=f"corr-{case_id}",
         )
         return (
-            Phase77ScenarioResult(
+            OrchestrationScenarioResult(
                 case_id=case_id,
                 completed=completed,
                 retry_count=retry_count,
@@ -130,7 +130,7 @@ class Phase77Checkpoint:
         )
 
     def run(self) -> dict[str, Any]:
-        results: list[Phase77ScenarioResult] = []
+        results: list[OrchestrationScenarioResult] = []
         observations: list[AgentObservation] = []
         for scenario in self.policy["scenarios"]:
             result, observation = self.run_scenario(scenario)
@@ -175,6 +175,6 @@ class Phase77Checkpoint:
         }
 
 
-def run_phase77_checkpoint(root: Path) -> dict[str, Any]:
+def run_orchestration_checkpoint(root: Path) -> dict[str, Any]:
     policy = root / "config/orchestration/checkpoint.json"
-    return Phase77Checkpoint.from_file(policy).run()
+    return OrchestrationPerformanceCheckpoint.from_file(policy).run()

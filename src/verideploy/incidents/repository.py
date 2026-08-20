@@ -15,7 +15,7 @@ class Base(DeclarativeBase):
 
 
 class SyntheticIncidentRow(Base):
-    __tablename__ = "synthetic_incidents_phase29"
+    __tablename__ = "synthetic_incidents"
     incident_id: Mapped[UUID] = mapped_column(Uuid, primary_key=True)
     tenant_id: Mapped[UUID] = mapped_column(Uuid, nullable=False, index=True)
     family_id: Mapped[UUID] = mapped_column(Uuid, nullable=False)

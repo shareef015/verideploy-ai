@@ -8,7 +8,7 @@ import verideploy.cache.core as cache_core
 from verideploy.cache import CacheContext, CacheLayer, CachePolicy, MemoryCacheBackend, MultiLayerCache
 
 
-SECRET = "phase64-cache-encryption-secret-32-bytes-minimum"
+SECRET = "cache-encryption-secret-32-bytes-minimum"
 
 
 def policy(*, ttl: int = 60, stale: int = 60) -> CachePolicy:

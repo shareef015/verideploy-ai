@@ -19,13 +19,13 @@ class PostgresLLMOpsRepository:
         d=event.model_dump(mode='json'); payload=json.dumps(d.pop('payload'),sort_keys=True,separators=(',',':'))
         cols=', '.join(d.keys())+', payload_json'; vals=', '.join(':'+k for k in d.keys())+', CAST(:payload_json AS jsonb)'
         with self.db.tenant_session(event.tenant_id) as s:
-            s.execute(text(f'INSERT INTO llmops_events_phase48 ({cols}) VALUES ({vals}) ON CONFLICT (event_id) DO NOTHING'),{**d,'payload_json':payload}); s.commit()
+            s.execute(text(f'INSERT INTO llmops_events ({cols}) VALUES ({vals}) ON CONFLICT (event_id) DO NOTHING'),{**d,'payload_json':payload}); s.commit()
     def purge_before(self,*,tenant_id:UUID,before):
         with self.db.tenant_session(tenant_id) as s:
-            s.execute(text("SELECT set_config('app.retention_purge','on',true)")); result=s.execute(text('DELETE FROM llmops_events_phase48 WHERE tenant_id=:t AND occurred_at < :b'),{'t':str(tenant_id),'b':before}); s.commit(); return result.rowcount
+            s.execute(text("SELECT set_config('app.retention_purge','on',true)")); result=s.execute(text('DELETE FROM llmops_events WHERE tenant_id=:t AND occurred_at < :b'),{'t':str(tenant_id),'b':before}); s.commit(); return result.rowcount
     def list_by_correlation(self,*,tenant_id:UUID,correlation_id:str):
         with self.db.tenant_session(tenant_id) as s:
-            rows=s.execute(text('SELECT * FROM llmops_events_phase48 WHERE tenant_id=:t AND correlation_id=:c ORDER BY occurred_at,event_id'),{'t':str(tenant_id),'c':correlation_id}).mappings().all()
+            rows=s.execute(text('SELECT * FROM llmops_events WHERE tenant_id=:t AND correlation_id=:c ORDER BY occurred_at,event_id'),{'t':str(tenant_id),'c':correlation_id}).mappings().all()
         out=[]
         for r in rows:
             d=dict(r); d['payload']=d.pop('payload_json') or {}; out.append(LLMOpsEvent.model_validate(d))

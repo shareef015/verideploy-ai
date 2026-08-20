@@ -13,8 +13,8 @@ def test_redaction_before_persistence():
 def test_tenant_isolation_memory():
  r=InMemoryLLMOpsRepository(); a,b=uuid4(),uuid4(); r.append(LLMOpsEvent(tenant_id=a,correlation_id='c',kind=LLMOpsKind.AGENT,operation='a')); assert r.list_by_correlation(tenant_id=b,correlation_id='c')==[]
 def test_migration_contract():
- s=(ROOT/'src/verideploy/database/migrations/versions/0025_phase48_llmops_data_platform.py').read_text();
- for token in ['llmops_events_phase48','ix_phase48_correlation_trace','ENABLE ROW LEVEL SECURITY','FORCE ROW LEVEL SECURITY','append-only','retention_class']: assert token in s
+ s=(ROOT/'src/verideploy/database/migrations/versions/0025_llmops_data_platform.py').read_text();
+ for token in ['llmops_events','ix_correlation_trace','ENABLE ROW LEVEL SECURITY','FORCE ROW LEVEL SECURITY','append-only','retention_class']: assert token in s
 def test_api_contract():
  s=(ROOT/'services/ai/routes/llmops.py').read_text(); m=(ROOT/'services/ai/main.py').read_text(); assert '/correlations/{correlation_id}' in s and 'llmops_router' in m
 def test_version_bumped():

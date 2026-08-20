@@ -35,9 +35,9 @@ class Base(DeclarativeBase):
 
 
 class EmbeddingRow(Base):
-    __tablename__ = "embedding_cache_phase11"
+    __tablename__ = "embedding_cache"
     __table_args__ = (
-        UniqueConstraint("tenant_id", "content_hash", "model", "dimensions", name="uq_embedding_cache_phase11"),
+        UniqueConstraint("tenant_id", "content_hash", "model", "dimensions", name="uq_embedding_cache"),
     )
     embedding_id: Mapped[str] = mapped_column(String(36), primary_key=True)
     tenant_id: Mapped[str] = mapped_column(String(36), index=True)

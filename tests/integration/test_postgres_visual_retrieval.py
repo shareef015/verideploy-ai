@@ -9,7 +9,7 @@ from verideploy.rag.visual_retrieval.repository import PostgresVisualPageReposit
 URL=os.getenv('TEST_POSTGRES_URL')
 pytestmark=pytest.mark.skipif(not URL,reason='TEST_POSTGRES_URL is not configured')
 
-def test_phase14_tables_rls_and_tenant_context():
+def test_tables_rls_and_tenant_context():
     assert URL
     engine=create_engine(URL,future=True)
     with engine.begin() as c:

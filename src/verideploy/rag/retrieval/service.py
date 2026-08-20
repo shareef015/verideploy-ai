@@ -110,7 +110,7 @@ class HybridRetriever:
             service=request.service,
             environment=request.environment,
             document_kinds=request.document_kinds or None,
-            **({"effective_scope": scope} if getattr(self.repository,"supports_phase35_scope",False) else {}),
+            **({"effective_scope": scope} if getattr(self.repository,"supports_scope",False) else {}),
         )
         normalized = normalize_scores([row.score for row in rows])
         return [
@@ -154,7 +154,7 @@ class HybridRetriever:
             service=request.service,
             environment=request.environment,
             document_kinds=request.document_kinds or None,
-            **({"effective_scope": scope} if getattr(self.repository,"supports_phase35_scope",False) else {}),
+            **({"effective_scope": scope} if getattr(self.repository,"supports_scope",False) else {}),
         )
         normalized = normalize_scores([row.distance for row in rows], higher_is_better=False)
         return [

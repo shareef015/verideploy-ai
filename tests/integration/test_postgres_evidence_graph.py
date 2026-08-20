@@ -16,12 +16,12 @@ pytestmark=pytest.mark.skipif(not URL,reason="TEST_POSTGRES_URL is not configure
 TENANT=UUID("11111111-1111-4111-8111-111111111111")
 OTHER=UUID("22222222-2222-4222-8222-222222222222")
 
-def test_phase31_postgres_graph_path_is_queryable_and_tenant_isolated():
+def test_postgres_graph_path_is_queryable_and_tenant_isolated():
     cfg=Config("alembic.ini");cfg.set_main_option("sqlalchemy.url",URL);command.upgrade(cfg,"head")
     db=DatabaseManager(URL)
     try:
         with db.engine.begin() as conn:
-            for t,n in ((TENANT,"phase31"),(OTHER,"phase31-other")):
+            for t,n in ((TENANT,"postgres-evidence-graph"),(OTHER,"other")):
                 conn.execute(text("INSERT INTO tenants (tenant_id,slug,display_name) VALUES (:id,:slug,:name) ON CONFLICT (tenant_id) DO NOTHING"),{"id":str(t),"slug":f"{n}-{str(t)[:8]}","name":n})
         svc=EvidenceGraphService(PostgresEvidenceGraphRepository(db)); snap=seed_nexuspay_demo_graph(svc); by_type={e.entity_type:e for e in snap.entities}
         path=svc.path(tenant_id=TENANT,source_entity_id=by_type[GraphEntityType.PULL_REQUEST].entity_id,target_entity_id=by_type[GraphEntityType.ROOT_CAUSE].entity_id,max_depth=4)

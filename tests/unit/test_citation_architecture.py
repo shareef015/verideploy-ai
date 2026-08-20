@@ -79,14 +79,14 @@ def test_wrong_tenant_cannot_fetch_citation_or_links():
     assert s.claim_links(tenant_id=other,verification_id=v.verification_id,claim_id="root-cause")==[]
 
 
-def test_phase38_migration_has_rls_append_only_and_tenant_guards():
-    t=open("src/verideploy/database/migrations/versions/0020_phase38_citation_architecture.py").read()
-    for token in ("citations_phase38","claim_citations_phase38","FORCE ROW LEVEL SECURITY","phase38_prevent_mutation","phase38_validate_citation_source_tenant","phase38_validate_mapping_tenant","locator_kind IN ('text','page','timecode','code')"):
+def test_migration_has_rls_append_only_and_tenant_guards():
+    t=open("src/verideploy/database/migrations/versions/0020_citation_architecture.py").read()
+    for token in ("citations","claim_citations","FORCE ROW LEVEL SECURITY","prevent_citation_mutation","validate_citation_source_tenant","validate_mapping_tenant","locator_kind IN ('text','page','timecode','code')"):
         assert token in t
     assert 'down_revision="0019_phase37_hallucination_protection"' in t
 
 
-def test_phase38_private_api_and_public_gateway_deep_link_contract():
+def test_private_api_and_public_gateway_deep_link_contract():
     route=open("services/ai/routes/citations.py").read();app=open("apps/gateway/src/app.module.ts").read();controller=open("apps/gateway/src/citations/citations.controller.ts").read();web=open("apps/web/app/(platform)/citations/[citationId]/page.tsx").read()
     assert '@router.post("/from-verification"' in route and '@router.get("/{citation_id}/preview"' in route
     assert "CitationsModule" in app and '@Controller("citations")' in controller
@@ -99,7 +99,7 @@ def test_gateway_does_not_trust_browser_permissions():
     assert 'x-retrieval-permissions' not in controller.casefold()
 
 
-def test_phase38_version_contract():
+def test_version_contract():
     version = open("src/verideploy/__init__.py").read().strip().split('"')[1]
     major, minor, patch = (int(part) for part in version.split("."))
     assert (major, minor, patch) >= (0, 38, 0)

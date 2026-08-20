@@ -1,4 +1,4 @@
-"""Phase 35 metadata filtering and authorization columns/indexes."""
+"""Metadata filtering and authorization columns/indexes."""
 from alembic import op
 import sqlalchemy as sa
 revision="0017_phase35_metadata_filtering_authorization"
@@ -22,15 +22,15 @@ def upgrade()->None:
     op.execute("UPDATE visual_documents SET occurred_at=created_at WHERE occurred_at IS NULL")
     op.alter_column("retrieval_documents","occurred_at",nullable=False)
     op.alter_column("visual_documents","occurred_at",nullable=False)
-    op.create_index("ix_phase35_retrieval_metadata","retrieval_documents",["tenant_id","service","environment","document_kind","team","severity","occurred_at"])
-    op.create_index("ix_phase35_retrieval_permission","retrieval_documents",["tenant_id","required_permission","occurred_at"])
-    op.create_index("ix_phase35_visual_metadata","visual_documents",["tenant_id","service","environment","document_kind","team","severity","occurred_at"])
-    op.create_index("ix_phase35_visual_permission","visual_documents",["tenant_id","required_permission","occurred_at"])
+    op.create_index("ix_retrieval_metadata","retrieval_documents",["tenant_id","service","environment","document_kind","team","severity","occurred_at"])
+    op.create_index("ix_retrieval_permission","retrieval_documents",["tenant_id","required_permission","occurred_at"])
+    op.create_index("ix_visual_metadata","visual_documents",["tenant_id","service","environment","document_kind","team","severity","occurred_at"])
+    op.create_index("ix_visual_permission","visual_documents",["tenant_id","required_permission","occurred_at"])
 
 def downgrade()->None:
     for table in ("visual_documents","retrieval_documents"):
-        op.drop_index(f"ix_phase35_{'visual' if table=='visual_documents' else 'retrieval'}_permission",table_name=table)
-        op.drop_index(f"ix_phase35_{'visual' if table=='visual_documents' else 'retrieval'}_metadata",table_name=table)
+        op.drop_index(f"ix{'visual' if table=='visual_documents' else 'retrieval'}_permission",table_name=table)
+        op.drop_index(f"ix{'visual' if table=='visual_documents' else 'retrieval'}_metadata",table_name=table)
     for c in ("document_kind","environment","service"):
         op.drop_column("visual_documents",c)
     for table in ("visual_documents","retrieval_documents"):

@@ -23,8 +23,8 @@ def test_append_only_hash_chain_redacts_secrets_and_detects_tampering():
  with pytest.raises(AuditIntegrityError): t.verify_chain(TENANT)
 
 def test_review_signature_is_bound_to_event_hash_and_reviewer():
- t=AuditTrail(); e=append(t); signed=t.sign_review(e.audit_id,reviewer_id="reviewer-63",key_id="kms/audit/63",signing_key=b"phase63-signing-key")
- assert t.verify_review_signature(signed,b"phase63-signing-key")
+ t=AuditTrail(); e=append(t); signed=t.sign_review(e.audit_id,reviewer_id="reviewer-63",key_id="kms/audit/63",signing_key=b"signing-key")
+ assert t.verify_review_signature(signed,b"signing-key")
  assert not t.verify_review_signature(signed,b"wrong-key")
 
 def test_search_is_tenant_scoped_and_export_requires_privileged_role():
@@ -41,10 +41,10 @@ def test_retention_and_legal_hold_make_purge_eligibility_explicit():
  held=t.append(tenant_id=TENANT,actor=actor("security_admin"),resource_type="incident",resource_id="i1",action="incident.close",result=AuditResult.SUCCEEDED,correlation_id="c2",source="gateway",occurred_at=old,legal_hold=True)
  purge=t.eligible_for_purge(); assert expired in purge and held not in purge
 
-def test_phase63_migration_ui_policy_and_routes_exist():
+def test_migration_ui_policy_and_routes_exist():
  root=Path(__file__).parents[2]
- migration=(root/"src/verideploy/database/migrations/versions/0026_phase63_audit_compliance_trail.py").read_text()
- assert "BEFORE UPDATE OR DELETE ON audit_events_phase63" in migration
+ migration=(root/"src/verideploy/database/migrations/versions/0026_audit_compliance_trail.py").read_text()
+ assert "BEFORE UPDATE OR DELETE ON audit_compliance_events" in migration
  assert "ENABLE ROW LEVEL SECURITY" in migration and "event_hash" in migration and "legal_hold" in migration
  policy=json.loads((root/"config/audit/policy.json").read_text()); assert policy["append_only"] is True and "auditor" in policy["export_roles"]
  viewer=(root/"apps/web/components/audit/audit-viewer.tsx").read_text(); assert "AgGridReact" in viewer and "correlation_id" in viewer and "event_hash" in viewer

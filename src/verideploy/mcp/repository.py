@@ -29,7 +29,7 @@ class InMemoryMCPAuditRepository(MCPAuditRepository):
 class SqlAlchemyMCPAuditRepository(MCPAuditRepository):
     metadata = sa.MetaData()
     table = sa.Table(
-        "mcp_tool_audit_phase25", metadata,
+        "mcp_tool_audit", metadata,
         sa.Column("audit_id", sa.Uuid(), primary_key=True),
         sa.Column("invocation_id", sa.Uuid(), nullable=False),
         sa.Column("tenant_id", sa.Uuid(), nullable=False),
