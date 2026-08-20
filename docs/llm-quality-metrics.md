@@ -1,6 +1,6 @@
-# Phase 56 — LLM Quality Metrics
+# LLM Quality Metrics
 
-Phase 56 adds a reproducible LLM-output quality layer to VeriDeploy AI without making normal CI depend on a paid or nondeterministic model call.
+LLM Quality Metrics adds a reproducible LLM-output quality layer to VeriDeploy AI without making normal CI depend on a paid or nondeterministic model call.
 
 ## Metrics
 
@@ -12,7 +12,7 @@ The deterministic evaluator scores five independent dimensions per case:
 - **Refusal/abstention correctness** — whether the system abstains exactly when the evaluation contract requires it, including a non-empty reason for required abstentions.
 - **Reasoning-result consistency** — whether the declared intermediate decision/result agrees with the final result. This evaluates structured result labels only; it does not persist or require private chain-of-thought.
 
-Every case stores `model_id`, `prompt_id`, and `prompt_version`, enabling direct variant grouping and baseline deltas. The offline Phase 56 benchmark uses synthetic behavior profiles solely to validate the comparison machinery; the report labels them explicitly as synthetic and must not be read as real vendor-model performance.
+Every case stores `model_id`, `prompt_id`, and `prompt_version`, enabling direct variant grouping and baseline deltas. The offline LLM Quality Metrics benchmark uses synthetic behavior profiles solely to validate the comparison machinery; the report labels them explicitly as synthetic and must not be read as real vendor-model performance.
 
 ## Optional model judge
 

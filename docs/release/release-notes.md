@@ -1,6 +1,6 @@
 # VeriDeploy AI 0.86.0 — Final Production Handoff
 
-Release 0.86.0 closes the 86-phase cumulative build. It preserves the Phase 85 recruiter package and adds the production release boundary: versioned container definitions, Terraform deployment plan, Helm release integration, explicit migration/rollback, backup/restore verification contract, signed-artifact CI, deployment verification, demo seeding, and final handoff documentation.
+Release 0.86.0 closes the 86-phase cumulative build. It preserves the Recruiter Grade Readme Explanation Package recruiter package and adds the production release boundary: versioned container definitions, Terraform deployment plan, Helm release integration, explicit migration/rollback, backup/restore verification contract, signed-artifact CI, deployment verification, demo seeding, and final handoff documentation.
 
 ## Release scope
 - Next.js web, NestJS gateway, Python AI service, and Python worker image definitions are versioned at `0.86.0`.

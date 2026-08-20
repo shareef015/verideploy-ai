@@ -1,8 +1,8 @@
-# Phase 4 — Multimodal Evidence Workflow
+# Multimodal Evidence Workflow
 
 ## Scope
 
-Phase 4 establishes one production intake pipeline for documents, images, audio, and video. It deliberately stops at a durable `READY` state. Visual reasoning, transcription, keyframe extraction, retrieval, and LangGraph orchestration remain assigned to later phases.
+Multimodal Sequence establishes one production intake pipeline for documents, images, audio, and video. It deliberately stops at a durable `READY` state. Visual reasoning, transcription, keyframe extraction, retrieval, and LangGraph orchestration remain assigned to later phases.
 
 ## Production flow
 

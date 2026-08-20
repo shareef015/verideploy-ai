@@ -1,6 +1,6 @@
-# Phase 55 — Agent Metrics
+# Agent Metrics
 
-Phase 55 adds deterministic, execution-aware evaluation for VeriDeploy's multi-agent and LangGraph workflows. It evaluates what the agent system *did*, not only the final prose answer.
+Agent Metrics adds deterministic, execution-aware evaluation for VeriDeploy's multi-agent and LangGraph workflows. It evaluates what the agent system *did*, not only the final prose answer.
 
 ## Metrics
 
@@ -18,11 +18,11 @@ The report retains raw retry counts separately so operators can inspect operatio
 
 ## Failure linkage
 
-Every benchmark failure record includes `case_id`, `category`, `correlation_id`, `failure_id`, `component`, `trace_id`, and `span_id`. This connects Phase 55 evaluation failures to the Phase 47 persisted execution timeline, Phase 48 LLMOps correlation model, and Phase 50 OpenTelemetry traces.
+Every benchmark failure record includes `case_id`, `category`, `correlation_id`, `failure_id`, `component`, `trace_id`, and `span_id`. This connects Agent Metrics evaluation failures to the Live Agent Execution Screen persisted execution timeline, LLMOps Data Platform LLMOps correlation model, and OpenTelemetry Across All Services OpenTelemetry traces.
 
 ## Dataset and gate
 
-The deterministic benchmark reuses all 500 Phase 52 cases. Each of the seven categories maps to an expected agent route, plan, tool contract, and LangGraph path. Synthetic deviations are derived only from stable SHA-256 buckets, which makes the benchmark reproducible and free of paid model calls.
+The deterministic benchmark reuses all 500 500 Case Evaluation Dataset cases. Each of the seven categories maps to an expected agent route, plan, tool contract, and LangGraph path. Synthetic deviations are derived only from stable SHA-256 buckets, which makes the benchmark reproducible and free of paid model calls.
 
 Run locally:
 

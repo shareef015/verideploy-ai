@@ -5,7 +5,7 @@ A clean operator environment needs Git, Docker/BuildKit, Terraform >=1.8, Helm 3
 
 ## 1. Verify source
 ```bash
-sha256sum -c VeriDeploy_AI_Phase_86.sha256
+sha256sum -c VeriDeploy_AI_v0.86.0.sha256
 PYTHONPATH=src python scripts/validate_release.py
 ```
 

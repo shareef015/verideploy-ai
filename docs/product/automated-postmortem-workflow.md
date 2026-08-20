@@ -1,6 +1,6 @@
-# Phase 5 — Automated Postmortem Workflow
+# Automated Postmortem Workflow
 
-Phase 5 establishes the production contract for postmortem generation without inventing evidence or prematurely implementing the later RCA and Critic agents.
+Postmortem Sequence establishes the production contract for postmortem generation without inventing evidence or prematurely implementing the later RCA and Critic agents.
 
 ## Eligibility invariant
 A postmortem can be generated only when:
@@ -14,7 +14,7 @@ The worker persists the source investigation version so the report records the e
 ## Approval lifecycle
 `PENDING_APPROVAL -> APPROVED | CHANGES_REQUESTED | REJECTED`
 
-Only `APPROVED` postmortems may be exported as final Markdown or JSON. Approved reports are immutable through the Phase 5 review API. Later human-review infrastructure will strengthen this boundary without changing this contract.
+Only `APPROVED` postmortems may be exported as final Markdown or JSON. Approved reports are immutable through the Postmortem Sequence review API. Later human-review infrastructure will strengthen this boundary without changing this contract.
 
 ## Scope boundary
-Phase 5 assembles and validates reviewed postmortem facts. It does not fabricate RCA, citations, multimodal findings, or LLM output. Those producers are implemented in later phases and will submit data through this contract.
+Postmortem Sequence assembles and validates reviewed postmortem facts. It does not fabricate RCA, citations, multimodal findings, or LLM output. Those producers are implemented in later phases and will submit data through this contract.

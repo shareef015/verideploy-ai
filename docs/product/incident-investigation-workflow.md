@@ -1,6 +1,6 @@
-# Phase 3 — Real-Time Incident Investigation Workflow
+# Real-Time Incident Investigation Workflow
 
-Phase 3 establishes the durable control plane for incident investigations. It intentionally does not fabricate RCA, evidence retrieval, LangGraph planning, or agent reasoning that belong to later phases.
+Incident Realtime Sequence establishes the durable control plane for incident investigations. It intentionally does not fabricate RCA, evidence retrieval, LangGraph planning, or agent reasoning that belong to later phases.
 
 ## Public flow
 
@@ -22,4 +22,4 @@ Each investigation owns a monotonic `sequence_number`. Persistence rejects skipp
 
 ## Phase boundary
 
-A successful Phase 3 create initializes a real durable investigation runtime and leaves it `RUNNING`. Evidence ingestion, specialist execution, RCA, critic loops, and completed investigation reports are not simulated here; those capabilities are introduced by their assigned later phases.
+A successful Incident Realtime Sequence create initializes a real durable investigation runtime and leaves it `RUNNING`. Evidence ingestion, specialist execution, RCA, critic loops, and completed investigation reports are not simulated here; those capabilities are introduced by their assigned later phases.

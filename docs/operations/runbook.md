@@ -1,4 +1,4 @@
-# Phase 1 Operations Runbook
+# Operations Runbook
 
 ## Gateway not ready
 1. Check `/api/v1/health/live` to distinguish process death from dependency readiness.

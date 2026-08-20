@@ -1,7 +1,7 @@
 # Kafka Operations Runbook
 
 ## Readiness and lag
-Track consumer lag per consumer group and tenant-safe ordering key. Page the platform owner when lag exceeds the Phase 79 alert threshold. Durable Kafka state remains authoritative; Redis/WebSocket fan-out is never the source of truth.
+Track consumer lag per consumer group and tenant-safe ordering key. Page the platform owner when lag exceeds the Production Operations Checkpoint alert threshold. Durable Kafka state remains authoritative; Redis/WebSocket fan-out is never the source of truth.
 
 ## Retry and DLQ
 Use the bounded retry topics defined in `config/kafka/topics.json`. Do not replay a DLQ blindly. Record tenant, aggregate, original event ID, schema family/version, reason, operator, and replay correlation ID. Replays must remain idempotent through inbox deduplication.

@@ -14,4 +14,4 @@
 Evaluation covers retrieval, RAG faithfulness/citations, agent routing/planning/tool use, LLM quality, hallucination/safety, visual/multimodal quality, regression budgets, security, chaos/load, contracts, and production checkpoint suites.
 
 ## Release-candidate truthfulness
-The Phase 80 checkpoint separates locally executed gates from CI-enforced gates. A missing environment capability is a limitation to report, not a reason to fabricate a pass.
+The Evaluation Release Candidate Checkpoint separates locally executed gates from CI-enforced gates. A missing environment capability is a limitation to report, not a reason to fabricate a pass.

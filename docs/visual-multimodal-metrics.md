@@ -1,6 +1,6 @@
-# Phase 58 — Visual & Multimodal Metrics
+# Visual & Multimodal Metrics
 
-Phase 58 adds deterministic modality-specific evaluation for VeriDeploy AI's visual and temporal evidence paths.
+Visual Multimodal Metrics adds deterministic modality-specific evaluation for VeriDeploy AI's visual and temporal evidence paths.
 
 ## Metrics
 
@@ -11,4 +11,4 @@ Phase 58 adds deterministic modality-specific evaluation for VeriDeploy AI's vis
 - **Temporal alignment** — timestamp alignment score plus mean absolute timing error for audio/video anchors.
 - **Modality gates** — image, screenshot, diagram, audio, and video each have independent quality thresholds.
 
-The benchmark uses the existing 500-case synthetic evaluation corpus and deterministically assigns a modality profile without changing Phase 52 category labels. CI requires the overall gate and every modality gate to pass.
+The benchmark uses the existing 500-case synthetic evaluation corpus and deterministically assigns a modality profile without changing 500 Case Evaluation Dataset category labels. CI requires the overall gate and every modality gate to pass.

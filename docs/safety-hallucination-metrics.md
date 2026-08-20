@@ -1,6 +1,6 @@
-# Phase 57 — Safety & Hallucination Metrics
+# Safety & Hallucination Metrics
 
-Phase 57 adds deterministic, CI-safe adversarial evaluation for hallucination and safety behavior without requiring paid model calls.
+Safety Hallucination Metrics adds deterministic, CI-safe adversarial evaluation for hallucination and safety behavior without requiring paid model calls.
 
 ## Metrics
 
@@ -16,6 +16,6 @@ Phase 57 adds deterministic, CI-safe adversarial evaluation for hallucination an
 
 `PYTHONPATH=src python scripts/benchmark_safety_metrics.py`
 
-The benchmark uses all 500 synthetic Phase 52 cases and injects deterministic adversarial conditions. The profile is explicitly synthetic and validates the metric/gating infrastructure rather than claiming real-world safety performance for a vendor model.
+The benchmark uses all 500 synthetic 500 Case Evaluation Dataset cases and injects deterministic adversarial conditions. The profile is explicitly synthetic and validates the metric/gating infrastructure rather than claiming real-world safety performance for a vendor model.
 
 CI fails when any configured maximum-rate or minimum-score threshold is violated. The report is written to `evals/reports/safety-hallucination-metrics.json` and retains trace-linkage metadata for every imperfect case.

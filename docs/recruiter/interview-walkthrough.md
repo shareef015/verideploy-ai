@@ -4,7 +4,7 @@
 Explain the user problem and why the system is evidence-driven rather than chat-driven. Point to release risk, incident RCA, multimodal evidence, citations, and approval.
 
 ## Minute 2–4 — Boundary design
-Use the Phase 82 topology. Explain browser → Next.js → NestJS public API → Kafka/private Python. Discuss why identity/tenant/tool policy belongs at controlled boundaries.
+Use the Final Production Technology Architecture topology. Explain browser → Next.js → NestJS public API → Kafka/private Python. Discuss why identity/tenant/tool policy belongs at controlled boundaries.
 
 ## Minute 4–7 — RAG and agent runtime
 Walk through ingestion, chunking, embeddings, hybrid retrieval, reranking, metadata filters, citation validation, supervisor/planner/specialists, fan-out/fan-in, critic correction, checkpoint/restart, and bounded retries.
@@ -16,7 +16,7 @@ Explain image/PDF/audio/video processing, redaction-before-persistence, evidence
 Explain Kafka envelopes, ordering keys, transactional outbox/inbox, idempotency, retry/DLQ/replay, WebSocket reconciliation, readiness, Kubernetes scaling, SLOs, alerts, audit, and backup/restore controls.
 
 ## Minute 11–13 — Evaluation
-Show Phase 80 and the clean Phase 76–79 checkpoints. Explain why measured values are tied to reports and why environment limitations are surfaced explicitly.
+Show Evaluation Release Candidate Checkpoint and the clean RAG Integration Performance Checkpoint–79 checkpoints. Explain why measured values are tied to reports and why environment limitations are surfaced explicitly.
 
 ## Minute 13–15 — Trade-offs and lessons
 Use `docs/career/resume-impact-and-interview-evidence.md`: NestJS/Python boundary, approval over autonomy, bounded multimodal processing, demo identity removal, architecture drift, and CI-vs-local execution truthfulness.

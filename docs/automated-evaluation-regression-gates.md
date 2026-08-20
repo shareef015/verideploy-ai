@@ -1,6 +1,6 @@
-# Phase 60 — Automated Evaluation Regression Gates
+# Automated Evaluation Regression Gates
 
-Phase 60 converts VeriDeploy's evaluation platform into an enforceable PR/CI release policy.
+Automated Evaluation Regression Gates converts VeriDeploy's evaluation platform into an enforceable PR/CI release policy.
 
 ## Controls
 

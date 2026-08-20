@@ -26,7 +26,7 @@ Target length: **8–10 minutes**. All demo data shown should be synthetic.
 - Explain why NestJS is the public boundary while Python remains private.
 
 ## 7:15–8:30 — Evaluation and measured evidence
-- Show Phase 80/84 reports.
+- Show the release-candidate and resume/interview-evidence reports.
 - Distinguish measured results from environment-limited or synthetic-demo values.
 - Mention that browser execution is CI-enforced when local dependencies are unavailable; do not claim unexecuted tests.
 

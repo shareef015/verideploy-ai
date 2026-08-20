@@ -11,4 +11,4 @@ The repository includes both the production recovery policy and an executable re
 For each release or scheduled recovery drill, retain: release version, source commit, DB engine/pgvector versions, backup object/version, backup SHA-256, recovery target, restore start/end timestamps, achieved RPO/RTO, verifier output, and operator/approver identity.
 
 ## Truthfulness status for this handoff
-The source package validates that the restore verifier and procedures are present and consistent. This execution environment did not provide a live production PostgreSQL backup/PITR target, so Phase 86 does **not** claim a live restore drill was performed here. The final deployment gate requires that live evidence before production promotion.
+The source package validates that the restore verifier and procedures are present and consistent. This execution environment did not provide a live production PostgreSQL backup/PITR target, so Backup Restore Proof does **not** claim a live restore drill was performed here. The final deployment gate requires that live evidence before production promotion.

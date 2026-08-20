@@ -21,7 +21,7 @@ Liveness answers only whether the process is alive. Readiness is the deployment/
 - Keycloak dev realm → external OIDC provider
 - OTel Collector + Prometheus/Grafana/Loki/Tempo → production observability pipeline
 
-Compose is a local parity environment, not a production security boundary. Production Security Architecture/66 production controls remain authoritative.
+Compose is a local parity environment, not a production security boundary. Production Security Architecture and Kubernetes Scalability and Resilience production controls remain authoritative.
 
 ## Failure drills
 

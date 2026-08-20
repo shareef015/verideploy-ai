@@ -10,10 +10,10 @@ VeriDeploy AI is an evidence-driven release-risk and incident-intelligence platf
 - Deployment: Kubernetes + Helm; Terraform installs the chart into an explicitly selected cluster context.
 
 ## Operate
-Use Phase 79 operations runbooks for alerts, Kafka replay/DLQ, backup/restore, scaling, incident response, and rollback. Use Phase 80 for release-candidate evaluation evidence and Phase 82 for the canonical topology/data-flow model.
+Use Production Operations Checkpoint operations runbooks for alerts, Kafka replay/DLQ, backup/restore, scaling, incident response, and rollback. Use Evaluation Release Candidate Checkpoint for release-candidate evaluation evidence and Final Production Technology Architecture for the canonical topology/data-flow model.
 
 ## Explain to recruiters / senior engineers
-Start with `README.md`, then `docs/recruiter/`, Phase 82 diagrams, Phase 83 skill mapping, Phase 84 interview evidence, and Phase 85 demo script. Measured metrics remain linked to their historical reports; do not upgrade historical numbers without rerunning the relevant benchmark.
+Start with `README.md`, then `docs/recruiter/`, Final Production Technology Architecture diagrams, AI Engineering Job Description Mapping skill mapping, Resume Impact Interview Evidence interview evidence, and Recruiter Grade Readme Explanation Package demo script. Measured metrics remain linked to their historical reports; do not upgrade historical numbers without rerunning the relevant benchmark.
 
 ## Known environment-dependent validations
 The source archive does not assert that a registry push, keyless signature, Terraform apply, Kubernetes rollout, external-service load test, or live restore drill occurred in this container. Those steps are automated/documented for a trusted deployment environment.

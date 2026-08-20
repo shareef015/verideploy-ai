@@ -4,7 +4,7 @@
 
 1. `PYTHONPATH=src:. pytest -q tests/unit/test_dynamic_parallelism.py`
 2. `make dynamic-parallel-validate`
-3. Run LangGraph Production Runtime/19/39 regression tests.
+3. Run LangGraph Production Runtime, Supervisor Planner Agent Contracts, and LangGraph State Reducers regression tests.
 4. Run cumulative Python tests.
 5. Verify configuration limits are present in `Settings` and `.env.example`.
 6. Verify runtime events use the existing LangGraph Production Runtime event repository.

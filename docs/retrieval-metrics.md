@@ -1,6 +1,6 @@
-# Phase 53 — Retrieval Metrics
+# Retrieval Metrics
 
-Phase 53 turns the Phase 52 retrieval cases into an auditable retrieval benchmark. It measures each retriever independently and compares fusion against a named baseline.
+Retrieval Metrics turns the 500 Case Evaluation Dataset retrieval cases into an auditable retrieval benchmark. It measures each retriever independently and compares fusion against a named baseline.
 
 ## Metrics
 

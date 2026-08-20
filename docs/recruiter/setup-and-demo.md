@@ -23,7 +23,7 @@ Never commit `.env`. Use only synthetic/authorized data. Production configuratio
 - NestJS gateway: `http://localhost:3001`
 - Private Python AI service is intentionally not a browser-facing API.
 
-Use the health/readiness endpoints and `docker compose ps` before running demos. The Phase 75 platform checkpoint documents critical-dependency failure behavior.
+Use the health/readiness endpoints and `docker compose ps` before running demos. The Platform Integration Reliability Checkpoint platform checkpoint documents critical-dependency failure behavior.
 
 ## Recruiter demo path
 1. Open `/demos` and show the synthetic one-click workflows.

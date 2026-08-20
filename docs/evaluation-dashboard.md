@@ -1,6 +1,6 @@
-# Phase 59 — Evaluation Dashboard & Experiment Comparison
+# Evaluation Dashboard & Experiment Comparison
 
-Phase 59 turns the Phase 51–58 evaluation stack into an operational LLMOps surface. It does not create new metric definitions; it unifies persisted evaluation runs and the existing retrieval, RAG, agent, LLM-quality, safety, and multimodal metrics.
+Evaluation Dashboard turns the Evaluation Framework–58 evaluation stack into an operational LLMOps surface. It does not create new metric definitions; it unifies persisted evaluation runs and the existing retrieval, RAG, agent, LLM-quality, safety, and multimodal metrics.
 
 ## Production capabilities
 
@@ -27,4 +27,4 @@ A candidate is promotable only when all blocking controls pass. Small non-blocki
 
 ## Data integrity
 
-The committed dashboard demo fixtures are explicitly synthetic and exist only to make the recruiter/demo screen useful without external services. Real runtime history and comparisons come from `EvaluationStore` through the private FastAPI service and NestJS boundary. Previous Phase 53–58 reports remain the authoritative measured benchmark artifacts.
+The committed dashboard demo fixtures are explicitly synthetic and exist only to make the recruiter/demo screen useful without external services. Real runtime history and comparisons come from `EvaluationStore` through the private FastAPI service and NestJS boundary. Previous Retrieval Metrics–58 reports remain the authoritative measured benchmark artifacts.

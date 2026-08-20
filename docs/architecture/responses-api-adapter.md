@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Responses API Adapter turns the OpenAI AI Gateway/7 provider boundary into a complete OpenAI Responses API transport while keeping OpenAI-specific event types out of VeriDeploy business code.
+Responses API Adapter turns the OpenAI AI Gateway and Model Routing/Cost Policy provider boundary into a complete OpenAI Responses API transport while keeping OpenAI-specific event types out of VeriDeploy business code.
 
 ## Production boundary
 
