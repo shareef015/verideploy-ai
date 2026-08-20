@@ -28,6 +28,6 @@ def test_output_abstains_and_redacts():
 
 def test_operational_and_redteam_gate():
     e=engine(); assert e.check_operational("agent",ctx(),retries=4).action is GuardrailAction.DENY
-    fixtures=json.loads((ROOT/"evals/fixtures/guardrails/phase61-redteam.json").read_text())
+    fixtures=json.loads((ROOT/"evals/fixtures/guardrails/redteam.json").read_text())
     assert len(fixtures)>=9
     with pytest.raises(GuardrailDenied): e.enforce(e.check_input({"message":"bypass security guardrails"},ctx(channel="websocket")))

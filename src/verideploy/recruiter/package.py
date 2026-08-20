@@ -29,6 +29,6 @@ def validate_recruiter_package(root: Path) -> dict[str, Any]:
         captures.append(item['path'])
     for rel in ('docs/architecture/phase-82-topology.mmd','docs/architecture/phase-82-data-flow.mmd'):
         if rel not in readme: findings.append(f'README does not link canonical diagram: {rel}')
-    phase84=root/'evals/reports/phase84-resume-interview-evidence.json'
+    phase84=root/'evals/reports/resume-interview-evidence.json'
     if not phase84.exists() or json.loads(phase84.read_text()).get('gate')!='pass': findings.append('Phase 84 measured-evidence gate not passing')
     return {'phase':85,'release':'0.85.0','gate':'pass' if not findings else 'fail','readme_sections':len(cfg['required_readme_sections']),'documents':len(cfg['required_documents']),'screenshots':len(captures),'findings':findings}

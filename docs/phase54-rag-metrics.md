@@ -23,4 +23,4 @@ Model judging is **disabled by default**. When explicitly enabled, the caller mu
 
 `PYTHONPATH=src python scripts/benchmark_rag_metrics.py`
 
-The benchmark evaluates all 500 synthetic Phase 52 cases, writes `evals/reports/phase54-rag-metrics.json`, enforces deterministic quality thresholds, and validates the bundled judge calibration fixture without making an external model call.
+The benchmark evaluates all 500 synthetic Phase 52 cases, writes `evals/reports/rag-metrics.json`, enforces deterministic quality thresholds, and validates the bundled judge calibration fixture without making an external model call.

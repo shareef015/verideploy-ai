@@ -10,7 +10,7 @@ from verideploy.evaluation.multimodal_metrics import MultimodalObservation, Temp
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "evals/datasets/verideploy-500/v1.jsonl"
-DEFAULT_REPORT = ROOT / "evals/reports/phase58-visual-multimodal-metrics.json"
+DEFAULT_REPORT = ROOT / "evals/reports/visual-multimodal-metrics.json"
 
 THRESHOLDS = {
     "image_grounding_accuracy": 0.97,

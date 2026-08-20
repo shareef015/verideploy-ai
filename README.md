@@ -80,17 +80,17 @@ Video script: `docs/recruiter/demo-video-script.md`
 
 | Evidence | Measured result | Evidence file |
 |---|---:|---|
-| Phase 80 regression | 700 passing tests | `evals/reports/phase80-release-candidate-benchmarks.json` |
+| Phase 80 regression | 700 passing tests | `evals/reports/release-candidate-benchmarks.json` |
 | Python coverage | 87.32% | same report |
 | Critical mutation probes | 4/4 killed | same report |
 | Security critical findings | 0 | same report |
-| Hybrid RAG Recall@5 | 1.00 | `evals/reports/phase76-rag-performance.json` |
+| Hybrid RAG Recall@5 | 1.00 | `evals/reports/rag-performance.json` |
 | Hybrid RAG MRR | 1.00 | Phase 76 report |
-| Agent path score | 1.00 | `evals/reports/phase77-agentic-orchestration.json` |
-| Multimodal clean traceability | 100% | `evals/reports/phase78-multimodal-integration.json` |
-| Critical operational gaps | 0 | `evals/reports/phase79-production-operations.json` |
-| Validated architecture | 15 nodes / 19 flows | `evals/reports/phase82-final-production-architecture.json` |
-| Evidence-backed AI skills | 14 | `evals/reports/phase83-ai-engineering-jd-mapping.json` |
+| Agent path score | 1.00 | `evals/reports/agentic-orchestration.json` |
+| Multimodal clean traceability | 100% | `evals/reports/multimodal-integration.json` |
+| Critical operational gaps | 0 | `evals/reports/production-operations.json` |
+| Validated architecture | 15 nodes / 19 flows | `evals/reports/final-production-architecture.json` |
+| Evidence-backed AI skills | 14 | `evals/reports/ai-engineering-jd-mapping.json` |
 
 Interpretation and caveats: `docs/recruiter/benchmark-evidence.md`.
 

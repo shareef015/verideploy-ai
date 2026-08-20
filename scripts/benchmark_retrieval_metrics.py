@@ -16,7 +16,7 @@ from verideploy.evaluation.retrieval_metrics import (
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "evals/datasets/verideploy-500/v1.jsonl"
-DEFAULT_REPORT = ROOT / "evals/reports/phase53-retrieval-metrics.json"
+DEFAULT_REPORT = ROOT / "evals/reports/retrieval-metrics.json"
 
 
 def _case_number(case_id: str) -> int:

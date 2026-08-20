@@ -14,7 +14,7 @@ def build(seq: int) -> EventEnvelope:
 
 
 def main() -> int:
-    parser=argparse.ArgumentParser(); parser.add_argument('--report',default=str(ROOT/'evals/reports/phase65-kafka-event-architecture.json')); args=parser.parse_args()
+    parser=argparse.ArgumentParser(); parser.add_argument('--report',default=str(ROOT/'evals/reports/kafka-event-architecture.json')); args=parser.parse_args()
     registry=TopicRegistry.from_mapping(json.loads((ROOT/'config/kafka/topics.json').read_text()))
     topic='verideploy.events.investigation.v1'; registry.assert_family_compatible(topic,'investigation-event','1.0')
     inbox=OrderedInbox(); applied=[]

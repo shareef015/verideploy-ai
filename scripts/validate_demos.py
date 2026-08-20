@@ -11,4 +11,4 @@ for token in ['ReleasesService','InvestigationsService','IngestionService']:
  if token not in g: issues.append('missing real service '+token)
 if 'SYNTHETIC DATA ONLY' not in w: issues.append('UI synthetic marker missing')
 report={'phase':73,'gate':'pass' if not issues else 'fail','demo_count':len(c.get('scenarios',[])),'synthetic':True,'issues':issues}
-(R/'evals/reports').mkdir(parents=True,exist_ok=True); (R/'evals/reports/phase73-five-production-demos.json').write_text(json.dumps(report,indent=2)+'\n'); print(json.dumps(report,indent=2)); sys.exit(bool(issues))
+(R/'evals/reports').mkdir(parents=True,exist_ok=True); (R/'evals/reports/five-production-demos.json').write_text(json.dumps(report,indent=2)+'\n'); print(json.dumps(report,indent=2)); sys.exit(bool(issues))

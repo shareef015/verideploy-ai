@@ -3,9 +3,9 @@
   "live_runtime_screenshot": false,
   "synthetic_or_documentary": true,
   "derived_from": [
-    "evals/reports/phase80-release-candidate-benchmarks.json",
-    "evals/reports/phase82-final-production-architecture.json",
-    "evals/reports/phase83-ai-engineering-jd-mapping.json"
+    "evals/reports/release-candidate-benchmarks.json",
+    "evals/reports/final-production-architecture.json",
+    "evals/reports/ai-engineering-jd-mapping.json"
   ],
   "note": "Rendered from repository source/report evidence for recruiter documentation; not a live application runtime screenshot."
 }

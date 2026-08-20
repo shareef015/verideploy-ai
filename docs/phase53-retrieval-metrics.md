@@ -20,4 +20,4 @@ The repository benchmark is deliberately synthetic and paid-call-free. It valida
 
 ## Gate
 
-The deterministic CI benchmark requires every retriever to satisfy Recall@5 >= 0.90, NDCG@10 >= 0.85, metadata-filter correctness >= 0.99, and requires fused Recall@5 to be at least as strong as dense retrieval. The report is written to `evals/reports/phase53-retrieval-metrics.json`.
+The deterministic CI benchmark requires every retriever to satisfy Recall@5 >= 0.90, NDCG@10 >= 0.85, metadata-filter correctness >= 0.99, and requires fused Recall@5 to be at least as strong as dense retrieval. The report is written to `evals/reports/retrieval-metrics.json`.

@@ -10,7 +10,7 @@ from verideploy.evaluation.quality import assert_phase52_dataset_quality
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run Phase 52 dataset quality gates")
     parser.add_argument("--dataset", type=Path, default=Path("evals/datasets/verideploy-500/v1.jsonl"))
-    parser.add_argument("--report", type=Path, default=Path("evals/reports/phase52-quality.json"))
+    parser.add_argument("--report", type=Path, default=Path("evals/reports/quality.json"))
     args = parser.parse_args()
     report = assert_phase52_dataset_quality(args.dataset)
     args.report.parent.mkdir(parents=True, exist_ok=True)

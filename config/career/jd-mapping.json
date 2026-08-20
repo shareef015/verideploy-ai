@@ -25,7 +25,7 @@
           "tests/orchestration/test_phase77_agentic_orchestration_checkpoint.py"
         ],
         "reports": [
-          "evals/reports/phase77-agentic-orchestration.json"
+          "evals/reports/agentic-orchestration.json"
         ]
       }
     },
@@ -42,7 +42,7 @@
           "tests/architecture/test_phase82_final_production_technology_architecture.py"
         ],
         "reports": [
-          "evals/reports/phase82-final-production-architecture.json"
+          "evals/reports/final-production-architecture.json"
         ]
       }
     },
@@ -59,7 +59,7 @@
           "tests/unit/test_phase20_rag_retrieval_modes.py"
         ],
         "reports": [
-          "evals/reports/phase56-llm-quality-metrics.json"
+          "evals/reports/llm-quality-metrics.json"
         ]
       }
     },
@@ -76,7 +76,7 @@
           "tests/rag/test_phase76_rag_integration_performance.py"
         ],
         "reports": [
-          "evals/reports/phase76-rag-performance.json"
+          "evals/reports/rag-performance.json"
         ]
       }
     },
@@ -93,7 +93,7 @@
           "tests/orchestration/test_phase77_agentic_orchestration_checkpoint.py"
         ],
         "reports": [
-          "evals/reports/phase77-agentic-orchestration.json"
+          "evals/reports/agentic-orchestration.json"
         ]
       }
     },
@@ -110,7 +110,7 @@
           "tests/unit/test_phase39_langgraph_state_reducers.py"
         ],
         "reports": [
-          "evals/reports/phase77-agentic-orchestration.json"
+          "evals/reports/agentic-orchestration.json"
         ]
       }
     },
@@ -127,7 +127,7 @@
           "tests/unit/test_phase25_mcp_gateway.py"
         ],
         "reports": [
-          "evals/reports/phase79-production-operations.json"
+          "evals/reports/production-operations.json"
         ]
       }
     },
@@ -144,7 +144,7 @@
           "tests/multimodal/test_phase78_multimodal_integration_checkpoint.py"
         ],
         "reports": [
-          "evals/reports/phase78-multimodal-integration.json"
+          "evals/reports/multimodal-integration.json"
         ]
       }
     },
@@ -161,7 +161,7 @@
           "tests/contracts/test_phase71_final_response_event_schemas.py"
         ],
         "reports": [
-          "evals/reports/phase71-final-response-event-schemas.json"
+          "evals/reports/final-response-event-schemas.json"
         ]
       }
     },
@@ -178,7 +178,7 @@
           "tests/realtime/test_phase70_complete_realtime_api_flow.py"
         ],
         "reports": [
-          "evals/reports/phase70-complete-realtime-api-flow.json"
+          "evals/reports/complete-realtime-api-flow.json"
         ]
       }
     },
@@ -195,7 +195,7 @@
           "tests/release_candidate/test_phase80_release_candidate_checkpoint.py"
         ],
         "reports": [
-          "evals/reports/phase80-release-candidate-benchmarks.json"
+          "evals/reports/release-candidate-benchmarks.json"
         ]
       }
     },
@@ -212,7 +212,7 @@
           "tests/unit/test_phase48_llmops_data_platform.py"
         ],
         "reports": [
-          "evals/reports/phase80-release-candidate-benchmarks.json"
+          "evals/reports/release-candidate-benchmarks.json"
         ]
       }
     },
@@ -229,7 +229,7 @@
           "tests/security/test_phase62_production_security_architecture.py"
         ],
         "reports": [
-          "evals/reports/phase62-security.json"
+          "evals/reports/security.json"
         ]
       }
     },
@@ -246,7 +246,7 @@
           "tests/platform/test_phase66_kubernetes_scalability_resilience.py"
         ],
         "reports": [
-          "evals/reports/phase79-production-operations.json"
+          "evals/reports/production-operations.json"
         ]
       }
     }

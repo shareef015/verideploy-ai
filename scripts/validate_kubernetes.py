@@ -115,7 +115,7 @@ def validate() -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--report", default=str(ROOT / "evals/reports/phase66-kubernetes-resilience.json"))
+    parser.add_argument("--report", default=str(ROOT / "evals/reports/kubernetes-resilience.json"))
     args = parser.parse_args()
     report = validate()
     out = Path(args.report); out.parent.mkdir(parents=True, exist_ok=True)

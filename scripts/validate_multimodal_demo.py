@@ -9,4 +9,4 @@ for token in ['IngestionService','InvestigationsService','ApprovalsService','run
 for token in ['SYNTHETIC DATA ONLY','Latency budget:','Estimated demo LLM cost:','Citations:','Review gate:']:
  if token not in w: issues.append('UI missing '+token)
 if 'execution_disabled:true' not in g: issues.append('consequential action is not explicitly disabled')
-report['issues']=issues; report['gate']='pass' if not issues else 'fail'; (R/'evals/reports').mkdir(parents=True,exist_ok=True); (R/'evals/reports/phase74-multimodal-killer-demo.json').write_text(json.dumps(report,indent=2)+'\n'); print(json.dumps(report,indent=2)); sys.exit(bool(issues))
+report['issues']=issues; report['gate']='pass' if not issues else 'fail'; (R/'evals/reports').mkdir(parents=True,exist_ok=True); (R/'evals/reports/multimodal-killer-demo.json').write_text(json.dumps(report,indent=2)+'\n'); print(json.dumps(report,indent=2)); sys.exit(bool(issues))

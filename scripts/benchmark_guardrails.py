@@ -4,10 +4,10 @@ from pathlib import Path
 from verideploy.guardrails import GuardrailContext, GuardrailPolicy, GuardrailEngine
 
 def main() -> int:
-    ap=argparse.ArgumentParser(); ap.add_argument("--report", default="evals/reports/phase61-guardrails.json"); args=ap.parse_args()
+    ap=argparse.ArgumentParser(); ap.add_argument("--report", default="evals/reports/guardrails.json"); args=ap.parse_args()
     root=Path(__file__).resolve().parents[1]
     engine=GuardrailEngine(GuardrailPolicy.load(root/"config/guardrails/policy.json"))
-    cases=json.loads((root/"evals/fixtures/guardrails/phase61-redteam.json").read_text())
+    cases=json.loads((root/"evals/fixtures/guardrails/redteam.json").read_text())
     rows=[]; passed=0
     for c in cases:
         ctx=GuardrailContext(tenant_id="tenant-a", actor_id="redteam", role="viewer", correlation_id=c["id"], channel=c["channel"], trace_id=f"trace-{c['id']}", span_id=f"span-{c['id']}")

@@ -26,7 +26,7 @@ def main():
     for p in topo['diagram_sources']:
         if not (ROOT/p).exists(): findings.append('missing diagram source: '+p)
     report={'phase':82,'release':rel,'status':'PASS' if not findings else 'FAIL','node_count':len(topo['layers']),'flow_count':len(topo['flows']),'findings':findings,'production_workloads':topo['production_workloads'],'security_invariants':len(topo['security_invariants'])}
-    out=ROOT/'evals/reports/phase82-final-production-architecture.json'; out.write_text(json.dumps(report,indent=2)+'\n')
+    out=ROOT/'evals/reports/final-production-architecture.json'; out.write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))
     raise SystemExit(0 if not findings else 1)
 if __name__=='__main__': main()

@@ -7,7 +7,7 @@ from verideploy.platform.reliability import DependencyState, PlatformReliability
 
 ROOT=Path(__file__).resolve().parents[1]
 POLICY_PATH=ROOT/'config/platform/checkpoint.json'
-REPORT=ROOT/'evals/reports/phase75-platform-integration-reliability.json'
+REPORT=ROOT/'evals/reports/platform-integration-reliability.json'
 
 
 def load() -> tuple[dict, dict]:

@@ -9,13 +9,13 @@
       "name": "evaluation",
       "status": "PASS",
       "evidence": [
-        "evals/reports/phase53-retrieval-metrics.json",
-        "evals/reports/phase54-rag-metrics.json",
-        "evals/reports/phase55-agent-metrics.json",
-        "evals/reports/phase56-llm-quality-metrics.json",
-        "evals/reports/phase57-safety-hallucination-metrics.json",
-        "evals/reports/phase58-visual-multimodal-metrics.json",
-        "evals/reports/phase60-regression-gates.json"
+        "evals/reports/retrieval-metrics.json",
+        "evals/reports/rag-metrics.json",
+        "evals/reports/agent-metrics.json",
+        "evals/reports/llm-quality-metrics.json",
+        "evals/reports/safety-hallucination-metrics.json",
+        "evals/reports/visual-multimodal-metrics.json",
+        "evals/reports/regression-gates.json"
       ],
       "detail": "required evidence present"
     },
@@ -23,9 +23,9 @@
       "name": "security",
       "status": "PASS",
       "evidence": [
-        "evals/reports/phase61-guardrails.json",
-        "evals/reports/phase62-security.json",
-        "evals/reports/phase79-production-operations.json"
+        "evals/reports/guardrails.json",
+        "evals/reports/security.json",
+        "evals/reports/production-operations.json"
       ],
       "detail": "required evidence present"
     },
@@ -34,7 +34,7 @@
       "status": "PASS",
       "evidence": [
         "tests/load/test_phase72_load.py",
-        "evals/reports/phase78-multimodal-integration.json"
+        "evals/reports/multimodal-integration.json"
       ],
       "detail": "required evidence present"
     },
@@ -43,7 +43,7 @@
       "status": "PASS",
       "evidence": [
         "tests/chaos/test_phase72_chaos.py",
-        "evals/reports/phase75-platform-integration-reliability.json"
+        "evals/reports/platform-integration-reliability.json"
       ],
       "detail": "required evidence present"
     },
@@ -68,7 +68,7 @@
       "name": "contract",
       "status": "PASS",
       "evidence": [
-        "evals/reports/phase71-final-response-event-schemas.json",
+        "evals/reports/final-response-event-schemas.json",
         "contracts/final/manifest.json"
       ],
       "detail": "required evidence present"

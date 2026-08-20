@@ -18,5 +18,5 @@ for path in (ROOT/"apps/web").rglob("*.ts*"):
     for name in p.secret_variables:
         if f"process.env.{name}" in text or f'process.env["{name}"]' in text or f"process.env['{name}']" in text: issues.append(f"client secret reference: {rel}:{name}")
 report={"phase":69,"passed":not issues,"issues":issues,"public_variables":sorted(p.public_variables),"secret_variable_count":len(p.secret_variables),"environments":list(p.environments),"external_secret_schemes":sorted(p.external_secret_schemes)}
-out=ROOT/"evals/reports/phase69-environment-secrets-configuration.json";out.write_text(json.dumps(report,indent=2)+"\n")
+out=ROOT/"evals/reports/environment-secrets-configuration.json";out.write_text(json.dumps(report,indent=2)+"\n")
 print(json.dumps(report,indent=2));raise SystemExit(0 if not issues else 1)

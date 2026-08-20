@@ -5,13 +5,13 @@
   "browser_ci_required": true,
   "critical_failure_budget": 0,
   "sources": {
-    "evaluation": ["evals/reports/phase53-retrieval-metrics.json","evals/reports/phase54-rag-metrics.json","evals/reports/phase55-agent-metrics.json","evals/reports/phase56-llm-quality-metrics.json","evals/reports/phase57-safety-hallucination-metrics.json","evals/reports/phase58-visual-multimodal-metrics.json","evals/reports/phase60-regression-gates.json"],
-    "security": ["evals/reports/phase61-guardrails.json","evals/reports/phase62-security.json","evals/reports/phase79-production-operations.json"],
-    "load": ["tests/load/test_phase72_load.py","evals/reports/phase78-multimodal-integration.json"],
-    "chaos": ["tests/chaos/test_phase72_chaos.py","evals/reports/phase75-platform-integration-reliability.json"],
+    "evaluation": ["evals/reports/retrieval-metrics.json","evals/reports/rag-metrics.json","evals/reports/agent-metrics.json","evals/reports/llm-quality-metrics.json","evals/reports/safety-hallucination-metrics.json","evals/reports/visual-multimodal-metrics.json","evals/reports/regression-gates.json"],
+    "security": ["evals/reports/guardrails.json","evals/reports/security.json","evals/reports/production-operations.json"],
+    "load": ["tests/load/test_phase72_load.py","evals/reports/multimodal-integration.json"],
+    "chaos": ["tests/chaos/test_phase72_chaos.py","evals/reports/platform-integration-reliability.json"],
     "accessibility": ["apps/web/tests/e2e/shell.spec.ts"],
     "browser": ["apps/web/playwright.config.ts","apps/web/tests/e2e/shell.spec.ts"],
-    "contract": ["evals/reports/phase71-final-response-event-schemas.json","contracts/final/manifest.json"],
+    "contract": ["evals/reports/final-response-event-schemas.json","contracts/final/manifest.json"],
     "regression": ["artifacts/release-candidate/pytest-summary.json"]
   }
 }

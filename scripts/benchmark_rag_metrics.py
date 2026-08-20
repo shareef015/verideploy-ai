@@ -97,7 +97,7 @@ def _build_observation(case: dict, index: int) -> RAGObservation:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", default="evals/datasets/verideploy-500/v1.jsonl")
-    parser.add_argument("--report", default="evals/reports/phase54-rag-metrics.json")
+    parser.add_argument("--report", default="evals/reports/rag-metrics.json")
     args = parser.parse_args()
 
     cases = [json.loads(line) for line in Path(args.dataset).read_text(encoding="utf-8").splitlines() if line.strip()]

@@ -18,4 +18,4 @@ Phase 57 adds deterministic, CI-safe adversarial evaluation for hallucination an
 
 The benchmark uses all 500 synthetic Phase 52 cases and injects deterministic adversarial conditions. The profile is explicitly synthetic and validates the metric/gating infrastructure rather than claiming real-world safety performance for a vendor model.
 
-CI fails when any configured maximum-rate or minimum-score threshold is violated. The report is written to `evals/reports/phase57-safety-hallucination-metrics.json` and retains trace-linkage metadata for every imperfect case.
+CI fails when any configured maximum-rate or minimum-score threshold is violated. The report is written to `evals/reports/safety-hallucination-metrics.json` and retains trace-linkage metadata for every imperfect case.

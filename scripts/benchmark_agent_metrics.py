@@ -15,7 +15,7 @@ from verideploy.evaluation.agent_metrics import (
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "evals/datasets/verideploy-500/v1.jsonl"
-DEFAULT_REPORT = ROOT / "evals/reports/phase55-agent-metrics.json"
+DEFAULT_REPORT = ROOT / "evals/reports/agent-metrics.json"
 
 ROUTES: dict[str, tuple[str, tuple[str, ...], frozenset[str], tuple[str, ...]]] = {
     "retrieval": ("rag", ("retrieve", "rerank", "answer"), frozenset({"retrieval.search"}), ("supervisor", "rag", "complete")),

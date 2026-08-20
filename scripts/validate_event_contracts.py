@@ -12,6 +12,6 @@ def main()->int:
     missing=sorted(required-set(manifest.get('schemas',{})))
     if missing: errors.append(f'missing final schemas: {missing}')
     report={'phase':71,'passed':not errors,'schema_count':len(manifest.get('schemas',{})),'compatibility':'BACKWARD','errors':errors}
-    rp=ROOT/'evals/reports/phase71-final-response-event-schemas.json'; rp.parent.mkdir(parents=True,exist_ok=True); rp.write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
+    rp=ROOT/'evals/reports/final-response-event-schemas.json'; rp.parent.mkdir(parents=True,exist_ok=True); rp.write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
     print(json.dumps(report,sort_keys=True)); return 0 if not errors else 1
 if __name__=='__main__': raise SystemExit(main())

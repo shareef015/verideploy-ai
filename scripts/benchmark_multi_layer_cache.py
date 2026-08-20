@@ -52,7 +52,7 @@ async def run() -> dict[str, object]:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--report", default="evals/reports/phase64-multi-layer-cache.json")
+    parser.add_argument("--report", default="evals/reports/multi-layer-cache.json")
     args = parser.parse_args()
     report = asyncio.run(run())
     out = Path(args.report)

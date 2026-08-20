@@ -19,13 +19,13 @@ const DEMOS:ReadonlyArray<DemoDefinition>=[
  {id:"recording",title:"Recording — Incident screen recording",kind:"recording",description:"Synthetic MP4 recording enters video ingestion and launches incident investigation.",workspace_href:"/incidents",asset:"data/demos/checkout-incident-recording-synthetic.mp4",modality:"video"},
 ] as const;
 const KILLER_EVIDENCE:ReadonlyArray<KillerEvidence>=[
- {evidence_id:"ev-pr",citation_id:"cit-pr",label:"Synthetic pull request",asset:"data/demos/phase74/checkout-pr-synthetic.txt",modality:"document"},
+ {evidence_id:"ev-pr",citation_id:"cit-pr",label:"Synthetic pull request",asset:"data/demos/multimodal-killer-demo/checkout-pr-synthetic.txt",modality:"document"},
  {evidence_id:"ev-architecture",citation_id:"cit-architecture",label:"Synthetic architecture PDF",asset:"data/demos/checkout-architecture-synthetic.pdf",modality:"document"},
  {evidence_id:"ev-grafana",citation_id:"cit-grafana",label:"Synthetic Grafana screenshot",asset:"data/demos/checkout-grafana-synthetic.png",modality:"image"},
  {evidence_id:"ev-video",citation_id:"cit-video",label:"Synthetic incident recording",asset:"data/demos/checkout-incident-recording-synthetic.mp4",modality:"video"},
- {evidence_id:"ev-runbook",citation_id:"cit-runbook",label:"Synthetic incident runbook",asset:"data/demos/phase74/checkout-runbook-synthetic.txt",modality:"document"},
- {evidence_id:"ev-runtime",citation_id:"cit-runtime",label:"Synthetic runtime signals",asset:"data/demos/phase74/checkout-runtime-signals-synthetic.txt",modality:"document"},
- {evidence_id:"ev-history",citation_id:"cit-history",label:"Synthetic historical RCA",asset:"data/demos/phase74/checkout-historical-rca-synthetic.txt",modality:"document"},
+ {evidence_id:"ev-runbook",citation_id:"cit-runbook",label:"Synthetic incident runbook",asset:"data/demos/multimodal-killer-demo/checkout-runbook-synthetic.txt",modality:"document"},
+ {evidence_id:"ev-runtime",citation_id:"cit-runtime",label:"Synthetic runtime signals",asset:"data/demos/multimodal-killer-demo/checkout-runtime-signals-synthetic.txt",modality:"document"},
+ {evidence_id:"ev-history",citation_id:"cit-history",label:"Synthetic historical RCA",asset:"data/demos/multimodal-killer-demo/checkout-historical-rca-synthetic.txt",modality:"document"},
 ] as const;
 
 @Injectable()

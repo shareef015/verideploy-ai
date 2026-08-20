@@ -20,7 +20,7 @@ from verideploy.evaluation.llm_quality_metrics import (
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "evals/datasets/verideploy-500/v1.jsonl"
-DEFAULT_REPORT = ROOT / "evals/reports/phase56-llm-quality-metrics.json"
+DEFAULT_REPORT = ROOT / "evals/reports/llm-quality-metrics.json"
 PROMPT = ROOT / "prompts/evaluation/llm_quality_judge_v1.md"
 
 VARIANTS = (

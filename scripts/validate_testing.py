@@ -7,7 +7,7 @@ sys.path.insert(0,str(ROOT/"src"))
 from verideploy.testing.strategy import load_strategy,validate_suite_inventory,critical_mutation_probes,coverage_gate
 
 def main():
- p=argparse.ArgumentParser(); p.add_argument("--measured-coverage",type=float); p.add_argument("--coverage-json"); p.add_argument("--report",default="evals/reports/phase72-testing-strategy.json"); a=p.parse_args()
+ p=argparse.ArgumentParser(); p.add_argument("--measured-coverage",type=float); p.add_argument("--coverage-json"); p.add_argument("--report",default="evals/reports/testing-strategy.json"); a=p.parse_args()
  s=load_strategy(ROOT); errors=validate_suite_inventory(ROOT,s); muts=critical_mutation_probes(); measured=a.measured_coverage
  if a.coverage_json:
   measured=float(json.loads((ROOT/a.coverage_json).read_text())["totals"]["percent_covered"])
